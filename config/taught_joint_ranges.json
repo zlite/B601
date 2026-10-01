@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "kind": "measured_joint_ranges",
+  "coordinates": "raw_motor_radians",
+  "joints": {
+    "1": {
+      "name": "base",
+      "motor_id": 1,
+      "feedback_id": 17,
+      "model": "4340P",
+      "min_rad": -2.5924148559570312,
+      "max_rad": 2.6412858963012695,
+      "soft_min_rad": -2.505148393357315,
+      "soft_max_rad": 2.554019433701553,
+      "margin_rad": 0.08726646259971647,
+      "samples": 503
+    },
+    "2": {
+      "name": "shoulder",
+      "motor_id": 2,
+      "feedback_id": 18,
+      "model": "4340P",
+      "min_rad": -2.7680745124816895,
+      "max_rad": 0.9845398664474487,
+      "soft_min_rad": -2.680808049881973,
+      "soft_max_rad": 0.8972734038477322,
+      "margin_rad": 0.08726646259971647,
+      "samples": 314
+    },
+    "3": {
+      "name": "elbow",
+      "motor_id": 3,
+      "feedback_id": 19,
+      "model": "4340P",
+      "min_rad": -2.1571712493896484,
+      "max_rad": 1.7656177282333374,
+      "soft_min_rad": -2.069904786789932,
+      "soft_max_rad": 1.678351265633621,
+      "margin_rad": 0.08726646259971647,
+      "samples": 294
+    },
+    "4": {
+      "name": "wrist bend",
+      "motor_id": 4,
+      "feedback_id": 20,
+      "model": "4310",
+      "min_rad": -1.650228500366211,
+      "max_rad": 2.117189884185791,
+      "soft_min_rad": -1.5629620377664946,
+      "soft_max_rad": 2.0299234215860746,
+      "margin_rad": 0.08726646259971647,
+      "samples": 159
+    },
+    "5": {
+      "name": "wrist yaw",
+      "motor_id": 5,
+      "feedback_id": 21,
+      "model": "4310",
+      "min_rad": -1.4102110862731934,
+      "max_rad": 1.9462288618087769,
+      "soft_min_rad": -1.322944623673477,
+      "soft_max_rad": 1.8589623992090605,
+      "margin_rad": 0.08726646259971647,
+      "samples": 123
+    },
+    "6": {
+      "name": "wrist roll",
+      "motor_id": 6,
+      "feedback_id": 22,
+      "model": "4310",
+      "min_rad": -3.667755603790283,
+      "max_rad": 2.8271284103393555,
+      "soft_min_rad": -3.580489141190567,
+      "soft_max_rad": 2.739861947739639,
+      "margin_rad": 0.08726646259971647,
+      "samples": 213
+    }
+  },
+  "updated_utc": "2026-09-18T00:22:44.195435+00:00"
+}

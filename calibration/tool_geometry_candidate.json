@@ -1,0 +1,248 @@
+{
+  "status": "unverified_geometry_candidate_not_for_motion",
+  "photo_paths": [
+    "/home/chris/Downloads/PXL_20260930_001830639.MP.jpg",
+    "/home/chris/Downloads/PXL_20260930_001839401.MP.jpg"
+  ],
+  "observations": [
+    "Folded arm broadly resembles reference; photo perspective prevents precision alignment verification.",
+    "Installed fingers are custom elongated bent fingers, not stock URDF fingers.",
+    "Camera uses a printed bracket near the gripper; printed-part identity and seating remain unconfirmed."
+  ],
+  "candidate_fingers": [
+    "B601_long_braced45",
+    "B601_clean_braced45"
+  ],
+  "candidate_camera_mount": "OAK1_B601_snug_1mm",
+  "cad_source_paths": [
+    "/home/chris/Documents/Codex/2026-09-21/can/outputs/build_plate_grippers.py",
+    "/home/chris/Documents/Codex/2026-09-21/can/outputs/build_dogleg_grippers.py",
+    "/home/chris/Documents/Codex/2026-09-21/can/outputs/build_long_braced_grippers.py",
+    "/home/chris/Documents/Codex/2026-09-21/can/outputs/build_clean_braced_grippers.py",
+    "/home/chris/Documents/Codex/2026-09-21/can/outputs/build_snug_camera_mount.py"
+  ],
+  "nominal_dimensions_mm": {
+    "neck_reach": 85,
+    "jaw_length": 65,
+    "pad_length": 61,
+    "pad_height": 8,
+    "pad_thickness": 1
+  },
+  "pad_points": {
+    "LEFT": {
+      "nominal_pad_face_center_finger_cad_mm": [
+        15.02661534101,
+        23.58793940660449,
+        107.9809703885628
+      ],
+      "nominal_pad_distal_edge_midpoint_finger_cad_mm": [
+        15.02661534101,
+        45.154696232794194,
+        129.54772721475248
+      ],
+      "nominal_pad_face_center_wrist_m": [
+        -0.022971486927981795,
+        -0.039997871780960904,
+        0.19856172884721146
+      ],
+      "nominal_pad_distal_edge_midpoint_wrist_m": [
+        -0.044538164442333175,
+        -0.03999587355086357,
+        0.22012856489237692
+      ]
+    },
+    "RIGHT": {
+      "nominal_pad_face_center_finger_cad_mm": [
+        15.02661534101,
+        -22.374001370521093,
+        107.9809703885628
+      ],
+      "nominal_pad_distal_edge_midpoint_finger_cad_mm": [
+        15.02661534101,
+        -43.94075819671079,
+        129.54772721475248
+      ],
+      "nominal_pad_face_center_wrist_m": [
+        -0.022827947600591526,
+        0.040002115262992605,
+        0.19856172834718894
+      ],
+      "nominal_pad_distal_edge_midpoint_wrist_m": [
+        -0.04439462511494289,
+        0.04000411349308994,
+        0.22012856439235437
+      ]
+    }
+  },
+  "coordinate_warning": "These points are in each original finger CAD coordinate system, NOT link6/base/camera. Registration and physical checks are required. Rounded pad edges and physical pad dimensions may differ.",
+  "T_wrist_finger_left": [
+    [
+      9.265358966049026e-05,
+      -0.9999999957009099,
+      3.673205087579915e-06,
+      0.0006146634711144366
+    ],
+    [
+      0.9999999957076562,
+      9.265358965986519e-05,
+      -3.4033563838429215e-10,
+      -0.055026672527980436
+    ],
+    [
+      0.0,
+      3.673205103346574e-06,
+      0.9999999999932537,
+      0.09058067181603774
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "T_wrist_finger_right": [
+    [
+      -9.265358966049026e-05,
+      0.9999999957009099,
+      3.673205087579915e-06,
+      -0.00045295069265627883
+    ],
+    [
+      -0.9999999957076562,
+      -9.265358965986519e-05,
+      -3.4033563838429215e-10,
+      0.05502665754471095
+    ],
+    [
+      0.0,
+      -3.673205103346574e-06,
+      0.9999999999932537,
+      0.09058067577505859
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "actual_gripper_opening_mm": 80,
+  "physical_parts_confirmed": true,
+  "motion_ready": false,
+  "confirmed_fingers": "B601_clean_braced45",
+  "confirmed_camera_mount": "OAK1_B601_snug_1mm",
+  "opening_measurement_source": "user ruler measurement between black padded inner faces",
+  "stock_left_registration": {
+    "T_endlink_finger_cad_m": [
+      [
+        0.0,
+        0.0,
+        1.0,
+        -0.06480932590701252
+      ],
+      [
+        -1.0,
+        -0.0,
+        -0.0,
+        0.01399908269266598
+      ],
+      [
+        -0.0,
+        -1.0,
+        -0.0,
+        0.0006199999451637281
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "sampled_surface_rms_mm": 0.013441014390033736,
+    "sampled_surface_max_mm": 0.12308490727875994,
+    "samples": 180,
+    "motion_ready": false
+  },
+  "stock_right_registration": {
+    "T_endlink_finger_cad_m": [
+      [
+        0.0,
+        0.0,
+        1.0,
+        -0.06480932590701252
+      ],
+      [
+        1.0,
+        0.0,
+        0.0,
+        -0.014291642778320238
+      ],
+      [
+        0.0,
+        1.0,
+        0.0,
+        -0.0004578110501170171
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "sampled_surface_rms_mm": 0.199870415512511,
+    "sampled_surface_max_mm": 0.489374310834483,
+    "samples": 300,
+    "motion_ready": false
+  },
+  "assumptions": [
+    "Jaw motions symmetric about end_link center, opening fixed at user-measured 80 mm.",
+    "Sampled CAD registration surface errors: left RMS 0.013 mm; right RMS 0.200 mm and maximum 0.489 mm. These are approximate registrations, not physical validation.",
+    "CAD dimensions and pad positions are nominal. Actual mounting, padding and flex need physical verification."
+  ],
+  "handedness_projection_diagnostic": {
+    "same_labels": [
+      {
+        "side": "LEFT",
+        "finger_cad_hand": "LEFT",
+        "predicted_pixel": [
+          1376.9850727695843,
+          725.5328802058053
+        ],
+        "camera_depth_m": 0.1264104751186311
+      },
+      {
+        "side": "RIGHT",
+        "finger_cad_hand": "RIGHT",
+        "predicted_pixel": [
+          1345.0928885462722,
+          97.30415699887362
+        ],
+        "camera_depth_m": 0.1244212529150778
+      }
+    ],
+    "swapped": [
+      {
+        "side": "LEFT",
+        "finger_cad_hand": "RIGHT",
+        "predicted_pixel": [
+          680.7751371360941,
+          764.5124904432605
+        ],
+        "camera_depth_m": 0.12855190311032763
+      },
+      {
+        "side": "RIGHT",
+        "finger_cad_hand": "LEFT",
+        "predicted_pixel": [
+          638.965826020058,
+          148.75242893448072
+        ],
+        "camera_depth_m": 0.12656268090677433
+      }
+    ]
+  },
+  "installed_handedness_verified": false
+}

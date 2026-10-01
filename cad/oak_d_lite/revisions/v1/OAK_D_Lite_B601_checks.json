@@ -1,0 +1,19 @@
+{
+  "valid_single_solid": true,
+  "watertight_single_mesh": true,
+  "arm_attachment_below_z_25_6_unchanged": true,
+  "camera_mount_intersection_mm3": 0.0,
+  "camera_rear_hole_pitch_mm": 75.0,
+  "camera_screw_clearance_mm": 4.5,
+  "camera_seating_stack_mm": 5.399999999999999,
+  "rear_ventilation_gap_mm": 1.0,
+  "usb_plug_envelope_clear": true,
+  "print_dimensions_mm": [
+    95.0,
+    31.00031508441316,
+    40.0
+  ],
+  "mount_volume_cm3": 25.76793680642598,
+  "physical_fit_tested": false,
+  "note": "CAD clearance is not a full robot swept-volume or optical occlusion test."
+}

@@ -1,0 +1,16 @@
+{
+  "source/camera.stl": "d1b3f7c3c0ce9df83f5618411efcfc034a7dcff661c314ca4a1651f504fbbea7",
+  "source/DM9095_enclosure.stp": "26a56d59b6bc4e8baadf3256704ce74a5fe9a2e9d0b4f51f8ba2b76c2629461a",
+  "source/OAK1_B601_snug_1mm.step": "79ac922d88fad4ae37ee4ed2b045bbba91a22366b32437d220650504551cc66a",
+  "source/LICENSE-CERN-OHL-W-2.0.txt": "e258a9c6833bfd17fb90252df8c33e29d13fabc2768508248927824c17878db7",
+  "source/original_oak1/OFFSET_TRIPOD_README.md": "42de5de4d0d47b0bbeb04583970b4ffb958daa849dfcc9b0bb3f2876ab15251b",
+  "source/original_oak1/build_single_top_brace.py": "44cf7c02c988b8059836d6ba9b490cbd615ebdaba7c14d447bf2e53291645894",
+  "source/original_oak1/build_offset_tripod_mount.py": "28cdbdb77b86d328f62165b0ca4e368427cec871c2fac759d0e3b2a75c54136d",
+  "source/original_oak1/SNUG_CAMERA_MOUNT_README.md": "cbdd13f58ef670b8d5c145a2f7ce06ddb48cdf96b5b37ff12089c33c568004bd",
+  "source/original_oak1/OAK1_B601_offset_tripod.step": "1671e2bd8910355ec402b220720ea136f6f70b27130ce5ff4e7b3945091a0421",
+  "source/original_oak1/build_direct_top_mount.py": "635af8aff238a8bae93aa8797de6327257408ae438d29e25b9b69862889717c9",
+  "source/original_oak1/build_low_support_mount.py": "0c2f66a159f905667a2f47a0b575ca06ad87a197f3b4b5cd55bb8f3d78686fb5",
+  "source/original_oak1/build_snug_camera_mount.py": "55923d0c89cd1499b6398116db78acd5d5928efa72c3f2dceeaf77d40559adf3",
+  "source/original_oak1/build_full_width_attachment.py": "7ce82f87848545971f6ddf5009dce0543c33011d68370f6e73dfe348e512b43e",
+  "source/original_oak1/D435_Gemini2_Mount.step": "18a85132d55240279e2e759fa34cbab36c9371f5113880aa51543a5131971925"
+}

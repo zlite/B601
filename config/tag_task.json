@@ -1,0 +1,29 @@
+{
+  "tag": {
+    "family": "36h11",
+    "id": 0,
+    "size_m": 0.06
+  },
+  "joint_ranges_source": null,
+  "joint_ranges_local": null,
+  "joint_coordinates": "raw_motor_radians",
+  "joint_to_model_mapping": null,
+  "T_tool_camera": null,
+  "gripper_contact_point_tool_m": null,
+  "requested_lift_m": 0.2,
+  "note": "User identified the second arm. Only first-arm ranges were found; these must not be used for this arm. Second-arm kinematic mapping and camera-to-gripper calibration are missing. Prior elbow lift direction is recalled but unverified.",
+  "physical_arm": "second",
+  "excluded_first_arm_ranges": "config/taught_joint_ranges.json",
+  "expected_second_arm_ranges": "/home/chris/rebot-hello/joint_ranges_arm2.json",
+  "motion_ready": false,
+  "last_observation": {
+    "pose_file": "outputs/tag_pose.json",
+    "joint_snapshot": "outputs/arm_held.json",
+    "joint_snapshot_synchronized": false,
+    "tag_detected": true,
+    "contact_target_valid": false
+  },
+  "joint_mapping_candidate": "calibration/arm2_reference.json",
+  "handeye_capture_tool": "calibrate_camera.py",
+  "operator_contact_reference": "calibration/contact_20260930T002532864375Z/reference.json"
+}

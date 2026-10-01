@@ -1,0 +1,206 @@
+{
+  "schema_version": 1,
+  "physical_arm": "second",
+  "captured_utc": "2026-09-29T23:53:06.756040+00:00",
+  "reference_raw_rad": [
+    -0.008786320686340332,
+    0.9761649370193481,
+    1.764588713645935,
+    -0.055460453033447266,
+    0.09484803676605225,
+    -0.004525233060121536
+  ],
+  "reference_model_rad": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "sample_span_rad": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "direction_checks": {
+    "1": {
+      "method": "operator_observed_physical_direction",
+      "instruction": "BASE: rotate the entire arm COUNTERCLOCKWISE as viewed from above; keep the base plate fixed.",
+      "baseline_raw_rad": [
+        -0.008786320686340332,
+        0.9761649370193481,
+        1.764588713645935,
+        -0.05544078350067139,
+        0.09482890367507935,
+        -0.004506349563598633
+      ],
+      "raw_rad": [
+        0.17366743087768555,
+        0.9761649370193481,
+        1.764588713645935,
+        -0.05506634712219238,
+        0.09429305791854858,
+        -0.0044591911137104034
+      ],
+      "sample_span_rad": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        9.566545486450195e-06,
+        0.0
+      ],
+      "model_direction": 1,
+      "captured_utc": "2026-09-29T23:55:21.965824+00:00",
+      "angle_magnitude_independently_measured": false
+    },
+    "2": {
+      "method": "operator_observed_physical_direction",
+      "instruction": "SHOULDER: raise the elbow by rotating the lower long link upward at the shoulder.",
+      "baseline_raw_rad": [
+        -0.011319756507873535,
+        0.9761840105056763,
+        1.764593482017517,
+        -0.05503678321838379,
+        0.09800562262535095,
+        -0.004591226577758789
+      ],
+      "raw_rad": [
+        -0.011410236358642578,
+        0.8119992017745972,
+        1.764593482017517,
+        -0.05517476797103882,
+        0.09801498055458069,
+        -0.004534672945737839
+      ],
+      "sample_span_rad": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "model_direction": -1,
+      "captured_utc": "2026-09-29T23:56:26.920183+00:00",
+      "angle_magnitude_independently_measured": false
+    },
+    "3": {
+      "method": "operator_observed_physical_direction",
+      "instruction": "ELBOW: hold the lower long link fixed; lift the wrist by rotating the upper long link upward at the elbow.",
+      "baseline_raw_rad": [
+        -0.011374592781066895,
+        0.9818121194839478,
+        1.7653917074203491,
+        -0.057086050510406494,
+        0.09356582164764404,
+        -0.004487514495849609
+      ],
+      "raw_rad": [
+        -0.011426925659179688,
+        0.9818893671035767,
+        1.618477702140808,
+        -0.05682992935180664,
+        0.128071591258049,
+        0.006554793566465378
+      ],
+      "sample_span_rad": [
+        0.0,
+        0.0,
+        7.3909759521484375e-06,
+        9.85264778137207e-05,
+        1.9073486328125e-05,
+        0.0
+      ],
+      "model_direction": -1,
+      "captured_utc": "2026-09-29T23:57:26.951612+00:00",
+      "angle_magnitude_independently_measured": false
+    },
+    "4": {
+      "method": "operator_observed_physical_direction",
+      "instruction": "WRIST BEND: keep both long links fixed; tilt the gripper nose upward at the wrist bend.",
+      "baseline_raw_rad": [
+        -0.011353135108947754,
+        0.9818261861801147,
+        1.7646793127059937,
+        -0.05610084533691406,
+        0.10184073448181152,
+        0.0056341663002967834
+      ],
+      "raw_rad": [
+        -0.0113983154296875,
+        0.9827064275741577,
+        1.7646721601486206,
+        -0.30297988653182983,
+        0.11348061263561249,
+        0.021354246884584427
+      ],
+      "sample_span_rad": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        4.7534704208374023e-05,
+        0.0
+      ],
+      "model_direction": -1,
+      "captured_utc": "2026-09-29T23:57:49.144840+00:00",
+      "angle_magnitude_independently_measured": false
+    },
+    "5": {
+      "method": "operator_observed_physical_direction",
+      "instruction": "WRIST YAW: swivel only the gripper assembly CLOCKWISE as viewed from above.",
+      "baseline_raw_rad": [
+        -0.010584831237792969,
+        0.9817441701889038,
+        1.7646793127059937,
+        -0.0486832857131958,
+        0.09435045719146729,
+        0.005372188985347748
+      ],
+      "raw_rad": [
+        -0.011531829833984375,
+        0.9817513227462769,
+        1.7663639783859253,
+        -0.07419121265411377,
+        0.31503090262413025,
+        0.001672554761171341
+      ],
+      "sample_span_rad": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "model_direction": 1,
+      "captured_utc": "2026-09-29T23:59:20.889029+00:00",
+      "angle_magnitude_independently_measured": false
+    }
+  },
+  "reference_alignment": "operator_matched_photo_not_independently_verified",
+  "signs": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    null
+  ],
+  "software_offsets_rad": [
+    0.008786320686340332,
+    -0.9761649370193481,
+    -1.764588713645935,
+    0.055460453033447266,
+    -0.09484803676605225,
+    null
+  ],
+  "mapping_equation": "q_model[i] = signs[i] * q_raw[i] + software_offsets_rad[i]",
+  "motion_ready": false,
+  "hardware_zero_changed": false
+}

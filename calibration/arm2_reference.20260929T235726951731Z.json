@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "physical_arm": "second",
+  "captured_utc": "2026-09-29T23:53:06.756040+00:00",
+  "reference_raw_rad": [
+    -0.008786320686340332,
+    0.9761649370193481,
+    1.764588713645935,
+    -0.055460453033447266,
+    0.09484803676605225,
+    -0.004525233060121536
+  ],
+  "reference_model_rad": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "sample_span_rad": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "direction_checks": {
+    "1": {
+      "method": "operator_observed_physical_direction",
+      "instruction": "BASE: rotate the entire arm COUNTERCLOCKWISE as viewed from above; keep the base plate fixed.",
+      "baseline_raw_rad": [
+        -0.008786320686340332,
+        0.9761649370193481,
+        1.764588713645935,
+        -0.05544078350067139,
+        0.09482890367507935,
+        -0.004506349563598633
+      ],
+      "raw_rad": [
+        0.17366743087768555,
+        0.9761649370193481,
+        1.764588713645935,
+        -0.05506634712219238,
+        0.09429305791854858,
+        -0.0044591911137104034
+      ],
+      "sample_span_rad": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        9.566545486450195e-06,
+        0.0
+      ],
+      "model_direction": 1,
+      "captured_utc": "2026-09-29T23:55:21.965824+00:00",
+      "angle_magnitude_independently_measured": false
+    },
+    "2": {
+      "method": "operator_observed_physical_direction",
+      "instruction": "SHOULDER: raise the elbow by rotating the lower long link upward at the shoulder.",
+      "baseline_raw_rad": [
+        -0.011319756507873535,
+        0.9761840105056763,
+        1.764593482017517,
+        -0.05503678321838379,
+        0.09800562262535095,
+        -0.004591226577758789
+      ],
+      "raw_rad": [
+        -0.011410236358642578,
+        0.8119992017745972,
+        1.764593482017517,
+        -0.05517476797103882,
+        0.09801498055458069,
+        -0.004534672945737839
+      ],
+      "sample_span_rad": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "model_direction": -1,
+      "captured_utc": "2026-09-29T23:56:26.920183+00:00",
+      "angle_magnitude_independently_measured": false
+    }
+  },
+  "reference_alignment": "operator_matched_photo_not_independently_verified",
+  "signs": [
+    1,
+    1,
+    null,
+    null,
+    null,
+    null
+  ],
+  "software_offsets_rad": [
+    0.008786320686340332,
+    -0.9761649370193481,
+    null,
+    null,
+    null,
+    null
+  ],
+  "mapping_equation": "q_model[i] = signs[i] * q_raw[i] + software_offsets_rad[i]",
+  "motion_ready": false,
+  "hardware_zero_changed": false
+}
