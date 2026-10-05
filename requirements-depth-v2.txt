@@ -1,0 +1,4 @@
+# Isolated camera-only workaround; do not install into the arm's .venv.
+depthai==2.32.0.0
+numpy==2.2.6
+opencv-python==4.12.0.88

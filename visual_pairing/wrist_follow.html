@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>REbot · Wrist following</title>
+<style>
+:root{color-scheme:dark;font:17px system-ui;background:#10161f;color:#e7eff9}*{box-sizing:border-box}body{max-width:1150px;margin:auto;padding:28px}h1{font-size:30px;margin-bottom:8px}p{line-height:1.5;color:#b9c6d8}.panel{background:#1a2533;padding:22px;border-radius:16px;margin:18px 0}.cameras,.metrics{display:grid;grid-template-columns:1fr 1fr;gap:16px}.metrics{grid-template-columns:repeat(3,1fr)}img{width:100%;aspect-ratio:8/5;object-fit:contain;background:#080c12;border-radius:10px}figure{margin:0}figcaption{margin:8px 0;color:#b9c6d8}button{font:inherit;border:0;border-radius:12px;padding:20px;cursor:pointer}#hold{background:#6fe0c5;color:#102721;width:100%;font-weight:750;touch-action:none;user-select:none}#hold:disabled{opacity:.35;cursor:default}#stop{background:#b73545;color:white;margin-top:10px;width:100%}label{display:block;margin:14px 0;line-height:1.5}#message{font-size:20px}output{display:block;font-size:28px;margin:5px 0}.track{height:12px;background:#344356;position:relative;border-radius:5px;margin:12px 0}.dot{position:absolute;width:8px;height:20px;top:-4px;background:#6fe0c5;border-radius:4px}.small{font-size:14px}#error{color:#ffb4b4;white-space:pre-wrap}a{color:#6fe0c5}@media(max-width:700px){.cameras,.metrics{grid-template-columns:1fr}body{padding:16px}}
+</style>
+<h1>Wrist follows your hand</h1>
+<p>Hold the button, then gently twist the small leader’s wrist roll. Other leader joints may move. Each press starts from your current pose.</p>
+<div class="panel"><div id="message">Connecting…</div><p>Wrist roll only · ±<span id="range">15</span>° from this session’s starting pose · target speed ≤<span id="speed">12</span>°/s · gradual acceleration · no time limit while held</p>
+<div class="metrics"><div>Leader movement<output id="leader">—</output></div><div>Wrist target<output id="target">—</output><div class="track"><i class="dot" id="targetDot"></i></div></div><div>Wrist measured<output id="actual">—</output><div class="track"><i class="dot" id="actualDot"></i></div></div></div>
+<label><input type="checkbox" id="clear"> The follower is supported, and the wrist and camera cable have room to rotate 15° in either direction.</label>
+<button id="hold" disabled>Press and hold to follow</button><button id="stop">Stop · disable wrist</button>
+<p class="small">Release, switch tabs, or press Escape to disable the wrist. Keep the follower supported: releasing removes wrist torque; it does not return it to center. If the computer or USB connection fails, use the arm’s physical power switch.</p><div id="error" role="alert"></div></div>
+<div class="cameras"><figure><img id="wrist" alt="Live wrist camera"><figcaption>Wrist camera</figcaption></figure><figure><img id="tripod" alt="Live workspace camera"><figcaption>Workspace camera</figcaption></figure></div>
+<p class="small">Saved direction checks are retained. This test measures relative wrist movement and does not enable the other arm joints or gripper.</p>
+<script>
+const token='__TOKEN__',client=crypto.randomUUID(),$=id=>document.getElementById(id);
+let seq=0,pressId=null,holding=false,ready=false,lastState=0;
+async function send(action,extra={}){
+ const n=++seq;if(action==='press')pressId=n;
+ const response=await fetch('/action',{method:'POST',headers:{'Content-Type':'application/json','X-Pairing-Token':token},body:JSON.stringify({action,client,seq:n,press_id:pressId,...extra}),signal:AbortSignal.timeout(1000),keepalive:action==='release'});
+ const result=await response.json();if(!response.ok)throw Error(result.error||'Request failed');
+}
+function release(){holding=false;pressId=null;send('release').catch(()=>{});$('hold').textContent='Press and hold to follow';}
+$('hold').onpointerdown=e=>{if(e.button!==0||!ready||!$('clear').checked)return;e.preventDefault();holding=true;$('hold').setPointerCapture(e.pointerId);$('error').textContent='';send('press',{clearance_confirmed:true}).catch(e=>{$('error').textContent=e.message;release()});};
+for(const event of ['pointerup','pointercancel','lostpointercapture'])$('hold').addEventListener(event,release);
+$('stop').onclick=release;window.addEventListener('blur',release);window.addEventListener('pagehide',release);
+document.addEventListener('visibilitychange',()=>{if(document.hidden)release()});document.addEventListener('keydown',e=>{if(e.key==='Escape')release()});
+$('clear').onchange=()=>{if(!$('clear').checked)release();$('hold').disabled=!ready||!$('clear').checked};
+setInterval(()=>{if(holding){if(Date.now()-lastState>600){release();return;}send('heartbeat').catch(e=>{$('error').textContent=e.message;release()});}},100);
+function angle(id,value){$(id).textContent=Number.isFinite(value)?`${value>=0?'+':''}${value.toFixed(2)}°`:'—'}
+async function poll(){try{
+ const response=await fetch('/state',{signal:AbortSignal.timeout(700)});if(!response.ok)throw Error('Status unavailable');const s=await response.json();lastState=Date.now();ready=s.ready||s.active;
+ $('message').textContent=s.message;$('hold').disabled=!ready||!$('clear').checked;$('speed').textContent=s.speed_limit_deg_s;$('range').textContent=s.travel_limit_deg;
+ if(s.fault){$('error').textContent=s.fault;if(holding)release()}
+ if(holding)$('hold').textContent=s.active?'Following · release to stop':'Starting…';
+ if(holding&&!s.active&&!s.hold_requested)release();
+ const t=s.trial;angle('leader',t.leader_delta_deg);angle('target',t.target_offset_deg);angle('actual',t.actual_offset_deg);
+ for(const [id,key] of [['targetDot','target_offset_deg'],['actualDot','actual_offset_deg']])$(id).style.left=`${50+Math.max(-1,Math.min(1,(t[key]||0)/s.travel_limit_deg))*45}%`;
+ for(const role of ['wrist','tripod']){const source=s.sources[role];$(role).style.opacity=source&&!source.error&&source.age_s<1?1:.2;}
+ }catch(e){ready=false;$('hold').disabled=true;$('message').textContent='Connection lost';if(holding)release();}finally{setTimeout(poll,75)}}
+for(const role of ['wrist','tripod']){const img=$(role);const reload=()=>{if(!document.hidden)img.src=`/${role}.jpg?t=${Date.now()}`;else setTimeout(reload,500)};img.onload=()=>setTimeout(reload,150);img.onerror=()=>setTimeout(reload,1000);reload();}
+poll();
+</script></html>

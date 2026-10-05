@@ -1,0 +1,37 @@
+{
+  "recorded_utc": "2026-10-02T19:49:52.239194+00:00",
+  "physical_arm": "second",
+  "measurement": "second upper long link inclination, wrist end raised, lower link requested level",
+  "operator_report": "its currently 14.8 degrees",
+  "reported_inclination_deg": 14.8,
+  "instrument": "phone level app per measurement context",
+  "instrument_accuracy_deg": null,
+  "raw_joint_deg_rounded_to_0_01": [
+    2.48,
+    56.25,
+    86.79,
+    49.6,
+    5.82,
+    -5.85
+  ],
+  "baseline": "calibration/arm2_upper_level_check.20261002T193927498036Z.json",
+  "raw_joint_change_deg_from_rounded_readings": [
+    -0.99,
+    0.05,
+    -14.26,
+    52.8,
+    1.5,
+    -1.09
+  ],
+  "upper_link_upward_change_from_level_baseline_deg": 14.31,
+  "inclination_computation": "Change of link3 positive X axis inclination under saved mapping and pinned URDF; accounts for shoulder and elbow changes. Assumes fixed base and same phone surface as level baseline.",
+  "geometry_fingerprint": "a7f49e6930041f69900f6a9a52e405ea5acba3741db6e69a71bda0d7c1b1b212",
+  "phone_minus_encoder_predicted_inclination_change_deg": 0.49,
+  "joint_read_source": "calibrate_arm.py inspect after operator report",
+  "motor_status": "all six disabled according to Reader checks",
+  "finding": "Shoulder changed +0.05 degrees and elbow -14.26 degrees. Model predicts upper-link upward inclination change of 14.31 degrees from operator-reported level baseline, 0.49 degrees below phone report. Wrist bend also changed +52.80 degrees; this is not a single-joint-only trial. Phone placement and accuracy remain unquantified.",
+  "accepted_angle_scale_validation": false,
+  "motion_commanded": false,
+  "reference_modified": false,
+  "motion_ready": false
+}

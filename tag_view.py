@@ -9,6 +9,7 @@ from pathlib import Path
 import cv2
 import numpy as np
 from hello_world import Camera
+from camera_view import upright, VIEW_ROTATION_DEG
 
 TASK_CONFIG = json.loads((Path(__file__).resolve().parent / 'config/tag_task.json').read_text())
 
@@ -27,10 +28,29 @@ def detect(frame, family='auto', tag_id=0):
         if ids is None:
             continue
         for points, value in zip(corners, ids.flatten()):
-            if int(value) == tag_id:
+            if tag_id is None or int(value) == tag_id:
                 xy = points.reshape(4, 2)
                 found.append({'family': name, 'id': int(value),
                               'corners_px': xy.tolist(), 'center_px': xy.mean(axis=0).tolist()})
+    return found
+
+
+def detect_small(frame, family='36h11', tag_id=1):
+    """Retry a small foreshortened tag at 2x; return original-image pixels."""
+    found=detect(frame,family,tag_id)
+    if found:return found
+    gray=cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
+    parameters=cv2.aruco.DetectorParameters()
+    parameters.cornerRefinementMethod=cv2.aruco.CORNER_REFINE_SUBPIX
+    parameters.adaptiveThreshWinSizeMax=53
+    parameters.adaptiveThreshWinSizeStep=4
+    detector=cv2.aruco.ArucoDetector(cv2.aruco.getPredefinedDictionary(FAMILIES[family]),parameters)
+    corners,ids,_=detector.detectMarkers(cv2.resize(gray,None,fx=2,fy=2))
+    if ids is not None:
+        for points,value in zip(corners,ids.flatten()):
+            if int(value)==tag_id:
+                xy=points.reshape(4,2)/2
+                found.append({'family':family,'id':int(value),'corners_px':xy.tolist(),'center_px':xy.mean(0).tolist()})
     return found
 
 
@@ -42,6 +62,17 @@ def annotate(frame, detections):
         cv2.putText(result, f"{item['family']} ID:{item['id']}", tuple(points[0]),
                     cv2.FONT_HERSHEY_SIMPLEX, .5, (0, 255, 0), 1)
     return result
+
+
+def annotate_view(frame, detections):
+    height, width = frame.shape[:2]
+    displayed = []
+    for item in detections:
+        corners = np.array(item['corners_px'], dtype=float)
+        corners = np.array([width - 1, height - 1]) - corners
+        displayed.append({**item, 'corners_px': corners.tolist(),
+                          'center_px': corners.mean(axis=0).tolist()})
+    return annotate(upright(frame), displayed)
 
 
 def main():
@@ -62,7 +93,7 @@ def main():
         detections = detect(frame, args.family, args.id)
     else:
         with ExitStack() as stack:
-            camera = Camera(stack, False, args.output.with_name('tag_raw.jpg'))
+            camera = Camera(stack, False, args.output.with_name('tag_raw.jpg'), output_raw=True)
             deadline = time.monotonic() + args.seconds
             last_count = -1
             detections = []
@@ -73,16 +104,18 @@ def main():
                     frame = camera.frame.copy()
                     detections = detect(frame, args.family, args.id)
                     if args.preview:
-                        cv2.imshow('AprilTag search (no motion)', annotate(frame, detections))
+                        cv2.imshow('AprilTag search (no motion)', annotate_view(frame, detections))
                     if detections or (args.preview and cv2.waitKey(1) & 0xff in (27, ord('q'))):
                         break
                 time.sleep(.01)
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    if not cv2.imwrite(str(args.output), annotate(frame, detections)):
+    display = annotate(frame, detections) if args.image else annotate_view(frame, detections)
+    if not cv2.imwrite(str(args.output), display):
         raise RuntimeError('Failed to save annotated image')
     report = {'detections': detections, 'image': str(args.output), 'motion_commanded': False,
               'configured_tag_size_m': TASK_CONFIG['tag']['size_m'],
-              'coordinates': 'image_pixels_only'}
+              'coordinates': 'original_input_image_pixels',
+              'image_rotation_deg': 0 if args.image else VIEW_ROTATION_DEG}
     args.output.with_suffix('.json').write_text(json.dumps(report, indent=2) + '\n')
     print(json.dumps(report, indent=2))
     cv2.destroyAllWindows()

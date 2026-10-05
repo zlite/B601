@@ -61,6 +61,8 @@ def refine(data):
 
 def main():
     data=load_data(Geometry());result=refine(data)
+    result['wrist_camera']=data['wrist_camera']
+    result['session_id']=data.get('session_id')
     output=ROOT/'calibration/arm2_handeye_refined_candidate.json'
     output.write_text(json.dumps(result,indent=2,allow_nan=False)+'\n')
     print(json.dumps(result,indent=2))

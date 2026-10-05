@@ -13,6 +13,7 @@ from hello_world import PORT
 from rise_approach import Planner,MetricCamera,ROOT,PROFILE,PLANE_STANDOFF
 from tag_view import detect
 from tag_pose import estimate
+from camera_view import upright
 
 
 def smoothstep(x):
@@ -119,7 +120,7 @@ def execute():
       if direction==1 and s>=route.gate_arc-.025 and not approach_ok:
        seen=vision.latest()
        if seen is None or seen['plane_m']<PLANE_STANDOFF+route.approach_m+.01:
-        log['stop_reason']='Vision gate not satisfied; reversing';log['gate_observation']=seen;log['gate_samples']=list(vision.samples);camera.cv2.imwrite(str(ROOT/'outputs/continuous_gate.jpg'),camera.frame);direction=-1
+        log['stop_reason']='Vision gate not satisfied; reversing';log['gate_observation']=seen;log['gate_samples']=list(vision.samples);camera.cv2.imwrite(str(ROOT/'outputs/continuous_gate.jpg'),upright(camera.frame));direction=-1
        else:
         approach_ok=True;log['before_approach']=seen
         print('Tag verified while moving; blending into approach.',flush=True)
@@ -173,7 +174,7 @@ def execute():
      if arm.load_taken and np.max(abs(actual-endpoint))<math.radians(.15):
       if direction==1:
        log['forward_complete']=True;log['closest_observation']=vision.latest()
-       camera.cv2.imwrite(str(ROOT/'outputs/continuous_closest.jpg'),camera.frame)
+       camera.cv2.imwrite(str(ROOT/'outputs/continuous_closest.jpg'),upright(camera.frame))
        print('Approach endpoint reached; continuous turn-around.',flush=True);direction=-1;previous_speed=.003
       else:
        log['returned_to_rest']=True;print('Returned to rest.',flush=True);return

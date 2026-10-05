@@ -1,0 +1,14 @@
+{
+  "description": "Read-only pose-alignment checkpoint after operator reported done; not motion authorization or full calibration validation.",
+  "date": "2026-10-02",
+  "pairing_file": "leader_pairing_20261002T202428971124Z.json",
+  "leader_signs": [1, -1, 1, 1, -1, 1],
+  "leader_model_deg": [2.0, 0.0, -0.1, 0.3, -8.6, -4.1],
+  "follower_model_deg": [2.9331086258460854, 0.3692536869092322, -0.6506164995787316, 1.4111204976192195, -6.686143895511767, -5.813373572187663],
+  "alignment_tolerance_deg": 2.0,
+  "all_six_within_tolerance": true,
+  "follower_disabled_at_observation": true,
+  "motion_ready": false,
+  "hardware_zero_changed": false,
+  "limitations": "Single-pose match with visually confirmed leader directions. Joint ranges, powered following, gripper mapping, collision clearance and camera geometry are not validated by this checkpoint."
+}

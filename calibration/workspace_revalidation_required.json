@@ -1,0 +1,7 @@
+{
+  "created_utc": "2026-10-05T22:05:50.683891+00:00",
+  "reason": "User is relocating arm after ending trials; do not replay old workspace paths.",
+  "motion_ready": false,
+  "last_workspace_session": "outputs/plate_session_20261005_resumed.json",
+  "required_action": "Reacquire holder/tag, plate grid, independent wood plane and checked paths; validate an empty-jaw rehearsal before clearing this marker."
+}

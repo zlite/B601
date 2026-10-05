@@ -1,0 +1,202 @@
+{
+  "captured_utc": "2026-10-01T23:38:47.565943+00:00",
+  "wrist_camera": {
+    "device_id": "19443010C104077E00",
+    "model": "OAK-D-LITE"
+  },
+  "geometry_fingerprint": "a7f49e6930041f69900f6a9a52e405ea5acba3741db6e69a71bda0d7c1b1b212",
+  "calibration_sha256": "74919f18add8f37779b16ac0221b455ff56d9d25d458e9200e49b866afa95174",
+  "stereo_baseline_cm": 7.484872341156006,
+  "sensor_checks_passed": false,
+  "starting_pose_near_saved_reference": false,
+  "summary": {
+    "synchronized_frames": 60,
+    "tag_frames": 60,
+    "warmup_frames_excluded": 30,
+    "median_depth_valid_fraction": 0.496697265625,
+    "max_sync_difference_ms": 0.5760000058216974,
+    "median_tag_translation_camera_m": [
+      -0.1324387880833958,
+      0.050448603247997124,
+      0.5773235856442945
+    ],
+    "tag_translation_std_m": [
+      7.819830490171294e-05,
+      3.406457271675932e-05,
+      0.00043029284475369986
+    ],
+    "median_tag_depth_error_m": 0.0029837887072033387,
+    "median_tag_depth_valid_fraction": 1.0
+  },
+  "motion_commanded": false,
+  "motion_ready": false,
+  "report": "outputs/wrist_revalidation/report.json",
+  "handeye_validated_for_current_camera": false,
+  "physical_route_revalidated": false,
+  "note": "Fixed-focus 20-pose hand-eye session completed and failed held-out position validation. Stereo accuracy/alignment and physical route validation remain incomplete. No motion, EEPROM, motor-zero or active calibration writes.",
+  "handeye_session": "20261002T003620145947Z",
+  "handeye_validation": {
+    "sample_count": 20,
+    "all_lens_positions_verified": true,
+    "passed": false,
+    "heldout_indices": [
+      4,
+      9,
+      14,
+      19
+    ],
+    "heldout_translation_errors_mm": [
+      3.9671969136459873,
+      7.676398704918178,
+      12.12198371086128,
+      4.278523767286698
+    ],
+    "heldout_rotation_errors_deg": [
+      0.8069923384510009,
+      0.7154644994513369,
+      1.2666948452215099,
+      1.2664036620220587
+    ],
+    "max_heldout_translation_error_mm": 12.12198371086128,
+    "max_heldout_rotation_error_deg": 1.2666948452215099,
+    "candidate": "calibration/arm2_handeye_candidate.json",
+    "review_montage": "outputs/handeye_fixed_focus_review.jpg"
+  },
+  "operator_tag_verification": {
+    "width_mm": 60,
+    "height_mm": 60,
+    "rigid_flat_board": true,
+    "tag_fixed_during_capture": true,
+    "source": "user confirmation"
+  },
+  "stationary_pose_diagnostic": {
+    "sample_count": 12,
+    "translation_std_mm": [
+      0.011927109649149207,
+      0.00755040522706429,
+      0.06592608251838138
+    ],
+    "joint_span_deg": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "report": "outputs/wrist_static_diagnostic.json"
+  },
+  "diagnosis": "Fixed focus improved the Park held-out maximum translation error from 26.35 to 12.12 mm, but the 5 mm limit remains exceeded. Per-view tag corner RMS is 0.031 to 0.256 px. Training-only corner refinement fails, with held-out RMS up to 34.25 px. Before/after joint choices give 11.92/12.35 mm maximum translation error. Diagnostic reference-offset fitting within +/-15 degrees also fails held-out checks; no reference corrections activated. Operator confirms the camera mount is rigid with no wobble. Independently measured joint/model agreement still needs a physical check; root cause unresolved.",
+  "robot_base_secured_during_capture": true,
+  "reference_pose_check": {
+    "raw_rad": [
+      0.01934659481048584,
+      0.981690526008606,
+      1.7645314931869507,
+      -0.05210143327713013,
+      0.06404197216033936,
+      -0.015828561037778854
+    ],
+    "raw_deg": [
+      1.1084782305905394,
+      56.246723928270896,
+      101.10020737752944,
+      -2.9851922333620178,
+      3.6693347164817602,
+      -0.9069097432299428
+    ],
+    "saved_reference_raw_rad": [
+      -0.008786320686340332,
+      0.9761649370193481,
+      1.764588713645935,
+      -0.055460453033447266,
+      0.09484803676605225,
+      -0.004525233060121536
+    ],
+    "delta_from_reference_deg": [
+      1.6118973233663292,
+      0.316592928408431,
+      -0.0032784908016061202,
+      0.1924576553380343,
+      -1.7650574853146952,
+      -0.6476329875719085
+    ],
+    "sample_span_deg": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "motion_commanded": false,
+    "reference_overwritten": false,
+    "tripod_image": "outputs/reference_check_tripod.jpg"
+  },
+  "focus_diagnostic": {
+    "autofocus_supported": true,
+    "observed_autofocus_positions": [
+      0,
+      44,
+      47,
+      51,
+      55,
+      58,
+      62,
+      66,
+      70,
+      73,
+      75,
+      77,
+      81,
+      84
+    ],
+    "calibrated_lens_position": 76,
+    "factory_lens_position": 76,
+    "report": "outputs/wrist_focus_diagnostic.json",
+    "finding": "Focus varied while stored intrinsics stayed constant. This is a possible contributor, not a proven sole cause of hand-eye failure."
+  },
+  "configured_wrist_camera": {
+    "device_id": "19443010C104077E00",
+    "model": "OAK-D-LITE",
+    "manual_focus": 76
+  },
+  "fixed_focus_revalidation": {
+    "rgb_capture_verified": true,
+    "stereo_stream_verified": true,
+    "stereo_metric_check_passed": false,
+    "depthai_stereo_version": "2.32.0.0",
+    "stereo_report": "outputs/wrist_depth_v2_native/report.json",
+    "rgb_depth_alignment_verified": false,
+    "camera_reconnect_needed": false,
+    "note": "Calibrated-focus RGB is stable. New 20-pose fixed-focus hand-eye session fails position validation. Isolated DepthAI 2.32 restores RGB/stereo streaming; native stereo tag-depth consistency remains failed and RGB/depth alignment unvalidated.",
+    "rgb_tag_observations": 20,
+    "rgb_tag_translation_std_mm": [
+      0.008839864120613793,
+      0.010422144831829155,
+      0.1008811719976232
+    ],
+    "rgb_tag_report": "outputs/tag_pose.json"
+  },
+  "validation_updated_utc": "2026-10-02T00:43:57.628645+00:00",
+  "historical_autofocus_sensor_checks_passed": true,
+  "sensor_summary_scope": "The captured_utc, summary and report above describe the earlier autofocus sensor test; current fixed-focus stereo metric consistency remains failed.",
+  "fixed_focus_refinement": {
+    "passed": false,
+    "training_corner_rms_px": 24.245996022326366,
+    "max_heldout_translation_error_mm": 11.674840185738514,
+    "max_heldout_rotation_error_deg": 4.998090834416735,
+    "max_heldout_corner_rms_px": 34.251113838191586,
+    "candidate": "calibration/arm2_handeye_fixed_focus_refined_candidate.json"
+  },
+  "fixed_focus_reference_diagnostic": {
+    "report": "outputs/handeye_fixed_focus_reference_diagnostic.json",
+    "diagnostic_only": true,
+    "reference_modified": false
+  },
+  "operator_camera_mount_verification": {
+    "rigidly_fixed_to_wrist_gripper_body": true,
+    "no_wobble": true,
+    "source": "user confirmation"
+  }
+}

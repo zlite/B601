@@ -1,0 +1,39 @@
+{
+  "recorded_utc": "2026-10-02T19:45:28.267032+00:00",
+  "physical_arm": "second",
+  "measurement": "second lower long link inclination check, shoulder to elbow",
+  "operator_report": "it currently says 14.6 degrees",
+  "reported_inclination_deg": 14.6,
+  "status": "operator inclination and joint measurement recorded",
+  "raw_joint_deg_rounded_to_0_01": [
+    4.97,
+    41.89,
+    101.1,
+    -2.83,
+    3.92,
+    -4.76
+  ],
+  "baseline": "calibration/arm2_level_check.20261002T193105011059Z.json",
+  "raw_joint_change_deg_from_rounded_readings": [
+    1.5,
+    -14.31,
+    0.05,
+    0.37,
+    -0.4,
+    0.0
+  ],
+  "shoulder_upward_change_from_level_baseline_deg": 14.31,
+  "joint_read_source": "calibrate_arm.py inspect; successful retry",
+  "prior_capture_rejected": "Arm moved more than 0.5 degrees during first capture; no measurement accepted from that attempt.",
+  "motor_status": "all six disabled according to Reader checks",
+  "accepted_angle_scale_validation": false,
+  "motion_commanded": false,
+  "reference_modified": false,
+  "motion_ready": false,
+  "operator_report_received_utc": "2026-10-02T19:46:08.429115+00:00",
+  "instrument": "phone level app per measurement context",
+  "instrument_accuracy_deg": null,
+  "measurement_pairing": "Operator supplied current phone reading after successful joint capture; same pose assumed from conversation, not independently synchronized.",
+  "phone_minus_shoulder_change_deg": 0.29,
+  "finding": "Phone reports 14.6 degrees above level; shoulder encoder indicates 14.31 degrees upward from the level baseline. Difference is 0.29 degrees. Earlier 8.6-degree phone reading differed by 0.70 degrees. Both support direction and approximate magnitude; phone accuracy and placement are unquantified, and a scale correction is not established."
+}

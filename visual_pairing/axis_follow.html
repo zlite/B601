@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>REbot · Camera calibration</title>
+<style>
+:root{color-scheme:dark;font:17px system-ui;background:#10161f;color:#e7eff9}*{box-sizing:border-box}body{max-width:1150px;margin:auto;padding:28px}h1{font-size:30px;margin-bottom:8px}p{line-height:1.5;color:#b9c6d8}.panel{background:#1a2533;padding:22px;border-radius:16px;margin:18px 0}.cameras,.metrics{display:grid;grid-template-columns:1fr 1fr;gap:16px}.metrics{grid-template-columns:repeat(3,1fr)}img{width:100%;aspect-ratio:8/5;object-fit:contain;background:#080c12;border-radius:10px}figure{margin:0}figcaption{margin:8px 0;color:#b9c6d8}button{font:inherit;border:0;border-radius:12px;padding:20px;cursor:pointer}#hold{background:#6fe0c5;color:#102721;width:100%;font-weight:750;touch-action:none;user-select:none}#hold:disabled{opacity:.35;cursor:default}#stop{background:#b73545;color:white;margin-top:10px;width:100%}label{display:block;margin:14px 0;line-height:1.5}#message{font-size:20px}output{display:block;font-size:28px;margin:5px 0}.track{height:12px;background:#344356;position:relative;border-radius:5px;margin:12px 0}.dot{position:absolute;width:8px;height:20px;top:-4px;background:#6fe0c5;border-radius:4px}.small{font-size:14px}#error{color:#ffb4b4;white-space:pre-wrap}a{color:#6fe0c5}@media(max-width:700px){.cameras,.metrics{grid-template-columns:1fr}body{padding:16px}}
+
+.guide-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(330px,1fr);gap:20px;align-items:start}.guide-card{background:#1a2533;border-radius:16px;padding:20px}.guide-card h2{margin-top:0}.steps{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.step{padding:8px 12px;border-radius:20px;background:#344356}.step.current{background:#6fe0c5;color:#102721}.step.done{color:#6fe0c5}.chip{display:inline-block;padding:5px 10px;border-radius:12px;background:#344356;font-size:14px}.chip.good{color:#6fe0c5}.chip.wait{color:#ffd083}#cameraCapture{background:#6fe0c5;color:#102721;width:100%;font-weight:700}button:disabled{opacity:.45;cursor:default}.gauge{height:20px;background:#344356;position:relative;border-radius:12px;margin:12px 0}.zone{position:absolute;left:30%;width:45%;height:100%;background:#286956;border-radius:8px}#moveNeedle{position:absolute;left:0;width:4px;height:30px;top:-5px;background:#fff}.readouts{display:flex;justify-content:space-between;font-size:14px;color:#b9c6d8}progress{width:100%;height:18px;accent-color:#6fe0c5}#cameraMessage{min-height:60px;font-size:19px}#followDock{border-top:1px solid #344356;margin-top:20px;padding-top:16px}#followDock #message{font-size:15px;margin:8px 0}#followDock button{padding:15px}#followDock label{font-size:14px}#tripodBox{position:relative;aspect-ratio:8/5;overflow:hidden;background:#080c12;border-radius:10px}#tripodBox img{position:absolute;left:50%;top:50%;width:62.5%;transform:translate(-50%,-50%) rotate(-90deg)}.camera-pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}.camera-pair img{width:100%}.result-table{width:100%;border-collapse:collapse}.result-table td,.result-table th{text-align:left;padding:10px;border-bottom:1px solid #344356}.wrist-diagram{width:100%;height:115px}.wrist-diagram .hinge circle{fill:#344356;stroke:#b9c6d8;stroke-width:2}.wrist-diagram .hinge text{fill:#e7eff9;text-anchor:middle;font:15px system-ui}.wrist-diagram .hinge.focus circle{fill:#286956;stroke:#6fe0c5;stroke-width:4}.wrist-diagram .hinge.focus text{fill:#6fe0c5}.joint-bars{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;font-size:13px}.joint-bars div{background:#10161f;border-radius:8px;padding:8px}.joint-bars .focus{outline:2px solid #6fe0c5}details{margin:18px 0}summary{cursor:pointer;padding:12px;font-size:18px}#savedViews:empty{display:none}.camera-tools{display:flex;justify-content:space-between;align-items:center;gap:10px}.camera-tools button{padding:7px 12px;font-size:14px}@media(max-width:800px){.guide-grid{grid-template-columns:1fr}.result-table{font-size:13px}}
+</style>
+<h1>Camera calibration</h1>
+<p>Live cameras and saved calibration results. For a manual check below, move with the leader, release to hold, then capture. Keep the tag and robot base fixed throughout.</p>
+<div class="panel" id="jointCalibrationResults" hidden>
+<h2>Autonomous joint calibration</h2><p id="jointCalibrationSummary"></p>
+<div style="overflow-x:auto"><table class="result-table"><thead><tr><th>Joint</th><th>Validation</th><th>Camera ° / motor °</th><th>Largest prediction error</th></tr></thead><tbody id="jointCalibrationRows"></tbody></table></div>
+<label>Inspect measurement <select id="jointCalibrationSelect" style="font:inherit;padding:8px;background:#233347;color:white"></select></label>
+<svg id="jointCalibrationChart" viewBox="0 0 720 330" style="width:100%;max-width:850px" role="img" aria-label="Camera rotation versus motor travel; outward and return calibration curves and separate validation points"></svg>
+<p id="jointCalibrationDetail" class="small"></p><p class="small">Local angular calibration around the folded pose, with the other joints held still. Curves are saved for analysis; the live controller still uses its existing mapping. These measurements do not establish fingertip position or calibration across the full workspace.</p>
+</div>
+<div class="steps" id="cameraSteps"><span class="step">Starting view</span><span class="step">Roll</span><span class="step">Yaw</span><span class="step">Bend</span></div>
+<div class="guide-grid"><div class="guide-card"><div id="wristArea"></div><div class="camera-tools"><span class="chip" id="tagQuality">Checking tag…</span><span class="chip" id="cameraFresh">Waiting for camera</span></div><details><summary>Workspace camera</summary><div id="tripodArea"></div><button id="rotateTripod" style="padding:8px">Rotate view ↻</button></details><div id="savedViews" class="camera-pair"></div></div>
+<div class="guide-card"><h2 id="cameraStepTitle">1 · Starting view</h2><svg class="wrist-diagram" viewBox="0 0 360 115" role="img" aria-label="Wrist joint guide: joint 4 bends, joint 5 yaws, joint 6 rolls. Schematic, not a registered camera overlay."><path d="M25 45H335" stroke="#62778e" stroke-width="12"/><g class="hinge" id="hinge3"><circle cx="60" cy="45" r="23"/><text x="60" y="50">4</text><text x="60" y="94">Bend ↕</text></g><g class="hinge" id="hinge4"><circle cx="180" cy="45" r="23"/><text x="180" y="50">5</text><text x="180" y="94">Yaw ↔</text></g><g class="hinge" id="hinge5"><circle cx="300" cy="45" r="23"/><text x="300" y="50">6</text><text x="300" y="94">Roll ↻</text></g></svg>
+<p id="cameraInstruction">Keep the whole tag visible and the arm still. A supported arm can be captured with motors off; release Follow if it is moving.</p><div id="movementGuide" hidden><strong id="moveLabel">Joint movement</strong><output id="moveValue">0.0°</output><div class="gauge"><div class="zone"></div><i id="moveNeedle"></i></div><div class="readouts"><span>0°</span><span>Green: 6–15°</span><span>20°</span></div></div><div class="joint-bars" id="jointMovement"></div>
+<div id="captureOutcome" role="status" style="padding:14px;margin:14px 0;background:#183b32;border-radius:10px;color:#8aefcf;font-weight:700"></div><p id="cameraMessage" role="status">Waiting for readings…</p><p id="captureDiagnostics" class="small"></p><label for="steadyProgress" class="small">Steady view</label><progress id="steadyProgress" max="1" value="0"></progress><button id="cameraCapture">Capture when steady</button><p class="small">One click arms the capture. It waits for a clear tag and a stationary arm. It never moves the arm.</p><details><summary style="font-size:14px">Start over</summary><p class="small">This resets progress to a new starting view. Previous files are preserved.</p><button id="cameraRestart" style="padding:8px;font-size:14px">Reset progress · new check</button></details>
+<div id="followDock"></div></div></div>
+<div class="panel" id="imuResults" hidden><h2>Independent movement check</h2><p id="imuFinding"></p><svg id="imuChart" viewBox="0 0 800 255" style="width:100%;max-width:850px" role="img" aria-label="Motor, tag image, and independent gyroscope rotation comparison"></svg><table class="result-table"><thead><tr><th>Movement</th><th>Motor reading</th><th>Tag image</th><th>Gyroscope</th></tr></thead><tbody id="imuRows"></tbody></table><p class="small">The gyroscope is inside the wrist camera and measures its physical rotation independently of the image. Gravity measurements provide a separate tilt check. These measurements do not identify a specific loose part or validate a new calibration.</p></div>
+<div class="panel" id="cameraResults" hidden><h2>Camera versus arm rotation</h2><p>Other joint movements are included in the arm-model calculation. A close result is a consistency check, not a completed camera-to-arm calibration.</p><table class="result-table"><thead><tr><th>Movement</th><th>Arm model</th><th>Camera</th><th>Difference</th></tr></thead><tbody id="cameraResultRows"></tbody></table><p id="cameraSummary"></p></div>
+<details id="armSettings"><summary>Arm settings, direction checks, and motor power</summary>
+<div class="panel"><label>Control mode <select id="mode" style="font:inherit;padding:10px;background:#233347;color:white;border-radius:8px"><option value="single">Selected joint only</option><option value="hold_all">All joints powered · selected joint follows</option><option value="follow_all">All joints follow</option></select></label><p id="modeNote"></p><label>Joint to inspect / reverse <select id="joint" style="font:inherit;padding:10px;background:#233347;color:white;border-radius:8px"><option value="5">5 · Wrist yaw</option><option value="4">4 · Wrist bend</option><option value="3">3 · Elbow</option><option value="2">2 · Shoulder</option><option value="1">1 · Base</option><option value="6">6 · Wrist roll</option></select></label><p id="progress">Loading direction checks…</p><div id="message">Connecting…</div><p id="limits" style="color:#ffd083" role="status"></p><p><span id="axisName">Wrist yaw</span> display · <span id="range">—</span>° from the selected axis’s starting pose · target speed ≤<span id="speed">12</span>°/s · gradual acceleration · no time limit while held</p>
+<div id="allRows" style="overflow-x:auto"></div><div class="metrics"><div>Leader movement<output id="leader">—</output></div><div>Joint target<output id="target">—</output><div class="track"><i class="dot" id="targetDot"></i></div></div><div>Joint measured<output id="actual">—</output><div class="track"><i class="dot" id="actualDot"></i></div></div></div>
+<label><input type="checkbox" id="clear"> <span id="clearance">The displayed ranges are clear, and I can support the arm during startup or a fault.</span></label>
+<button id="hold" disabled>Press and hold to follow</button><button id="stop">Pause · hold position</button><label><input type="checkbox" id="supported"> I am supporting the arm for motor power removal.</label><button id="disable" disabled>Remove motor power · arm can drop</button>
+<p class="small">Release, switch tabs, or press Escape to pause and hold position. Heartbeat, leader, or camera loss also pauses; recovery never resumes automatically. Motor faults, server shutdown, USB failure, or loss of power can still remove torque and let the arm drop. Keep physical support available. Motor power removal is a separate action below the pause button.</p><div id="error" role="alert"></div><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px"><button id="reverse">Reverse direction</button><button id="confirm">Direction looks right · Save</button></div><p class="small">Check a small movement first. Support the arm and remove motor power before changing or saving a direction. Shoulder and elbow may have only inward travel near their limits.</p></div>
+</details><div class="cameras" id="oldCameras"><figure><img id="wrist" alt="Live wrist camera"><figcaption>Wrist camera</figcaption></figure><figure><img id="tripod" alt="Live workspace camera"><figcaption>Workspace camera</figcaption></figure></div>
+<p class="small">All-joints modes power six arm joints together; the gripper stays unchanged. Existing directions and travel limits still apply. Support the arm and remove motor power before changing modes or reversing a direction. At a travel limit, excess leader movement is discarded so reversing responds immediately; pause and resume to realign.</p>
+<script>
+const token='__TOKEN__',client=crypto.randomUUID(),$=id=>document.getElementById(id);
+$('wristArea').append($('wrist').closest('figure'));
+$('tripodArea').append($('tripod').closest('figure'));
+const tripodBox=document.createElement('div');tripodBox.id='tripodBox';$('tripod').before(tripodBox);tripodBox.append($('tripod'));
+$('oldCameras').remove();
+for(const node of [$('message'),$('clear').closest('label'),$('hold'),$('stop'),$('error')])$('followDock').append(node);
+let tripodRotation=-90;
+$('rotateTripod').onclick=()=>{tripodRotation=(tripodRotation+90)%360;$('tripod').style.transform=`translate(-50%,-50%) rotate(${tripodRotation}deg)`;$('tripod').style.width=tripodRotation%180?'62.5%':'100%'};
+let jointCalibrationSignature='',jointCalibrationAttempts=[];
+function drawJointCalibration(){
+ const m=jointCalibrationAttempts[Number($('jointCalibrationSelect').value)];
+ const svg=$('jointCalibrationChart');svg.replaceChildren();if(!m)return;
+ if(!m.curves){$('jointCalibrationDetail').textContent=m.reason;return;}
+ const add=(type,attrs,text)=>{const el=document.createElementNS('http://www.w3.org/2000/svg',type);for(const [k,v] of Object.entries(attrs))el.setAttribute(k,v);if(text!==undefined)el.textContent=text;svg.append(el)};
+ const curves=Object.values(m.curves),values=curves.flatMap(c=>c.camera_travel_deg).concat(m.validation.map(v=>v.observed_camera_deg));
+ const ymin=Math.min(-1,...values),ymax=Math.max(10,...values)+.5,xmax=Math.max(8,...curves.flatMap(c=>c.motor_travel_deg));
+ const X=x=>65+x/xmax*580,Y=y=>265-(y-ymin)/(ymax-ymin)*220;
+ for(let y=0;y<=ymax;y+=2){add('line',{x1:65,y1:Y(y),x2:645,y2:Y(y),stroke:'#344356'});add('text',{x:50,y:Y(y)+5,fill:'currentColor','text-anchor':'end','font-size':13},y+'°');}
+ for(let x=0;x<=xmax;x+=2)add('text',{x:X(x),y:285,fill:'currentColor','text-anchor':'middle','font-size':13},x+'°');
+ add('text',{x:65,y:18,fill:'currentColor','font-size':14},'Camera rotation');add('text',{x:355,y:316,fill:'currentColor','text-anchor':'middle','font-size':14},'Motor travel from starting pose');
+ for(const [branch,color] of [['outward','#6fe0c5'],['return','#e8b366']]){
+  const c=m.curves[branch];add('polyline',{points:c.motor_travel_deg.map((x,i)=>`${X(x)},${Y(c.camera_travel_deg[i])}`).join(' '),fill:'none',stroke:color,'stroke-width':3});
+  c.motor_travel_deg.forEach((x,i)=>add('circle',{cx:X(x),cy:Y(c.camera_travel_deg[i]),r:3,fill:color}));
+  m.validation.filter(v=>v.branch===branch).forEach(v=>{const x=X(v.motor_travel_deg),y=Y(v.observed_camera_deg);add('path',{d:`M${x-5} ${y-5}L${x+5} ${y+5}M${x-5} ${y+5}L${x+5} ${y-5}`,stroke:color,'stroke-width':2});});
+ }
+ add('text',{x:265,y:18,fill:'#6fe0c5','font-size':13},'Outward');add('text',{x:365,y:18,fill:'#e8b366','font-size':13},'Return');add('text',{x:445,y:18,fill:'currentColor','font-size':13},'× Separate validation');
+ $('jointCalibrationDetail').textContent=`${m.name} · ${m.training_indices.length} training / ${m.validation_indices.length} validation views · raw range ${m.raw_range_deg.map(x=>x.toFixed(2)+'°').join(' to ')} · Prediction error ${m.max_validation_error_deg.toFixed(2)}° (limit 0.75°) · Off-axis rotation ${m.max_off_axis_deg.toFixed(2)}°${m.model_type==='local_full_rotation'?' (included in model)':' (limit 1.00°)'} · Other-joint drift ${m.max_other_joint_drift_deg.toFixed(3)}° (limit 0.35°). ${m.validation_passed?'This local trial passed.':'This trial needs further calibration.'} ${m.model_type==='local_full_rotation'?'Error measures the full camera rotation; off-axis motion is included in the model.':'Error measures rotation projected onto the fitted joint axis.'}`;
+}
+$('jointCalibrationSelect').onchange=drawJointCalibration;
+function updateJointCalibration(p){
+ $('jointCalibrationResults').hidden=!p;if(!p)return;
+ const signature=JSON.stringify(p);if(signature===jointCalibrationSignature)return;jointCalibrationSignature=signature;
+ const passed=p.joints.filter(m=>[m,...(m.repeat_checks||[])].every(a=>a.validation_passed)).length;
+ $('jointCalibrationSummary').textContent=`${passed} of ${p.joints.length} joints passed all recorded local checks. Camera measurements are the reference. Training views fit each curve; separate validation views test it. Earlier approaches remain available in the selector.`;
+ $('jointCalibrationRows').replaceChildren();$('jointCalibrationSelect').replaceChildren();jointCalibrationAttempts=[];
+ for(const m of p.joints){
+  const attempts=[m,...(m.repeat_checks||[])],ok=attempts.every(a=>a.validation_passed),worst=Math.max(...attempts.map(a=>a.max_validation_error_deg??0));
+  const tr=document.createElement('tr');[m.name,ok?'✓ Locally validated':'Needs more calibration',m.endpoint_scale?.toFixed(3)??'—',worst.toFixed(2)+'°'].forEach(value=>{const td=document.createElement('td');td.textContent=value;tr.append(td)});tr.children[1].style.color=ok?'#6fe0c5':'#ffd083';$('jointCalibrationRows').append(tr);
+  const history=attempts.concat(m.previous_approaches||[]);
+  history.forEach((a,i)=>{const option=document.createElement('option');option.value=jointCalibrationAttempts.length;option.textContent=`${m.name} · ${i?'earlier trial '+i:'current model'} · ${a.validation_passed?'passed':'needs calibration'}`;jointCalibrationAttempts.push(a);$('jointCalibrationSelect').append(option)});
+ }
+ $('jointCalibrationSelect').value='0';drawJointCalibration();
+}
+
+let cameraSignature='';
+let imuSignature='';
+function updateImu(c){
+ const rows=c.independent_imu?.comparisons;$('imuResults').hidden=!rows;
+ if(!rows){imuSignature='';return;}
+ const signature=c.session+JSON.stringify(rows);if(signature===imuSignature)return;imuSignature=signature;
+ const gap=Math.max(...rows.map(r=>r.gyro_vs_encoder_deg));
+ $('imuFinding').textContent=gap>1?'Using the camera as the calibration reference: motor readings need a measured motion mapping. Check scale, pose, and movement direction across repeated views.':'The independent motion measurements are close in this check; position and fingertip calibration still need validation.';
+ $('imuRows').replaceChildren();const svg=$('imuChart');svg.replaceChildren();
+ const add=(type,attrs,text)=>{const el=document.createElementNS('http://www.w3.org/2000/svg',type);for(const [k,v] of Object.entries(attrs))el.setAttribute(k,v);if(text!==undefined)el.textContent=text;svg.append(el)};
+ const series=[['encoder_deg','Motor reading','#64748b'],['tag_deg','Tag image','#148263'],['gyro_deg','Gyroscope','#2563eb']];
+ series.forEach(([key,label,color],i)=>{add('rect',{x:155+i*170,y:5,width:12,height:12,fill:color});add('text',{x:173+i*170,y:16,fill:'currentColor','font-size':13},label)});
+ const scale=490/Math.max(10,...rows.flatMap(r=>series.map(([k])=>r[k])));
+ rows.forEach((r,i)=>{const y=38+i*68;add('text',{x:2,y:y+23,fill:'currentColor','font-size':14},r.step);series.forEach(([key,label,color],j)=>{add('rect',{x:155,y:y+j*16,width:r[key]*scale,height:11,rx:2,fill:color});add('text',{x:163+r[key]*scale,y:y+j*16+10,fill:'currentColor','font-size':12},r[key].toFixed(2)+'°')});const tr=document.createElement('tr');[r.step,...series.map(([k])=>r[k].toFixed(2)+'°')].forEach(value=>{const td=document.createElement('td');td.textContent=value;tr.append(td)});$('imuRows').append(tr)});
+}
+$('cameraCapture').onclick=async()=>{try{await send('camera_capture');$('cameraCapture').disabled=true}catch(e){$('error').textContent=e.message}};
+$('cameraRestart').onclick=async()=>{try{await send('camera_restart')}catch(e){$('error').textContent=e.message}};
+function updateCameraGuide(s){
+ const c=s.camera_check;if(!c){$('cameraMessage').textContent='Camera check is waiting for the updated server.';return;}
+ updateImu(c);
+ const names=c.steps?c.steps.map(step=>step[1]):['Starting view','Wrist roll','Wrist yaw','Wrist bend'];
+ [...$('cameraSteps').children].forEach((el,i)=>{el.className='step'+(i<c.step?' done':i===c.step?' current':'');el.textContent=(i<c.step?'✓ ':'')+names[i]});
+ $('cameraStepTitle').textContent=c.complete?'Check complete':`${c.step+1} · ${names[c.step]}`;
+ $('cameraInstruction').textContent=c.complete?'Review the comparison below. Saved views are ready for diagnosis.':c.step===0?'Keep the whole tag visible and the arm still. A supported arm can be captured with motors off; release Follow if it is moving.':`Use the leader to move ${c.step_name.toLowerCase()} about 10° in either direction. Release in the green zone. Coupled movement is included automatically.`;
+ for(let j=3;j<6;j++)$('hinge'+j).classList.toggle('focus',!c.complete&&c.selected_joint===j);
+ $('movementGuide').hidden=c.step===0||c.complete;
+ const moved=c.selected_joint===null?0:Math.abs(c.delta_deg[c.selected_joint]);
+ $('moveLabel').textContent=c.step_name+' movement';$('moveValue').textContent=moved.toFixed(1)+'°';$('moveNeedle').style.left=Math.min(100,moved*5)+'%';
+ $('jointMovement').replaceChildren();['Base','Shoulder','Elbow','Bend','Yaw','Roll'].forEach((name,j)=>{const d=document.createElement('div');d.textContent=`${name}: ${c.delta_deg[j].toFixed(1)}°`;d.className=c.selected_joint===j&&!c.complete?'focus':'';$('jointMovement').append(d)});
+ $('cameraMessage').textContent=c.message;
+ const d=c.diagnostics||{};$('captureDiagnostics').textContent=`Image age: ${Number.isFinite(d.latest_frame_age_s)?Math.round(d.latest_frame_age_s*1000)+' ms':'—'} · Camera samples: ${d.camera_samples??'—'} · window: ${(d.camera_window_s??0).toFixed(2)} s · rotation variation: ${Number.isFinite(d.camera_rotation_span_deg)?d.camera_rotation_span_deg.toFixed(2)+'°':'—'}`;$('steadyProgress').value=c.steady_fraction;
+ const needsMovement=c.step>0&&!c.complete&&(moved<6||moved>20);
+ $('captureOutcome').hidden=c.step===0;
+ $('captureOutcome').textContent=c.complete?'✓ All 4 views saved':`✓ ${c.step} of 4 saved · ${names[c.step-1]} captured. Next: ${names[c.step]}.`;
+ $('cameraCapture').disabled=c.pending||c.saving||c.complete||!!s.fault||needsMovement;
+ $('cameraCapture').textContent=c.saving?'Saving image and readings…':c.complete?'✓ All four views saved':needsMovement?`${c.pending?'Waiting: ':''}${c.step_name} ${moved.toFixed(1)}° — need 6–15°`:c.pending?`Waiting: ${c.message}`:c.ready?'Capture this view now':'Capture once steady';
+ $('cameraRestart').disabled=c.saving;
+ const wrist=s.sources.wrist||{};const fresh=!wrist.error&&wrist.age_s<.35;
+ $('tagQuality').textContent=wrist.tag==='Visible'?`Tag visible · ${wrist.rms_px.toFixed(2)} px fit`:(wrist.tag||'Tag not visible');$('tagQuality').className='chip '+(wrist.tag==='Visible'&&fresh?'good':'wait');
+ $('cameraFresh').textContent=fresh?`Image delay: ${Math.round((wrist.frame_age_s||0)*1000)} ms`:'Camera delayed';$('cameraFresh').className='chip '+(fresh?'good':'wait');
+ const signature=c.session+':'+c.images.length;
+ if(signature!==cameraSignature){cameraSignature=signature;$('savedViews').replaceChildren();c.images.slice(-2).forEach((url,i)=>{const f=document.createElement('figure'),img=document.createElement('img'),caption=document.createElement('figcaption');img.src=url;img.alt='Saved camera check view';caption.textContent=names[Math.max(0,c.images.length-2)+i];f.append(img,caption);$('savedViews').append(f)});}
+ $('cameraResults').hidden=c.results.length===0;$('cameraResultRows').replaceChildren();
+ c.results.forEach(r=>{const tr=document.createElement('tr');[r.step,r.model_rotation_deg.toFixed(2)+'°',r.camera_rotation_deg.toFixed(2)+'°',r.difference_deg.toFixed(2)+'° · '+r.assessment].forEach(text=>{const td=document.createElement('td');td.textContent=text;tr.append(td)});$('cameraResultRows').append(tr)});
+ $('cameraSummary').textContent=c.complete?(c.results.every(r=>r.difference_deg<=2)?'These three rotation comparisons agree within 2°. Position, stereo depth, and fingertip alignment still need their own checks.':'At least one rotation comparison differs by more than 2°. The saved views will help locate the cause; calibration has not been changed.'):'Capture the next view to continue.';
+ if(c.independent_imu)$('cameraSummary').textContent='Review the independent sensor comparison above. A small tag-versus-motor difference by itself does not establish accurate physical movement.';
+}
+
+let seq=0,pressId=null,holding=false,ready=false,lastState=0,revision=-1,selected=5,powered=false;
+async function send(action,extra={}){
+ const n=++seq;if(action==='press')pressId=n;
+ const response=await fetch('/action',{method:'POST',headers:{'Content-Type':'application/json','X-Pairing-Token':token},body:JSON.stringify({action,client,seq:n,press_id:pressId,joint:selected,revision,...extra}),signal:AbortSignal.timeout(1000),keepalive:action==='release'});
+ const result=await response.json();if(!response.ok)throw Error(result.error||'Request failed');
+}
+function release(reason='operator_release'){
+ const wasHolding=holding;holding=false;pressId=null;
+ if(wasHolding)send('release',{reason}).catch(()=>{});
+ $('hold').textContent='Press and hold to follow';
+}
+$('hold').onpointerdown=e=>{if(e.button!==0||!ready||!$('clear').checked)return;e.preventDefault();holding=true;$('hold').setPointerCapture(e.pointerId);$('error').textContent='';send('press',{clearance_confirmed:true}).catch(e=>{$('error').textContent=e.message;release('press_failed')});};
+for(const event of ['pointerup','pointercancel','lostpointercapture'])$('hold').addEventListener(event,()=>release(event));
+async function configure(action,extra={}){if(holding)return;try{$('error').textContent='';await send(action,extra)}catch(e){$('error').textContent=e.message}}
+$('mode').onchange=()=>configure('set_control_mode',{control_mode:$('mode').value});
+$('joint').onchange=()=>configure('select',{joint:Number($('joint').value)});
+$('reverse').onclick=()=>configure('reverse');$('confirm').onclick=()=>configure('confirm_direction');
+$('stop').onclick=()=>{holding=false;pressId=null;send('release',{reason:'pause_button'}).catch(e=>{$('error').textContent=e.message})};
+$('disable').onclick=async()=>{if(!$('supported').checked)return;holding=false;pressId=null;try{await send('disable',{support_confirmed:true});$('supported').checked=false}catch(e){$('error').textContent=e.message}};
+$('supported').onchange=()=>{$('disable').disabled=!powered||!$('supported').checked};
+window.addEventListener('blur',()=>release('window_blur'));window.addEventListener('pagehide',()=>release('page_hidden'));
+document.addEventListener('visibilitychange',()=>{if(document.hidden)release('page_hidden')});document.addEventListener('keydown',e=>{if(e.key==='Escape')release('escape')});
+$('clear').onchange=()=>{if(!$('clear').checked)release('clearance_unchecked');$('hold').disabled=!ready||!$('clear').checked};
+setInterval(()=>{if(holding){if(Date.now()-lastState>600){release('status_stale');return;}send('heartbeat').catch(e=>{$('error').textContent=e.message;release('heartbeat_request_failed')});}},100);
+function angle(id,value){$(id).textContent=Number.isFinite(value)?`${value>=0?'+':''}${value.toFixed(2)}°`:'—'}
+async function poll(){try{
+ const response=await fetch('/state',{signal:AbortSignal.timeout(700)});if(!response.ok)throw Error('Status unavailable');const s=await response.json();lastState=Date.now();ready=s.ready||s.following;powered=s.powered;
+ updateJointCalibration(s.joint_calibration);
+ updateCameraGuide(s);
+ $('message').textContent=s.message;
+ $('limits').textContent=(s.axis_trials||[]).filter(r=>r.limited).map(r=>`${r.name}: AT LIMIT — reverse or pause to realign`).join(' · ');$('hold').disabled=!ready||!$('clear').checked;$('speed').textContent=s.speed_limit_deg_s;if(revision!==s.revision){$('clear').checked=false;}revision=s.revision;selected=s.selected_joint;$('joint').value=selected;$('axisName').textContent=s.selected_name;
+ $('disable').disabled=!powered||!$('supported').checked||!!s.fault;
+ $('range').textContent=s.bounds?`${s.bounds.low_deg.toFixed(1)} to +${s.bounds.high_deg.toFixed(1)}`:'—';
+ $('progress').textContent=`${s.directions.filter(Boolean).length}/6 directions physically confirmed · ${s.directions[selected-1]?'This direction is confirmed':'Check this direction with a small movement'}`;
+ $('mode').value=s.control_mode;$('mode').disabled=holding||s.active||!!s.fault;
+ $('modeNote').textContent=s.control_mode==='follow_all'?'All six joints will follow the leader. Move any hinge; coupled movement is allowed.':s.control_mode==='hold_all'?'All six joints will power up. The selected joint follows; the other five hold their starting positions.':'Only the selected joint powers up. Other joints need external support.';
+ $('joint').disabled=holding||s.active||!!s.fault;$('reverse').disabled=holding||s.active||!!s.fault;$('confirm').disabled=holding||s.active||!!s.fault||!s.can_confirm;
+ $('hold').disabled=!ready||!$('clear').checked;
+ if(s.fault){$('error').textContent=s.fault;if(holding)release('server_fault')}
+ if(holding)$('hold').textContent=s.following?'Following · release to hold':'Starting…';
+ if(holding&&!s.following&&!s.hold_requested)release('server_paused');
+ $('allRows').replaceChildren();if(s.control_mode!=='single'){
+ const table=document.createElement('table');table.style.cssText='width:100%;text-align:left;margin:16px 0;border-spacing:8px';
+ for(const cells of [['Axis','Range','Target','Measured','Status'],...(s.axis_trials||[]).map(r=>[r.name,`${r.low_deg.toFixed(1)} to +${r.high_deg.toFixed(1)}°`,`${r.target_offset_deg.toFixed(2)}°`,`${r.actual_offset_deg.toFixed(2)}°`,r.limited?'AT LIMIT · reverse or pause':s.following?'Following':s.fault?'Power state uncertain':s.powered?'Holding':'Power off'])]){const tr=document.createElement('tr');for(const label of cells){const td=document.createElement('td');td.textContent=label;tr.append(td)}table.append(tr)}$('allRows').append(table);}
+ const t=s.trial;angle('leader',t.leader_delta_deg);angle('target',t.target_offset_deg);angle('actual',t.actual_offset_deg);
+ for(const [id,key] of [['targetDot','target_offset_deg'],['actualDot','actual_offset_deg']])$(id).style.left=`${50+Math.max(-1,Math.min(1,(t[key]||0)/s.travel_limit_deg))*45}%`;
+ for(const role of ['wrist','tripod']){const source=s.sources[role];$(role).style.opacity=source&&!source.error&&source.age_s<1?1:.2;}
+ }catch(e){ready=false;$('hold').disabled=true;$('message').textContent='Dashboard connection lost — controller may still be holding. Support the arm; holding cannot be guaranteed after a controller or USB failure.';if(holding)release('status_request_failed');}finally{setTimeout(poll,75)}}
+for(const role of ['wrist','tripod']){const img=$(role);const reload=()=>{if(!document.hidden)img.src=`/${role}.jpg?t=${Date.now()}`;else setTimeout(reload,500)};img.onload=()=>setTimeout(reload,150);img.onerror=()=>setTimeout(reload,1000);reload();}
+poll();
+</script></html>

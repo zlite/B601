@@ -1,0 +1,23 @@
+{
+  "recorded_utc": "2026-10-02T19:31:05.011036+00:00",
+  "physical_arm": "second",
+  "measurement": "lower long link, shoulder to elbow, stationary resting pose",
+  "operator_report": "it's completely level",
+  "instrument": "phone level app",
+  "reported_inclination_deg": 0.0,
+  "instrument_accuracy_deg": null,
+  "raw_joint_deg_rounded_to_0_01": [
+    3.47,
+    56.2,
+    101.05,
+    -3.2,
+    4.32,
+    -4.76
+  ],
+  "shoulder_difference_from_saved_reference_deg": 0.26986900013753967,
+  "motor_status": "all six disabled according to Reader checks",
+  "scope": "Single stationary level comparison; angle scale, link surface alignment, and full joint geometry remain unverified.",
+  "motion_commanded": false,
+  "reference_modified": false,
+  "motion_ready": false
+}

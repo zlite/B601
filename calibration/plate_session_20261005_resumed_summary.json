@@ -1,0 +1,47 @@
+{
+  "scope": "Session summary; detailed recordings remain local",
+  "ended_utc": "2026-10-05T22:05:50.683891+00:00",
+  "arm_motors_off_verified": true,
+  "table_release_performed": false,
+  "runs": [
+    {
+      "run": "20261005T214911092531Z",
+      "returned_to_rest": true,
+      "motors_disabled_verified": true,
+      "lift_verified": null,
+      "stop_reason": null
+    },
+    {
+      "run": "20261005T215254487309Z",
+      "returned_to_rest": true,
+      "motors_disabled_verified": true,
+      "lift_verified": false,
+      "stop_reason": null
+    },
+    {
+      "run": "20261005T215716019347Z",
+      "returned_to_rest": true,
+      "motors_disabled_verified": true,
+      "lift_verified": true,
+      "stop_reason": null
+    },
+    {
+      "run": "20261005T220145766180Z",
+      "returned_to_rest": true,
+      "motors_disabled_verified": true,
+      "lift_verified": false,
+      "stop_reason": "Pregrasp geometry not ready"
+    }
+  ],
+  "carry_result": "Partial lateral carry; automatically retraced and returned plate to holder",
+  "pending": [
+    "Full carry repeat with plate-only clear-transit tracking",
+    "Hardware validation of conditional early-stall relief and stationary pregrasp handoff",
+    "Broader independent wood map for destination contact",
+    "Table touchdown, release, regrasp and holder return"
+  ],
+  "validation": {
+    "plate_tests": 99,
+    "dashboard_tests": 6
+  }
+}

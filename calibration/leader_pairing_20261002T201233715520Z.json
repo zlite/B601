@@ -1,0 +1,38 @@
+{
+  "session_id": "20261002T201233715520Z",
+  "demo": false,
+  "leader_port": "/dev/serial/by-id/usb-1a86_USB_Serial-if00-port0",
+  "servo_ids": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "reference_raw_deg": [
+    1.6,
+    -0.1,
+    -0.2,
+    0.7,
+    -3.8,
+    5.0,
+    0.0
+  ],
+  "signs": [
+    -1,
+    -1,
+    1,
+    1,
+    1,
+    -1
+  ],
+  "direction_checks": {},
+  "geometry_fingerprint": "a7f49e6930041f69900f6a9a52e405ea5acba3741db6e69a71bda0d7c1b1b212",
+  "mapping": "model_deg = sign * (leader_raw_deg - leader_reference_deg), first six joints only",
+  "reference_validity": "Current uninterrupted connection only; re-reference after restart or read failure.",
+  "motion_ready": false,
+  "hardware_zero_changed": false,
+  "scope": "Operator-aligned software reference and direction candidates. No scale, range, collision, gripper, or motion validation."
+}

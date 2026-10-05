@@ -1,0 +1,2 @@
+# Isolated optional dependency: install with --target vendor/leader_sdk
+motorbridge-smart-servo==0.0.4

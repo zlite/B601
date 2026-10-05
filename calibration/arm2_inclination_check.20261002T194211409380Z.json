@@ -1,0 +1,34 @@
+{
+  "recorded_utc": "2026-10-02T19:42:11.409380+00:00",
+  "physical_arm": "second",
+  "operator_report": "It's tilted up at 8.6 degrees",
+  "reported_inclination_deg": 8.6,
+  "instrument": "phone level app per measurement context",
+  "instrument_accuracy_deg": null,
+  "requested_measurement": "lower long link, shoulder to elbow, inclination upward from level",
+  "measured_link_confirmed": false,
+  "raw_joint_deg_rounded_to_0_01": [
+    5.01,
+    56.15,
+    92.78,
+    34.76,
+    4.31,
+    -4.76
+  ],
+  "baseline": "calibration/arm2_level_check.20261002T193105011059Z.json",
+  "raw_joint_change_deg_from_rounded_readings": [
+    1.54,
+    -0.05,
+    -8.27,
+    37.96,
+    -0.01,
+    0.0
+  ],
+  "joint_read_source": "calibrate_arm.py inspect after operator report",
+  "motor_status": "all six disabled according to Reader checks",
+  "finding": "Shoulder changed only -0.05 degrees, while elbow changed -8.27 and wrist bend +37.96 degrees. Cannot attribute reported 8.6-degree inclination to shoulder motion without clarifying measured link and pose timing.",
+  "accepted_angle_scale_validation": false,
+  "motion_commanded": false,
+  "reference_modified": false,
+  "motion_ready": false
+}

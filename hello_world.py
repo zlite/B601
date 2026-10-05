@@ -8,6 +8,8 @@ import signal
 import time
 from contextlib import ExitStack
 from pathlib import Path
+from camera_selection import wrist_pipeline, build_wrist_rgb, start_wrist_pipeline, wrist_camera_config
+from camera_view import upright
 
 PORT = '/dev/serial/by-id/usb-HDSC_CDC_Device_00000000050C-if00'
 
@@ -78,16 +80,16 @@ class Wrist:
 
 
 class Camera:
-    def __init__(self, stack: ExitStack, preview: bool, output: Path):
+    def __init__(self, stack: ExitStack, preview: bool, output: Path, *, output_raw: bool = False):
         import cv2
         import depthai as dai
         self.cv2, self.preview, self.output = cv2, preview, output
-        if not dai.Device.getAllAvailableDevices():
-            raise RuntimeError('OAK unavailable. Run bash scripts/setup_usb.sh, then reconnect it.')
-        self.pipeline = stack.enter_context(dai.Pipeline())
-        cam = self.pipeline.create(dai.node.Camera).build(dai.CameraBoardSocket.CAM_A)
+        self.output_raw = output_raw
+        self.pipeline = stack.enter_context(wrist_pipeline())
+        cam = build_wrist_rgb(self.pipeline)
         self.queue = cam.requestOutput((640, 400), type=dai.ImgFrame.Type.BGR888p, fps=15).createOutputQueue(maxSize=2, blocking=False)
-        self.pipeline.start()
+        start_wrist_pipeline(self.pipeline, cam)
+        self.focus = wrist_camera_config()['manual_focus']
         self.last = time.monotonic()
         self.count = 0
         self.frame = None
@@ -98,16 +100,18 @@ class Camera:
             if time.monotonic() > deadline:
                 raise RuntimeError('OAK did not produce a frame within 10 seconds')
             time.sleep(0.01)
-        print('OAK-1 RGB stream ready: 640×400 at 15 FPS')
+        print('Wrist RGB stream ready: 640×400 at 15 FPS')
 
     def poll(self, timeout=2):
         packet = self.queue.tryGet()
+        if packet is not None and packet.getLensPosition() != self.focus:
+            packet = None
         if packet is not None:
             self.frame = packet.getCvFrame()
             self.count += 1
             self.last = time.monotonic()
             if self.preview:
-                self.cv2.imshow('B601 hello-world — OAK-1 (Q to stop)', self.frame)
+                self.cv2.imshow('B601 wrist camera (Q to stop)', upright(self.frame))
         if time.monotonic() - self.last > timeout:
             raise RuntimeError('OAK frames stopped arriving')
         if self.preview and self.cv2.waitKey(1) & 0xFF in (ord('q'), 27):
@@ -116,7 +120,8 @@ class Camera:
     def finish(self):
         if self.frame is not None:
             self.output.parent.mkdir(parents=True, exist_ok=True)
-            if not self.cv2.imwrite(str(self.output), self.frame):
+            image = self.frame if self.output_raw else upright(self.frame)
+            if not self.cv2.imwrite(str(self.output), image):
                 raise RuntimeError(f'Cannot write snapshot: {self.output}')
             print(f'Read {self.count} frames; saved {self.output}')
         if self.preview:

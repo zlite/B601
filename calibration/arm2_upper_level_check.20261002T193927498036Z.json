@@ -1,0 +1,32 @@
+{
+  "recorded_utc": "2026-10-02T19:39:27.498036+00:00",
+  "physical_arm": "second",
+  "measurement": "upper long link, elbow to wrist, same supported folded resting pose",
+  "operator_report": "it's perfectly level",
+  "instrument": "phone level app per measurement context",
+  "reported_inclination_deg": 0.0,
+  "instrument_accuracy_deg": null,
+  "raw_joint_deg_rounded_to_0_01": [
+    3.47,
+    56.2,
+    101.05,
+    -3.2,
+    4.32,
+    -4.76
+  ],
+  "joint_read_source": "calibrate_arm.py inspect after operator report",
+  "delta_from_saved_reference_deg_from_rounded_readings": [
+    3.97341909277579,
+    0.26986900013753967,
+    -0.053485868331051734,
+    -0.022350111299947795,
+    -1.1143922017964547,
+    -4.500723244341965
+  ],
+  "motor_status": "all six disabled according to Reader checks",
+  "prior_lower_link_measurement": "calibration/arm2_level_check.20261002T193105011059Z.json",
+  "scope": "Operator reports both long links level at this pose. Supports folded reference alignment; does not independently validate angle scale, link surface registration, base leveling, or full geometry.",
+  "motion_commanded": false,
+  "reference_modified": false,
+  "motion_ready": false
+}

@@ -9,7 +9,8 @@ import numpy as np
 from arm_geometry import Geometry
 from calibrate_arm import Reader
 from hello_world import PORT
-from tag_view import detect,annotate,TASK_CONFIG
+from tag_view import detect,annotate_view,TASK_CONFIG
+from camera_selection import wrist_pipeline, build_wrist_rgb, start_wrist_pipeline, wrist_camera_config
 from tag_pose import estimate
 
 
@@ -18,11 +19,11 @@ def main():
     folder=Path(__file__).resolve().parent/'calibration'/f'contact_{stamp}'
     folder.mkdir()
     samples=[]
-    with Reader(PORT) as reader, dai.Pipeline() as pipeline:
+    with Reader(PORT) as reader, wrist_pipeline() as pipeline:
         gripper=reader.add_motor(7,23,'4310')
-        camera=pipeline.create(dai.node.Camera).build(dai.CameraBoardSocket.CAM_A)
+        camera=build_wrist_rgb(pipeline)
         queue=camera.requestOutput((1280,800),type=dai.ImgFrame.Type.BGR888p,fps=15,enableUndistortion=False).createOutputQueue(maxSize=2,blocking=False)
-        pipeline.start()
+        start_wrist_pipeline(pipeline, camera)
         deadline=time.monotonic()+12
         attempts=0
         while len(samples)<5 and time.monotonic()<deadline:
@@ -33,7 +34,7 @@ def main():
             end=min(deadline,time.monotonic()+3)
             while time.monotonic()<end:
                 p=queue.tryGet()
-                if p is not None and p.getTimestamp().total_seconds()>=earliest:
+                if p is not None and p.getTimestamp().total_seconds()>=earliest and p.getLensPosition()==wrist_camera_config()['manual_focus']:
                     packet=p;break
                 time.sleep(.005)
             if packet is None:continue
@@ -42,7 +43,7 @@ def main():
             after=reader.read()
             grip=gripper.get_register_f32(80,500)
             cv2.imwrite(str(folder/'latest_raw.jpg'),image)
-            cv2.imwrite(str(folder/'latest_detection.jpg'),annotate(image,found))
+            cv2.imwrite(str(folder/'latest_detection.jpg'),annotate_view(image,found))
             if max(abs(a-b) for a,b in zip(before,after))>np.deg2rad(.5):continue
             tr=packet.getTransformation();K=np.array(tr.getIntrinsicMatrix());D=np.array(tr.getDistortionCoefficients())
             poses=[]

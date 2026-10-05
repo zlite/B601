@@ -12,7 +12,9 @@ from arm_geometry import Geometry
 from calibrate_arm import Reader
 from hello_world import PORT
 from tag_pose import estimate
-from tag_view import detect, annotate, TASK_CONFIG
+from tag_view import detect, annotate_view, TASK_CONFIG
+from camera_view import VIEW_ROTATION_DEG
+from camera_selection import wrist_camera_config, build_wrist_rgb, start_wrist_pipeline
 
 ROOT = Path(__file__).resolve().parent
 DATA = ROOT / 'calibration/arm2_handeye_samples.json'
@@ -70,8 +72,11 @@ def load_data(geometry):
         data=json.loads(DATA.read_text())
         if data['geometry_fingerprint'] != geometry.fingerprint or data['tag'] != TASK_CONFIG['tag']:
             raise ValueError('Reference/model/tag changed; archive old sample file before starting a new collection')
+        if data.get('wrist_camera') != wrist_camera_config():
+            raise ValueError('Camera changed or old session has no camera identity; use capture --new-session')
         return data
-    return {'geometry_fingerprint':geometry.fingerprint, 'tag':TASK_CONFIG['tag'], 'samples':[]}
+    return {'geometry_fingerprint':geometry.fingerprint, 'tag':TASK_CONFIG['tag'],
+            'wrist_camera':wrist_camera_config(), 'samples':[]}
 
 
 def save_data(data):
@@ -100,6 +105,7 @@ def frame_pose(packet):
 
 
 def capture(port, new_session=False):
+    from camera_selection import wrist_pipeline
     geometry=Geometry()
     if new_session:
         stamp=datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')
@@ -108,7 +114,7 @@ def capture(port, new_session=False):
             archive.write_bytes(DATA.read_bytes())
             print(f'Preserved previous dataset: {archive}')
         data={'geometry_fingerprint':geometry.fingerprint, 'tag':TASK_CONFIG['tag'],
-              'session_id':stamp, 'samples':[]}
+              'wrist_camera':wrist_camera_config(), 'session_id':stamp, 'samples':[]}
         save_data(data)
     else:
         data=load_data(geometry)
@@ -116,12 +122,12 @@ def capture(port, new_session=False):
         data['session_id']=datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')
     print('Keep tag AND robot base fixed throughout this session. Support the disabled arm.')
     print('SPACE: save a steady pose. Q: finish. Capture 20 varied views; no motors are commanded.',flush=True)
-    with Reader(port) as reader, dai.Pipeline() as pipeline:
+    with Reader(port) as reader, wrist_pipeline() as pipeline:
         reader.read()  # refuse enabled/faulted joints before starting
-        cam=pipeline.create(dai.node.Camera).build(dai.CameraBoardSocket.CAM_A)
+        cam=build_wrist_rgb(pipeline)
         queue=cam.requestOutput((1280,800),type=dai.ImgFrame.Type.BGR888p,fps=15,enableUndistortion=False).createOutputQueue(maxSize=2,blocking=False)
-        pipeline.start()
-        message='Hold steady, then SPACE'; last=time.monotonic()
+        start_wrist_pipeline(pipeline, cam)
+        message='Hold steady, then SPACE'; last=time.monotonic(); began=last
         try:
             while True:
                 packet=queue.tryGet()
@@ -131,7 +137,7 @@ def capture(port, new_session=False):
                 last=time.monotonic()
                 image=packet.getCvFrame()
                 found=detect(image,TASK_CONFIG['tag']['family'],TASK_CONFIG['tag']['id'])
-                preview=annotate(image,found)
+                preview=annotate_view(image,found)
                 cv2.putText(preview,f"Saved {len(data['samples'])}/20 | SPACE capture | Q finish",(15,30),cv2.FONT_HERSHEY_SIMPLEX,.7,(0,255,255),2)
                 cv2.putText(preview,message[:105],(15,65),cv2.FONT_HERSHEY_SIMPLEX,.5,(0,255,255),1)
                 cv2.imshow('Second arm - read-only hand-eye calibration',preview)
@@ -139,6 +145,8 @@ def capture(port, new_session=False):
                 if key in (ord('q'),27):break
                 if key!=32:continue
                 try:
+                    if time.monotonic()-began<3:
+                        raise ValueError('Camera settling; wait three seconds before capturing')
                     before=reader.read()
                     earliest=dai.Clock.now().total_seconds()
                     deadline=time.monotonic()+3
@@ -149,6 +157,8 @@ def capture(port, new_session=False):
                             fresh=candidate;break
                         time.sleep(.005)
                     if fresh is None:raise ValueError('No fresh synchronized camera frame')
+                    if fresh.getLensPosition()!=wrist_camera_config()['manual_focus']:
+                        raise ValueError('Lens has not reached the calibrated focus position')
                     image,found,pose,K,D=frame_pose(fresh)
                     after=reader.read()
                     if max(abs(a-b) for a,b in zip(before,after))>np.deg2rad(.3):
@@ -165,13 +175,15 @@ def capture(port, new_session=False):
                     raw_path=image_path.with_name(image_path.stem+'_raw.jpg')
                     if not cv2.imwrite(str(raw_path),image):
                         raise ValueError('Cannot save raw image')
-                    if not cv2.imwrite(str(image_path),annotate(image,found)):
+                    if not cv2.imwrite(str(image_path),annotate_view(image,found)):
                         raise ValueError('Cannot save image')
                     data['samples'].append({'captured_utc':datetime.now(timezone.utc).isoformat(),
                         'raw_before':before,'raw_after':after,'T_base_wrist':A.tolist(),'T_camera_tag':B.tolist(),
                         'image':str(image_path),'raw_image':str(raw_path),
+                        'image_rotation_deg':VIEW_ROTATION_DEG,'coordinates':'original_sensor_frame',
                         'corners_px':found[0]['corners_px'],
                         'frame_timestamp_s':fresh.getTimestamp().total_seconds(),
+                        'lens_position':fresh.getLensPosition(),
                         'camera_matrix':K.tolist(),'distortion':D.tolist(),
                         'reprojection_rms_px':pose['reprojection_rms_px']})
                     save_data(data);message=f'Saved pose {index+1}'
@@ -191,6 +203,8 @@ def main():
     else:
         g=Geometry();data=load_data(g);result=solve_samples(data['samples'])
         result['geometry_fingerprint']=g.fingerprint
+        result['wrist_camera']=data['wrist_camera']
+        result['session_id']=data.get('session_id')
         RESULT.write_text(json.dumps(result,indent=2,allow_nan=False)+'\n')
         print(json.dumps(result,indent=2))
 

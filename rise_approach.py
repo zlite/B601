@@ -25,6 +25,7 @@ from teach_approach import near
 from arm_control import LiftArm
 from tag_view import detect
 from tag_pose import estimate
+from camera_view import upright
 
 ROOT=Path(__file__).resolve().parent
 SPEED=.06
@@ -73,6 +74,7 @@ def safe_observation(observation,reserve_m=STEP):
 class MetricCamera(Camera):
  def poll(self,timeout=2):
   packet=self.queue.tryGet()
+  if packet is not None and packet.getLensPosition()!=self.focus:packet=None
   if packet is not None:
    self.frame=packet.getCvFrame();self.count+=1;self.last=time.monotonic()
    trans=packet.getTransformation()
@@ -99,7 +101,7 @@ def observe(arm,current,camera,label):
   normal=cv2.Rodrigues(np.array(pose['rotation_vector']))[0][:,2]
   samples.append((v,abs(float(normal@v)),pose['reprojection_rms_px']))
   if len(samples)>=8:break
- path=ROOT/'outputs'/f'rise_{label}.jpg';camera.cv2.imwrite(str(path),camera.frame)
+ path=ROOT/'outputs'/f'rise_{label}.jpg';camera.cv2.imwrite(str(path),upright(camera.frame))
  result=None
  if len(samples)>=8:
   vectors=np.array([s[0] for s in samples])

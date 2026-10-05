@@ -1,0 +1,94 @@
+{
+  "reusable_if_mounts_and_hardware_unchanged": {
+    "calibration/leader_pairing_20261002T202428971124Z.json": "0ed72a96883bf3a5082494f8cd43b8947ba48ffa59edb13185b088aa7aac1c5e",
+    "calibration/camera_joint_motion_summary_20261004.json": "dc7309137864347767030b6cffa430779731de128ddc04539484fe34c2a489e6",
+    "calibration/stereo_sweep_handeye_20261004.json": "6390b3bd8f2d66da9eddc1b7a21deb81d821e4762867ae1eb223d14b5567275d",
+    "config/cameras.json": "2467d6ca509a472edd492fa03ae1d9cf650ce646fd1bb6db6212478e1864b41f",
+    "plate_speed.py": "7ba4a0217e866b7dba47939e9b2bf4e6e14cf8be7859828ba75ac8cf6e7bd3c2",
+    "outputs/gripper/20261004T204827125655Z/jaw_geometry.json": "f8e1caf3355415b43658c32c6aad62c34a67446efe2350487f3499a6ffaeedcd"
+  },
+  "workspace_specific_must_reacquire_after_move": {
+    "calibration/plate_surface_dense_20261005.json": "03a2ed9e0030748b39bd04535eae43b9e699b5e1ebf4d7da41c0dcae2b15e05d",
+    "calibration/plate_grid_tripod_20261004.json": "bb921b38245141b4a42e1dfa08392fbf45685ce0d6d10f8ab8745ae3f201bb05",
+    "calibration/plate_tripod_candidate_20261004.json": "734aaeadd15ecae89c804cfce44d469efa9adc994cc7699d9703d65f17efe0f8",
+    "outputs/plate_grid_reseed_candidate.json": "b6c2b509b403c9da098765b914f368b67f39381cb691e077910b4d380b3923c1"
+  },
+  "motion_ready_after_relocation": false,
+  "required_relocation_checks": [
+    "Verify camera serials, resolution and locked focus",
+    "Verify resting joint readback and gripper opening without enabling arm",
+    "Acquire new holder/tag pose, plate grid and independent table landmarks",
+    "Recompute reachable approach and return paths in the new workspace",
+    "Pass an open-jaw standoff/return rehearsal",
+    "Pass a 20 mm holder lift, placement, release and autonomous return"
+  ],
+  "holder_successes": [
+    {
+      "run": "20261005T190906767335Z",
+      "approach": "direct",
+      "lift_mm": 19.962413715730353,
+      "placement_shift_mm": 0.3720156465251457
+    },
+    {
+      "run": "20261005T191241457230Z",
+      "approach": "direct",
+      "lift_mm": 19.466727856229443,
+      "placement_shift_mm": 0.35045704496504104
+    },
+    {
+      "run": "20261005T193702193441Z",
+      "approach": "left",
+      "lift_mm": 19.38962010454051,
+      "placement_shift_mm": 0.6614823225271971
+    },
+    {
+      "run": "20261005T195412343726Z",
+      "approach": "left",
+      "lift_mm": 20.08654429972062,
+      "placement_shift_mm": 0.4015331769356933
+    },
+    {
+      "run": "20261005T201103982927Z",
+      "approach": "right",
+      "lift_mm": 20.555659364785054,
+      "placement_shift_mm": 0.24654763675503896
+    },
+    {
+      "run": "20261005T201931865227Z",
+      "approach": "right",
+      "lift_mm": 19.76339396662841,
+      "placement_shift_mm": 0.7670847403244027
+    },
+    {
+      "run": "20261005T202620981270Z",
+      "approach": "right",
+      "lift_mm": 20.572303286360665,
+      "placement_shift_mm": 0.7193525413821109
+    },
+    {
+      "run": "20261005T203916986415Z",
+      "approach": "left",
+      "lift_mm": 19.76295005408324,
+      "placement_shift_mm": 0.4236312491711122
+    },
+    {
+      "run": "20261005T204306756718Z",
+      "approach": "direct",
+      "lift_mm": 19.39601179875803,
+      "placement_shift_mm": 0.7571889199958547
+    },
+    {
+      "run": "20261005T204638000440Z",
+      "approach": "right",
+      "lift_mm": 20.54845144423318,
+      "placement_shift_mm": 0.2667627157205339
+    },
+    {
+      "run": "20261005T213039160412Z",
+      "approach": "left",
+      "lift_mm": 20.52814784519571,
+      "placement_shift_mm": 1.055041448403993
+    }
+  ],
+  "scope": "Evidence and reuse manifest; does not authorize replaying old workspace trajectories"
+}

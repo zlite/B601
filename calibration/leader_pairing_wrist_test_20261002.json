@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-02",
+  "test": "Independent joint6 wrist wave, not leader-controlled following",
+  "operator_confirmed_support_and_clearance": true,
+  "amplitude_deg": 3,
+  "period_seconds": 12,
+  "cycles": 1,
+  "command": ".venv/bin/python -u hello_world.py --mode wave --amplitude 3 --period 12 --cycles 1 --output outputs/leader_pairing_wrist_test.jpg",
+  "exit_code": 0,
+  "camera_frames": 242,
+  "post_test_inspect_raw_deg": [2.43, 56.30, 100.45, -1.77, -1.24, -6.29],
+  "post_test_all_six_motors_disabled": true,
+  "operator_confirmed_smooth_motion_and_clear_cable": true,
+  "post_test_verification": "calibrate_arm.py inspect completed; Reader rejects enabled or faulted motors",
+  "limitations": "Controller reported no fault and operator confirmed smooth motion, but tracking trace was not recorded. This does not validate leader following, other powered joints, gripper mapping or camera geometry.",
+  "motion_ready": false
+}

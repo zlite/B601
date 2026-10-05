@@ -1,0 +1,819 @@
+{
+  "session": "20261004T183948295824Z",
+  "geometry_fingerprint": "a7f49e6930041f69900f6a9a52e405ea5acba3741db6e69a71bda0d7c1b1b212",
+  "camera_is_reference": true,
+  "scope": "Local angular mappings only; existing raw motor limits and global kinematics unchanged.",
+  "joints": [
+    {
+      "joint": 1,
+      "name": "Base",
+      "origin_raw_deg": -1.9609131597648108,
+      "reference_raw_deg": [
+        -1.9609131597648108,
+        56.25101328706966,
+        100.67648976217853,
+        -2.9999010457396404,
+        10.266305369737132,
+        -3.2801247109216343
+      ],
+      "travel_sign": 1,
+      "camera_axis_in_reference_frame": [
+        0.01824065826043147,
+        0.9998292048163655,
+        -0.002973143538485036
+      ],
+      "curves": {
+        "outward": {
+          "motor_travel_deg": [
+            0.0,
+            3.9883617632266026,
+            7.99425435002758
+          ],
+          "camera_travel_deg": [
+            0.0,
+            4.6544516024373355,
+            8.16997579665294
+          ]
+        },
+        "return": {
+          "motor_travel_deg": [
+            0.0033154174878859966,
+            4.004739987729396,
+            7.99425435002758
+          ],
+          "camera_travel_deg": [
+            0.048320265727680785,
+            5.2056190477623545,
+            8.16997579665294
+          ]
+        }
+      },
+      "endpoint_scale": 1.0219809676964748,
+      "scope": "Local angular mapping with other joints held at the recorded reference; outward starts near zero, return starts near the endpoint. No extrapolation.",
+      "training_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "validation_indices": [
+        5,
+        6,
+        7,
+        8
+      ],
+      "validation": [
+        {
+          "index": 5,
+          "branch": "outward",
+          "motor_travel_deg": 6.006262468196492,
+          "observed_camera_deg": 6.369220312158868,
+          "predicted_camera_deg": 6.425337515160091,
+          "error_deg": -0.05611720300122336,
+          "outside_training_range_deg": 0.0
+        },
+        {
+          "index": 6,
+          "branch": "outward",
+          "motor_travel_deg": 7.996476299382012,
+          "observed_camera_deg": 8.243221308910384,
+          "predicted_camera_deg": 8.16997579665294,
+          "error_deg": 0.07324551225744358,
+          "outside_training_range_deg": 0.0022219493544319846
+        },
+        {
+          "index": 7,
+          "branch": "return",
+          "motor_travel_deg": 6.002184732940487,
+          "observed_camera_deg": 6.50674487632429,
+          "predicted_camera_deg": 6.689794381722457,
+          "error_deg": -0.18304950539816733,
+          "outside_training_range_deg": 0.0
+        },
+        {
+          "index": 8,
+          "branch": "return",
+          "motor_travel_deg": 0.003319662660600242,
+          "observed_camera_deg": 0.0968917887202243,
+          "predicted_camera_deg": 0.04832573718507911,
+          "error_deg": 0.04856605153514519,
+          "outside_training_range_deg": 0.0
+        }
+      ],
+      "max_validation_error_deg": 0.18304950539816733,
+      "max_other_joint_drift_deg": 0.001117589702943178,
+      "max_off_axis_deg": 0.9166085470170939,
+      "midpoint_direction_difference_deg": -0.551167445325019,
+      "validation_passed": true,
+      "camera_travel_deg": [
+        0.0,
+        4.6544516024373355,
+        8.16997579665294,
+        5.2056190477623545,
+        0.048320265727680785,
+        6.369220312158868,
+        8.243221308910384,
+        6.50674487632429,
+        0.0968917887202243
+      ],
+      "motor_travel_deg": [
+        0.0,
+        3.9883617632266026,
+        7.99425435002758,
+        4.004739987729396,
+        0.0033154174878859966,
+        6.006262468196492,
+        7.996476299382012,
+        6.002184732940487,
+        0.003319662660600242
+      ],
+      "raw_range_deg": [
+        -1.9609131597648108,
+        6.033341190262769
+      ],
+      "acceptance": {
+        "max_validation_error_deg": 0.75,
+        "max_other_joint_drift_deg": 0.35,
+        "max_off_axis_deg": 1.0
+      },
+      "globally_applied": false
+    },
+    {
+      "joint": 2,
+      "name": "Shoulder",
+      "origin_raw_deg": 56.25101328706966,
+      "reference_raw_deg": [
+        -1.9609131597648108,
+        56.25101328706966,
+        100.6766127055836,
+        -2.9999010457396404,
+        10.266305369737132,
+        -3.2795646354096935
+      ],
+      "travel_sign": -1,
+      "camera_axis_in_reference_frame": [
+        0.9858692888325358,
+        0.14269236674157912,
+        -0.08775325527019869
+      ],
+      "curves": {
+        "outward": {
+          "motor_travel_deg": [
+            -0.0,
+            3.9894100820597487,
+            7.997860913782112
+          ],
+          "camera_travel_deg": [
+            0.0,
+            3.388015438102658,
+            6.911390768952006
+          ]
+        },
+        "return": {
+          "motor_travel_deg": [
+            0.0027098231273399165,
+            4.001424500979404,
+            7.997860913782112
+          ],
+          "camera_travel_deg": [
+            -0.7812576310022625,
+            3.429386413484983,
+            6.911390768952006
+          ]
+        }
+      },
+      "endpoint_scale": 0.8641549088509561,
+      "scope": "Local angular mapping with other joints held at the recorded reference; outward starts near zero, return starts near the endpoint. No extrapolation.",
+      "training_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "validation_indices": [
+        5,
+        6,
+        7,
+        8
+      ],
+      "validation": [
+        {
+          "index": 5,
+          "branch": "outward",
+          "motor_travel_deg": 6.003667978549508,
+          "observed_camera_deg": 5.730997573943667,
+          "predicted_camera_deg": 5.158521521474289,
+          "error_deg": 0.5724760524693782,
+          "outside_training_range_deg": 0.0
+        },
+        {
+          "index": 6,
+          "branch": "outward",
+          "motor_travel_deg": 7.997403722722986,
+          "observed_camera_deg": 7.000580994109219,
+          "predicted_camera_deg": 6.9109889040503685,
+          "error_deg": 0.08959209005885072,
+          "outside_training_range_deg": 0.0
+        },
+        {
+          "index": 7,
+          "branch": "return",
+          "motor_travel_deg": 6.005203010050224,
+          "observed_camera_deg": 5.324866060090006,
+          "predicted_camera_deg": 5.175233156754623,
+          "error_deg": 0.14963290333538293,
+          "outside_training_range_deg": 0.0
+        },
+        {
+          "index": 8,
+          "branch": "return",
+          "motor_travel_deg": 0.004186655302859776,
+          "observed_camera_deg": -0.6865995498991924,
+          "predicted_camera_deg": -0.779702527648927,
+          "error_deg": 0.09310297774973464,
+          "outside_training_range_deg": 0.0
+        }
+      ],
+      "max_validation_error_deg": 0.5724760524693782,
+      "max_other_joint_drift_deg": 0.0034185096795913417,
+      "max_off_axis_deg": 0.4701638732727168,
+      "midpoint_direction_difference_deg": -0.04137097538232526,
+      "validation_passed": true,
+      "camera_travel_deg": [
+        0.0,
+        3.388015438102658,
+        6.911390768952006,
+        3.429386413484983,
+        -0.7812576310022625,
+        5.730997573943667,
+        7.000580994109219,
+        5.324866060090006,
+        -0.6865995498991924
+      ],
+      "motor_travel_deg": [
+        -0.0,
+        3.9894100820597487,
+        7.997860913782112,
+        4.001424500979404,
+        0.0027098231273399165,
+        6.003667978549508,
+        7.997403722722986,
+        6.005203010050224,
+        0.004186655302859776
+      ],
+      "raw_range_deg": [
+        48.25315237328755,
+        56.25101328706966
+      ],
+      "acceptance": {
+        "max_validation_error_deg": 0.75,
+        "max_other_joint_drift_deg": 0.35,
+        "max_off_axis_deg": 1.0
+      },
+      "globally_applied": false
+    },
+    {
+      "joint": 3,
+      "name": "Elbow",
+      "origin_raw_deg": 100.6766127055836,
+      "reference_raw_deg": [
+        -1.961056593737381,
+        56.25127283425812,
+        100.6766127055836,
+        -3.0010314420472777,
+        10.266305369737132,
+        -3.2795646354096935
+      ],
+      "travel_sign": -1,
+      "camera_axis_in_reference_frame": [
+        -0.9697658697858066,
+        0.12648568549141162,
+        0.20869961467225018
+      ],
+      "curves": {
+        "outward": {
+          "motor_travel_deg": [
+            -0.0,
+            3.9974737661099056,
+            7.999790763485734
+          ],
+          "camera_travel_deg": [
+            0.0,
+            2.050438033077115,
+            5.22575506856382
+          ]
+        },
+        "return": {
+          "motor_travel_deg": [
+            0.00337893166394565,
+            4.000186184240903,
+            7.999790763485734
+          ],
+          "camera_travel_deg": [
+            -0.6974029703674565,
+            1.895860644348337,
+            5.22575506856382
+          ]
+        }
+      },
+      "endpoint_scale": 0.6532364686856899,
+      "scope": "Local angular mapping with other joints held at the recorded reference; outward starts near zero, return starts near the endpoint. No extrapolation.",
+      "training_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "validation_indices": [
+        5,
+        6,
+        7,
+        8
+      ],
+      "validation": [
+        {
+          "index": 5,
+          "branch": "outward",
+          "motor_travel_deg": 5.99895561952772,
+          "observed_camera_deg": 4.079113842755602,
+          "predicted_camera_deg": 3.63835309066552,
+          "error_deg": 0.4407607520900818,
+          "outside_training_range_deg": 0.0
+        },
+        {
+          "index": 6,
+          "branch": "outward",
+          "motor_travel_deg": 8.000063969078852,
+          "observed_camera_deg": 5.170627537469042,
+          "predicted_camera_deg": 5.22575506856382,
+          "error_deg": -0.05512753109477764,
+          "outside_training_range_deg": 0.00027320559311760917
+        },
+        {
+          "index": 7,
+          "branch": "return",
+          "motor_travel_deg": 6.001509638771779,
+          "observed_camera_deg": 3.615289069396638,
+          "predicted_camera_deg": 3.562074311288459,
+          "error_deg": 0.053214758108178994,
+          "outside_training_range_deg": 0.0
+        },
+        {
+          "index": 8,
+          "branch": "return",
+          "motor_travel_deg": 0.0053335520455704,
+          "observed_camera_deg": -0.3941659037464261,
+          "predicted_camera_deg": -0.6961347466088599,
+          "error_deg": 0.30196884286243375,
+          "outside_training_range_deg": 0.0
+        }
+      ],
+      "max_validation_error_deg": 0.4407607520900818,
+      "max_other_joint_drift_deg": 0.006225717428467004,
+      "max_off_axis_deg": 0.8947034438564191,
+      "midpoint_direction_difference_deg": 0.15457738872877802,
+      "validation_passed": true,
+      "camera_travel_deg": [
+        0.0,
+        2.050438033077115,
+        5.22575506856382,
+        1.895860644348337,
+        -0.6974029703674565,
+        4.079113842755602,
+        5.170627537469042,
+        3.615289069396638,
+        -0.3941659037464261
+      ],
+      "motor_travel_deg": [
+        -0.0,
+        3.9974737661099056,
+        7.999790763485734,
+        4.000186184240903,
+        0.00337893166394565,
+        5.99895561952772,
+        8.000063969078852,
+        6.001509638771779,
+        0.0053335520455704
+      ],
+      "raw_range_deg": [
+        92.67682194209786,
+        100.6766127055836
+      ],
+      "acceptance": {
+        "max_validation_error_deg": 0.75,
+        "max_other_joint_drift_deg": 0.35,
+        "max_off_axis_deg": 1.0
+      },
+      "globally_applied": false
+    },
+    {
+      "joint": 4,
+      "name": "Wrist bend",
+      "origin_raw_deg": -2.995939536021033,
+      "reference_raw_deg": [
+        -1.9607697257922405,
+        56.25074007950286,
+        100.67674930936701,
+        -2.995939536021033,
+        10.266853492418027,
+        -3.2795646354096935
+      ],
+      "travel_sign": -1,
+      "camera_axis_in_reference_frame": [
+        -0.9737814146286887,
+        0.1232523462045999,
+        0.19120307444916057
+      ],
+      "curves": {
+        "outward": {
+          "motor_travel_deg": [
+            -0.0,
+            4.015338439456266,
+            7.985119579700528
+          ],
+          "camera_travel_deg": [
+            0.0,
+            2.4540871877786126,
+            6.146196473815803
+          ]
+        },
+        "return": {
+          "motor_travel_deg": [
+            -0.006218887239296311,
+            4.00152096676533,
+            7.985119579700528
+          ],
+          "camera_travel_deg": [
+            -0.18073507774638675,
+            1.9368679595521532,
+            6.146196473815803
+          ]
+        }
+      },
+      "endpoint_scale": 0.7697062532964984,
+      "scope": "Local angular mapping with other joints held at the recorded reference; outward starts near zero, return starts near the endpoint. No extrapolation.",
+      "training_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "validation_indices": [
+        5,
+        6,
+        7,
+        8
+      ],
+      "validation": [
+        {
+          "index": 5,
+          "branch": "outward",
+          "motor_travel_deg": 5.971726428800772,
+          "observed_camera_deg": 4.807011765711047,
+          "predicted_camera_deg": 4.273632902610144,
+          "error_deg": 0.5333788631009027,
+          "outside_training_range_deg": 0.0
+        },
+        {
+          "index": 6,
+          "branch": "outward",
+          "motor_travel_deg": 7.982551991384187,
+          "observed_camera_deg": 6.142077935542328,
+          "predicted_camera_deg": 6.143808479029547,
+          "error_deg": -0.0017305434872190162,
+          "outside_training_range_deg": 0.0
+        },
+        {
+          "index": 7,
+          "branch": "return",
+          "motor_travel_deg": 5.997887784277572,
+          "observed_camera_deg": 4.758375385562892,
+          "predicted_camera_deg": 4.046358544923224,
+          "error_deg": 0.7120168406396674,
+          "outside_training_range_deg": 0.0
+        },
+        {
+          "index": 8,
+          "branch": "return",
+          "motor_travel_deg": -0.006218887239296311,
+          "observed_camera_deg": -0.2507563144860303,
+          "predicted_camera_deg": -0.18073507774638675,
+          "error_deg": -0.07002123673964356,
+          "outside_training_range_deg": 0.0
+        }
+      ],
+      "max_validation_error_deg": 0.7120168406396674,
+      "max_other_joint_drift_deg": 0.008821189313072964,
+      "max_off_axis_deg": 0.7591604874053619,
+      "midpoint_direction_difference_deg": 0.5172192282264594,
+      "validation_passed": true,
+      "camera_travel_deg": [
+        0.0,
+        2.4540871877786126,
+        6.146196473815803,
+        1.9368679595521532,
+        -0.18073507774638675,
+        4.807011765711047,
+        6.142077935542328,
+        4.758375385562892,
+        -0.2507563144860303
+      ],
+      "motor_travel_deg": [
+        -0.0,
+        4.015338439456266,
+        7.985119579700528,
+        4.00152096676533,
+        -0.006218887239296311,
+        5.971726428800772,
+        7.982551991384187,
+        5.997887784277572,
+        -0.006218887239296311
+      ],
+      "raw_range_deg": [
+        -10.98105911572156,
+        -2.995939536021033
+      ],
+      "acceptance": {
+        "max_validation_error_deg": 0.75,
+        "max_other_joint_drift_deg": 0.35,
+        "max_off_axis_deg": 1.0
+      },
+      "globally_applied": false
+    },
+    {
+      "joint": 5,
+      "name": "Wrist yaw",
+      "origin_raw_deg": 10.265200586638883,
+      "reference_raw_deg": [
+        -1.961056593737381,
+        56.25101328706966,
+        100.67635315839514,
+        -2.9954552955995544,
+        10.265200586638883,
+        -3.279564635409694
+      ],
+      "travel_sign": -1,
+      "camera_axis_in_reference_frame": [
+        0.14514391508513966,
+        0.987938338975071,
+        0.053954446498278276
+      ],
+      "curves": {
+        "outward": {
+          "motor_travel_deg": [
+            -0.0,
+            4.011107348132038,
+            8.007133216843497
+          ],
+          "camera_travel_deg": [
+            0.0,
+            5.431863243188614,
+            8.980545958942454
+          ]
+        },
+        "return": {
+          "motor_travel_deg": [
+            -0.02370929415640788,
+            4.006564028117894,
+            8.007133216843497
+          ],
+          "camera_travel_deg": [
+            -0.1794285737968419,
+            5.144139414832097,
+            8.980545958942454
+          ]
+        }
+      },
+      "endpoint_scale": 1.121568196224252,
+      "scope": "Local angular mapping with other joints held at the recorded reference; outward starts near zero, return starts near the endpoint. No extrapolation.",
+      "training_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "validation_indices": [
+        5,
+        6,
+        7,
+        8
+      ],
+      "validation": [
+        {
+          "index": 5,
+          "branch": "outward",
+          "motor_travel_deg": 5.987952209444891,
+          "observed_camera_deg": 6.152096791290606,
+          "predicted_camera_deg": 7.18740623053414,
+          "error_deg": -1.0353094392435347,
+          "outside_training_range_deg": 0.0
+        },
+        {
+          "index": 6,
+          "branch": "outward",
+          "motor_travel_deg": 8.006574848878849,
+          "observed_camera_deg": 8.766066904296036,
+          "predicted_camera_deg": 8.980050098602636,
+          "error_deg": -0.21398319430659996,
+          "outside_training_range_deg": 0.0
+        },
+        {
+          "index": 7,
+          "branch": "return",
+          "motor_travel_deg": 5.995656166653083,
+          "observed_camera_deg": 6.582116868707095,
+          "predicted_camera_deg": 7.051609511492451,
+          "error_deg": -0.4694926427853563,
+          "outside_training_range_deg": 0.0
+        },
+        {
+          "index": 8,
+          "branch": "return",
+          "motor_travel_deg": -0.02150143550720074,
+          "observed_camera_deg": -0.35284825134564485,
+          "predicted_camera_deg": -0.17651222428690247,
+          "error_deg": -0.17633602705874238,
+          "outside_training_range_deg": 0.0
+        }
+      ],
+      "max_validation_error_deg": 1.0353094392435347,
+      "max_other_joint_drift_deg": 0.009453864549272772,
+      "max_off_axis_deg": 0.6685639991809563,
+      "midpoint_direction_difference_deg": 0.28772382835651733,
+      "validation_passed": false,
+      "camera_travel_deg": [
+        0.0,
+        5.431863243188614,
+        8.980545958942454,
+        5.144139414832097,
+        -0.1794285737968419,
+        6.152096791290606,
+        8.766066904296036,
+        6.582116868707095,
+        -0.35284825134564485
+      ],
+      "motor_travel_deg": [
+        -0.0,
+        4.011107348132038,
+        8.007133216843497,
+        4.006564028117894,
+        -0.02370929415640788,
+        5.987952209444891,
+        8.006574848878849,
+        5.995656166653083,
+        -0.02150143550720074
+      ],
+      "raw_range_deg": [
+        2.2580673697953855,
+        10.265200586638883
+      ],
+      "acceptance": {
+        "max_validation_error_deg": 0.75,
+        "max_other_joint_drift_deg": 0.35,
+        "max_off_axis_deg": 1.0
+      },
+      "globally_applied": false
+    },
+    {
+      "joint": 6,
+      "name": "Wrist roll",
+      "origin_raw_deg": -3.2795646354096935,
+      "reference_raw_deg": [
+        -1.961056593737381,
+        56.250876683286265,
+        100.67661270558358,
+        -2.9987672343374183,
+        10.267958275516277,
+        -3.2795646354096935
+      ],
+      "travel_sign": 1,
+      "camera_axis_in_reference_frame": [
+        -0.10784653329130163,
+        -0.023780613782461973,
+        0.9938830955727025
+      ],
+      "curves": {
+        "outward": {
+          "motor_travel_deg": [
+            0.0,
+            3.452302894283666,
+            7.5752985560045305
+          ],
+          "camera_travel_deg": [
+            0.0,
+            3.2566566342101937,
+            7.44401065588049
+          ]
+        },
+        "return": {
+          "motor_travel_deg": [
+            0.39776033518392406,
+            4.483156024957011,
+            7.5752985560045305
+          ],
+          "camera_travel_deg": [
+            0.2869011854001127,
+            4.420131591501812,
+            7.44401065588049
+          ]
+        }
+      },
+      "endpoint_scale": 0.9826689470846036,
+      "scope": "Local angular mapping with other joints held at the recorded reference; outward starts near zero, return starts near the endpoint. No extrapolation.",
+      "training_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "validation_indices": [
+        5,
+        6,
+        7,
+        8
+      ],
+      "validation": [
+        {
+          "index": 5,
+          "branch": "outward",
+          "motor_travel_deg": 5.609996151914071,
+          "observed_camera_deg": 5.7060471552327545,
+          "predicted_camera_deg": 5.448030645042527,
+          "error_deg": 0.2580165101902274,
+          "outside_training_range_deg": 0.0
+        },
+        {
+          "index": 6,
+          "branch": "outward",
+          "motor_travel_deg": 7.725831890364742,
+          "observed_camera_deg": 7.550737857366865,
+          "predicted_camera_deg": 7.44401065588049,
+          "error_deg": 0.10672720148637538,
+          "outside_training_range_deg": 0.15053333436021177
+        },
+        {
+          "index": 7,
+          "branch": "return",
+          "motor_travel_deg": 6.191097760884767,
+          "observed_camera_deg": 6.351582931309124,
+          "predicted_camera_deg": 6.090368072063047,
+          "error_deg": 0.2612148592460768,
+          "outside_training_range_deg": 0.0
+        },
+        {
+          "index": 8,
+          "branch": "return",
+          "motor_travel_deg": 0.3961044411970187,
+          "observed_camera_deg": 0.3205742450751976,
+          "predicted_camera_deg": 0.2869011854001127,
+          "error_deg": 0.03367305967508488,
+          "outside_training_range_deg": 0.0016558939869053546
+        }
+      ],
+      "max_validation_error_deg": 0.2612148592460768,
+      "max_other_joint_drift_deg": 0.008273066632177972,
+      "max_off_axis_deg": 1.2406045773451302,
+      "midpoint_direction_difference_deg": -1.1634749572916179,
+      "validation_passed": false,
+      "camera_travel_deg": [
+        0.0,
+        3.2566566342101937,
+        7.44401065588049,
+        4.420131591501812,
+        0.2869011854001127,
+        5.7060471552327545,
+        7.550737857366865,
+        6.351582931309124,
+        0.3205742450751976
+      ],
+      "motor_travel_deg": [
+        0.0,
+        3.452302894283666,
+        7.5752985560045305,
+        4.483156024957011,
+        0.39776033518392406,
+        5.609996151914071,
+        7.725831890364742,
+        6.191097760884767,
+        0.3961044411970187
+      ],
+      "raw_range_deg": [
+        -3.2795646354096935,
+        4.295733920594837
+      ],
+      "acceptance": {
+        "max_validation_error_deg": 0.75,
+        "max_other_joint_drift_deg": 0.35,
+        "max_off_axis_deg": 1.0
+      },
+      "globally_applied": false
+    }
+  ],
+  "global_mapping_changed": false
+}

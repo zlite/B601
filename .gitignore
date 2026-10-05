@@ -1,4 +1,6 @@
 .venv/
+.venv-depth-v2/
+.python/
 __pycache__/
 outputs/
 vendor/

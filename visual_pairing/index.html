@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>REbot · Visual pairing</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,sans-serif;background:#101820;color:#ecf2f4}*{box-sizing:border-box}body{margin:0;padding:22px;max-width:1560px;margin:auto}header{display:flex;justify-content:space-between;align-items:center;gap:20px}h1{font-size:26px;margin:0}h2{font-size:17px;margin:0 0 12px}p{color:#b7c5cf;line-height:1.5}small{color:#b7c5cf}.badge{background:#173d37;border:1px solid #39776a;padding:8px 12px;border-radius:20px;color:#98e1c8;font-size:13px}.statusbar{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0}.status{background:#1b2935;border-radius:8px;padding:9px 12px;font-size:13px}.ok{color:#8bd9bb}.bad{color:#ffc486}.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.panel{background:#18242f;border:1px solid #2c3b48;border-radius:14px;padding:18px;min-width:0}.cam{width:100%;aspect-ratio:1.6;object-fit:contain;background:#0c1218;border-radius:8px;display:block}.caption{margin-top:9px;min-height:20px;font-size:13px;color:#acbcc9}.model{width:100%;height:340px;background:#111c26;border-radius:8px;touch-action:none}.legend{display:flex;gap:18px;font-size:13px;margin:8px 0}.cyan{color:#64dae7}.orange{color:#ffbd76}table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums;font-size:13px}th{text-align:left;color:#9fb3c4;font-weight:500}td,th{padding:9px 6px;border-bottom:1px solid #2b3b49}td:not(:first-child),th:not(:first-child){text-align:right}button{background:#62d5e3;color:#092029;border:0;border-radius:8px;padding:11px 15px;font-size:14px;font-weight:650;cursor:pointer}button.secondary{background:#304455;color:#e3eff6}button:disabled{opacity:.4;cursor:default}input[type=checkbox]{accent-color:#62d5e3}label{display:block;color:#c3d2dc;font-size:14px;line-height:1.5;margin:12px 0}select{background:#101e29;color:#e6f1f6;padding:10px;border:1px solid #4a606f;border-radius:7px}.reference{width:100%;height:210px;object-fit:contain;background:#e8e8e8;border-radius:8px}.row{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.wide{grid-column:1/-1}.guide{background:#223747;border-left:3px solid #62d5e3;padding:14px;border-radius:6px;line-height:1.5;margin:12px 0;min-height:55px}#feedback{color:#ffcc9b;margin:12px 0;min-height:22px}.subtle{font-size:12px;color:#93a9ba}.step{color:#62d5e3;font-size:12px;letter-spacing:.08em;text-transform:uppercase}details summary{cursor:pointer;margin:9px 0;color:#a9c5d9}footer{font-size:12px;color:#95aabb;margin:20px 0} @media(max-width:900px){.grid{grid-template-columns:1fr}body{padding:12px}header{align-items:flex-start}.badge{max-width:170px}.model{height:280px}}
+</style>
+<style>
+.movement{display:grid;grid-template-columns:100px 1fr 64px;gap:10px;align-items:center;font-size:13px;margin:10px 0}.track{height:9px;background:#101e29;border-radius:5px;overflow:hidden}.fill{height:100%;width:0;background:#70899d;transition:width .15s}.movement.selected{color:#75e1eb;font-weight:650}.selected .fill{background:#64dae7}.readiness{padding:12px;background:#10202b;border-radius:8px;margin:12px 0;line-height:1.45}.readiness.ready{background:#153c33;color:#a4e4c8}.preview-controls{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+</style>
+<header><div><h1>REbot · Visual pairing</h1><p style="margin:6px 0">Move the leader. See the mapping. Check each direction.</p></div><div class="badge" id="mode">READ ONLY · Motors unchanged</div></header>
+<div class="statusbar" id="statusbar"></div>
+<div class="grid">
+ <section class="panel"><h2>Workspace camera</h2><img class="cam" id="tripod" alt="Workspace camera is starting"><div id="tripod-info" class="caption">Starting OAK-1…</div></section>
+ <section class="panel"><h2>Wrist camera · Tag 0</h2><img class="cam" id="wrist" alt="Wrist camera is starting"><div id="wrist-info" class="caption">Starting OAK-D Lite RGB…</div></section>
+ <section class="panel"><h2 id="model-title">Follower and leader preview</h2><div class="legend" id="legend"><span class="orange">● Measured follower</span><span class="cyan">● Leader-driven model</span></div><canvas class="model" id="model"></canvas><div class="preview-controls"><label><input type="checkbox" id="isolate" checked> Focus on selected hinge during a check</label><button class="secondary" id="reset-view">Reset view</button></div><div class="caption" id="model-info">Save a leader reference to show its preview. Drag to rotate the view.</div><p class="subtle">Both shapes use the B601 model in a shared base frame. During a focused check, gray is the start pose and cyan shows just the selected hinge; other joints are frozen on screen only. Drag to see the hinge clearly. This is not a camera overlay or a collision check.</p></section>
+ <section class="panel"><h2>Live joints · Pose alignment</h2><div id="alignment" class="readiness">Waiting for live joint readings.</div><table><thead><tr><th>Joint</th><th>Leader raw °</th><th>Mapped °</th><th>Follower model °</th><th>Difference °</th><th>Direction</th></tr></thead><tbody id="joints"></tbody></table><p class="subtle">After all six direction checks, leave the follower supported and match the small leader to its pose. Aim for all six differences within 2°. This is a visual starting-pose check, not motion authorization. Gripper is displayed as raw telemetry only.</p></section>
+ <section class="panel"><div class="step">1 · Establish a reference</div><h2>Match the leader to this pose</h2><img class="reference" src="/leader_reference.jpg" alt="Seeed reBot 102 folded leader reference"><p>Use the small leader only. Match its folded links and wrist to the photo. Do not force a joint that resists movement. Let it settle for a second.</p><label><input id="pose-confirm" type="checkbox"> The leader matches this reference pose.</label><button id="reference-button">Save software reference</button><p class="subtle">No motor zeros change. Existing follower offsets stay in place. A new connection or a lost leader reading requires a fresh reference.</p><a class="subtle" href="https://files.seeedstudio.com/wiki/robotics/projects/lerobot/102_zeroposition.jpg" target="_blank" rel="noreferrer">Reference photo: Seeed Studio</a></section>
+ <section class="panel"><div class="step">2 · Check directions from any comfortable pose</div><h2>Move naturally. Compare the highlighted hinge.</h2><p>Select a joint and click <b>Start here</b>. Move that hinge a comfortable 5–15°. Other joints may move too—you do not need to return to the folded reference.</p><div class="row"><select id="joint-select" aria-label="Joint to check"></select><button class="secondary" id="begin-button">Start here / restart</button><button class="secondary" id="cancel-button">Cancel check</button></div><div id="guide" class="guide">Save the leader reference first.</div><div id="movements"></div><div class="readiness" id="readiness" role="status">Start a check to see live movement feedback.</div><div class="row"><button class="secondary" id="flip-button">Preview looks reversed · Flip it</button></div><label><input id="direction-confirm" type="checkbox"> The highlighted hinge moves the same way as my physical hinge, relative to its neighboring link.</label><button id="record-button">Looks right · Save direction</button><p class="subtle">Pause only the selected hinge briefly before saving. Movement of the other joints and gripper is allowed. These are visual direction checks, not measurements of angular accuracy.</p></section>
+ <section class="panel wide"><div id="message">Connecting…</div><div id="feedback" role="status" aria-live="polite"></div><details><summary>What this workbench establishes</summary><p>This records a software leader reference and operator-observed direction checks. It never sends torque, movement, mode, or motor-zero commands. There is no follower activation button.</p><p>Leader-following can be developed separately from camera-guided contact. The current camera-to-wrist candidate still fails its 5 mm positional validation. The cameras here provide visual feedback and tag quality; they do not independently measure link angles or certify calibration. Joint ranges, gripper mapping, starting-pose matching and motion controls still need validation before physical following.</p></details></section>
+</div>
+<footer>Local connection · Camera frames and joint reads are live but are not synchronized calibration samples. Stop the Python server with Ctrl+C before opening another arm/camera client.</footer>
+<script>
+const token='__TOKEN__';
+let state=null, connected=false, yaw=.65, pitch=.42, dragging=false, lastPointer=null;
+const $=id=>document.getElementById(id);
+const names=['Base','Shoulder','Elbow','Wrist bend','Wrist yaw','Wrist roll','Gripper'];
+names.slice(0,6).forEach((n,i)=>{const o=document.createElement('option');o.value=i+1;o.textContent=`${i+1} · ${n}`;$('joint-select').append(o)});
+const rows=names.map(n=>{const tr=document.createElement('tr');for(let i=0;i<6;i++){const td=document.createElement('td');td.textContent=i===0?n:'—';tr.append(td)}$('joints').append(tr);return tr});
+const movementRows=names.slice(0,6).map((n,i)=>{const row=document.createElement('div');row.className='movement';const label=document.createElement('span');label.textContent=n;const track=document.createElement('div');track.className='track';const fill=document.createElement('div');fill.className='fill';track.append(fill);const value=document.createElement('span');value.textContent='—';row.append(label,track,value);$('movements').append(row);return {row,fill,value}});
+const fresh=(s,age=1)=>s && !s.error && s.age_s<age;
+const number=x=>Number.isFinite(x)?x.toFixed(1):'—';
+function render(s){
+ state=s; connected=true;
+ $('mode').textContent=s.demo?'DEMO · No hardware':'READ ONLY · Motors unchanged';
+ $('statusbar').replaceChildren();
+ for(const [key,title] of [['leader','Leader'],['follower','Follower'],['tripod','Workspace camera'],['wrist','Wrist camera']]){
+  const source=s.sources[key];const node=document.createElement('div');node.className='status '+(fresh(source)?'ok':'bad');node.textContent=title+' · '+(fresh(source)?'live':source?.error||'waiting for fresh data');$('statusbar').append(node);
+ }
+ for(const role of ['wrist','tripod']){
+  const source=s.sources[role];
+  $(role).style.opacity=fresh(source)?1:.18;
+  $(role+'-info').textContent=!fresh(source)?source?.error||'Waiting for camera':role==='wrist'?`${source.tag}${Number.isFinite(source.rms_px)?` · Corner fit ${source.rms_px.toFixed(2)} px · Range ${source.distance_mm.toFixed(0)} mm`:''}`:'Live workspace view';
+ }
+ rows.forEach((row,i)=>{
+  row.children[1].textContent=fresh(s.sources.leader,.5)?number(s.sources.leader.angles?.[i]):'—';
+  row.children[2].textContent=number(s.leader_model_deg?.[i]);
+  row.children[3].textContent=number(s.follower_model_deg?.[i]);
+  const difference=Number.isFinite(s.leader_model_deg?.[i])&&Number.isFinite(s.follower_model_deg?.[i])?s.leader_model_deg[i]-s.follower_model_deg[i]:null;
+  row.children[4].textContent=Number.isFinite(difference)?`${difference>=0?'+':''}${difference.toFixed(1)}`:'—';
+  row.children[4].className=Number.isFinite(difference)?Math.abs(difference)<=2?'ok':'bad':'subtle';
+  row.children[5].textContent=i===6?'Not mapped':s.checks[String(i+1)]?'Checked':'Unchecked';
+  row.children[5].className=s.checks[String(i+1)]?'ok':'subtle';
+ });
+ const allChecked=Object.keys(s.checks).length===6;
+ const comparable=s.leader_model_deg?.length===6&&s.follower_model_deg?.length===6;
+ const matched=comparable?s.leader_model_deg.filter((v,i)=>Math.abs(v-s.follower_model_deg[i])<=2).length:0;
+ $('alignment').className='readiness'+(allChecked&&matched===6?' ready':'');
+ $('alignment').textContent=!allChecked?`${Object.keys(s.checks).length}/6 directions checked. Finish the remaining checks first.`:!comparable?'Waiting for fresh readings from both arms.':matched===6?'All six joints are within 2°. Pose preview matched; physical following has not been enabled.':`${matched}/6 joints within 2°. Leave the follower supported; adjust only the small leader. Match the cyan pose to the orange pose.`;
+ $('message').textContent=s.message;
+ $('guide').textContent=s.guided?`Checking J${s.guided.joint} · ${names[s.guided.joint-1]}. Compare the highlighted hinge with the real hinge, relative to its neighboring link. Flip the preview if it moves the opposite way.`:s.reference?`${Object.keys(s.checks).length}/6 directions checked. Choose any joint and click Start here from your current pose.`:'Save the leader reference first.';
+ const feedback=s.direction_feedback;
+ movementRows.forEach(({row,fill,value},i)=>{const delta=feedback?.delta_deg?.[i];row.className='movement'+(s.guided?.joint===i+1?' selected':'');fill.style.width=Number.isFinite(delta)?`${Math.min(100,Math.abs(delta)/15*100)}%`:'0%';value.textContent=Number.isFinite(delta)?`${delta>=0?'+':''}${delta.toFixed(1)}°`:'—'});
+ $('readiness').textContent=feedback?.message||(s.guided?'Waiting for fresh leader data.':'Start a check to see live movement feedback.');
+ $('readiness').className='readiness'+(feedback?.ready?' ready':'');
+ const live=fresh(s.sources.leader,.5);
+ $('reference-button').disabled=!live||!$('pose-confirm').checked;
+ $('begin-button').disabled=!live||!s.reference;
+ $('record-button').disabled=!live||!feedback?.ready||!$('direction-confirm').checked;
+ $('flip-button').disabled=$('cancel-button').disabled=!live||!s.guided;
+ const isolated=s.guided&&$('isolate').checked;
+ $('model-title').textContent=isolated?`Focused check · ${names[s.guided.joint-1]}`:'Follower and leader preview';
+ $('legend').innerHTML=isolated?'<span style="color:#8296a8">● Start pose</span><span class="cyan">● Selected hinge only</span>':'<span class="orange">● Measured follower</span><span class="cyan">● Leader-driven model</span>';
+ $('model-info').textContent=s.outside_model_limits?.length?`Preview exceeds the saved model limits at J${s.outside_model_limits.join(', J')}. No movement is sent.`:s.reference?'Drag to rotate · Shapes are previews, not movement commands.':'Save a leader reference to show its preview. Drag to rotate the view.';
+ draw();
+}
+async function action(data){
+ try{const response=await fetch('/action',{method:'POST',headers:{'Content-Type':'application/json','X-Pairing-Token':token},body:JSON.stringify(data)});const result=await response.json();if(!response.ok)throw Error(result.error||'Action failed');$('feedback').textContent=data.action==='record_direction'?'Direction saved. Pick another joint and click Start here.':'Ready.';if(data.action==='reference')$('pose-confirm').checked=false;$('direction-confirm').checked=false;await poll();if(data.action==='record_direction'){const next=names.slice(0,6).findIndex((_,i)=>!state.checks[String(i+1)]);if(next>=0)$('joint-select').value=String(next+1)}}
+ catch(e){$('feedback').textContent=e.message;}
+}
+$('reference-button').onclick=()=>action({action:'reference',pose_confirmed:$('pose-confirm').checked});
+$('begin-button').onclick=()=>action({action:'begin_direction',joint:Number($('joint-select').value)});
+$('record-button').onclick=()=>action({action:'record_direction',direction_confirmed:$('direction-confirm').checked});
+$('flip-button').onclick=()=>{$('isolate').checked=true;action({action:'flip_direction'})};
+$('cancel-button').onclick=()=>action({action:'cancel_direction'});
+$('isolate').onchange=()=>{if(state)render(state)};
+$('reset-view').onclick=()=>{yaw=.65;pitch=.42;draw()};
+for(const id of ['pose-confirm','direction-confirm'])$(id).onchange=()=>{if(state)render(state)};
+async function poll(){try{const response=await fetch('/state',{signal:AbortSignal.timeout(1800)});if(!response.ok)throw Error('Server unavailable');render(await response.json());}catch(e){connected=false;$('mode').textContent='DISCONNECTED · Readings unavailable';for(const id of ['reference-button','begin-button','record-button','flip-button','cancel-button'])$(id).disabled=true;$('feedback').textContent='Server disconnected. Reconnect before capturing a reference or direction.';$('readiness').className='readiness';$('readiness').textContent='Disconnected';$('alignment').className='readiness';$('alignment').textContent='Disconnected · Pose alignment unavailable';for(const role of ['wrist','tripod'])$(role).style.opacity=.15;rows.forEach(r=>{for(let i=1;i<5;i++)r.children[i].textContent='—'});draw();}}
+async function loop(){await poll();setTimeout(loop,150)}loop();
+for(const role of ['wrist','tripod']){
+ let busy=false;
+ setInterval(()=>{if(busy||!connected||!fresh(state?.sources[role]))return;busy=true;const image=$(role);image.onload=image.onerror=()=>{busy=false};image.src=`/${role}.jpg?t=${Date.now()}`;},200);
+}
+const canvas=$('model');
+canvas.onpointerdown=e=>{dragging=true;lastPointer=[e.clientX,e.clientY];canvas.setPointerCapture(e.pointerId)};
+canvas.onpointerup=()=>dragging=false;
+canvas.onpointermove=e=>{if(!dragging)return;yaw+=(e.clientX-lastPointer[0])*.008;pitch=Math.max(-.1,Math.min(1.4,pitch+(e.clientY-lastPointer[1])*.006));lastPointer=[e.clientX,e.clientY];draw()};
+function draw(){
+ const rect=canvas.getBoundingClientRect(),dpr=window.devicePixelRatio||1;
+ canvas.width=rect.width*dpr;canvas.height=rect.height*dpr;const ctx=canvas.getContext('2d');ctx.scale(dpr,dpr);const w=rect.width,h=rect.height;
+ function project(p){const x=p[0]*Math.cos(yaw)-p[1]*Math.sin(yaw),y=p[0]*Math.sin(yaw)+p[1]*Math.cos(yaw);const scale=Math.min(w,h)*1.65;return [w*.5+x*scale,h*.74+(y*Math.sin(pitch)-p[2]*Math.cos(pitch))*scale]}
+ function line(a,b,color,width=1){const A=project(a),B=project(b);ctx.strokeStyle=color;ctx.lineWidth=width;ctx.beginPath();ctx.moveTo(...A);ctx.lineTo(...B);ctx.stroke()}
+ for(let i=-5;i<=5;i++){line([i*.1,-.5,0],[i*.1,.5,0],'#263844');line([-.5,i*.1,0],[.5,i*.1,0],'#263844')}
+ if(!connected)return;
+ const isolated=state?.guided&&$('isolate').checked;
+ const shapes=isolated?[[state?.check_baseline_shape,'#8296a8'],[state?.check_preview_shape,'#64dae7']]:[[state?.follower_shape,'#ffbd76'],[state?.leader_shape,'#64dae7']];
+ for(const [shape,color] of shapes){
+  if(!shape)continue;shape.points.slice(1).forEach((p,i)=>line(shape.points[i],p,color,4));
+  shape.points.forEach(p=>{ctx.fillStyle=color;ctx.beginPath();ctx.arc(...project(p),4,0,Math.PI*2);ctx.fill()});
+  shape.axes.forEach((p,i)=>line(shape.points.at(-1),p,['#e77d85','#82cd91','#779be1'][i],2));
+  if(isolated&&color==='#64dae7'){const p=project(shape.points[state.guided.joint]);ctx.strokeStyle='#f2f7b0';ctx.lineWidth=3;ctx.beginPath();ctx.arc(...p,12,0,Math.PI*2);ctx.stroke();ctx.fillStyle='#f2f7b0';ctx.font='bold 13px system-ui';ctx.fillText(`J${state.guided.joint}`,p[0]+16,p[1]-10)}
+ }
+ ctx.fillStyle='#90a7ba';ctx.font='12px system-ui';ctx.fillText('Grid: 10 cm · Base frame',12,20);
+}
+window.addEventListener('resize',draw);
+</script>
+</html>
