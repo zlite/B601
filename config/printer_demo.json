@@ -15,7 +15,7 @@
     "model_limits_changed": false,
     "live_rest_tolerance_changed": false,
     "new_entry_geometry_checked": true,
-    "new_entry_motion_trial_completed": false
+    "new_entry_motion_trial_completed": true
   },
   "communication_recovery": {
     "reader": "original sequential; concurrent reader opt-in only",

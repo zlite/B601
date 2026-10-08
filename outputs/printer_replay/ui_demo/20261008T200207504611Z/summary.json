@@ -1,0 +1,28 @@
+{
+  "returned_to_start": true,
+  "motors_disabled_verified": true,
+  "completed_stages": [
+    "entry",
+    "smooth_approach",
+    "plate_view"
+  ],
+  "motion_elapsed_s": 125.81534370800364,
+  "rail_to_arm_motion_s": 2.3577626350161154,
+  "roll_mit_gains": {
+    "kp": 30.0,
+    "kd": 2.6,
+    "feedforward_nm": 0.0
+  },
+  "error": null,
+  "early_return": null,
+  "final_raw_deg": [
+    92.04558951938363,
+    56.35298801137795,
+    99.50448394211772,
+    -3.3806772617786813,
+    4.773448456192662,
+    -4.753710917038617
+  ],
+  "max_tracking_error_deg": 1.0383974712365829,
+  "scope": "First full cycle from refreshed folded rest completed; next repeating rail cycle observed. Open-jaw only; no grasp or lift."
+}

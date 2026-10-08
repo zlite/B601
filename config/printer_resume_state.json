@@ -1,6 +1,6 @@
 {
-  "saved_utc": "2026-10-08T20:02:05.878349+00:00",
-  "status": "Restarted repeating demo after operator-supported rest, disabled-only communication-fault clear and fresh entry CAD checks. Fully folded elbow 99.50 degrees passes unchanged rail interlock. First fresh-entry cycle in progress.",
+  "saved_utc": "2026-10-08T20:04:31.795615+00:00",
+  "status": "First full cycle from refreshed folded rest completed without pause/error, returned and disabled. Repeating demo started cycle 2.",
   "arm_motors_disabled_verified": false,
   "latest_teaching_session": "outputs/printer_teach/20261008T200115172550Z",
   "current_launch": {
@@ -108,8 +108,8 @@
       "smooth_approach",
       "plate_view"
     ],
-    "motion_elapsed_s": 125.08003933800501,
-    "rail_to_arm_motion_s": 1.9371098330011591,
+    "motion_elapsed_s": 125.81534370800364,
+    "rail_to_arm_motion_s": 2.3577626350161154,
     "roll_mit_gains": {
       "kp": 30.0,
       "kd": 2.6,
@@ -117,92 +117,23 @@
     },
     "error": null,
     "early_return": null,
-    "max_tracking_error_deg": 1.021979384461524,
-    "max_roll_error_deg": 1.021979384461524,
-    "max_abs_roll_torque_nm": 0.3589744567871094,
-    "max_motor_temp_c": 36.0,
-    "held_endpoints": [
-      {
-        "error_deg": [
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.0038,
-          0.0
-        ]
-      },
-      {
-        "error_deg": [
-          0.1492,
-          0.1087,
-          0.0473,
-          0.1532,
-          0.0081,
-          0.2402
-        ]
-      },
-      {
-        "error_deg": [
-          0.0658,
-          0.19,
-          0.071,
-          0.0491,
-          0.0111,
-          0.5442
-        ]
-      },
-      {
-        "error_deg": [
-          0.0698,
-          0.0311,
-          0.0369,
-          0.0375,
-          0.0084,
-          0.2165
-        ]
-      },
-      {
-        "error_deg": [
-          0.0057,
-          0.0991,
-          0.0001,
-          0.0547,
-          0.0139,
-          0.5353
-        ]
-      },
-      {
-        "error_deg": [
-          0.0147,
-          0.1154,
-          0.1015,
-          0.0016,
-          0.1888,
-          0.2315
-        ]
-      },
-      {
-        "error_deg": [
-          0.0511,
-          0.0443,
-          0.0352,
-          0.1719,
-          0.053,
-          0.3888
-        ]
-      }
+    "final_raw_deg": [
+      92.04558951938363,
+      56.35298801137795,
+      99.50448394211772,
+      -3.3806772617786813,
+      4.773448456192662,
+      -4.753710917038617
     ],
-    "samples": 2455,
-    "scope": "Second consecutive complete rail-and-arm trial with demo-only roll Kp=30 Kd=2.6. Returned and disabled; repeating demo began its next rail cycle. Open-jaw approach only; no grasp or lift.",
-    "summary": "outputs/printer_replay/ui_demo/20261008T171938199644Z/summary.json",
-    "camera_mode": "ArduCam 1920x1080 30fps, USB 3"
+    "max_tracking_error_deg": 1.0383974712365829,
+    "scope": "First full cycle from refreshed folded rest completed; next repeating rail cycle observed. Open-jaw only; no grasp or lift.",
+    "summary": "outputs/printer_replay/ui_demo/20261008T200207504611Z/summary.json"
   },
   "demo": {
     "config": "config/printer_demo.json",
     "running_at_save": true,
-    "completed_cycles_observed": 0,
-    "next_cycle_observed": 1,
+    "completed_cycles_observed": 1,
+    "next_cycle_observed": 2,
     "stop_immediately": ".venv/bin/python scripts/printer_demo_client.py pause",
     "stop_at_rest": ".venv/bin/python scripts/printer_demo_client.py stop",
     "no_duration_cutoff": true,
@@ -211,7 +142,7 @@
     "repeat_fix": "Cache gripper device per motor owner; reset cache when owner is replaced; regression tested.",
     "paused_holding": false,
     "awaiting": null,
-    "current_folder": null,
+    "current_folder": "outputs/printer_replay/ui_demo/20261008T200207504611Z",
     "repeat_fix_live_verified": true,
     "validation_scope": "Seven repeating cycles completed with final roll gains; cycle 8 communication failure, then restart."
   },
@@ -287,7 +218,7 @@
     "entry_checks_passed": true,
     "live_rest_tolerance_changed": false,
     "focused_tests_passed": 25,
-    "motion_trial_completed": false
+    "motion_trial_completed": true
   },
   "endpoint_repair": {
     "loaded": true,
@@ -333,6 +264,6 @@
     "fully_folded_capture": "outputs/arm_response/folded_recovery_20261008T2000.json",
     "rail_park_interlock_changed": false,
     "new_entry_geometry_checked": true,
-    "new_entry_motion_trial_completed": false
+    "new_entry_motion_trial_completed": true
   }
 }
