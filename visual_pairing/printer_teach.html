@@ -7,8 +7,14 @@
 <h1>Teach the printer approach</h1>
 <p>Demonstrate the approach and withdrawal with the jaws unchanged. Gripper control is inactive. Both cameras and the measured arm path are being recorded.</p>
 <div class="cameras"><figure><img id="wrist" alt="Live wrist camera"><figcaption>Wrist camera</figcaption></figure><figure><img id="tripod" alt="Live ArduCam overview"><figcaption>ArduCam overview</figcaption></figure></div>
+<div class="panel"><h2>Camera-guided plate approach · commissioning</h2>
+<p>The wrist stereo cameras locate the plate’s full well grid independently of bed tag 18. A preview uses the measured plate position and checks bed-attached and fixed printer obstacles separately. Automatic movement is unavailable until scene calibration and physical trials are complete.</p>
+<p id="targetStatus">Waiting for live plate observations…</p>
+<button id="targetCapture">Save stereo calibration images</button>
+<button id="targetPreview" disabled>Preview approach · no movement</button>
+<p id="targetPlanStatus" class="small"></p></div>
 <div class="panel"><h2>Plate approach demo</h2>
-<p>Repeat: rail 30 cm left → rail back to start → open-jaw approach stopping above the plate → arm back to rest. The final descent has been removed following plate contact. Joint speed is capped at 12°/s and slows for bends and tracking. This demo does not grip or lift the plate.</p>
+<p>The previous fixed-path demo is disabled while camera-guided targeting is commissioned. It cannot compensate for a moved bed or plate. The preview panel above does not enable robot movement or plate pickup.</p>
 <label><input type="checkbox" id="demoConfirm"> The arm is at its demonstrated resting pose; the rail, bed, plate, gantry and syringe are unchanged, and the full 30 cm rail sweep and arm path are clear.</label>
 <button id="demoStart" disabled>Demo · start repeating cycle</button>
 <button id="demoPause" disabled>Pause now</button> <button id="demoStop" disabled>Stop after this cycle</button>
@@ -62,6 +68,7 @@ $('demoResumeLabel').hidden=!demoPaused;
 for(const id of ['demoResume','demoReturn'])$(id).disabled=!demoPaused||!$('demoClear').checked;
 }
 function pauseDemo(){if(demoActive){demoOwner=false;send('demo_pause').catch(()=>{})}}
+for(const [id,action] of [['targetCapture','target_capture'],['targetPreview','target_preview']])$(id).onclick=()=>send(action).catch(e=>$('error').textContent=e.message);
 $('demoConfirm').onchange=demoButtons;$('demoClear').onchange=demoButtons;
 $('demoStart').onclick=async()=>{demoOwner=true;demoActive=true;demoReady=false;demoButtons();try{await send('demo_start',{rest_confirmed:$('demoConfirm').checked,scene_unchanged:$('demoConfirm').checked,rail_clear_confirmed:$('demoConfirm').checked});$('demoConfirm').checked=false;$('error').textContent=''}catch(e){demoOwner=false;demoActive=false;$('error').textContent=e.message}};
 $('demoPause').onclick=pauseDemo;$('demoStop').onclick=()=>send('demo_stop').catch(e=>$('error').textContent=e.message);
@@ -86,6 +93,10 @@ setInterval(()=>{if(holding){if(Date.now()-lastState>600){release('status_stale'
 function angle(x){return Number.isFinite(x)?x.toFixed(1)+'°':'—'}
 async function poll(){if(pending)return;pending=true;try{const r=await fetch('/state',{signal:AbortSignal.timeout(700)});if(!r.ok)throw Error('Status unavailable');const s=await r.json();lastState=Date.now();ready=!!(s.ready||s.following);powered=!!s.powered;selected=s.selected_joint;
 const d=s.demo||{};demoActive=!!d.active;demoPaused=!!d.paused;demoReady=!!d.ready;if(!demoActive)demoOwner=false;demoButtons();$('demoStatus').textContent=d.error||((d.phase||'Demo unavailable')+(d.active&&!d.repeat?' · will stop after this cycle':'')+(d.reason&&!d.active?' · '+d.reason:''));
+const tp=s.target_preview||{},plate=s.sources.printer_plate||{};
+$('targetStatus').textContent=tp.reason||(plate.registration?'Plate and bed localized · waiting for preview':'Waiting for the complete well grid and bed tag');
+$('targetPreview').disabled=!tp.preview_ready||!!tp.busy;
+$('targetPlanStatus').textContent=(tp.message||'')+(tp.result?' · '+tp.result.path:'');
 if(revision!==s.revision)$('clear').checked=false;revision=s.revision;
 $('message').textContent=s.message;$('power').textContent=s.fault?'Fault — motor state requires verification':powered?'Motor power ON':'Motor power OFF';
 $('hold').disabled=!ready||!$('clear').checked;$('disable').disabled=!powered||!$('supported').checked||!!s.fault;

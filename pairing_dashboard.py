@@ -337,6 +337,10 @@ class Workbench:
             target = sources.get('printer_target')
             if target is not None and not 0 <= now-target.get('observation_time', 0) <= .25:
                 target.update(valid=False, reason='Stereo reference expired; reacquire before planning')
+            plate = sources.get('printer_plate')
+            if plate is not None and not 0 <= now-plate.get('observation_time', 0) <= .5:
+                plate.update(valid=False, reason='Plate observation expired; reacquire')
+                plate.pop('registration', None)
             result = {'demo': self.demo, 'sources': sources, 'names': NAMES,
                       'message': self.message, 'reference': self.reference,
                       'signs': self.signs, 'checks': self.checks, 'guided': self.guided,

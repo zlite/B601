@@ -14,6 +14,7 @@ import numpy as np
 from camera_selection import wrist_camera_config
 from contact_geometry import stereo_tag_pose
 from tag_view import annotate_view, detect, detect_small
+from printer_plate_vision import PlateVisionWorker
 
 
 def interrupted(*_):
@@ -24,6 +25,8 @@ def main(capture_root=None):
     if not dai.__version__.startswith('2.32.'):
         raise RuntimeError('This camera stream requires the verified DepthAI 2.32 environment')
     config = wrist_camera_config()
+    plate_worker = PlateVisionWorker()
+    last_plate_request = 0.
     target = json.loads(Path('config/printer_bed_target.json').read_text())['tag']
     pipeline = dai.Pipeline()
     rgb = pipeline.create(dai.node.ColorCamera)
@@ -108,7 +111,14 @@ def main(capture_root=None):
             observation['frame_age_s'] = time.monotonic()-stamp
             if observation['frame_age_s'] > .25:
                 observation.update(valid=False, reason='Stereo processing exceeded freshness limit')
+            if (time.monotonic()-last_plate_request >= .2 and
+                    abs(stamps['B']-stamps['C']) <= .015 and
+                    0 <= time.monotonic()-stamp <= .25):
+                plate_worker.submit({r: latest[r].getCvFrame().copy() for r in ('B', 'C')},
+                                    calibration, T, observation)
+                last_plate_request = time.monotonic()
             row = {'kind': 'printer_camera_frame', 'target': observation,
+                   'plate': plate_worker.latest,
                    'rgb_observation_time': time.monotonic()-(dai.Clock.now().total_seconds()-stamps['A']),
                    'visible_tags': [{'family': t['family'], 'id': t['id']} for t in tags],
                    'jpeg_base64': base64.b64encode(jpeg).decode('ascii')}

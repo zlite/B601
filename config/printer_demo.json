@@ -1,5 +1,5 @@
 {
-  "enabled": true,
+  "enabled": false,
   "source": "outputs/printer_replay/standoff_recovery_20261008T2024",
   "speed_scale": 4,
   "scope": "Attended rail-left/back plus open-jaw standoff and return; no plate-level approach, grasp or lift. Final descent removed after plate contact.",
@@ -35,5 +35,6 @@
     "standoff_geometry_checks_passed": true,
     "live_trial_completed": true,
     "live_trial_summary": "outputs/printer_replay/ui_demo/20261008T202805067162Z/summary.json"
-  }
+  },
+  "disabled_reason": "Fixed replay retired while camera-guided plate localization and scene calibration are commissioned"
 }

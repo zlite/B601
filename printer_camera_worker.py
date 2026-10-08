@@ -8,6 +8,7 @@ import time
 
 from printer_approach import rigid
 from printer_target_tracker import compare_reference, stationary_joint_pose
+from printer_target_plan import register_observation
 
 ROOT = Path(__file__).resolve().parent
 
@@ -18,6 +19,8 @@ def camera_worker(workbench, config):
         X = rigid(json.loads((ROOT/'calibration/stereo_sweep_handeye_20261004.json').read_text())['T_wrist_camera'])
         session = workbench.session+':'+str(time.monotonic_ns())
         baseline = None; revision = 0; last = time.monotonic(); last_stamp = -1.
+        last_rail_motion = time.monotonic()
+        rail_revision = None
         command = [str(ROOT/'.venv-depth-v2/bin/python'), '-u', str(ROOT/'printer_camera_stream_v2.py')]
         capture_root = getattr(workbench, 'printer_capture_root', None)
         if capture_root is not None:
@@ -37,6 +40,31 @@ def camera_worker(workbench, config):
             row = json.loads(line)
             if row.get('kind') != 'printer_camera_frame':
                 continue
+            rail = getattr(workbench, 'rail', None)
+            if rail is not None:
+                with workbench.lock:
+                    if rail.busy() or rail.state != 'Idle' or rail.commands != rail_revision:
+                        last_rail_motion = time.monotonic()
+                    rail_revision = rail.commands
+                    rail_state = dict(connected=rail.connected, state=rail.state,
+                        error=rail.error, x_mm=rail.x_mm, commands=rail.commands,
+                        status_time=rail.status_time, last_motion_time=last_rail_motion)
+                    history = list(workbench.follower_history)
+                plate = dict(row.get('plate') or {})
+                plate['session'] = session
+                try:
+                    registration = register_observation(plate, history, workbench.geometry,
+                        X, rail_state, time.monotonic(), session)
+                    plate['registration'] = registration
+                except (ValueError, KeyError, TypeError) as error:
+                    plate['registration_error'] = str(error)
+                if not 0 <= time.monotonic()-plate.get('observation_time', -1.) <= .5:
+                    plate.update(valid=False, reason='Plate observation expired; reacquire')
+                    plate.pop('registration', None)
+                workbench.publish('printer_plate', **plate)
+                target_preview = getattr(workbench, 'target_preview', None)
+                if target_preview is not None:
+                    target_preview.observe(plate)
             rgb_age = time.monotonic()-row['rgb_observation_time']
             if not 0 <= rgb_age <= .5:
                 # Drop a delayed frame, mark the feed unavailable, and drain

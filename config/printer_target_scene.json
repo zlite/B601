@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "scope": "Camera-guided local noncontact preview only; no autonomous motion commissioned",
+  "scene": {
+    "registered": false,
+    "revision": null,
+    "rail_x_mm": 0.0,
+    "geometry_fingerprint": null,
+    "uncertainty_m": null,
+    "obstacles": [],
+    "required_frames": {
+      "bed": "bed",
+      "holder": "bed",
+      "plate": "plate",
+      "frame": "base",
+      "gantry": "base",
+      "syringe": "base",
+      "bench": "base"
+    }
+  },
+  "tool": {
+    "registered": false,
+    "revision": null,
+    "camera_and_cables_included": false,
+    "tips_camera_b_m": null,
+    "parts_camera_b": [],
+    "downstream_reach_bounds_m": null
+  },
+  "pending": [
+    "Fresh wrist stereo plate and tag observations at a supported observation pose",
+    "Measure bed/holder and fixed printer/syringe volumes separately",
+    "Validate installed finger, camera, cable registration and reach bounds",
+    "Validate a noncontact observation corridor for the permitted bed travel",
+    "Bounded physical rehearsal; no fallback to the fixed replay"
+  ]
+}

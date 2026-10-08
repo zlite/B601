@@ -5,6 +5,44 @@ Uses Seeed's motorbridge driver and Luxonis DepthAI v3. No recalibration or zero
 
 ## Current printer teaching and rail demo (October 7, 2026)
 
+October 8 camera-guided targeting commissioning supersedes the replay below.
+The fixed demo is disabled. `printer_plate_vision.py` independently acquires
+the complete 12×8 well lattice in the OAK stereo pair, validates 9 mm spacing,
+rigid fit and reprojection, and rejects incomplete/ambiguous observations.
+It reports a symmetric plate pose, **not A1 well identity**. A separate process
+keeps grid detection off the live camera and motor threads. No historical
+well-grid bootstrap or saved bed-to-plate offset is used.
+
+`printer_target_plan.py` requires stationary joint readback bracketing the
+exposure, the bed tag in that same stereo pair, a fresh stopped rail, and
+current arm calibration. It composes bed-attached obstacles with the observed
+bed pose, plate obstacles with the independently observed plate, and leaves
+printer frame/gantry/syringe obstacles fixed. It solves a fresh local side
+approach stopping 65 mm above the plate; it does not translate the old replay.
+The planner inflates external obstacles for registered uncertainty and joint
+tracking bounds. Its output is a **preview**, not an executable authorization:
+full self-collision checks, validated geometry and a physical rehearsal remain
+necessary. It cannot automatically move from rest to an unseen target.
+
+The web panel shows localization failures and offers raw stereo capture and
+preview without any motor commands. Preview requires three independent stable
+observations and is invalidated by target movement, stale data, a camera restart
+or rail movement. `config/printer_target_scene.json` deliberately leaves the
+unmeasured scene/tool registration incomplete. Automatic target-relative
+execution and plate pickup are **not commissioned or implemented in the demo
+executor**. Live acquisition at a clear observation pose, scene/tool calibration,
+an independently checked acquisition corridor and execution integration are the
+remaining work; software tests are not physical validation.
+
+Read-only tools:
+
+```bash
+.venv/bin/python scripts/printer_target_client.py status
+.venv/bin/python scripts/printer_target_client.py capture
+.venv/bin/python scripts/printer_target_client.py preview
+.venv/bin/python scripts/analyze_printer_grid.py <target_captures/stage_01>
+```
+
 October 8 contact incident supersedes the close-approach validation below:
 the operator confirmed that the arm knocked the plate out. Recorded wrist
 frames show the plate being dragged and tilted during the return of cycle 6;

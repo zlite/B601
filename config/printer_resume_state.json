@@ -1,14 +1,14 @@
 {
-  "saved_utc": "2026-10-08T20:30:35.397865+00:00",
-  "status": "Confirmed plate collision invalidates old plate-level route. Replacement standoff-only route passed one bounded trial with plate remaining seated in reviewed camera views; repeating shortened demo restarted.",
-  "arm_motors_disabled_verified": false,
-  "latest_teaching_session": "outputs/printer_teach/20261008T202716454117Z",
+  "saved_utc": "2026-10-08T22:23:41.686703+00:00",
+  "status": "Camera-guided targeting commissioning: fixed replay disabled, arm at rest with motors off, waiting for live plate-view calibration",
+  "arm_motors_disabled_verified": true,
+  "latest_teaching_session": "outputs/printer_teach/20261008T222112445234Z",
   "current_launch": {
     "command": ".venv/bin/python printer_teach.py",
-    "exec_session_id": 50702,
+    "exec_session_id": 22634,
     "url": "http://127.0.0.1:8765",
-    "demo_client_exec_session_id": 71435,
-    "demo_attendance_note": "CLI demo client maintains attendance heartbeat; never automatically resumes a pause."
+    "demo_client_exec_session_id": null,
+    "demo_attendance_note": "No repeating demo; fixed replay disabled for camera-guided commissioning"
   },
   "operator_feedback": "Requests fast smooth repeating 300 mm left/back then open-jaw arm approach/return, immediate postrail start; small passive wrist movement during rail is acceptable.",
   "controller": "printer_teach.py",
@@ -26,14 +26,14 @@
   "resume_steps": [
     "Fresh read-only device identity, disabled motor state, joints/gripper and both cameras after power-up; never reuse saved start angles",
     "Use printer_teach.py with first-press references, persistent alignment across pauses and explicit Re-align",
-    "Read live demo state; an attended repeating loop may already be active. Pause/stop through demo API, preserve holding torque if arm is away from rest; require fresh checks after any restart.",
+    "Fixed replay is disabled. Capture a clear wrist view of the full plate grid and bed tag using attended teaching; validate perception and scene geometry before implementing dynamic execution.",
     "Validate gripper leader mapping and current measured pads before a full pickup demonstration",
     "Reacquire bed tag18 (18 mm black square), plate and holder in current bed Y; validate scene and approach before autonomous lift/replace",
     "Manual rail arrows available; automatic homing/task positioning remain deferred until stationary pickup is reliable"
   ],
   "important_limits": [
     "Bed and gantry stationary during each attempt; bed Y may differ between attempts",
-    "Old plate-level approach caused a confirmed plate collision and is retired. Current standoff-only demo omits descent; scene-relative targeting, grasp and collision-aware pickup remain incomplete.",
+    "Old plate-level route collided and is retired. Standoff fixed replay is also disabled while camera-guided targeting is commissioned; no autonomous pickup or dynamic execution yet.",
     "Gripper remains inactive. Operator rail trial hit the right limit; operator manually cleared it, and restart verified Idle with no limit input. Rail remains unhomed",
     "Prior compact camera search aborted on roll envelope; torque-off rather than retrace; cause still requires diagnosis",
     "Leader and rail CH340 adapters share the same by-id alias; use the verified leader by-path binding in leader_read.py. Re-verify if moved to another port."
@@ -128,7 +128,7 @@
   },
   "demo": {
     "config": "config/printer_demo.json",
-    "running_at_save": true,
+    "running_at_save": false,
     "completed_cycles_observed": 1,
     "next_cycle_observed": 1,
     "stop_immediately": ".venv/bin/python scripts/printer_demo_client.py pause",
@@ -138,8 +138,8 @@
     "restart_note": "Read actual current rail position before closing/restarting; a GRBL reconnect resets MPos. Never assume zero if interrupted away from origin.",
     "repeat_fix": "Cache gripper device per motor owner; reset cache when owner is replaced; regression tested.",
     "paused_holding": false,
-    "awaiting": null,
-    "current_folder": "outputs/printer_replay/ui_demo/20261008T202805067162Z",
+    "awaiting": "Camera-guided localization, geometry registration and execution commissioning",
+    "current_folder": null,
     "repeat_fix_live_verified": true,
     "validation_scope": "One bounded standoff cycle; repeat restarted. Old close-contact route retired."
   },
@@ -263,5 +263,29 @@
     "new_entry_geometry_checked": true,
     "new_entry_motion_trial_completed": true
   },
-  "collision_incident": "outputs/printer_replay/contact_incident_20261008/diagnosis.json"
+  "collision_incident": "outputs/printer_replay/contact_incident_20261008/diagnosis.json",
+  "camera_guided_targeting": {
+    "controller_session_id": 22634,
+    "recording": "outputs/printer_teach/20261008T222112445234Z",
+    "web_url": "http://127.0.0.1:8765",
+    "plate_method": "complete stereo 12x8 well-grid acquisition",
+    "bed_tag": {
+      "family": "36h11",
+      "id": 18,
+      "size_m": 0.018
+    },
+    "preview_only": true,
+    "automatic_target_relative_execution_implemented": false,
+    "tests_passed": 78,
+    "hardware_motion_commanded": false,
+    "operator_supported_disable_completed": true,
+    "arducam_reconnected": true,
+    "remaining": [
+      "Live plate-grid acquisition at a clear held viewing pose",
+      "Measured scene/tool registration, including fixed syringe/gantry and moved bed",
+      "Checked observation corridor and full self-collision checks",
+      "Integrate validated fresh plans into the executor, then bounded physical trials"
+    ],
+    "known_detector_limit": "Synthetic grid tests pass; historical oblique transparent-plate capture had 0/12 full-grid detections. Real acquisition not yet validated."
+  }
 }

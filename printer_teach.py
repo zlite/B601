@@ -19,6 +19,7 @@ from leader_read import LeaderReader, LEADER_PORT
 from pairing_dashboard import ASSETS
 from rail_jog import RailJog
 from printer_demo_ui import DemoController
+from printer_target_ui import TargetPreview
 
 
 def teaching_profiles():
@@ -59,6 +60,8 @@ class TeachWorkbench(AxisWorkbench):
         self.press_leader_reference = None
         self.rail = RailJog(self, control_enabled=not rail_monitor_only,reboot_offset_mm=rail_reboot_offset_mm)
         self.demo = DemoController(self)
+        self.printer_capture_root = self.recording_root/'target_captures'
+        self.target_preview = TargetPreview(self)
         self.metadata = {
             'session': self.session, 'created_utc': datetime.now(timezone.utc).isoformat(),
             'geometry_fingerprint': self.geometry.fingerprint,
@@ -110,6 +113,9 @@ class TeachWorkbench(AxisWorkbench):
     def action(self, request):
         op = request.get('action')
         with self.lock:
+            if isinstance(op, str) and op.startswith('target_'):
+                self.target_preview.action(request)
+                return
             if isinstance(op,str) and op.startswith('demo_'):
                 self.demo.action(request)
                 return
@@ -178,6 +184,7 @@ class TeachWorkbench(AxisWorkbench):
         with self.lock:
             result['rail'] = self.rail.snapshot()
             result['demo'] = self.demo.snapshot()
+            result['target_preview'] = self.target_preview.snapshot()
             if self.demo.busy():
                 result['rail']['ready']=False
                 result['message']=result['demo']['phase']

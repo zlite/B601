@@ -41,7 +41,7 @@ class DemoController:
     def attended(self):return 0<=time.monotonic()-self.heartbeat<.75
     def reason(self):
         w=self.w;r=w.rail;f=w.sources.get('follower',{})
-        if not self.config.get('enabled'):return 'Demo needs a reviewed route for this scene'
+        if not self.config.get('enabled'):return self.config.get('disabled_reason', 'Demo needs a reviewed route for this scene')
         if self.busy():return 'Demo is active'
         if w.fault:return str(w.fault)
         if w.powered or w.active_id is not None or w.gate.lease:return 'Rest the arm and remove motor power first'
