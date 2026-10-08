@@ -1,14 +1,15 @@
 {
-  "saved_utc": "2026-10-08T17:38:55.195035+00:00",
-  "status": "Seven repeats completed; cycle 8 position-read timeout before first trajectory sample. All six motors subsequently verified disabled and fault-free at rest; controller restarted and repeating demo restarted at user request. Communication root cause unresolved.",
+  "saved_utc": "2026-10-08T20:02:05.878349+00:00",
+  "status": "Restarted repeating demo after operator-supported rest, disabled-only communication-fault clear and fresh entry CAD checks. Fully folded elbow 99.50 degrees passes unchanged rail interlock. First fresh-entry cycle in progress.",
   "arm_motors_disabled_verified": false,
-  "latest_teaching_session": "outputs/printer_teach/20261008T173817072977Z",
+  "latest_teaching_session": "outputs/printer_teach/20261008T200115172550Z",
   "current_launch": {
     "command": ".venv/bin/python printer_teach.py",
-    "exec_session_id": 92165,
+    "exec_session_id": 99757,
     "url": "http://127.0.0.1:8765",
-    "demo_client_exec_session_id": 97374,
-    "demo_attendance_note": "CLI demo client maintains attendance heartbeat; never automatically resumes a pause."
+    "demo_client_exec_session_id": 46968,
+    "demo_attendance_note": "CLI demo client maintains attendance heartbeat; never automatically resumes a pause.",
+    "console_log": "outputs/printer_teach/controller_20261008T2000.log"
   },
   "operator_feedback": "Requests fast smooth repeating 300 mm left/back then open-jaw arm approach/return, immediate postrail start; small passive wrist movement during rail is acceptable.",
   "controller": "printer_teach.py",
@@ -200,8 +201,8 @@
   "demo": {
     "config": "config/printer_demo.json",
     "running_at_save": true,
-    "completed_cycles_observed": 7,
-    "next_cycle_observed": null,
+    "completed_cycles_observed": 0,
+    "next_cycle_observed": 1,
     "stop_immediately": ".venv/bin/python scripts/printer_demo_client.py pause",
     "stop_at_rest": ".venv/bin/python scripts/printer_demo_client.py stop",
     "no_duration_cutoff": true,
@@ -243,7 +244,7 @@
     "old_fault": "get_register_f32 failed: register 80 not received within 40ms",
     "position_retry_added": true
   },
-  "latest_shutdown_diagnosis": "outputs/printer_replay/ui_demo/20261008T173653881823Z/shutdown_diagnosis.json",
+  "latest_shutdown_diagnosis": "outputs/printer_replay/ui_demo/20261008T192553758403Z/shutdown_diagnosis.json",
   "communication_repair": {
     "feedback_reader_verified": "sequential",
     "experimental_reader_default_enabled": false,
@@ -280,13 +281,13 @@
     "verified_mode": "1920x1080 30fps MJPG; 5000M USB link; original serial restored"
   },
   "rest_entry_recovery": {
-    "new_source": "outputs/printer_replay/settling_recovery_rest_20261008",
-    "capture": "outputs/gripper/20261008T170703808668Z_inspect.json",
+    "new_source": "outputs/printer_replay/folded_recovery_rest_20261008T2000",
+    "capture": "outputs/arm_response/folded_recovery_20261008T2000.json",
     "operator_confirmed_rest": true,
     "entry_checks_passed": true,
     "live_rest_tolerance_changed": false,
     "focused_tests_passed": 25,
-    "motion_trial_completed": true
+    "motion_trial_completed": false
   },
   "endpoint_repair": {
     "loaded": true,
@@ -321,6 +322,17 @@
       "outputs/printer_replay/ui_demo/20261008T171938199644Z/summary.json"
     ],
     "focused_tests_passed": 59,
-    "long_duration_validation": false
+    "long_duration_validation": false,
+    "later_settling_timeout": "Cycle 3 of restarted controller; explicit resume only after convergence and operator-confirmed printer stop. Endpoint settling reliability remains unresolved."
+  },
+  "process_exit_recovery": {
+    "prior_controller_completed_cycles": 42,
+    "first_exit_cause": "Unknown; abrupt recording end and no final report",
+    "second_exit": "Clean server_shutdown with motors disabled at 19:59:33 UTC, exit code 0; termination source not established",
+    "fault_clear_record": "outputs/arm_response/supported_recovery_20261008T1952.json",
+    "fully_folded_capture": "outputs/arm_response/folded_recovery_20261008T2000.json",
+    "rail_park_interlock_changed": false,
+    "new_entry_geometry_checked": true,
+    "new_entry_motion_trial_completed": false
   }
 }

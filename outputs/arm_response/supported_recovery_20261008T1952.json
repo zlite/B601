@@ -1,0 +1,46 @@
+{
+  "operator_confirmed_supported_rest": true,
+  "motion_commanded": false,
+  "before": [
+    {
+      "joint": 1,
+      "raw_deg": 92.32704112451233,
+      "status": 13
+    },
+    {
+      "joint": 2,
+      "raw_deg": 56.241888154338525,
+      "status": 13
+    },
+    {
+      "joint": 3,
+      "raw_deg": 98.36871910579298,
+      "status": 13
+    },
+    {
+      "joint": 4,
+      "raw_deg": 0.053521362336219916,
+      "status": 13
+    },
+    {
+      "joint": 5,
+      "raw_deg": 4.770156305012716,
+      "status": 13
+    },
+    {
+      "joint": 6,
+      "raw_deg": -4.324482192801152,
+      "status": 13
+    }
+  ],
+  "start_raw_deg": [
+    92.32704112451233,
+    56.241888154338525,
+    98.36871910579298,
+    0.053521362336219916,
+    4.770156305012716,
+    -4.324482192801152
+  ],
+  "gripper_raw_rad": -1.1524513959884644,
+  "motors_disabled_verified": true
+}

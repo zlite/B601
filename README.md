@@ -5,6 +5,17 @@ Uses Seeed's motorbridge driver and Luxonis DepthAI v3. No recalibration or zero
 
 ## Current printer teaching and rail demo (October 7, 2026)
 
+October 8 process-exit recovery: the 17:38 UTC controller recorded 42 completed
+cycles before its recording ended abruptly at 19:27:49 UTC, with no final report
+for the interrupted return. All six motors subsequently reported communication
+watchdog faults. The process termination cause is unresolved. After operator
+confirmation of supported rest, faults were cleared without enabling motors.
+The final folded rest (joint 3 about 99.50 degrees) passes the unchanged rail
+parking interlock; a fresh entry and reverse passed stock-arm, tool and camera
+mesh checks in `outputs/printer_replay/folded_recovery_rest_20261008T2000`.
+The 20:01 UTC controller also saves console output to
+`outputs/printer_teach/controller_20261008T2000.log` for diagnosis.
+
 October 8 roll-load correction (two complete live trials passed): increasing endpoint
 wait time alone did not resolve a persistent .95-degree roll offset. Roll's MIT
 controller used Kp=18, Kd=2 and no feedforward; observed stationary torque was

@@ -1,0 +1,15 @@
+{
+  "last_recording_time_local": "2026-10-08 12:27:49 America/Los_Angeles",
+  "completed_cycles_in_controller_session": 42,
+  "latest_cycle_report_missing": true,
+  "controller_process_absent": true,
+  "web_endpoint_connection_refused": true,
+  "motor_worker_fault_log_present": false,
+  "fresh_motor_status_report": "outputs/arm_response/20261008T194721159332Z/report.json",
+  "all_motor_status_codes": 13,
+  "all_motor_timeout_registers": 10000,
+  "system_log": "OAK/Movidius USB disconnect at 12:27:51 and boot-device re-enumeration at 12:27:52; event follows recording end, causal relationship unproven",
+  "conclusion": "Controller process exited without final cycle report or motor-worker fault entry; motor communication watchdog faults now present. Exact process termination cause not established.",
+  "motion_commanded_during_investigation": false,
+  "faults_cleared": false
+}

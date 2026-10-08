@@ -1,0 +1,284 @@
+{
+  "sampled_stock_self_clear": true,
+  "margin_m": 0.005,
+  "closest": {
+    "sample": 0,
+    "a": "link2",
+    "b": "link5",
+    "distance_m": 0.005398915932142703,
+    "intersects": false
+  },
+  "samples": 64,
+  "samples_below_margin": 0,
+  "mesh_sha256": {
+    "base_link": "22641c079014fe968702393f61e7f7f1a8f80c6c1df45a61e31545f6eaff3b65",
+    "link1": "9db637a63d37bc2c6398ea5b8ba32fb54122c637d5d77dc134c8782839b654cd",
+    "link2": "def0d9d82343dccc1eff0d9d5572eca49b3c134db9807ca12302b99d153df65e",
+    "link3": "ca14d73b5d63f352051f440f4cabc3989567f25ee9d19e7dd749f2d6f0d0561d",
+    "link4": "061909364f20bb387f9ff82cb80e506af959142f9fbb4a39dc86fc8244ee768a",
+    "link5": "3a32006227c1f9dbc70e77e07055c61e3f195f1054d4d2eb480262f0873bf001",
+    "link6": "c586a7d0b8345d2cd32eab7dfd2e334aba56e83f582a6298d41bbf718f2ebef1",
+    "end_link": "5e7b0473acaf31fc5c511a3591311e6561ad6066af8e135e21e18c096e1e7da5"
+  },
+  "rows": [
+    {
+      "sample": 0,
+      "below_margin": []
+    },
+    {
+      "sample": 1,
+      "below_margin": []
+    },
+    {
+      "sample": 2,
+      "below_margin": []
+    },
+    {
+      "sample": 3,
+      "below_margin": []
+    },
+    {
+      "sample": 4,
+      "below_margin": []
+    },
+    {
+      "sample": 5,
+      "below_margin": []
+    },
+    {
+      "sample": 6,
+      "below_margin": []
+    },
+    {
+      "sample": 7,
+      "below_margin": []
+    },
+    {
+      "sample": 8,
+      "below_margin": []
+    },
+    {
+      "sample": 9,
+      "below_margin": []
+    },
+    {
+      "sample": 10,
+      "below_margin": []
+    },
+    {
+      "sample": 11,
+      "below_margin": []
+    },
+    {
+      "sample": 12,
+      "below_margin": []
+    },
+    {
+      "sample": 13,
+      "below_margin": []
+    },
+    {
+      "sample": 14,
+      "below_margin": []
+    },
+    {
+      "sample": 15,
+      "below_margin": []
+    },
+    {
+      "sample": 16,
+      "below_margin": []
+    },
+    {
+      "sample": 17,
+      "below_margin": []
+    },
+    {
+      "sample": 18,
+      "below_margin": []
+    },
+    {
+      "sample": 19,
+      "below_margin": []
+    },
+    {
+      "sample": 20,
+      "below_margin": []
+    },
+    {
+      "sample": 21,
+      "below_margin": []
+    },
+    {
+      "sample": 22,
+      "below_margin": []
+    },
+    {
+      "sample": 23,
+      "below_margin": []
+    },
+    {
+      "sample": 24,
+      "below_margin": []
+    },
+    {
+      "sample": 25,
+      "below_margin": []
+    },
+    {
+      "sample": 26,
+      "below_margin": []
+    },
+    {
+      "sample": 27,
+      "below_margin": []
+    },
+    {
+      "sample": 28,
+      "below_margin": []
+    },
+    {
+      "sample": 29,
+      "below_margin": []
+    },
+    {
+      "sample": 30,
+      "below_margin": []
+    },
+    {
+      "sample": 31,
+      "below_margin": []
+    },
+    {
+      "sample": 32,
+      "below_margin": []
+    },
+    {
+      "sample": 33,
+      "below_margin": []
+    },
+    {
+      "sample": 34,
+      "below_margin": []
+    },
+    {
+      "sample": 35,
+      "below_margin": []
+    },
+    {
+      "sample": 36,
+      "below_margin": []
+    },
+    {
+      "sample": 37,
+      "below_margin": []
+    },
+    {
+      "sample": 38,
+      "below_margin": []
+    },
+    {
+      "sample": 39,
+      "below_margin": []
+    },
+    {
+      "sample": 40,
+      "below_margin": []
+    },
+    {
+      "sample": 41,
+      "below_margin": []
+    },
+    {
+      "sample": 42,
+      "below_margin": []
+    },
+    {
+      "sample": 43,
+      "below_margin": []
+    },
+    {
+      "sample": 44,
+      "below_margin": []
+    },
+    {
+      "sample": 45,
+      "below_margin": []
+    },
+    {
+      "sample": 46,
+      "below_margin": []
+    },
+    {
+      "sample": 47,
+      "below_margin": []
+    },
+    {
+      "sample": 48,
+      "below_margin": []
+    },
+    {
+      "sample": 49,
+      "below_margin": []
+    },
+    {
+      "sample": 50,
+      "below_margin": []
+    },
+    {
+      "sample": 51,
+      "below_margin": []
+    },
+    {
+      "sample": 52,
+      "below_margin": []
+    },
+    {
+      "sample": 53,
+      "below_margin": []
+    },
+    {
+      "sample": 54,
+      "below_margin": []
+    },
+    {
+      "sample": 55,
+      "below_margin": []
+    },
+    {
+      "sample": 56,
+      "below_margin": []
+    },
+    {
+      "sample": 57,
+      "below_margin": []
+    },
+    {
+      "sample": 58,
+      "below_margin": []
+    },
+    {
+      "sample": 59,
+      "below_margin": []
+    },
+    {
+      "sample": 60,
+      "below_margin": []
+    },
+    {
+      "sample": 61,
+      "below_margin": []
+    },
+    {
+      "sample": 62,
+      "below_margin": []
+    },
+    {
+      "sample": 63,
+      "below_margin": []
+    }
+  ],
+  "motion_ready": false,
+  "scope": "Sampled stock nonadjacent triangle surfaces only; excludes solid containment, custom tool, scene, tracking error and model uncertainty",
+  "input_sha256": "83e38b792478652631d7c9f61ace92cc9228aa14ee283b411aeef247b6dc7019"
+}

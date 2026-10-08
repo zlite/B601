@@ -1,0 +1,13 @@
+{
+  "start_raw_deg": [
+    92.00325600690789,
+    56.40507503398847,
+    99.50124643245113,
+    -3.208133022965819,
+    4.7959607596970235,
+    -4.342828080911806
+  ],
+  "gripper_raw_rad": -1.1524513959884644,
+  "motors_disabled_verified": true,
+  "operator_confirmed_supported_rest": true
+}

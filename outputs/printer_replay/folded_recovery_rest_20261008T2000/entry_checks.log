@@ -1,0 +1,18 @@
+near pairs 0
+near pairs 0
+{
+  "sampled_stock_self_clear": true,
+  "margin_m": 0.005,
+  "closest": {
+    "sample": 0,
+    "a": "link2",
+    "b": "link5",
+    "distance_m": 0.005398915932142703,
+    "intersects": false
+  },
+  "samples": 64,
+  "samples_below_margin": 0,
+  "motion_ready": false,
+  "scope": "Sampled stock nonadjacent triangle surfaces only; excludes solid containment, custom tool, scene, tracking error and model uncertainty",
+  "input_sha256": "83e38b792478652631d7c9f61ace92cc9228aa14ee283b411aeef247b6dc7019"
+}
