@@ -16,6 +16,7 @@ def main():
     parser.add_argument('--images', action='store_true', help='Save the two currently served JPEGs under outputs/camera_diagnosis')
     parser.add_argument('--brief', action='store_true', help='Show motor state and source readings only')
     parser.add_argument('--target', action='store_true', help='Include the current read-only printer stereo observation')
+    parser.add_argument('--axes', action='store_true', help='Include teaching limits and saturation diagnostics')
     parser.add_argument('--sample-target-seconds', type=float, default=0,
                         help='Record up to 60 seconds of read-only target status')
     args = parser.parse_args()
@@ -70,6 +71,8 @@ def main():
     if args.target:
         summary['printer_target'] = state.get('sources', {}).get('printer_target')
         summary['printer_plate'] = state.get('sources', {}).get('printer_plate')
+    if args.axes:
+        summary['axis_trials'] = state.get('axis_trials', [])
     print(json.dumps(summary,indent=2))
 
 

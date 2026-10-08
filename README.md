@@ -41,7 +41,15 @@ Read-only tools:
 .venv/bin/python scripts/printer_target_client.py capture
 .venv/bin/python scripts/printer_target_client.py preview
 .venv/bin/python scripts/analyze_printer_grid.py <target_captures/stage_01>
+.venv/bin/python scripts/printer_stereo_viewer.py <teaching-session/target_captures>
+.venv/bin/python scripts/dashboard_read.py --brief --axes
 ```
+
+The standalone stereo viewer serves upright **snapshots**, with visible image
+age, at `http://127.0.0.1:8766`. Its only action requests a raw image capture
+from the existing camera owner; it has no arm or rail controls and needs no
+controller restart. Use it to check both measuring-camera views: the RGB
+preview can look clear while a finger obscures the tag or plate in one eye.
 
 October 8 contact incident supersedes the close-approach validation below:
 the operator confirmed that the arm knocked the plate out. Recorded wrist

@@ -1,7 +1,7 @@
 {
-  "saved_utc": "2026-10-08T22:23:41.686703+00:00",
-  "status": "Camera-guided targeting commissioning: fixed replay disabled, arm at rest with motors off, waiting for live plate-view calibration",
-  "arm_motors_disabled_verified": true,
+  "saved_utc": "2026-10-08T23:26:11.895689+00:00",
+  "status": "Follower powered and holding fourth taught viewing pose; stereo finger occlusion remains; read-only stereo snapshot viewer running",
+  "arm_motors_disabled_verified": false,
   "latest_teaching_session": "outputs/printer_teach/20261008T222112445234Z",
   "current_launch": {
     "command": ".venv/bin/python printer_teach.py",
@@ -286,6 +286,15 @@
       "Checked observation corridor and full self-collision checks",
       "Integrate validated fresh plans into the executor, then bounded physical trials"
     ],
-    "known_detector_limit": "Synthetic grid tests pass; historical oblique transparent-plate capture had 0/12 full-grid detections. Real acquisition not yet validated."
+    "known_detector_limit": "Synthetic grid tests pass; historical oblique transparent-plate capture had 0/12 full-grid detections. Real acquisition not yet validated.",
+    "latest_capture": "outputs/printer_teach/20261008T222112445234Z/target_captures/stage_04",
+    "latest_capture_diagnosis": "outputs/printer_teach/20261008T222112445234Z/target_captures/stage_04/localization_diagnosis.json",
+    "holding_pose_warning": "Do not stop or restart the controller while the unsupported follower is powered in the observation pose.",
+    "awaiting": "Frame plate and tag clear of fingers in both stereo snapshots; no additional wrist tilt requested. Wrist bend and roll are near the local teaching bounds.",
+    "stereo_viewer": {
+      "url": "http://127.0.0.1:8766",
+      "exec_session_id": 76227,
+      "mode": "operator-triggered snapshots; no motor controls"
+    }
   }
 }
