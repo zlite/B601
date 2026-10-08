@@ -1,6 +1,6 @@
 {
-  "saved_utc": "2026-10-08T16:41:50.691111+00:00",
-  "status": "Demo paused and holding near plate with motors powered; roll stalled at old one-degree pacing cap. Fix tested offline, pending safe rest/motor-off before controller restart. Do not stop current motor owner while unsupported.",
+  "saved_utc": "2026-10-08T16:42:53.328692+00:00",
+  "status": "Old live controller faulted at 16:40:16 UTC during paused hold: position register 80 timeout at 100 ms; cleanup also timed out. Motor power is unknown. ArduCam absent from host USB inventory. Pacing fix tested and pushed but not loaded. Await supported rest/power-off and device-change clarification before restart.",
   "arm_motors_disabled_verified": false,
   "latest_teaching_session": "outputs/printer_teach/20261008T163119576152Z",
   "current_launch": {
@@ -113,7 +113,7 @@
   },
   "demo": {
     "config": "config/printer_demo.json",
-    "running_at_save": true,
+    "running_at_save": false,
     "completed_cycles_observed": 0,
     "next_cycle_observed": null,
     "stop_immediately": ".venv/bin/python scripts/printer_demo_client.py pause",
@@ -122,8 +122,8 @@
     "rail_reboot_offset_for_current_launch_mm": 0,
     "restart_note": "Read actual current rail position before closing/restarting; a GRBL reconnect resets MPos. Never assume zero if interrupted away from origin.",
     "repeat_fix": "Cache gripper device per motor owner; reset cache when owner is replaced; regression tested.",
-    "paused_holding": true,
-    "awaiting": "Operator requested to use Return to rest and report motors off before loading pacing correction",
+    "paused_holding": false,
+    "awaiting": "Operator support/rest/power-off and USB-device-change clarification; earlier Return instruction is superseded by communication fault",
     "current_folder": "outputs/printer_replay/ui_demo/20261008T163342278587Z",
     "repeat_fix_live_verified": true
   },
@@ -156,7 +156,7 @@
     "old_fault": "get_register_f32 failed: register 80 not received within 40ms",
     "position_retry_added": true
   },
-  "latest_shutdown_diagnosis": "outputs/printer_replay/ui_demo/20261008T160050434745Z/shutdown_diagnosis.json",
+  "latest_shutdown_diagnosis": "outputs/printer_replay/ui_demo/20261008T163342278587Z/shutdown_diagnosis.json",
   "communication_repair": {
     "feedback_reader_verified": "sequential",
     "experimental_reader_default_enabled": false,
