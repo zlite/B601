@@ -30,6 +30,8 @@ PROFILES = [
     dict(range=45., speed=24., acceleration=80., measured_speed=75., mode=1),
 ]
 TRACKING_ERROR = 8.0
+ROLL_MIT_GAINS = (18., 2.)
+DEMO_ROLL_MIT_GAINS = (30., 2.6)
 
 
 class AxisGate(HoldGate):
@@ -160,6 +162,7 @@ class AxisArm(FollowArm):
         self.selected = 4
         self.original = {}
         self.enabled_indices = set()
+        self.demo_roll_stiffness = False
         self.speed_limits = {i:p['measured_speed'] for i,p in enumerate(PROFILES)}
         self.measured_speed_limit = PROFILES[self.selected]['measured_speed']
 
@@ -236,12 +239,23 @@ class AxisArm(FollowArm):
     def command(self, position, take_up=False):
         self.command_axis(self.selected,position,take_up)
 
+    def set_demo_roll_stiffness(self,enabled):
+        # Transient MIT command gains only; never write EEPROM or change mode.
+        # A loaded roll retained ~.95 degrees error at Kp=18. Kp=30 reduces
+        # that expected static deflection; Kd scales by sqrt(30/18).
+        if type(enabled) is not bool:
+            raise ValueError('Invalid demo roll profile')
+        if self.active or self.enabled_indices:
+            raise RuntimeError('Roll gains can change only with all motors disabled')
+        self.demo_roll_stiffness=enabled
+
     def command_axis(self,i,position,take_up=False):
         if i not in range(6) or not math.isfinite(position):
             raise ValueError('Invalid arm target')
         m = self.motors[i]
         if i == 5:
-            m.send_mit(math.radians(position),0.,18.,2.,0.)
+            kp,kd=DEMO_ROLL_MIT_GAINS if self.demo_roll_stiffness else ROLL_MIT_GAINS
+            m.send_mit(math.radians(position),0.,kp,kd,0.)
         else:
             speed=getattr(self,'command_speed_limits',{}).get(i,PROFILES[i]['speed']*1.5)
             if not math.isfinite(speed) or not 0<speed<=60.:

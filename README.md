@@ -5,6 +5,15 @@ Uses Seeed's motorbridge driver and Luxonis DepthAI v3. No recalibration or zero
 
 ## Current printer teaching and rail demo (October 7, 2026)
 
+October 8 roll-load correction (awaiting live validation): increasing endpoint
+wait time alone did not resolve a persistent .95-degree roll offset. Roll's MIT
+controller used Kp=18, Kd=2 and no feedforward; observed stationary torque was
+about .32 Nm. Demo-only command gains are now Kp=30, Kd=2.6, set only while all
+motors are disabled. The damping increase approximately follows the square root
+of the stiffness ratio. Teaching restores Kp=18, Kd=2 after a disabled demo end.
+No motor mode, EEPROM, zero, commanded path, tracking cutoff or endpoint
+tolerance changes. Physical behavior must be checked before declaring this fixed.
+
 October 8 endpoint follow-up: the first updated cycle completed, but cycle 2
 paused at `settling_timeout`. Roll was still about .77 degrees from its target
 at the four-second deadline, and subsequently converged inside the unchanged
@@ -12,7 +21,8 @@ at the four-second deadline, and subsequently converged inside the unchanged
 exits as soon as all original tolerances pass, and reports the limiting joint
 and measured error if it times out. Camera/attendance readiness is checked
 during settling as well. Recorded-convergence and nonconvergence regressions
-passed; this follow-up still needs deployment at disabled rest and a live trial.
+passed. A subsequent eight-second live trial still paused with .955-degree
+roll error and was returned along its checked route with motors disabled.
 
 October 8 roll-pacing correction: the next sequential-reader run stalled near
 the plate while joint 6 retained almost exactly one degree of command error.

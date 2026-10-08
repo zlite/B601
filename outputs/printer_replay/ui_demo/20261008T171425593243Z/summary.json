@@ -1,0 +1,95 @@
+{
+  "returned_to_start": true,
+  "motors_disabled_verified": true,
+  "completed_stages": [
+    "entry",
+    "smooth_approach",
+    "plate_view"
+  ],
+  "motion_elapsed_s": 125.14793143302086,
+  "roll_mit_gains": {
+    "kp": 30.0,
+    "kd": 2.6,
+    "feedforward_nm": 0.0
+  },
+  "error": null,
+  "early_return": null,
+  "max_tracking_error_deg": 1.0193665306961552,
+  "max_roll_error_deg": 1.0193665306961552,
+  "max_abs_roll_torque_nm": 0.3589744567871094,
+  "peak_roll_speed_from_position_deg_s": 6.7693151532118305,
+  "max_motor_temp_c": 35.0,
+  "held_endpoints": [
+    {
+      "error_deg": [
+        0.0,
+        0.0,
+        0.0002,
+        0.0,
+        0.0043,
+        0.0
+      ]
+    },
+    {
+      "error_deg": [
+        0.1466,
+        0.1066,
+        0.0465,
+        0.1554,
+        0.0027,
+        0.2407
+      ]
+    },
+    {
+      "error_deg": [
+        0.0573,
+        0.1508,
+        0.0493,
+        0.0486,
+        0.0095,
+        0.5425
+      ]
+    },
+    {
+      "error_deg": [
+        0.0698,
+        0.028,
+        0.0329,
+        0.0408,
+        0.0067,
+        0.2165
+      ]
+    },
+    {
+      "error_deg": [
+        0.0062,
+        0.0992,
+        0.0001,
+        0.0541,
+        0.01,
+        0.5353
+      ]
+    },
+    {
+      "error_deg": [
+        0.0126,
+        0.103,
+        0.0894,
+        0.0005,
+        0.1845,
+        0.2321
+      ]
+    },
+    {
+      "error_deg": [
+        0.0457,
+        0.0403,
+        0.0268,
+        0.1605,
+        0.0514,
+        0.3876
+      ]
+    }
+  ],
+  "scope": "One bounded rail-and-arm cycle with transient roll Kp=30 Kd=2.6; no grasp or lift"
+}

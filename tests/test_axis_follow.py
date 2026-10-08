@@ -167,6 +167,22 @@ class AxisHardwareTests(unittest.TestCase):
         self.assertAlmostEqual(arm.motors[5].send_mit.call_args.args[0],math.radians(5))
         arm.disable()
 
+    def test_demo_roll_gains_are_transient_scoped_and_require_disabled_arm(self):
+        arm=self.arm(5)
+        arm.command_axis(5,5.)
+        self.assertEqual(arm.motors[5].send_mit.call_args.args[2:4],(18.,2.))
+        arm.set_demo_roll_stiffness(True);arm.command_axis(5,5.)
+        self.assertEqual(arm.motors[5].send_mit.call_args.args[2:4],(30.,2.6))
+        self.assertAlmostEqual(arm.motors[5].send_mit.call_args.args[0],math.radians(5.))
+        self.assertEqual(arm.motors[5].send_mit.call_args.args[4],0.)
+        arm.active=True
+        with self.assertRaisesRegex(RuntimeError,'disabled'):arm.set_demo_roll_stiffness(False)
+        arm.active=False;arm.set_demo_roll_stiffness(False);arm.command_axis(5,5.)
+        self.assertEqual(arm.motors[5].send_mit.call_args.args[2:4],(18.,2.))
+        for motor in arm.motors:
+            motor.enable.assert_not_called();motor.write_register_f32.assert_not_called()
+            motor.store_parameters.assert_not_called()
+
 
 class SelectionTests(unittest.TestCase):
     def setUp(self):

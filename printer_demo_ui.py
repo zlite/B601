@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 import time
 import numpy as np
+from axis_follow import DEMO_ROLL_MIT_GAINS
 from printer_demo_plan import PreparedDemoPlan, REST_TOLERANCE_DEG
 from printer_demo_replay import ReplayRunner, ReturnRequested, load_plan, timed_path
 from replay_timing import TimedCurve
@@ -244,6 +245,8 @@ class DemoController:
             runner.save_view('before')
             if self.stop_requested or not runner.vision_ready() or np.max(abs(np.asarray(arm.read())-start))>.05:raise ValueError('Readiness or resting pose changed during setup')
             arm.speed_limits={i:48. for i in range(6)};arm.command_speed_limits={i:18. for i in range(6)}
+            arm.set_demo_roll_stiffness(True)
+            report['roll_mit_gains']={'kp':DEMO_ROLL_MIT_GAINS[0],'kd':DEMO_ROLL_MIT_GAINS[1],'feedforward_nm':0.}
             enabled=True;arm.enable_group(dict(enumerate(start)));self.w.powered=True;runner.last=time.monotonic()
             began=time.monotonic()
             for _ in range(2):runner.tick(take_up=True)
@@ -275,6 +278,9 @@ class DemoController:
             if self.runner:self.runner.phase=self.message
             if enabled:raise
         finally:
+            # Do not change gains on a powered fault; the motor-owner cleanup
+            # must disable first. Successful/supported stops restore teaching.
+            if not arm.active:arm.set_demo_roll_stiffness(False)
             if self.runner:report['samples']=self.runner.rows
             self.save_report(report,arm)
             arm.speed_limits=old_speed
