@@ -1,14 +1,14 @@
 {
-  "saved_utc": "2026-10-08T17:22:33.278383+00:00",
-  "status": "Demo-only roll Kp=30 Kd=2.6 passed two complete rail/approach/return trials, each disabled at rest. Repeating run started its next rail cycle; no pause or fault. Check fresh live state before any action.",
+  "saved_utc": "2026-10-08T17:38:55.195035+00:00",
+  "status": "Seven repeats completed; cycle 8 position-read timeout before first trajectory sample. All six motors subsequently verified disabled and fault-free at rest; controller restarted and repeating demo restarted at user request. Communication root cause unresolved.",
   "arm_motors_disabled_verified": false,
-  "latest_teaching_session": "outputs/printer_teach/20261008T171329779423Z",
+  "latest_teaching_session": "outputs/printer_teach/20261008T173817072977Z",
   "current_launch": {
     "command": ".venv/bin/python printer_teach.py",
-    "exec_session_id": 31947,
+    "exec_session_id": 92165,
     "url": "http://127.0.0.1:8765",
-    "demo_client_exec_session_id": null,
-    "demo_attendance_note": "Repeating run observed active via API; current heartbeat source/session not established in final readback."
+    "demo_client_exec_session_id": 97374,
+    "demo_attendance_note": "CLI demo client maintains attendance heartbeat; never automatically resumes a pause."
   },
   "operator_feedback": "Requests fast smooth repeating 300 mm left/back then open-jaw arm approach/return, immediate postrail start; small passive wrist movement during rail is acceptable.",
   "controller": "printer_teach.py",
@@ -200,8 +200,8 @@
   "demo": {
     "config": "config/printer_demo.json",
     "running_at_save": true,
-    "completed_cycles_observed": 2,
-    "next_cycle_observed": 2,
+    "completed_cycles_observed": 7,
+    "next_cycle_observed": null,
     "stop_immediately": ".venv/bin/python scripts/printer_demo_client.py pause",
     "stop_at_rest": ".venv/bin/python scripts/printer_demo_client.py stop",
     "no_duration_cutoff": true,
@@ -210,9 +210,9 @@
     "repeat_fix": "Cache gripper device per motor owner; reset cache when owner is replaced; regression tested.",
     "paused_holding": false,
     "awaiting": null,
-    "current_folder": "outputs/printer_replay/ui_demo/20261008T171938199644Z",
+    "current_folder": null,
     "repeat_fix_live_verified": true,
-    "validation_scope": "One bounded cycle plus first cycle of repeating run completed with final roll gains; repeat entered cycle 2."
+    "validation_scope": "Seven repeating cycles completed with final roll gains; cycle 8 communication failure, then restart."
   },
   "speed_investigation": {
     "report": "outputs/printer_replay/ui_demo/20261008T004919406737Z/speed_bottleneck.json",
@@ -243,7 +243,7 @@
     "old_fault": "get_register_f32 failed: register 80 not received within 40ms",
     "position_retry_added": true
   },
-  "latest_shutdown_diagnosis": "outputs/printer_replay/ui_demo/20261008T163342278587Z/shutdown_diagnosis.json",
+  "latest_shutdown_diagnosis": "outputs/printer_replay/ui_demo/20261008T173653881823Z/shutdown_diagnosis.json",
   "communication_repair": {
     "feedback_reader_verified": "sequential",
     "experimental_reader_default_enabled": false,

@@ -1,0 +1,72 @@
+{
+  "motion_commanded": false,
+  "settings_changed": false,
+  "joints": [
+    {
+      "joint": 1,
+      "raw_deg": 92.37332931651751,
+      "status_code": 0,
+      "velocity_rad_s": -0.0024423599243164062,
+      "temperature_c": [
+        27.0,
+        26.0
+      ],
+      "timeout_register": 0
+    },
+    {
+      "joint": 2,
+      "raw_deg": 56.457640169840886,
+      "status_code": 0,
+      "velocity_rad_s": -0.0024423599243164062,
+      "temperature_c": [
+        29.0,
+        27.0
+      ],
+      "timeout_register": 0
+    },
+    {
+      "joint": 3,
+      "raw_deg": 100.93240329000058,
+      "status_code": 0,
+      "velocity_rad_s": -0.0024423599243164062,
+      "temperature_c": [
+        32.0,
+        31.0
+      ],
+      "timeout_register": 0
+    },
+    {
+      "joint": 4,
+      "raw_deg": -3.1917610595252985,
+      "status_code": 0,
+      "velocity_rad_s": -0.0073261260986328125,
+      "temperature_c": [
+        33.0,
+        33.0
+      ],
+      "timeout_register": 0
+    },
+    {
+      "joint": 5,
+      "raw_deg": 5.981725995840842,
+      "status_code": 0,
+      "velocity_rad_s": -0.0073261260986328125,
+      "temperature_c": [
+        30.0,
+        28.0
+      ],
+      "timeout_register": 0
+    },
+    {
+      "joint": 6,
+      "raw_deg": -5.211830487691589,
+      "status_code": 0,
+      "velocity_rad_s": -0.0073261260986328125,
+      "temperature_c": [
+        30.0,
+        28.0
+      ],
+      "timeout_register": 0
+    }
+  ]
+}

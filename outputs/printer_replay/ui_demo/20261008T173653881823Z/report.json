@@ -1,0 +1,34 @@
+{
+  "requested_speed_scale": 4,
+  "returned_to_start": false,
+  "motors_disabled_verified": false,
+  "gripper_commanded": false,
+  "rail_commanded": false,
+  "completed_stages": [],
+  "start_raw_deg": [
+    92.37332931651751,
+    56.45750356605749,
+    100.93226668621718,
+    -3.1917610595252985,
+    5.967169155172252,
+    -5.211830487691589
+  ],
+  "starting_pose_method": "Fresh disabled readback immediately after rail Idle at origin; entry checked from this pose; <=0.05 degree change verified before enable",
+  "entry_check_s": 1.6072773489868268,
+  "fixed_home_raw_deg": [
+    92.36385584413871,
+    56.46769420829915,
+    100.93778547906655,
+    -3.2041817585309667,
+    6.080594691624069,
+    -4.768832955861026
+  ],
+  "planned_outbound_s": 22.52150957153421,
+  "roll_mit_gains": {
+    "kp": 30.0,
+    "kd": 2.6,
+    "feedforward_nm": 0.0
+  },
+  "error": "CallError('get_register_f32 failed: register 80 not received within 100ms')",
+  "samples": []
+}

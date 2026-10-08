@@ -1,0 +1,32 @@
+{
+  "failure_utc": "2026-10-08T17:36:55.926982+00:00",
+  "failure": "Register 80 position response exceeded 100ms during cycle 8 setup/engagement, before first trajectory sample",
+  "root_cause": "Not established; a transient missing position response is observed",
+  "prior_completed_repeating_cycles": 7,
+  "prior_cycles_returned_and_disabled": true,
+  "cleanup_error": null,
+  "fresh_read_only_verification": "outputs/arm_response/20261008T173756290163Z/report.json",
+  "fresh_motor_status_codes": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "fresh_timeout_registers": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "motor_fault_clear_performed": false,
+  "rail_idle_x_mm": 0,
+  "controller_restarted": true,
+  "new_teaching_session": "outputs/printer_teach/20261008T173817072977Z",
+  "controller_exec_session_id": 92165,
+  "demo_client_exec_session_id": 97374,
+  "code_changed": false
+}
