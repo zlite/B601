@@ -2,7 +2,7 @@ import threading
 import time
 from types import SimpleNamespace
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 import numpy as np
 
 from printer_demo_replay import ReplayRunner, ReversedCurve
@@ -66,6 +66,70 @@ class ReplayInterlockTests(unittest.TestCase):
         np.testing.assert_allclose(calls[-1].at(calls[-1].duration),fresh.at(0))
         r.executed_curves=[{'path':fresh,'elapsed':fresh.duration/2}]
         with self.assertRaisesRegex(RuntimeError,'does not join'):r.return_executed_curves(home)
+
+    def stalled_roll_runner(self,sign=1):
+        r=self.runner();r.speed=3.;r.acceleration=9.;r.tracking_limit=1.5;r.pacing_lag=1.
+        # Target and error at the observed 2026-10-08 freeze. Simulate roll
+        # breakaway at 1.05 degrees, followed by .55-degree running error.
+        target=np.array([52.743139597,-17.437377924,67.005334684,
+                         -8.407808547,-22.534457441,-20.890359727])*sign
+        actual=target.copy();actual[5]+=sign
+        goal=target.copy();goal[5]-=5*sign
+        r.low=np.full(6,-150.);r.high=np.full(6,150.)
+        r.targets=dict(enumerate(target));r.rows=[{'raw_deg':actual.tolist()}]
+        r.settle_tolerance=np.array([.2]*5+[.75]);r.phase='test';r.dynamic_reviews=300
+        r.vision_ready=lambda:True
+        clock=[100.];peak=np.zeros(6)
+        def now():clock[0]+=.025;return clock[0]
+        def tick(**kwargs):
+            command=np.array(list(r.targets.values()));error=command-actual
+            peak[:]=np.maximum(peak,abs(error))
+            if np.max(abs(error))>1.5:raise RuntimeError('Tracking error exceeds 1.5 degrees')
+            actual[:5]=command[:5]
+            if abs(error[5])>1.05:actual[5]=command[5]-.55*np.sign(error[5])
+            # Stop with the same .55-degree residual at the final held target.
+            if not kwargs.get('moving'):actual[5]=command[5]-.55*np.sign(error[5])
+            r.rows.append({'raw_deg':actual.tolist()});return actual.tolist()
+        r.tick=tick
+        return r,target,goal,actual,peak,now,clock
+
+    def test_recorded_one_degree_roll_stall_recovers_in_both_directions(self):
+        for sign in (-1,1):
+            with self.subTest(sign=sign):
+                r,start,goal,actual,peak,now,clock=self.stalled_roll_runner(sign)
+                with patch('printer_demo_replay.time.monotonic',side_effect=now), patch('printer_demo_replay.review',side_effect=AssertionError('Unexpected pause')):
+                    visited=[start.tolist()];r.blend([start,goal],visited)
+                np.testing.assert_allclose(visited[-1],goal)
+                self.assertLess(abs(actual[5]-goal[5]),.75)
+                self.assertGreater(peak[5],1.05)
+                self.assertLessEqual(peak[5],1.25)
+
+    def test_nonfollowing_roll_pauses_promptly_without_raising_error_cap(self):
+        r,start,goal,actual,peak,now,clock=self.stalled_roll_runner()
+        def stuck(**kwargs):
+            peak[:]=np.maximum(peak,abs(np.array(list(r.targets.values()))-actual))
+            r.rows.append({'raw_deg':actual.tolist()});return actual.tolist()
+        r.tick=stuck
+        with patch('printer_demo_replay.time.monotonic',side_effect=now), patch('printer_demo_replay.review',side_effect=RuntimeError('review pending')) as review:
+            with self.assertRaisesRegex(RuntimeError,'review pending'):
+                r.blend([start,goal],[start.tolist()])
+        self.assertIn('Tracking stalled: joint 6',review.call_args.args[-1])
+        self.assertLess(clock[0]-100,12.)
+        self.assertLessEqual(peak[5],1.25)
+
+    def test_other_joints_keep_one_degree_command_margin(self):
+        r,_,_,_,_,_,_=self.stalled_roll_runner()
+        np.testing.assert_allclose(r.pacing_margins(),[1.,1.,1.,1.,1.,1.25])
+
+    def test_measured_tracking_stop_still_precedes_any_motor_command(self):
+        for joint in (0,5):
+            r=self.runner();r.tracking_limit=1.5;r.targets=dict(enumerate([0.]*6))
+            q=[0.]*6;q[joint]=1.51
+            r.arm=SimpleNamespace(read=lambda:q,command_group=Mock());r.last=99.95
+            with patch('printer_demo_replay.time.monotonic',return_value=100.):
+                with self.assertRaisesRegex(RuntimeError,'Tracking error exceeds 1.5'):
+                    r.tick()
+            r.arm.command_group.assert_not_called()
 
     def runner(self):
         runner=object.__new__(ReplayRunner)

@@ -177,6 +177,15 @@ class ReplayRunner(LiftRunner):
         path=BlendedPath(points,self.speed,self.acceleration)
         return self.follow_curve(path, visited, returning)
 
+    def pacing_margins(self):
+        # Roll can retain a degree of error under load. The old 1-degree
+        # command cap never built enough position error to overcome it.
+        # Permit only roll another .25 degrees, still reserving .25 degrees
+        # before the independent 1.5-degree measured tracking stop in tick().
+        margins=np.full(6,min(self.pacing_lag,self.tracking_limit-.5))
+        margins[5]=min(self.pacing_lag+.25,self.tracking_limit-.25)
+        return margins
+
     def follow_curve(self, path, visited, returning=False):
         if np.max(abs(path.at(0)-list(self.targets.values())))>.01:
             raise RuntimeError('Blend start mismatch')
@@ -187,21 +196,36 @@ class ReplayRunner(LiftRunner):
             record = {'path': path, 'elapsed': 0.}
             self.executed_curves.append(record)
         began=previous=time.monotonic();elapsed=0.;phase=self.phase
+        margins=self.pacing_margins();stalled_since=None;stall_target=None
+        stall_cause=None
         while elapsed<path.duration:
             now=time.monotonic()
-            if not self.vision_ready() or now-began>max(30.,path.duration*6):
+            ready=self.vision_ready()
+            if not ready or stall_cause or now-began>max(30.,path.duration*6):
                 self.dynamic_reviews+=1
-                cause='readiness_or_operator_pause' if not self.vision_ready() else 'pacing_timeout'
+                cause=stall_cause or ('readiness_or_operator_pause' if not ready else 'pacing_timeout')
                 self.pause_cause=cause
                 action=review(self,self.output,self.dynamic_reviews,cause)
                 if action=='return' and not returning:raise ReturnRequested(cause)
                 self.phase=phase;began=previous=time.monotonic()
+                stalled_since=None;stall_target=None;stall_cause=None
             now=time.monotonic();dt=now-previous;previous=now
             actual=np.asarray(self.rows[-1]['raw_deg'])
-            lag=float(np.max(abs(actual-list(self.targets.values()))))
-            advance=min(dt,.06)*max(0.,min(1.,(self.pacing_lag-lag)/.5))
-            elapsed=path.advance(elapsed,advance,actual,self.tracking_limit-.5)
+            target=np.asarray(list(self.targets.values()))
+            errors=abs(actual-target);headroom=margins-errors
+            advance=min(dt,.06)*float(np.clip(np.min(headroom)/.5,0.,1.))
+            elapsed=path.advance(elapsed,advance,actual,margins)
             self.targets=dict(enumerate(path.at(elapsed).tolist()))
+            # Catch a loaded or obstructed joint without increasing its error
+            # allowance again. Do not count ordinary slow easing near endpoints.
+            if np.min(headroom)<.025:
+                if stalled_since is None or np.max(abs(target-stall_target))>.02:
+                    stalled_since=now;stall_target=target.copy()
+                elif now-stalled_since>=5.:
+                    joint=int(np.argmin(headroom))
+                    stall_cause=f'Tracking stalled: joint {joint+1}, error {errors[joint]:.2f} degrees; inspect before resuming'
+            else:
+                stalled_since=None;stall_target=None
             if record is not None:record['elapsed']=elapsed
             self.tick(moving=True)
             if not returning and np.max(abs(np.asarray(list(self.targets.values()))-visited[-1]))>.1:

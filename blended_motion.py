@@ -56,10 +56,10 @@ class BlendedPath:
         return self.spline(s)
     def advance(self,elapsed,dt,actual,margin):
         proposed=min(self.duration,elapsed+dt)
-        if np.max(abs(self.at(proposed)-actual))<=margin:return proposed
+        if np.all(abs(self.at(proposed)-actual)<=margin):return proposed
         low,high=elapsed,proposed
         for _ in range(16):
             m=(low+high)/2
-            if np.max(abs(self.at(m)-actual))<=margin:low=m
+            if np.all(abs(self.at(m)-actual)<=margin):low=m
             else:high=m
         return low

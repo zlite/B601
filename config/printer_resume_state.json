@@ -1,7 +1,7 @@
 {
-  "saved_utc": "2026-10-08T16:32:28.240946+00:00",
-  "status": "Communication faults cleared only at operator-confirmed supported rest; all six disabled verified. Repaired controller running sequential feedback. Teaching and Demo ready, rail Idle X=0. No powered trial after repair.",
-  "arm_motors_disabled_verified": true,
+  "saved_utc": "2026-10-08T16:41:50.691111+00:00",
+  "status": "Demo paused and holding near plate with motors powered; roll stalled at old one-degree pacing cap. Fix tested offline, pending safe rest/motor-off before controller restart. Do not stop current motor owner while unsupported.",
+  "arm_motors_disabled_verified": false,
   "latest_teaching_session": "outputs/printer_teach/20261008T163119576152Z",
   "current_launch": {
     "command": ".venv/bin/python printer_teach.py",
@@ -113,7 +113,7 @@
   },
   "demo": {
     "config": "config/printer_demo.json",
-    "running_at_save": false,
+    "running_at_save": true,
     "completed_cycles_observed": 0,
     "next_cycle_observed": null,
     "stop_immediately": ".venv/bin/python scripts/printer_demo_client.py pause",
@@ -122,9 +122,9 @@
     "rail_reboot_offset_for_current_launch_mm": 0,
     "restart_note": "Read actual current rail position before closing/restarting; a GRBL reconnect resets MPos. Never assume zero if interrupted away from origin.",
     "repeat_fix": "Cache gripper device per motor owner; reset cache when owner is replaced; regression tested.",
-    "paused_holding": false,
-    "awaiting": "Operator refreshes page and starts Demo after scene/clearance confirmation",
-    "current_folder": null,
+    "paused_holding": true,
+    "awaiting": "Operator requested to use Return to rest and report motors off before loading pacing correction",
+    "current_folder": "outputs/printer_replay/ui_demo/20261008T163342278587Z",
     "repeat_fix_live_verified": true
   },
   "speed_investigation": {
@@ -170,6 +170,17 @@
     "cad_cases_skipped_in_main_environment": 4,
     "cad_cases_passed_in_cad_environment": 4,
     "focused_cases_passed_after_last_change": 67,
-    "powered_motion_trial_after_repair": false
+    "powered_motion_trial_after_repair": true
+  },
+  "pacing_repair": {
+    "loaded": false,
+    "first_five_command_margin_deg": 1.0,
+    "roll_command_margin_deg": 1.25,
+    "measured_tracking_stop_deg": 1.5,
+    "stall_pause_seconds": 5.0,
+    "main_suite_cases": 364,
+    "main_suite_optional_skips": 4,
+    "cad_cases_passed": 4,
+    "physical_trial_completed": false
   }
 }

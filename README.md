@@ -5,6 +5,19 @@ Uses Seeed's motorbridge driver and Luxonis DepthAI v3. No recalibration or zero
 
 ## Current printer teaching and rail demo (October 7, 2026)
 
+October 8 roll-pacing correction: the next sequential-reader run stalled near
+the plate while joint 6 retained almost exactly one degree of command error.
+The trajectory clock and command cap both stopped advancing at that error.
+Replay now permits 1.25 degrees of command error on roll only, while the other
+five axes retain their one-degree pacing margin. The independent measured
+tracking stop remains 1.5 degrees; gains, path geometry, joint limits and speed
+limits are unchanged. Near the pacing cap, less than .02 degrees of commanded
+progress over five seconds causes an explicit joint-specific held pause.
+Tests exercise the recorded starting error with simulated breakaway in both
+directions, a nonfollowing joint, and the independent tracking stop. The main
+suite passed 364 tests (four CAD skips); those four passed in `.venv-cad`.
+Physical recovery with the updated pacing remains to be verified.
+
 October 8 communication recovery supersedes the fast-reader results below:
 the concurrent reader is now experimental and off by default. The teaching
 controller uses the original sequential reader while retaining the smoothed

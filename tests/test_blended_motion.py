@@ -34,6 +34,13 @@ class BlendTests(unittest.TestCase):
   p=BlendedPath([[0]*6,[20]*6],24.,144.)
   x=p.advance(0,p.duration,np.zeros(6),3.)
   self.assertLessEqual(max(abs(p.at(x))),3.);self.assertGreater(x,0)
+ def test_per_joint_margin_does_not_relax_other_axes(self):
+  for joint,limit in ((0,1.),(5,1.25)):
+   goal=np.zeros(6);goal[joint]=20
+   p=BlendedPath([np.zeros(6),goal],24.,144.)
+   t=p.advance(0,p.duration,np.zeros(6),np.array([1.]*5+[1.25]))
+   self.assertLessEqual(p.at(t)[joint],limit)
+   self.assertGreater(p.at(t)[joint],limit-.001)
  def test_bad_paths_and_limits_rejected(self):
   for q,s,a in [([[0]*6],24,144),([[0]*6,[0]*6],24,144),([[0]*6,[2]*6],100,144),([[0]*6,[float('nan')]*6],24,144)]:
    with self.assertRaises(ValueError):BlendedPath(q,s,a)
