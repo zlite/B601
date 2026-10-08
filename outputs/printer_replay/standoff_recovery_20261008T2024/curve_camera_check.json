@@ -1,0 +1,7 @@
+{
+  "samples": 1150,
+  "near": [],
+  "motion_ready": false,
+  "scope": "Coarsely sampled hypothetical installed finger/pad boxes versus stock links 0-5; camera, gripper motor, cables and external scene excluded",
+  "input_sha256": "b703bfe572c8aa681732064849b7f06cb6a3998d04b5e3d76090a17222dcca59"
+}

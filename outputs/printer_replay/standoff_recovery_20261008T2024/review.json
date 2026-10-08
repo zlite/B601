@@ -1,0 +1,34 @@
+{
+  "plan_sha256": "5ccd2700551308c187250dd638080877bd6829ec7942f7a50c7a4896cadd3ecb",
+  "scene_unchanged_operator_confirmed": true,
+  "noncontact_route_reviewed": true,
+  "scope": "Rail and open-jaw standoff/return only. Final descent and plate-level approach removed after observed plate contact.",
+  "source": "outputs/printer_replay/folded_recovery_rest_20261008T2000",
+  "disabled_start_capture": "outputs/gripper/20261008T202446479959Z_inspect.json",
+  "removed_joined_groups": [
+    2,
+    3,
+    4
+  ],
+  "removed_stage": "plate_view",
+  "geometry_checks_complete": true,
+  "live_motion_validated": true,
+  "review_basis": {
+    "operator_requests": [
+      "printer stopped",
+      "follower supported at rest",
+      "resume demo"
+    ],
+    "scope": "Same stationary scene; retained prefix only, no plate-level descent or grasp",
+    "current_overview": "outputs/camera_diagnosis/tripod_latest.jpg",
+    "recorded_standoff_views": [
+      "outputs/printer_teach/20261008T200115172550Z/008470_tripod.jpg",
+      "outputs/printer_teach/20261008T200115172550Z/008470_wrist.jpg"
+    ],
+    "tool_bottom_z_standoff_m": 0.1471407,
+    "tool_bottom_z_removed_contact_pose_m": 0.064627,
+    "note": "Height difference is model-relative, not a calibrated scene clearance measurement. Camera review confirms retained staging route is clear; final approach removed."
+  },
+  "validation_scope": "One bounded rail/standoff/return trial; plate remained seated in reviewed before/endpoint/returned camera views",
+  "trial_summary": "outputs/printer_replay/ui_demo/20261008T202805067162Z/summary.json"
+}

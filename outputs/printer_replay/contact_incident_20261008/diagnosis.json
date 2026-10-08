@@ -1,0 +1,25 @@
+{
+  "operator_confirmed": "The arm knocked it out",
+  "pause_cycle": 7,
+  "pause_roll_error_deg": 0.816,
+  "endpoint_tolerance_deg": 0.75,
+  "pause_folder": "outputs/printer_replay/ui_demo/20261008T201700766002Z",
+  "observed_collision_cycle": 6,
+  "observed_collision_phase": "Return after plate_view; plate translates and rotates with withdrawing fingers, then leaves holder",
+  "evidence_images": [
+    "008595_wrist.jpg",
+    "008635_wrist.jpg",
+    "008705_wrist.jpg"
+  ],
+  "important_correction": "Completed-cycle motor reports do not prove collision-free behavior. Original near-plate trajectory is retired.",
+  "exact_contact_cause": "Unresolved; likely finger/pad engagement with plate rim during return, not a commanded grasp. Scene-relative plate targeting was not updated by replay.",
+  "supported_stop_verified": true,
+  "motors_disabled_verified": true,
+  "replacement_route": "outputs/printer_replay/standoff_recovery_20261008T2024",
+  "replacement_scope": "Retain first two approach groups; remove final three descent groups and plate_view; no grasp/lift",
+  "self_geometry_samples": 1150,
+  "geometry_scope": "Stock self-clearance, gripper and camera against robot; external printer clearance checked in camera views, not a complete calibrated printer mesh",
+  "model_relative_tool_bottom_raise_m": 0.082514,
+  "live_trial_completed": true,
+  "live_trial_summary": "outputs/printer_replay/ui_demo/20261008T202805067162Z/summary.json"
+}

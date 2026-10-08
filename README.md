@@ -5,6 +5,24 @@ Uses Seeed's motorbridge driver and Luxonis DepthAI v3. No recalibration or zero
 
 ## Current printer teaching and rail demo (October 7, 2026)
 
+October 8 contact incident supersedes the close-approach validation below:
+the operator confirmed that the arm knocked the plate out. Recorded wrist
+frames show the plate being dragged and tilted during the return of cycle 6;
+cycle 7 later paused on roll settling. A completed motor trajectory report is
+not evidence of collision-free operation. The old plate-level route is retired.
+The replacement `standoff_recovery_20261008T2024` retains only the first two
+approach groups, omitting the final three descent groups and `plate_view`.
+Its tool bottom is approximately 82 mm higher in the model; this is a relative
+pose difference, not a calibrated measurement of clearance from the scene.
+All 1,150 stock/tool/camera geometry samples passed, with camera review of
+external structures and 16 focused tests. One bounded rail/standoff/return trial
+completed in 104.16 s of arm motion, with no visible plate displacement in
+reviewed camera views and motors disabled at rest. Repeating standoff demo
+then restarted. This does not validate the retired plate-level route.
+The original plate-contact cause and scene-relative pickup targeting still
+need investigation; this shortened demo does not attempt pickup.
+Evidence: `outputs/printer_replay/contact_incident_20261008/diagnosis.json`.
+
 October 8 process-exit recovery: the 17:38 UTC controller recorded 42 completed
 cycles before its recording ended abruptly at 19:27:49 UTC, with no final report
 for the interrupted return. All six motors subsequently reported communication

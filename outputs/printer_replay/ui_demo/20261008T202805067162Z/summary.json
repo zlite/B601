@@ -1,0 +1,26 @@
+{
+  "completed_stages": [
+    "entry",
+    "standoff"
+  ],
+  "returned_to_start": true,
+  "motors_disabled_verified": true,
+  "motion_elapsed_s": 104.15559204699821,
+  "rail_to_arm_motion_s": 1.9953492589993402,
+  "roll_mit_gains": {
+    "kp": 30.0,
+    "kd": 2.6,
+    "feedforward_nm": 0.0
+  },
+  "error": null,
+  "early_return": null,
+  "max_tracking_error_deg": 0.9755796547194744,
+  "plate_remained_seated_visual_review": true,
+  "visual_evidence": [
+    "before_tripod.jpg",
+    "standoff_tripod.jpg",
+    "standoff_wrist.jpg",
+    "returned_tripod.jpg"
+  ],
+  "scope": "One bounded rail/standoff/return trial; final descent removed. No visible plate displacement; no grasp or lift."
+}

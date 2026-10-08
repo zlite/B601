@@ -1,8 +1,8 @@
 {
   "enabled": true,
-  "source": "outputs/printer_replay/folded_recovery_rest_20261008T2000",
+  "source": "outputs/printer_replay/standoff_recovery_20261008T2024",
   "speed_scale": 4,
-  "scope": "Attended repeating rail-left/rail-return/open-gripper approach/arm-return; no grasp or lift",
+  "scope": "Attended rail-left/back plus open-jaw standoff and return; no plate-level approach, grasp or lift. Final descent removed after plate contact.",
   "scene_confirmation_required_each_start": true,
   "disable_after_rail_jog": true,
   "repeat": true,
@@ -11,7 +11,7 @@
   "rest_entry_update": {
     "date": "2026-10-08",
     "reason": "Operator-confirmed supported manual rest after controller process exit; fresh disabled capture and CAD entry checks",
-    "entry_proof": "outputs/printer_replay/folded_recovery_rest_20261008T2000/entry_refresh_proof.json",
+    "entry_proof": "outputs/printer_replay/standoff_recovery_20261008T2024/review.json",
     "model_limits_changed": false,
     "live_rest_tolerance_changed": false,
     "new_entry_geometry_checked": true,
@@ -22,5 +22,18 @@
     "deferred_fault_reporting": true,
     "preserves_primary_fault": true,
     "requires_operator_start": true
+  },
+  "collision_recovery": {
+    "operator_confirmed_plate_knocked_out": true,
+    "contact_route_retired": "outputs/printer_replay/folded_recovery_rest_20261008T2000",
+    "removed_joined_groups": [
+      2,
+      3,
+      4
+    ],
+    "removed_stage": "plate_view",
+    "standoff_geometry_checks_passed": true,
+    "live_trial_completed": true,
+    "live_trial_summary": "outputs/printer_replay/ui_demo/20261008T202805067162Z/summary.json"
   }
 }

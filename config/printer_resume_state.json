@@ -1,15 +1,14 @@
 {
-  "saved_utc": "2026-10-08T20:04:31.795615+00:00",
-  "status": "First full cycle from refreshed folded rest completed without pause/error, returned and disabled. Repeating demo started cycle 2.",
+  "saved_utc": "2026-10-08T20:30:35.397865+00:00",
+  "status": "Confirmed plate collision invalidates old plate-level route. Replacement standoff-only route passed one bounded trial with plate remaining seated in reviewed camera views; repeating shortened demo restarted.",
   "arm_motors_disabled_verified": false,
-  "latest_teaching_session": "outputs/printer_teach/20261008T200115172550Z",
+  "latest_teaching_session": "outputs/printer_teach/20261008T202716454117Z",
   "current_launch": {
     "command": ".venv/bin/python printer_teach.py",
-    "exec_session_id": 99757,
+    "exec_session_id": 50702,
     "url": "http://127.0.0.1:8765",
-    "demo_client_exec_session_id": 46968,
-    "demo_attendance_note": "CLI demo client maintains attendance heartbeat; never automatically resumes a pause.",
-    "console_log": "outputs/printer_teach/controller_20261008T2000.log"
+    "demo_client_exec_session_id": 71435,
+    "demo_attendance_note": "CLI demo client maintains attendance heartbeat; never automatically resumes a pause."
   },
   "operator_feedback": "Requests fast smooth repeating 300 mm left/back then open-jaw arm approach/return, immediate postrail start; small passive wrist movement during rail is acceptable.",
   "controller": "printer_teach.py",
@@ -34,7 +33,7 @@
   ],
   "important_limits": [
     "Bed and gantry stationary during each attempt; bed Y may differ between attempts",
-    "Same-scene open-jaw approach/return and confirmed rail demo sweep are validated by repeated completed trials; grasp, changed-bed adaptation and full scene/tool calibration remain incomplete.",
+    "Old plate-level approach caused a confirmed plate collision and is retired. Current standoff-only demo omits descent; scene-relative targeting, grasp and collision-aware pickup remain incomplete.",
     "Gripper remains inactive. Operator rail trial hit the right limit; operator manually cleared it, and restart verified Idle with no limit input. Rail remains unhomed",
     "Prior compact camera search aborted on roll envelope; torque-off rather than retrace; cause still requires diagnosis",
     "Leader and rail CH340 adapters share the same by-id alias; use the verified leader by-path binding in leader_read.py. Re-verify if moved to another port."
@@ -101,15 +100,14 @@
     "operator_retest_passed": true
   },
   "last_autonomous_trial": {
-    "returned_to_start": true,
-    "motors_disabled_verified": true,
     "completed_stages": [
       "entry",
-      "smooth_approach",
-      "plate_view"
+      "standoff"
     ],
-    "motion_elapsed_s": 125.81534370800364,
-    "rail_to_arm_motion_s": 2.3577626350161154,
+    "returned_to_start": true,
+    "motors_disabled_verified": true,
+    "motion_elapsed_s": 104.15559204699821,
+    "rail_to_arm_motion_s": 1.9953492589993402,
     "roll_mit_gains": {
       "kp": 30.0,
       "kd": 2.6,
@@ -117,23 +115,22 @@
     },
     "error": null,
     "early_return": null,
-    "final_raw_deg": [
-      92.04558951938363,
-      56.35298801137795,
-      99.50448394211772,
-      -3.3806772617786813,
-      4.773448456192662,
-      -4.753710917038617
+    "max_tracking_error_deg": 0.9755796547194744,
+    "plate_remained_seated_visual_review": true,
+    "visual_evidence": [
+      "before_tripod.jpg",
+      "standoff_tripod.jpg",
+      "standoff_wrist.jpg",
+      "returned_tripod.jpg"
     ],
-    "max_tracking_error_deg": 1.0383974712365829,
-    "scope": "First full cycle from refreshed folded rest completed; next repeating rail cycle observed. Open-jaw only; no grasp or lift.",
-    "summary": "outputs/printer_replay/ui_demo/20261008T200207504611Z/summary.json"
+    "scope": "One bounded rail/standoff/return trial; final descent removed. No visible plate displacement; no grasp or lift.",
+    "summary": "outputs/printer_replay/ui_demo/20261008T202805067162Z/summary.json"
   },
   "demo": {
     "config": "config/printer_demo.json",
     "running_at_save": true,
     "completed_cycles_observed": 1,
-    "next_cycle_observed": 2,
+    "next_cycle_observed": 1,
     "stop_immediately": ".venv/bin/python scripts/printer_demo_client.py pause",
     "stop_at_rest": ".venv/bin/python scripts/printer_demo_client.py stop",
     "no_duration_cutoff": true,
@@ -142,9 +139,9 @@
     "repeat_fix": "Cache gripper device per motor owner; reset cache when owner is replaced; regression tested.",
     "paused_holding": false,
     "awaiting": null,
-    "current_folder": "outputs/printer_replay/ui_demo/20261008T200207504611Z",
+    "current_folder": "outputs/printer_replay/ui_demo/20261008T202805067162Z",
     "repeat_fix_live_verified": true,
-    "validation_scope": "Seven repeating cycles completed with final roll gains; cycle 8 communication failure, then restart."
+    "validation_scope": "One bounded standoff cycle; repeat restarted. Old close-contact route retired."
   },
   "speed_investigation": {
     "report": "outputs/printer_replay/ui_demo/20261008T004919406737Z/speed_bottleneck.json",
@@ -212,8 +209,8 @@
     "verified_mode": "1920x1080 30fps MJPG; 5000M USB link; original serial restored"
   },
   "rest_entry_recovery": {
-    "new_source": "outputs/printer_replay/folded_recovery_rest_20261008T2000",
-    "capture": "outputs/arm_response/folded_recovery_20261008T2000.json",
+    "new_source": "outputs/printer_replay/standoff_recovery_20261008T2024",
+    "capture": "outputs/gripper/20261008T202446479959Z_inspect.json",
     "operator_confirmed_rest": true,
     "entry_checks_passed": true,
     "live_rest_tolerance_changed": false,
@@ -265,5 +262,6 @@
     "rail_park_interlock_changed": false,
     "new_entry_geometry_checked": true,
     "new_entry_motion_trial_completed": true
-  }
+  },
+  "collision_incident": "outputs/printer_replay/contact_incident_20261008/diagnosis.json"
 }
