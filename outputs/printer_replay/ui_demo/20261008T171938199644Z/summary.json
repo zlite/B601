@@ -1,0 +1,96 @@
+{
+  "returned_to_start": true,
+  "motors_disabled_verified": true,
+  "completed_stages": [
+    "entry",
+    "smooth_approach",
+    "plate_view"
+  ],
+  "motion_elapsed_s": 125.08003933800501,
+  "rail_to_arm_motion_s": 1.9371098330011591,
+  "roll_mit_gains": {
+    "kp": 30.0,
+    "kd": 2.6,
+    "feedforward_nm": 0.0
+  },
+  "error": null,
+  "early_return": null,
+  "max_tracking_error_deg": 1.021979384461524,
+  "max_roll_error_deg": 1.021979384461524,
+  "max_abs_roll_torque_nm": 0.3589744567871094,
+  "max_motor_temp_c": 36.0,
+  "held_endpoints": [
+    {
+      "error_deg": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0038,
+        0.0
+      ]
+    },
+    {
+      "error_deg": [
+        0.1492,
+        0.1087,
+        0.0473,
+        0.1532,
+        0.0081,
+        0.2402
+      ]
+    },
+    {
+      "error_deg": [
+        0.0658,
+        0.19,
+        0.071,
+        0.0491,
+        0.0111,
+        0.5442
+      ]
+    },
+    {
+      "error_deg": [
+        0.0698,
+        0.0311,
+        0.0369,
+        0.0375,
+        0.0084,
+        0.2165
+      ]
+    },
+    {
+      "error_deg": [
+        0.0057,
+        0.0991,
+        0.0001,
+        0.0547,
+        0.0139,
+        0.5353
+      ]
+    },
+    {
+      "error_deg": [
+        0.0147,
+        0.1154,
+        0.1015,
+        0.0016,
+        0.1888,
+        0.2315
+      ]
+    },
+    {
+      "error_deg": [
+        0.0511,
+        0.0443,
+        0.0352,
+        0.1719,
+        0.053,
+        0.3888
+      ]
+    }
+  ],
+  "samples": 2455,
+  "scope": "Second consecutive complete rail-and-arm trial with demo-only roll Kp=30 Kd=2.6. Returned and disabled; repeating demo began its next rail cycle. Open-jaw approach only; no grasp or lift."
+}

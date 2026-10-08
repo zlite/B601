@@ -1,13 +1,14 @@
 {
-  "saved_utc": "2026-10-08T17:08:20.598895+00:00",
-  "status": "Repeating demo restarted with eight-second endpoint settling, unchanged endpoint tolerance and tracking stop. Pending observation of two complete cycles. Prior 17:05:46 communication timeout explained by operator-confirmed power-off and manual return.",
+  "saved_utc": "2026-10-08T17:22:33.278383+00:00",
+  "status": "Demo-only roll Kp=30 Kd=2.6 passed two complete rail/approach/return trials, each disabled at rest. Repeating run started its next rail cycle; no pause or fault. Check fresh live state before any action.",
   "arm_motors_disabled_verified": false,
-  "latest_teaching_session": "outputs/printer_teach/20261008T170739531138Z",
+  "latest_teaching_session": "outputs/printer_teach/20261008T171329779423Z",
   "current_launch": {
     "command": ".venv/bin/python printer_teach.py",
-    "exec_session_id": 83940,
+    "exec_session_id": 31947,
     "url": "http://127.0.0.1:8765",
-    "demo_client_exec_session_id": 59256
+    "demo_client_exec_session_id": null,
+    "demo_attendance_note": "Repeating run observed active via API; current heartbeat source/session not established in final readback."
   },
   "operator_feedback": "Requests fast smooth repeating 300 mm left/back then open-jaw arm approach/return, immediate postrail start; small passive wrist movement during rail is acceptable.",
   "controller": "printer_teach.py",
@@ -106,22 +107,101 @@
       "smooth_approach",
       "plate_view"
     ],
-    "motion_elapsed_s": 125.02555153798312,
-    "rail_to_arm_motion_s": 1.7542075510136783,
+    "motion_elapsed_s": 125.08003933800501,
+    "rail_to_arm_motion_s": 1.9371098330011591,
+    "roll_mit_gains": {
+      "kp": 30.0,
+      "kd": 2.6,
+      "feedforward_nm": 0.0
+    },
     "error": null,
     "early_return": null,
-    "max_tracking_error_deg": 1.0568191625508696,
-    "samples": 2452,
-    "scope": "Completed rail left/back followed by open-jaw approach and return. No grasp/lift. Repeating demo started cycle 2.",
-    "camera_mode": "ArduCam 1920x1080 30fps, USB 3 5000M",
-    "pacing_fix_loaded": true,
-    "summary": "outputs/printer_replay/ui_demo/20261008T165922227650Z/summary.json"
+    "max_tracking_error_deg": 1.021979384461524,
+    "max_roll_error_deg": 1.021979384461524,
+    "max_abs_roll_torque_nm": 0.3589744567871094,
+    "max_motor_temp_c": 36.0,
+    "held_endpoints": [
+      {
+        "error_deg": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0038,
+          0.0
+        ]
+      },
+      {
+        "error_deg": [
+          0.1492,
+          0.1087,
+          0.0473,
+          0.1532,
+          0.0081,
+          0.2402
+        ]
+      },
+      {
+        "error_deg": [
+          0.0658,
+          0.19,
+          0.071,
+          0.0491,
+          0.0111,
+          0.5442
+        ]
+      },
+      {
+        "error_deg": [
+          0.0698,
+          0.0311,
+          0.0369,
+          0.0375,
+          0.0084,
+          0.2165
+        ]
+      },
+      {
+        "error_deg": [
+          0.0057,
+          0.0991,
+          0.0001,
+          0.0547,
+          0.0139,
+          0.5353
+        ]
+      },
+      {
+        "error_deg": [
+          0.0147,
+          0.1154,
+          0.1015,
+          0.0016,
+          0.1888,
+          0.2315
+        ]
+      },
+      {
+        "error_deg": [
+          0.0511,
+          0.0443,
+          0.0352,
+          0.1719,
+          0.053,
+          0.3888
+        ]
+      }
+    ],
+    "samples": 2455,
+    "scope": "Second consecutive complete rail-and-arm trial with demo-only roll Kp=30 Kd=2.6. Returned and disabled; repeating demo began its next rail cycle. Open-jaw approach only; no grasp or lift.",
+    "summary": "outputs/printer_replay/ui_demo/20261008T171938199644Z/summary.json",
+    "camera_mode": "ArduCam 1920x1080 30fps, USB 3"
   },
   "demo": {
     "config": "config/printer_demo.json",
     "running_at_save": true,
-    "completed_cycles_observed": 0,
-    "next_cycle_observed": null,
+    "completed_cycles_observed": 2,
+    "next_cycle_observed": 2,
     "stop_immediately": ".venv/bin/python scripts/printer_demo_client.py pause",
     "stop_at_rest": ".venv/bin/python scripts/printer_demo_client.py stop",
     "no_duration_cutoff": true,
@@ -129,16 +209,17 @@
     "restart_note": "Read actual current rail position before closing/restarting; a GRBL reconnect resets MPos. Never assume zero if interrupted away from origin.",
     "repeat_fix": "Cache gripper device per motor owner; reset cache when owner is replaced; regression tested.",
     "paused_holding": false,
-    "awaiting": "Observe two completed cycles with endpoint fix",
-    "current_folder": null,
-    "repeat_fix_live_verified": true
+    "awaiting": null,
+    "current_folder": "outputs/printer_replay/ui_demo/20261008T171938199644Z",
+    "repeat_fix_live_verified": true,
+    "validation_scope": "One bounded cycle plus first cycle of repeating run completed with final roll gains; repeat entered cycle 2."
   },
   "speed_investigation": {
     "report": "outputs/printer_replay/ui_demo/20261008T004919406737Z/speed_bottleneck.json",
     "main_bottleneck": "Joint 2 feedback pacing",
     "hardware_tuning_changed": false,
     "latest_report": "outputs/printer_replay/ui_demo/20261008T011256235081Z/summary.json",
-    "feedback_reader": "Fresh concurrent native motor reads; one fresh status retry, 120 ms batch deadline",
+    "feedback_reader": "Sequential reader; earlier concurrent results historical and experimental only",
     "loop_median_s": 0.01168095349567011,
     "loop_p95_s": 0.016604706799262205,
     "loop_max_s": 0.08856692601693794,
@@ -146,7 +227,7 @@
     "remaining_bottleneck": "Motor tracking response still paces path advancement; further gains are not established"
   },
   "validation": {
-    "python_discovery_cases": 351,
+    "python_discovery_cases": 370,
     "python_discovery_optional_skips": 4,
     "cad_tests_in_dedicated_environment": 4,
     "fresh_reader_tests_after_final_addition": 8,
@@ -205,7 +286,7 @@
     "entry_checks_passed": true,
     "live_rest_tolerance_changed": false,
     "focused_tests_passed": 25,
-    "motion_trial_completed": false
+    "motion_trial_completed": true
   },
   "endpoint_repair": {
     "loaded": true,
@@ -215,11 +296,31 @@
     "other_axes_tolerance_deg": 0.2,
     "measured_tracking_stop_deg": 1.5,
     "focused_tests_passed": 28,
-    "physical_trial_completed": false
+    "physical_trial_completed": true,
+    "timeout_only_trial_failed": true,
+    "timeout_only_trial": "outputs/printer_replay/ui_demo/20261008T170836804014Z",
+    "requires_roll_gain_correction": true
   },
   "latest_timeout_explanation": {
     "time_utc": "2026-10-08T17:05:46Z",
     "operator_confirmed": "Yes, I powered it off and returned it",
     "motor_fault_clear_required": false
+  },
+  "roll_load_repair": {
+    "loaded": true,
+    "demo_kp": 30.0,
+    "demo_kd": 2.6,
+    "teaching_kp": 18.0,
+    "teaching_kd": 2.0,
+    "feedforward_nm": 0.0,
+    "gains_changed_only_disabled": true,
+    "endpoint_tolerances_changed": false,
+    "tracking_fault_limit_changed": false,
+    "completed_trials": [
+      "outputs/printer_replay/ui_demo/20261008T171425593243Z/summary.json",
+      "outputs/printer_replay/ui_demo/20261008T171938199644Z/summary.json"
+    ],
+    "focused_tests_passed": 59,
+    "long_duration_validation": false
   }
 }

@@ -5,14 +5,22 @@ Uses Seeed's motorbridge driver and Luxonis DepthAI v3. No recalibration or zero
 
 ## Current printer teaching and rail demo (October 7, 2026)
 
-October 8 roll-load correction (awaiting live validation): increasing endpoint
+October 8 roll-load correction (two complete live trials passed): increasing endpoint
 wait time alone did not resolve a persistent .95-degree roll offset. Roll's MIT
 controller used Kp=18, Kd=2 and no feedforward; observed stationary torque was
 about .32 Nm. Demo-only command gains are now Kp=30, Kd=2.6, set only while all
 motors are disabled. The damping increase approximately follows the square root
 of the stiffness ratio. Teaching restores Kp=18, Kd=2 after a disabled demo end.
 No motor mode, EEPROM, zero, commanded path, tracking cutoff or endpoint
-tolerance changes. Physical behavior must be checked before declaring this fixed.
+tolerance changes. Both trials returned to rest and disabled normally, without
+pauses or faults; the repeating run then began its next rail cycle. The loaded
+endpoint roll errors were .543 and .544 degrees (unchanged .75-degree tolerance),
+and maximum tracking errors were 1.019 and 1.022 degrees (unchanged 1.5-degree
+fault limit). Arm cycles took 125.15 and 125.08 seconds. Peak observed motor
+temperature was 36 C. These are two-cycle results, not long-duration validation.
+Summaries: `outputs/printer_replay/ui_demo/20261008T171425593243Z/summary.json`
+and `outputs/printer_replay/ui_demo/20261008T171938199644Z/summary.json`.
+The main suite ran 370 cases with four optional CAD skips.
 
 October 8 endpoint follow-up: the first updated cycle completed, but cycle 2
 paused at `settling_timeout`. Roll was still about .77 degrees from its target
@@ -35,7 +43,7 @@ progress over five seconds causes an explicit joint-specific held pause.
 Tests exercise the recorded starting error with simulated breakaway in both
 directions, a nonfollowing joint, and the independent tracking stop. The main
 suite passed 364 tests (four CAD skips); those four passed in `.venv-cad`.
-Physical recovery with the updated pacing remains to be verified.
+Physical recovery and the combined gain/pacing update passed the trials above.
 
 October 8 communication recovery supersedes the fast-reader results below:
 the concurrent reader is now experimental and off by default. The teaching
@@ -51,8 +59,8 @@ and verify that no report writing occurs before motor cleanup.
 The operator confirmed supported rest before the six communication faults were
 cleared and disabled status was verified. The configured entry was checked again
 from that actual rest in `outputs/printer_replay/recovered_rest_20261008/`.
-The ~129 s sequential-reader cycle is the previous measured reference; no new
-powered trial is implied by this repair.
+The ~129 s sequential-reader cycle is the previous measured reference; the
+combined live trials above use the sequential reader.
 
 October 8 power-up recovery: the old worker retained a position-read timeout
 fault after motor power returned. Position transactions now get one bounded
@@ -76,8 +84,9 @@ Stop. Pause holds immediately; Stop completes the current cycle at rest.
 The demo does not grasp or lift the plate. Fresh resting-pose, scene and rail-sweep
 confirmations are required each start. Changed bed positions require new targeting.
 
-The latest bounded trial returned to rest with motors disabled and rail X=0.
-The repeating demo is stopped. Three smoothed motion sections replace seven
+Historical fast-reader trial (superseded by the sequential-reader correction
+above): the bounded trial returned to rest with motors disabled and rail X=0.
+Three smoothed motion sections replace seven
 stopped chunks, with maximum checked joint-path deviation 0.071 degrees.
 Fresh concurrent motor reads reduced the measured full arm cycle from 129.24 s
 to **114.14 s** (11.7% less time). Median control-loop interval fell from
