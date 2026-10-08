@@ -1,0 +1,682 @@
+{
+  "sampled_stock_self_clear": false,
+  "margin_m": 0.005,
+  "closest": {
+    "sample": 0,
+    "a": "link2",
+    "b": "link5",
+    "distance_m": 0.000435553222223608,
+    "intersects": false
+  },
+  "samples": 52,
+  "samples_below_margin": 32,
+  "mesh_sha256": {
+    "base_link": "22641c079014fe968702393f61e7f7f1a8f80c6c1df45a61e31545f6eaff3b65",
+    "link1": "9db637a63d37bc2c6398ea5b8ba32fb54122c637d5d77dc134c8782839b654cd",
+    "link2": "def0d9d82343dccc1eff0d9d5572eca49b3c134db9807ca12302b99d153df65e",
+    "link3": "ca14d73b5d63f352051f440f4cabc3989567f25ee9d19e7dd749f2d6f0d0561d",
+    "link4": "061909364f20bb387f9ff82cb80e506af959142f9fbb4a39dc86fc8244ee768a",
+    "link5": "3a32006227c1f9dbc70e77e07055c61e3f195f1054d4d2eb480262f0873bf001",
+    "link6": "c586a7d0b8345d2cd32eab7dfd2e334aba56e83f582a6298d41bbf718f2ebef1",
+    "end_link": "5e7b0473acaf31fc5c511a3591311e6561ad6066af8e135e21e18c096e1e7da5"
+  },
+  "rows": [
+    {
+      "sample": 0,
+      "below_margin": [
+        {
+          "a": "link1",
+          "b": "link4",
+          "distance_m": 0.0044955432322903955,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.0010615416818901512,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.000435553222223608,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 1,
+      "below_margin": [
+        {
+          "a": "link1",
+          "b": "link4",
+          "distance_m": 0.0044958269982910935,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.0010619377128545937,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.0004363767858122518,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 2,
+      "below_margin": [
+        {
+          "a": "link1",
+          "b": "link4",
+          "distance_m": 0.004497746213371116,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.001064616275153158,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.00044194704227484686,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 3,
+      "below_margin": [
+        {
+          "a": "link1",
+          "b": "link4",
+          "distance_m": 0.004502755365566993,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.0010716077957083452,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.00045648696821033415,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 4,
+      "below_margin": [
+        {
+          "a": "link1",
+          "b": "link4",
+          "distance_m": 0.00451211903098965,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.0010846789538909683,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.00048367264114288383,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 5,
+      "below_margin": [
+        {
+          "a": "link1",
+          "b": "link4",
+          "distance_m": 0.004526920167063568,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.0011053453776662184,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.000526660996770665,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 6,
+      "below_margin": [
+        {
+          "a": "link1",
+          "b": "link4",
+          "distance_m": 0.004548068421125194,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.0011348844263047893,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.0005881178311570986,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 7,
+      "below_margin": [
+        {
+          "a": "link1",
+          "b": "link4",
+          "distance_m": 0.00457630842769979,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.0011743478576256988,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.0006702454173673861,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 8,
+      "below_margin": [
+        {
+          "a": "link1",
+          "b": "link4",
+          "distance_m": 0.00461222807505918,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.0012245742290571647,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.0007748092630153245,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 9,
+      "below_margin": [
+        {
+          "a": "link1",
+          "b": "link4",
+          "distance_m": 0.00465626672757294,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.0012862009272208846,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.0009031636775457068,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 10,
+      "below_margin": [
+        {
+          "a": "link1",
+          "b": "link4",
+          "distance_m": 0.004708723395034418,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.0013596757605522161,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.001056275946169624,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 11,
+      "below_margin": [
+        {
+          "a": "link1",
+          "b": "link4",
+          "distance_m": 0.004769764843753224,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.0014452680839513142,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.0012347490211021537,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 12,
+      "below_margin": [
+        {
+          "a": "link1",
+          "b": "link4",
+          "distance_m": 0.004839433646984655,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.0015430794539084518,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.0014388427398303097,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 13,
+      "below_margin": [
+        {
+          "a": "link1",
+          "b": "link4",
+          "distance_m": 0.004917656174441054,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.0016530538372615464,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.0016684936642646282,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 14,
+      "below_margin": [
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.001774987417003611,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.001923333703597185,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 15,
+      "below_margin": [
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.0019085380546611345,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.0022027077375232898,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 16,
+      "below_margin": [
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.0020532344809766,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.002505690495431676,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 17,
+      "below_margin": [
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.002208485295235662,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.0028311029717866345,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 18,
+      "below_margin": [
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.0023735878588373276,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.0031775286690247178,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 19,
+      "below_margin": [
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.002547737170884107,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.0035433299579645905,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 20,
+      "below_margin": [
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.002730034812927856,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.0039266648333003374,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 21,
+      "below_margin": [
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.002919498046797666,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.004325504319724735,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 22,
+      "below_margin": [
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.0031150691439422312,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.004737650754270663,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 23,
+      "below_margin": [
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.003315625017187268,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 24,
+      "below_margin": [
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.003519987216531885,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 25,
+      "below_margin": [
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.0037269323398649926,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 26,
+      "below_margin": [
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.003935202897564639,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 27,
+      "below_margin": [
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.004143518657155291,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 28,
+      "below_margin": [
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.004350588480840391,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 29,
+      "below_margin": [
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.004555122655111966,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 30,
+      "below_margin": [
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.004755845698074558,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 31,
+      "below_margin": [
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.004951509616909034,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 32,
+      "below_margin": []
+    },
+    {
+      "sample": 33,
+      "below_margin": []
+    },
+    {
+      "sample": 34,
+      "below_margin": []
+    },
+    {
+      "sample": 35,
+      "below_margin": []
+    },
+    {
+      "sample": 36,
+      "below_margin": []
+    },
+    {
+      "sample": 37,
+      "below_margin": []
+    },
+    {
+      "sample": 38,
+      "below_margin": []
+    },
+    {
+      "sample": 39,
+      "below_margin": []
+    },
+    {
+      "sample": 40,
+      "below_margin": []
+    },
+    {
+      "sample": 41,
+      "below_margin": []
+    },
+    {
+      "sample": 42,
+      "below_margin": []
+    },
+    {
+      "sample": 43,
+      "below_margin": []
+    },
+    {
+      "sample": 44,
+      "below_margin": []
+    },
+    {
+      "sample": 45,
+      "below_margin": []
+    },
+    {
+      "sample": 46,
+      "below_margin": []
+    },
+    {
+      "sample": 47,
+      "below_margin": []
+    },
+    {
+      "sample": 48,
+      "below_margin": []
+    },
+    {
+      "sample": 49,
+      "below_margin": []
+    },
+    {
+      "sample": 50,
+      "below_margin": []
+    },
+    {
+      "sample": 51,
+      "below_margin": []
+    }
+  ],
+  "motion_ready": false,
+  "scope": "Sampled stock nonadjacent triangle surfaces only; excludes solid containment, custom tool, scene, tracking error and model uncertainty",
+  "input_sha256": "68c3b835b2022586a985c7ab27bae6f433241b84951a4d371aec1dd1dbc62d07"
+}

@@ -17,12 +17,19 @@ def sha(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 def write(path,value):Path(path).write_text(json.dumps(value,indent=2)+'\n')
 
 
-def prepare_entry(source,destination,start_deg,gripper_rad):
+def prepare_entry(source,destination,start_deg,gripper_rad,*,confirmed_new_rest=False):
+    """Offline entry rebuild; an explicitly confirmed new rest needs fresh CAD checks.
+
+    This never enables motors. Live admission in PreparedDemoPlan.refresh and
+    DemoController.reason continues to use the unchanged REST_TOLERANCE_DEG.
+    """
     from printer_demo_replay import load_plan
     source=Path(source);destination=Path(destination);destination.mkdir(parents=True,exist_ok=False)
     plan,_,_,_=load_plan(source)
     start=np.asarray(start_deg,float)
-    if start.shape!=(6,) or not np.isfinite(start).all() or np.any(abs(start-plan['start_raw_deg'])>REST_TOLERANCE_DEG):
+    if start.shape!=(6,) or not np.isfinite(start).all():
+        raise ValueError('Invalid resting pose')
+    if np.any(abs(start-plan['start_raw_deg'])>REST_TOLERANCE_DEG) and confirmed_new_rest is not True:
         raise ValueError('Arm is outside the recorded resting-pose tolerance (0.75 degrees; roll 1.5 degrees)')
     if not np.isfinite(gripper_rad) or abs(gripper_rad-plan['gripper_raw_rad'])>.003:
         raise ValueError('Gripper opening changed')
@@ -55,6 +62,8 @@ def prepare_entry(source,destination,start_deg,gripper_rad):
         write(destination/f'entry_{kind}_input.json',{'meshes':prior['meshes'],'rows':custom})
         write(destination/f'curve_{kind}_input.json',{'meshes':prior['meshes'],'rows':custom+prior['rows'][n:]})
     proof={'source':str(source),'old_entry_samples':n,'new_entry_samples':len(rows),
+           'operator_confirmed_new_rest':confirmed_new_rest is True,
+           'previous_start_raw_deg':read(source/'simplified_plan.json')['start_raw_deg'],
            'previous_input_sha256':sha(source/'curve_stock_input.json'),
            'unchanged_tail_sha256':hashlib.sha256(json.dumps(old['rows'][n:],sort_keys=True).encode()).hexdigest()}
     write(destination/'entry_refresh_proof.json',proof)

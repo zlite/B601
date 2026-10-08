@@ -1,11 +1,11 @@
 {
-  "saved_utc": "2026-10-08T16:42:53.328692+00:00",
-  "status": "Old live controller faulted at 16:40:16 UTC during paused hold: position register 80 timeout at 100 ms; cleanup also timed out. Motor power is unknown. ArduCam absent from host USB inventory. Pacing fix tested and pushed but not loaded. Await supported rest/power-off and device-change clarification before restart.",
-  "arm_motors_disabled_verified": false,
-  "latest_teaching_session": "outputs/printer_teach/20261008T163119576152Z",
+  "saved_utc": "2026-10-08T16:54:08.034562+00:00",
+  "status": "Updated teaching controller loaded; sequential feedback, fresh disabled rest and gripper verified, new resting entry CAD checked. Waiting for ArduCam USB 3/1080p reconnection before requested demo restart. Motors off, rail Idle X=0.",
+  "arm_motors_disabled_verified": true,
+  "latest_teaching_session": "outputs/printer_teach/20261008T165331174278Z",
   "current_launch": {
     "command": ".venv/bin/python printer_teach.py",
-    "exec_session_id": 18291,
+    "exec_session_id": 44877,
     "url": "http://127.0.0.1:8765",
     "demo_client_exec_session_id": null
   },
@@ -123,8 +123,8 @@
     "restart_note": "Read actual current rail position before closing/restarting; a GRBL reconnect resets MPos. Never assume zero if interrupted away from origin.",
     "repeat_fix": "Cache gripper device per motor owner; reset cache when owner is replaced; regression tested.",
     "paused_holding": false,
-    "awaiting": "Operator support/rest/power-off and USB-device-change clarification; earlier Return instruction is superseded by communication fault",
-    "current_folder": "outputs/printer_replay/ui_demo/20261008T163342278587Z",
+    "awaiting": "Restore ArduCam USB 3 and review fresh images, then restart requested repeating demo",
+    "current_folder": null,
     "repeat_fix_live_verified": true
   },
   "speed_investigation": {
@@ -173,7 +173,7 @@
     "powered_motion_trial_after_repair": true
   },
   "pacing_repair": {
-    "loaded": false,
+    "loaded": true,
     "first_five_command_margin_deg": 1.0,
     "roll_command_margin_deg": 1.25,
     "measured_tracking_stop_deg": 1.5,
@@ -182,5 +182,20 @@
     "main_suite_optional_skips": 4,
     "cad_cases_passed": 4,
     "physical_trial_completed": false
+  },
+  "camera_reconnection": {
+    "user_report": "Switched USB port",
+    "initial_new_connection": "USB 2 480M, no serial descriptor, only MJPG 640x480 at 10 fps",
+    "configured_mode_unchanged": "1920x1080 30fps",
+    "awaiting": "User restoring previous working USB 3 cable/port combination"
+  },
+  "rest_entry_recovery": {
+    "new_source": "outputs/printer_replay/usb_recovery_rest_20261008",
+    "capture": "outputs/gripper/20261008T165141551893Z_inspect.json",
+    "operator_confirmed_rest": true,
+    "entry_checks_passed": true,
+    "live_rest_tolerance_changed": false,
+    "focused_tests_passed": 25,
+    "motion_trial_completed": false
   }
 }
