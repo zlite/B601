@@ -1,0 +1,23 @@
+{
+  "samples": 1412,
+  "near": [],
+  "motion_ready": false,
+  "scope": "Coarsely sampled hypothetical installed finger/pad boxes versus stock links 0-5; camera, gripper motor, cables and external scene excluded",
+  "input_sha256": "106dd8358f733eb62e375d9ecfe9708179796eb51095dadd2d934b8114ecfa0c",
+  "entry_refresh_proof": {
+    "source": "outputs/printer_replay/usb_recovery_rest_20261008",
+    "old_entry_samples": 52,
+    "new_entry_samples": 61,
+    "operator_confirmed_new_rest": true,
+    "previous_start_raw_deg": [
+      91.67241530389082,
+      56.890196049977796,
+      100.99011838848719,
+      -3.197973116575425,
+      7.197851422845368,
+      -8.881612581563985
+    ],
+    "previous_input_sha256": "70599a5f0821ddd2963876710e48a8243852f9df0ced2a4255385f875d01b9cc",
+    "unchanged_tail_sha256": "85e0b12abf97792c272e89aa3917b1a4f8d3cf1d5abcfded6414cd88be2fc74d"
+  }
+}

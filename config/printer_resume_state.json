@@ -1,13 +1,13 @@
 {
-  "saved_utc": "2026-10-08T17:06:16.101256+00:00",
-  "status": "Cycle 2 paused and holding near plate on old four-second settling timeout; healthy motor and camera feedback. Eight-second endpoint fix tested but not loaded. Awaiting movement clearance for checked return, controller reload, and demo restart.",
+  "saved_utc": "2026-10-08T17:08:20.598895+00:00",
+  "status": "Repeating demo restarted with eight-second endpoint settling, unchanged endpoint tolerance and tracking stop. Pending observation of two complete cycles. Prior 17:05:46 communication timeout explained by operator-confirmed power-off and manual return.",
   "arm_motors_disabled_verified": false,
-  "latest_teaching_session": "outputs/printer_teach/20261008T165331174278Z",
+  "latest_teaching_session": "outputs/printer_teach/20261008T170739531138Z",
   "current_launch": {
     "command": ".venv/bin/python printer_teach.py",
-    "exec_session_id": 44877,
+    "exec_session_id": 83940,
     "url": "http://127.0.0.1:8765",
-    "demo_client_exec_session_id": 81840
+    "demo_client_exec_session_id": 59256
   },
   "operator_feedback": "Requests fast smooth repeating 300 mm left/back then open-jaw arm approach/return, immediate postrail start; small passive wrist movement during rail is acceptable.",
   "controller": "printer_teach.py",
@@ -120,17 +120,17 @@
   "demo": {
     "config": "config/printer_demo.json",
     "running_at_save": true,
-    "completed_cycles_observed": 1,
-    "next_cycle_observed": 2,
+    "completed_cycles_observed": 0,
+    "next_cycle_observed": null,
     "stop_immediately": ".venv/bin/python scripts/printer_demo_client.py pause",
     "stop_at_rest": ".venv/bin/python scripts/printer_demo_client.py stop",
     "no_duration_cutoff": true,
     "rail_reboot_offset_for_current_launch_mm": 0,
     "restart_note": "Read actual current rail position before closing/restarting; a GRBL reconnect resets MPos. Never assume zero if interrupted away from origin.",
     "repeat_fix": "Cache gripper device per motor owner; reset cache when owner is replaced; regression tested.",
-    "paused_holding": true,
-    "awaiting": "Clearance to return to rest, load endpoint fix, restart demo",
-    "current_folder": "outputs/printer_replay/ui_demo/20261008T170150059723Z",
+    "paused_holding": false,
+    "awaiting": "Observe two completed cycles with endpoint fix",
+    "current_folder": null,
     "repeat_fix_live_verified": true
   },
   "speed_investigation": {
@@ -199,16 +199,16 @@
     "verified_mode": "1920x1080 30fps MJPG; 5000M USB link; original serial restored"
   },
   "rest_entry_recovery": {
-    "new_source": "outputs/printer_replay/usb_recovery_rest_20261008",
-    "capture": "outputs/gripper/20261008T165141551893Z_inspect.json",
+    "new_source": "outputs/printer_replay/settling_recovery_rest_20261008",
+    "capture": "outputs/gripper/20261008T170703808668Z_inspect.json",
     "operator_confirmed_rest": true,
     "entry_checks_passed": true,
     "live_rest_tolerance_changed": false,
     "focused_tests_passed": 25,
-    "motion_trial_completed": true
+    "motion_trial_completed": false
   },
   "endpoint_repair": {
-    "loaded": false,
+    "loaded": true,
     "timeout_s": 8,
     "previous_timeout_s": 4,
     "roll_tolerance_deg": 0.75,
@@ -216,5 +216,10 @@
     "measured_tracking_stop_deg": 1.5,
     "focused_tests_passed": 28,
     "physical_trial_completed": false
+  },
+  "latest_timeout_explanation": {
+    "time_utc": "2026-10-08T17:05:46Z",
+    "operator_confirmed": "Yes, I powered it off and returned it",
+    "motor_fault_clear_required": false
   }
 }

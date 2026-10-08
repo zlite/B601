@@ -1,0 +1,17 @@
+{
+  "plan_sha256": "a146e3c60c7e9a1d6762c5aeaa8a1d61ad45e6d9afcd94c684c1c725093e716d",
+  "scene_unchanged_operator_confirmed": true,
+  "noncontact_route_reviewed": true,
+  "scope": "Recorded withdrawal reversed; open gripper. Stock/finger/camera diagnostics plus recorded overview review; stagewise fresh images required. No validated grasp or repositioning to a changed bed.",
+  "reviewed_recorded_frames": [
+    "001596_tripod.jpg",
+    "001626_tripod.jpg",
+    "001666_tripod.jpg"
+  ],
+  "tests_passed": 31,
+  "pacing_update": "1 degree pacing margin; 0.75 degree roll settling; pause holds for review",
+  "return_method": "Exact time reversal of checked curves; no dense telemetry refit",
+  "smoothed_from_verified_route": true,
+  "max_joint_path_deviation_deg": 0.0705841384158448,
+  "fresh_entry_checked": true
+}

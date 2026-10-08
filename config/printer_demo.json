@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "source": "outputs/printer_replay/usb_recovery_rest_20261008",
+  "source": "outputs/printer_replay/settling_recovery_rest_20261008",
   "speed_scale": 4,
   "scope": "Attended repeating rail-left/rail-return/open-gripper approach/arm-return; no grasp or lift",
   "scene_confirmation_required_each_start": true,
@@ -10,12 +10,12 @@
   "rail_sweep_operator_confirmed": true,
   "rest_entry_update": {
     "date": "2026-10-08",
-    "reason": "Operator confirmed normal rest after USB reconnection; fresh arm and gripper readback disabled and healthy",
-    "entry_proof": "outputs/printer_replay/usb_recovery_rest_20261008/entry_refresh_proof.json",
+    "reason": "Operator powered off and manually returned to rest; fresh disabled readback and CAD entry checks",
+    "entry_proof": "outputs/printer_replay/settling_recovery_rest_20261008/entry_refresh_proof.json",
     "model_limits_changed": false,
     "live_rest_tolerance_changed": false,
     "new_entry_geometry_checked": true,
-    "new_entry_motion_trial_completed": true
+    "new_entry_motion_trial_completed": false
   },
   "communication_recovery": {
     "reader": "original sequential; concurrent reader opt-in only",

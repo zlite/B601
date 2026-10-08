@@ -1,0 +1,783 @@
+{
+  "sampled_stock_self_clear": false,
+  "margin_m": 0.005,
+  "closest": {
+    "sample": 0,
+    "a": "link2",
+    "b": "link5",
+    "distance_m": 0.0008816369407187668,
+    "intersects": false
+  },
+  "samples": 61,
+  "samples_below_margin": 37,
+  "mesh_sha256": {
+    "base_link": "22641c079014fe968702393f61e7f7f1a8f80c6c1df45a61e31545f6eaff3b65",
+    "link1": "9db637a63d37bc2c6398ea5b8ba32fb54122c637d5d77dc134c8782839b654cd",
+    "link2": "def0d9d82343dccc1eff0d9d5572eca49b3c134db9807ca12302b99d153df65e",
+    "link3": "ca14d73b5d63f352051f440f4cabc3989567f25ee9d19e7dd749f2d6f0d0561d",
+    "link4": "061909364f20bb387f9ff82cb80e506af959142f9fbb4a39dc86fc8244ee768a",
+    "link5": "3a32006227c1f9dbc70e77e07055c61e3f195f1054d4d2eb480262f0873bf001",
+    "link6": "c586a7d0b8345d2cd32eab7dfd2e334aba56e83f582a6298d41bbf718f2ebef1",
+    "end_link": "5e7b0473acaf31fc5c511a3591311e6561ad6066af8e135e21e18c096e1e7da5"
+  },
+  "rows": [
+    {
+      "sample": 0,
+      "below_margin": [
+        {
+          "a": "link1",
+          "b": "link4",
+          "distance_m": 0.004652275890728662,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.001281512222953328,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.0008816369407187668,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 1,
+      "below_margin": [
+        {
+          "a": "link1",
+          "b": "link4",
+          "distance_m": 0.004652442578368616,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.00128174672071742,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.0008821274988186671,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 2,
+      "below_margin": [
+        {
+          "a": "link1",
+          "b": "link4",
+          "distance_m": 0.004653575895945201,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.0012833411003344702,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.0008854628848949974,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 3,
+      "below_margin": [
+        {
+          "a": "link1",
+          "b": "link4",
+          "distance_m": 0.004656551933570185,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.0012875280110572936,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.0008942219226415368,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 4,
+      "below_margin": [
+        {
+          "a": "link1",
+          "b": "link4",
+          "distance_m": 0.004662151219563285,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.0012954060765334452,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.0009107035324517073,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 5,
+      "below_margin": [
+        {
+          "a": "link1",
+          "b": "link4",
+          "distance_m": 0.00467106228568839,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.0013079452850996813,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.0009369384358409202,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 6,
+      "below_margin": [
+        {
+          "a": "link1",
+          "b": "link4",
+          "distance_m": 0.0046838852512888635,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.0013259924515581362,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.0009747010577806776,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 7,
+      "below_margin": [
+        {
+          "a": "link1",
+          "b": "link4",
+          "distance_m": 0.004701135408655079,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.0013502766772411044,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.0010255214158565963,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 8,
+      "below_margin": [
+        {
+          "a": "link1",
+          "b": "link4",
+          "distance_m": 0.004723246795767561,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.0013814147499752148,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.0010906968266799538,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 9,
+      "below_margin": [
+        {
+          "a": "link1",
+          "b": "link4",
+          "distance_m": 0.004750575745884314,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.0014199164389827185,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.0011713032982897695,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 10,
+      "below_margin": [
+        {
+          "a": "link1",
+          "b": "link4",
+          "distance_m": 0.0047834044062751045,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.001466189651819473,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.0012682065124739422,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 11,
+      "below_margin": [
+        {
+          "a": "link1",
+          "b": "link4",
+          "distance_m": 0.004821944220810685,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.0015205454312523445,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.0013820723331251297,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 12,
+      "below_margin": [
+        {
+          "a": "link1",
+          "b": "link4",
+          "distance_m": 0.004866339373113914,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.0015832027795333534,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.001513376805856407,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 13,
+      "below_margin": [
+        {
+          "a": "link1",
+          "b": "link4",
+          "distance_m": 0.0049166701886465235,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.001654293305923045,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.0016624156401301216,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 14,
+      "below_margin": [
+        {
+          "a": "link1",
+          "b": "link4",
+          "distance_m": 0.004972956495487492,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.0017338657005934004,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.0018293131880253823,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 15,
+      "below_margin": [
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.0018218900442614587,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.00201403095344902,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 16,
+      "below_margin": [
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.0019182619681249874,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.0022163756820576253,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 17,
+      "below_margin": [
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.0020228066829487377,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.0024360070954244696,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 18,
+      "below_margin": [
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.0021352828995329504,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.0026724453430943336,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 19,
+      "below_margin": [
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.002255386665345936,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.0029250782532302608,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 20,
+      "below_margin": [
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.002382755143861888,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.0031931684666801664,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 21,
+      "below_margin": [
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.002516970364176821,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.0034758605406806573,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 22,
+      "below_margin": [
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.0026575629688199466,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.003771323946948762,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 23,
+      "below_margin": [
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.002804015987390076,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.004066193787755156,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 24,
+      "below_margin": [
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.002955768662781709,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.004352798923562833,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 25,
+      "below_margin": [
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.003112220355364601,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.004648597960959735,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 26,
+      "below_margin": [
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.0032727345486028465,
+          "intersects": false
+        },
+        {
+          "a": "link2",
+          "b": "link5",
+          "distance_m": 0.004947776834350413,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 27,
+      "below_margin": [
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.003436642977304595,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 28,
+      "below_margin": [
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.0036032498970126094,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 29,
+      "below_margin": [
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.0037718365100690987,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 30,
+      "below_margin": [
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.003941665560639043,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 31,
+      "below_margin": [
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.004111986107537581,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 32,
+      "below_margin": [
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.004282038480125545,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 33,
+      "below_margin": [
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.004451059418877988,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 34,
+      "below_margin": [
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.004618287398548634,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 35,
+      "below_margin": [
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.004782968128217258,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 36,
+      "below_margin": [
+        {
+          "a": "link2",
+          "b": "link4",
+          "distance_m": 0.00494436021896669,
+          "intersects": false
+        }
+      ]
+    },
+    {
+      "sample": 37,
+      "below_margin": []
+    },
+    {
+      "sample": 38,
+      "below_margin": []
+    },
+    {
+      "sample": 39,
+      "below_margin": []
+    },
+    {
+      "sample": 40,
+      "below_margin": []
+    },
+    {
+      "sample": 41,
+      "below_margin": []
+    },
+    {
+      "sample": 42,
+      "below_margin": []
+    },
+    {
+      "sample": 43,
+      "below_margin": []
+    },
+    {
+      "sample": 44,
+      "below_margin": []
+    },
+    {
+      "sample": 45,
+      "below_margin": []
+    },
+    {
+      "sample": 46,
+      "below_margin": []
+    },
+    {
+      "sample": 47,
+      "below_margin": []
+    },
+    {
+      "sample": 48,
+      "below_margin": []
+    },
+    {
+      "sample": 49,
+      "below_margin": []
+    },
+    {
+      "sample": 50,
+      "below_margin": []
+    },
+    {
+      "sample": 51,
+      "below_margin": []
+    },
+    {
+      "sample": 52,
+      "below_margin": []
+    },
+    {
+      "sample": 53,
+      "below_margin": []
+    },
+    {
+      "sample": 54,
+      "below_margin": []
+    },
+    {
+      "sample": 55,
+      "below_margin": []
+    },
+    {
+      "sample": 56,
+      "below_margin": []
+    },
+    {
+      "sample": 57,
+      "below_margin": []
+    },
+    {
+      "sample": 58,
+      "below_margin": []
+    },
+    {
+      "sample": 59,
+      "below_margin": []
+    },
+    {
+      "sample": 60,
+      "below_margin": []
+    }
+  ],
+  "motion_ready": false,
+  "scope": "Sampled stock nonadjacent triangle surfaces only; excludes solid containment, custom tool, scene, tracking error and model uncertainty",
+  "input_sha256": "193639890e86b25adbef2354464ab2a5046df3479b46334266ba640c498f1aaa"
+}
