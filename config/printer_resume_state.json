@@ -1,11 +1,11 @@
 {
-  "saved_utc": "2026-10-08T16:00:01.036156+00:00",
-  "status": "Power-cycle recovery: live disabled readback verified; Demo ready after offline entry revalidation from operator-confirmed normal rest. No new motion trial. Leader teaching blocked at current shoulder model boundary; readback stays live.",
+  "saved_utc": "2026-10-08T16:32:28.240946+00:00",
+  "status": "Communication faults cleared only at operator-confirmed supported rest; all six disabled verified. Repaired controller running sequential feedback. Teaching and Demo ready, rail Idle X=0. No powered trial after repair.",
   "arm_motors_disabled_verified": true,
-  "latest_teaching_session": "outputs/printer_teach/20261008T155917003229Z",
+  "latest_teaching_session": "outputs/printer_teach/20261008T163119576152Z",
   "current_launch": {
     "command": ".venv/bin/python printer_teach.py",
-    "exec_session_id": 10190,
+    "exec_session_id": 18291,
     "url": "http://127.0.0.1:8765",
     "demo_client_exec_session_id": null
   },
@@ -123,7 +123,7 @@
     "restart_note": "Read actual current rail position before closing/restarting; a GRBL reconnect resets MPos. Never assume zero if interrupted away from origin.",
     "repeat_fix": "Cache gripper device per motor owner; reset cache when owner is replaced; regression tested.",
     "paused_holding": false,
-    "awaiting": "Operator starts Demo in refreshed browser",
+    "awaiting": "Operator refreshes page and starts Demo after scene/clearance confirmation",
     "current_folder": null,
     "repeat_fix_live_verified": true
   },
@@ -155,5 +155,21 @@
     "tests_passed": 72,
     "old_fault": "get_register_f32 failed: register 80 not received within 40ms",
     "position_retry_added": true
+  },
+  "latest_shutdown_diagnosis": "outputs/printer_replay/ui_demo/20261008T160050434745Z/shutdown_diagnosis.json",
+  "communication_repair": {
+    "feedback_reader_verified": "sequential",
+    "experimental_reader_default_enabled": false,
+    "faults_cleared_at_supported_rest": true,
+    "reset_capture": "outputs/printer_replay/recovered_rest_20261008/supported_rest_observation.json",
+    "deferred_powered_fault_report_and_checker_cleanup": true,
+    "primary_and_cleanup_errors_preserved": true,
+    "fault_power_state": "unknown until fresh hardware verification",
+    "new_source": "outputs/printer_replay/recovered_rest_20261008",
+    "full_discovery_cases": 359,
+    "cad_cases_skipped_in_main_environment": 4,
+    "cad_cases_passed_in_cad_environment": 4,
+    "focused_cases_passed_after_last_change": 67,
+    "powered_motion_trial_after_repair": false
   }
 }

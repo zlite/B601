@@ -29,6 +29,7 @@ class DemoController:
         self.runner=None;self.owner=None;self.heartbeat=0.;self.decision=None
         self.stop_requested=False;self.message='Demo unavailable';self.error=None
         self.pause_requested=False;self.stop_loop=False;self.cycle=0;self.rail_commands_allowed=0;self.recover_only=False
+        self.deferred_reports=[];self.deferred_checkers=[]
         self.last_seq={};self.folder=None;self.config={};self.expected=None;self.prepared=None;self.rail_returned_at=None
         if CONFIG.exists():
             self.config=json.loads(CONFIG.read_text())
@@ -122,10 +123,31 @@ class DemoController:
             self.error=str(error);self.message='Demo stopped: '+str(error)
             if arm.active:raise
         finally:
-            if self.prepared:self.prepared.close();self.prepared=None
+            if self.prepared:
+                if arm.active:self.deferred_checkers.append(self.prepared)
+                else:self.prepared.close()
+                self.prepared=None
             self.w.rail.lease=None
             with self.w.lock:self.active=False;self.paused=False;self.w.powered=arm.active
         return True
+
+    def save_report(self,report,arm):
+        """Never serialize a recording while a fault unwinds a powered owner."""
+        if arm.active:
+            self.deferred_reports.append((self.folder/'report.json',report))
+        else:
+            (self.folder/'report.json').write_text(json.dumps(report,indent=2)+'\n')
+
+    def after_motor_shutdown(self):
+        # Called only after the motor context has completed its cleanup attempt
+        # and closed hardware handles. No report/checker delay can starve it.
+        try:
+            for path,report in self.deferred_reports:
+                path.write_text(json.dumps(report,indent=2)+'\n')
+        finally:
+            self.deferred_reports.clear()
+            for checker in self.deferred_checkers:checker.close()
+            self.deferred_checkers.clear()
 
     def prepare_demo(self,arm):
         if arm.active:raise ValueError('Preparation requires disabled motors')
@@ -254,7 +276,7 @@ class DemoController:
             if enabled:raise
         finally:
             if self.runner:report['samples']=self.runner.rows
-            (self.folder/'report.json').write_text(json.dumps(report,indent=2)+'\n')
+            self.save_report(report,arm)
             arm.speed_limits=old_speed
             if old_command is None:
                 if hasattr(arm,'command_speed_limits'):del arm.command_speed_limits

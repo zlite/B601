@@ -1,0 +1,7 @@
+{
+  "source": "outputs/printer_replay/smooth_demo_v1",
+  "old_entry_samples": 77,
+  "new_entry_samples": 87,
+  "previous_input_sha256": "9fdc7c62c0d750a28c9ea5e076ae85e0f653a9157ef83176c0cd3fa065630f0f",
+  "unchanged_tail_sha256": "85e0b12abf97792c272e89aa3917b1a4f8d3cf1d5abcfded6414cd88be2fc74d"
+}

@@ -40,6 +40,9 @@ class TeachWorkbench(AxisWorkbench):
     brake_at_target = True
     resume_alignment_tolerance_deg = 1.
 
+    def after_motor_shutdown(self):
+        self.demo.after_motor_shutdown()
+
     def __init__(self, pairing, output=None, rail_monitor_only=False, rail_reboot_offset_mm=0.):
         super().__init__(pairing)
         self.track_printer_target = True

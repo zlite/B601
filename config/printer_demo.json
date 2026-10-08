@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "source": "outputs/printer_replay/powerup_rest_20261008",
+  "source": "outputs/printer_replay/recovered_rest_20261008",
   "speed_scale": 4,
   "scope": "Attended repeating rail-left/rail-return/open-gripper approach/arm-return; no grasp or lift",
   "scene_confirmation_required_each_start": true,
@@ -10,12 +10,17 @@
   "rail_sweep_operator_confirmed": true,
   "rest_entry_update": {
     "date": "2026-10-08",
-    "reason": "Operator confirmed normal supported rest after power cycle; old saved start differed by up to 2.71 degrees",
-    "read_only_capture": "outputs/arm_response/20261008T155416316078Z/report.json",
-    "entry_proof": "outputs/printer_replay/powerup_rest_20261008/entry_refresh_proof.json",
+    "reason": "Operator confirmed supported rest after communication fault; all six cleared and verified disabled",
+    "entry_proof": "outputs/printer_replay/recovered_rest_20261008/entry_refresh_proof.json",
     "model_limits_changed": false,
     "live_rest_tolerance_changed": false,
     "new_entry_geometry_checked": true,
     "new_entry_motion_trial_completed": false
+  },
+  "communication_recovery": {
+    "reader": "original sequential; concurrent reader opt-in only",
+    "deferred_fault_reporting": true,
+    "preserves_primary_fault": true,
+    "requires_operator_start": true
   }
 }

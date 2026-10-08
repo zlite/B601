@@ -1,0 +1,87 @@
+{
+  "operator_confirmed_supported_rest": true,
+  "raw_deg": [
+    95.44058285766265,
+    55.93149703769647,
+    100.99506344544628,
+    -3.1731351336586737,
+    4.130988910030214,
+    -1.3363730417767155
+  ],
+  "reset_observation": [
+    {
+      "joint": 1,
+      "q_rad": 1.6657524108886719,
+      "status": 13,
+      "velocity": -0.0024423599243164062,
+      "torque": 0.0068378448486328125,
+      "temperature": [
+        25.0,
+        23.0
+      ],
+      "status_after_clear": 0
+    },
+    {
+      "joint": 2,
+      "q_rad": 0.9761887788772583,
+      "status": 13,
+      "velocity": -0.0024423599243164062,
+      "torque": -0.11623954772949219,
+      "temperature": [
+        26.0,
+        23.0
+      ],
+      "status_after_clear": 0
+    },
+    {
+      "joint": 3,
+      "q_rad": 1.762696385383606,
+      "status": 13,
+      "velocity": -0.0024423599243164062,
+      "torque": -0.03418731689453125,
+      "temperature": [
+        26.0,
+        23.0
+      ],
+      "status_after_clear": 0
+    },
+    {
+      "joint": 4,
+      "q_rad": -0.0553816556930542,
+      "status": 13,
+      "velocity": -0.0073261260986328125,
+      "torque": -0.0073261260986328125,
+      "temperature": [
+        26.0,
+        24.0
+      ],
+      "status_after_clear": 0
+    },
+    {
+      "joint": 5,
+      "q_rad": 0.07209935784339905,
+      "status": 13,
+      "velocity": -0.0073261260986328125,
+      "torque": 0.021978378295898438,
+      "temperature": [
+        27.0,
+        24.0
+      ],
+      "status_after_clear": 0
+    },
+    {
+      "joint": 6,
+      "q_rad": -0.023324109613895416,
+      "status": 13,
+      "velocity": -0.0073261260986328125,
+      "torque": 0.0073261260986328125,
+      "temperature": [
+        28.0,
+        25.0
+      ],
+      "status_after_clear": 0
+    }
+  ],
+  "motion_commanded": false,
+  "runtime_tolerance_changed": false
+}

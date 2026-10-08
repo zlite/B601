@@ -5,11 +5,16 @@ from concurrent.futures import ThreadPoolExecutor
 from types import SimpleNamespace
 from unittest.mock import Mock, patch
 
-from fast_feedback import FreshMotorReader
+from fast_feedback import FreshMotorReader, configure_library
 from wrist_follow import FollowArm
 
 
 class ConcurrentReadTests(unittest.TestCase):
+    def test_experimental_reader_is_not_selected_by_default(self):
+        with patch.dict('os.environ',{},clear=True), patch('fast_feedback.LIBRARY') as library:
+            self.assertFalse(configure_library())
+            library.exists.assert_not_called()
+
     def test_position_timeout_retries_with_fresh_transaction(self):
         from motorbridge.errors import CallError
         reader=FreshMotorReader.__new__(FreshMotorReader);reader.retry_count=0

@@ -25,10 +25,11 @@ The build downloads pinned upstream sources, runs the native tests and writes
 by Git. `--cargo /path/to/cargo` supports an isolated toolchain. The source retains
 upstream's license; see the pinned upstream repository.
 
-`AxisArm` automatically selects a matching local build before opening hardware.
-A checksum/source mismatch is an error. Without a build, it uses the original
-sequential reader. `B601_FRESH_FEEDBACK=0` explicitly selects that original reader
-for comparison. Stop the controller with motors disabled before switching builds.
+The concurrent reader is experimental and **off by default** after sustained
+holding exposed communication failures. `AxisArm` uses the original sequential
+reader even when the extension is built. `B601_FRESH_FEEDBACK=1` opts into the
+experimental reader for explicit investigation; a checksum/source mismatch is
+an error. Stop the controller with motors disabled before switching readers.
 
 Read-only hardware timing, with the arm supported and disabled:
 

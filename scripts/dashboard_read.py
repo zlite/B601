@@ -45,7 +45,7 @@ def main():
         return
     with urlopen(URL+'/state', timeout=3) as response:
         state = json.load(response)
-    summary = {k:state.get(k) for k in ('ready','powered','following','fault','message','control_mode','camera_check','teaching','rail','phase','pause_requested','samples','pause_cause','last_sample','demo')}
+    summary = {k:state.get(k) for k in ('ready','powered','following','fault','feedback_reader','message','control_mode','camera_check','teaching','rail','phase','pause_requested','samples','pause_cause','last_sample','demo')}
     summary['sources'] = {k:{key:v.get(key) for key in ('angles','age_s','frame_age_s','error','tag','rms_px') if key in v}
                           for k,v in state.get('sources',{}).items()}
     profile = state.get('joint_calibration')
@@ -66,7 +66,7 @@ def main():
             with urlopen(URL+'/'+role+'.jpg',timeout=3) as response:
                 (directory/(role+'_latest.jpg')).write_bytes(response.read())
         summary['images_directory'] = str(directory)
-    if args.brief:summary={k:v for k,v in summary.items() if k in ('ready','powered','following','fault','message','sources','images_directory','teaching','rail','phase','pause_requested','samples','pause_cause','last_sample','demo')}
+    if args.brief:summary={k:v for k,v in summary.items() if k in ('ready','powered','following','fault','feedback_reader','message','sources','images_directory','teaching','rail','phase','pause_requested','samples','pause_cause','last_sample','demo')}
     if args.target:
         summary['printer_target'] = state.get('sources', {}).get('printer_target')
     print(json.dumps(summary,indent=2))

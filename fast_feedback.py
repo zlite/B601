@@ -13,8 +13,8 @@ LIBRARY=ROOT/'native/motorbridge/build/libmotor_abi.so'
 UPSTREAM_COMMIT='c652ce420e7da1008fa1864cc7f47d7d7c57fdb6'
 
 def configure_library():
-    """Call before constructing the SDK controller; explicit opt-out remains available."""
-    if os.environ.get('B601_FRESH_FEEDBACK','1')=='0' or not LIBRARY.exists():return False
+    """Experimental reader is opt-in after long-hold hardware failures."""
+    if os.environ.get('B601_FRESH_FEEDBACK','0')!='1' or not LIBRARY.exists():return False
     manifest=json.loads(LIBRARY.with_name('manifest.json').read_text())
     if (manifest['upstream_commit'] != UPSTREAM_COMMIT or
             manifest['patch_sha256'] != hashlib.sha256((LIBRARY.parent.parent/'fresh_state.patch').read_bytes()).hexdigest()):
@@ -63,6 +63,8 @@ class FreshMotorReader:
         # including when one motor fails. Native transactions have finite timeouts.
         wait(jobs)
         self.last_duration_s=time.monotonic()-began
-        if self.last_duration_s>.12:raise RuntimeError('Fresh motor read deadline exceeded')
+        if self.last_duration_s>.12:
+            failures=[repr(job.exception()) for job in jobs if job.exception() is not None]
+            raise RuntimeError(f'Fresh motor read deadline exceeded: {self.last_duration_s:.3f}s; failures={failures}')
         return [job.result() for job in jobs]
     def close(self):self.pool.shutdown(wait=True,cancel_futures=True)

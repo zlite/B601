@@ -1,0 +1,23 @@
+{
+  "recorded_utc": "2026-10-08T16:10:07.482505+00:00",
+  "initial_fault": "Fresh motor read deadline exceeded",
+  "reader_deadline_s": 0.12,
+  "actual_failed_read_duration_recorded": false,
+  "last_good_sample_monotonic_s": 231350.510101136,
+  "shutdown_requested_monotonic_s": 231352.085305778,
+  "secondary_cleanup_fault": "Joint 1: unexpected status; stopped",
+  "fresh_status_report": "outputs/arm_response/20261008T160904976523Z/report.json",
+  "all_six_status_codes": 13,
+  "sdk_status_meaning": "LOST_COMM",
+  "watchdog_ms": 500,
+  "time_holding_after_last_moving_sample_s": 172.63520620999043,
+  "software_observations": [
+    "Large report is serialized in demo finally block before motor-owner fault cleanup",
+    "Cleanup error replaced the initial feedback deadline error",
+    "UI powered boolean retained its stale pre-fault value; power_state already marks unknown_after_fault"
+  ],
+  "causal_limit": "The failing read duration and individual read failures were not logged; communication transport/scheduler cause is not established. Report serialization may have contributed to the watchdog timeout.",
+  "motion_commanded_during_investigation": false,
+  "faults_cleared": false,
+  "demo_restart_allowed": false
+}

@@ -5,6 +5,23 @@ Uses Seeed's motorbridge driver and Luxonis DepthAI v3. No recalibration or zero
 
 ## Current printer teaching and rail demo (October 7, 2026)
 
+October 8 communication recovery supersedes the fast-reader results below:
+the concurrent reader is now experimental and off by default. The teaching
+controller uses the original sequential reader while retaining the smoothed
+route and existing speed/acceleration bounds. An observed long-hold deadline
+failure is recorded in the local trial `20261008T160050434745Z`; all six motors
+subsequently reported LOST_COMM. Powered-fault report writing and CAD-worker
+shutdown now wait until the motor owner's cleanup attempt and handle closure
+finish. The original control fault is retained alongside any cleanup error,
+and power state becomes unknown until fresh verification instead of retaining
+a stale `powered: true`. Tests inject the deadline and a second cleanup failure
+and verify that no report writing occurs before motor cleanup.
+The operator confirmed supported rest before the six communication faults were
+cleared and disabled status was verified. The configured entry was checked again
+from that actual rest in `outputs/printer_replay/recovered_rest_20261008/`.
+The ~129 s sequential-reader cycle is the previous measured reference; no new
+powered trial is implied by this repair.
+
 October 8 power-up recovery: the old worker retained a position-read timeout
 fault after motor power returned. Position transactions now get one bounded
 fresh retry, like status reads; the 120 ms batch deadline and fault guards stay

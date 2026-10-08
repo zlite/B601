@@ -1,5 +1,5 @@
 """Read-only motor settings and transaction timing; refuses enabled motors."""
-import json,sys,time,math,argparse
+import json,sys,time,math,argparse,os
 from pathlib import Path
 from datetime import datetime,timezone
 import numpy as np
@@ -9,10 +9,25 @@ from hello_world import PORT
 from motorbridge.damiao_registers import DAMIAO_RW_REGISTERS
 
 def main():
-    parser=argparse.ArgumentParser();parser.add_argument('--fresh',action='store_true');args=parser.parse_args()
+    parser=argparse.ArgumentParser();parser.add_argument('--fresh',action='store_true')
+    parser.add_argument('--status-only',action='store_true',help='Read raw statuses, including faults; never clears faults or enables motors')
+    args=parser.parse_args()
     output=ROOT/'outputs/arm_response'/datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ');output.mkdir(parents=True)
     report={'motion_commanded':False,'settings_changed':False,'joints':[]}
+    if args.status_only:
+        with Reader(PORT) as arm:
+            for i,m in enumerate(arm.motors):
+                q=m.get_register_f32(80,200)
+                m.request_feedback();time.sleep(.02);arm.ctrl.poll_feedback_once();s=m.get_state()
+                report['joints'].append({'joint':i+1,'raw_deg':math.degrees(q),
+                    'status_code':None if s is None else s.status_code,
+                    'velocity_rad_s':None if s is None else s.vel,
+                    'temperature_c':None if s is None else [s.t_mos,s.t_rotor],
+                    'timeout_register':m.get_register_u32(9,200)})
+        (output/'report.json').write_text(json.dumps(report,indent=2)+'\n')
+        print(json.dumps({'report':str(output/'report.json'),**report},indent=2));return
     from axis_follow import AxisArm
+    if args.fresh:os.environ['B601_FRESH_FEEDBACK']='1'
     Arm=AxisArm if args.fresh else lambda:Reader(PORT)
     with Arm() as arm:
         report['start_raw_deg' if args.fresh else 'start_raw_rad']=arm.read()

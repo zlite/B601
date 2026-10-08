@@ -124,4 +124,21 @@ class DemoTests(unittest.TestCase):
         arm.enable_group.assert_not_called();prepared.close.assert_called_once()
         self.assertEqual(self.w.demo.error,'fresh clearance failed');self.assertFalse(self.w.demo.busy())
 
+    def test_powered_failure_defers_checker_and_report_until_owner_cleanup(self):
+        self.start();d=self.w.demo;arm=Mock();arm.active=True
+        checker=Mock();d.folder=Path(self.tmp.name)/'fault';d.folder.mkdir()
+        def prepare(_):d.prepared=checker
+        def fail(_):
+            d.save_report({'error':'feedback deadline'},arm)
+            raise RuntimeError('feedback deadline')
+        with patch.object(d,'prepare_demo',side_effect=prepare), patch.object(d,'rail_cycle',return_value=True), patch.object(d,'_arm_cycle',side_effect=fail):
+            with self.assertRaisesRegex(RuntimeError,'feedback deadline'):d.run_pending(arm)
+        checker.close.assert_not_called()
+        self.assertFalse((d.folder/'report.json').exists())
+        arm.active=False
+        d.after_motor_shutdown()
+        checker.close.assert_called_once()
+        self.assertTrue((d.folder/'report.json').exists())
+        self.assertFalse(d.deferred_reports);self.assertFalse(d.deferred_checkers)
+
 if __name__=='__main__':unittest.main()

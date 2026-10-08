@@ -442,6 +442,25 @@ class ControllerTransitionsTests(unittest.TestCase):
         self.assertEqual(self.events('shutdown_requested')[0]['reason'],'motor_or_control_fault')
         self.assertTrue(self.events('fault')[0]['torque_off_attempted'])
 
+    def test_primary_error_survives_cleanup_error_and_logging_follows_cleanup(self):
+        events=[]
+        self.w.run_motor=Mock(side_effect=RuntimeError('feedback deadline'))
+        self.w.record=Mock(side_effect=lambda *a,**k:events.append('log'))
+        self.w.after_motor_shutdown=Mock(side_effect=lambda:events.append('reports'))
+        def close(*args):
+            events.append('disable')
+            self.arm.active=False
+            raise RuntimeError('secondary status fault')
+        self.arm.__exit__.side_effect=close
+        self.w.powered=True
+        self.w.motor_worker(lambda:self.arm)
+        self.assertEqual(events[0],'disable')
+        self.assertEqual(events[-1],'reports')
+        self.assertEqual(self.w.fault,'feedback deadline')
+        self.assertEqual(self.events('fault')[0]['cleanup_error'],'secondary status fault')
+        self.assertIsNone(self.w.powered)
+        self.assertFalse(self.w.ready)
+
     def test_configuration_blocked_during_powered_pause(self):
         def scenario(n):
             if n==30:self.request('release',reason='escape')

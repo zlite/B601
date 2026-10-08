@@ -308,6 +308,7 @@ class AxisWorkbench(WristWorkbench):
         self.observed = set()
         self.gate = AxisGate()
         self.powered = False
+        self.feedback_reader = None
         self.disable_requested = False
         self.pause_reason = None
         self.camera_check = CameraCheck(self.geometry)
@@ -413,6 +414,7 @@ class AxisWorkbench(WristWorkbench):
             result['joint_calibration'] = self.joint_calibration
             cfg = PROFILES[self.selected]
             result.update(selected_joint=self.selected+1, selected_name=NAMES[self.selected], revision=self.revision,
+                feedback_reader=self.feedback_reader,
                 control_mode=self.control_mode, axis_trials=self.axis_trials,
                 active=self.powered, powered=self.powered, following=self.active_id is not None,
                 pause_reason=self.pause_reason, tracking_error_limit_deg=TRACKING_ERROR,
@@ -423,29 +425,40 @@ class AxisWorkbench(WristWorkbench):
             return result
 
     def motor_worker(self, factory=AxisArm):
+        original_error=None
         try:
             with factory() as arm:
+                self.feedback_reader='concurrent_experimental' if getattr(arm,'_fresh_reader',None) is not None else 'sequential'
                 try:
                     self.run_motor(arm)
                 except Exception as error:
-                    self.record('shutdown_requested', reason='motor_or_control_fault', error=str(error))
+                    original_error=error
                     raise
-                finally:
-                    if self.stop.is_set():
-                        self.record('shutdown_requested', reason='server_shutdown', powered=arm.active)
             with self.lock:
                 self.powered = False
                 self.active_id = None
             self.record('shutdown_complete', reason='server_shutdown', motors_disabled=True)
         except Exception as error:
+            primary=original_error if original_error is not None else error
+            cleanup_error=str(error) if original_error is not None and error is not original_error else None
             with self.lock:
                 self.ready = False
-                self.fault = str(error)
+                self.fault = str(primary)
+                self.powered = None  # unknown until fresh hardware verification
                 self.gate.cancel('motor_or_control_fault')
                 self.active_id = None
-                self.message = 'Fault; torque-off cleanup attempted: '+str(error)
-            self.record('fault', reason='motor_or_control_fault', error=str(error), torque_off_attempted=True)
+                self.message = 'Fault; motor state requires verification: '+str(primary)
+            self.record('shutdown_requested',reason='motor_or_control_fault',error=str(primary))
+            self.record('fault', reason='motor_or_control_fault', error=str(primary), cleanup_error=cleanup_error, torque_off_attempted=True)
             print(self.message, flush=True)
+        finally:
+            try:self.after_motor_shutdown()
+            except Exception as error:
+                self.record('report_cleanup_failed',error=str(error))
+
+    def after_motor_shutdown(self):
+        """Subclass hook for work that must not delay motor-owner cleanup."""
+        pass
 
     def run_auxiliary_motion(self, arm):
         return False
