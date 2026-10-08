@@ -234,6 +234,31 @@ class SelectionTests(unittest.TestCase):
             arm.enable_group.assert_not_called()
             if not cancel:arm.prepare_group.assert_not_called()
 
+    def test_invalid_disabled_start_keeps_reading_and_recovers_without_enable(self):
+        w=self.w;w.record=Mock();w.cameras_ready=Mock(return_value=True)
+        arm=Mock();arm.active=False;arm.selected=4
+        arm.__enter__=Mock(return_value=arm);arm.__exit__=Mock()
+        arm.select.side_effect=lambda i:setattr(arm,'selected',i)
+        count=0;blocked=[]
+        def read():
+            nonlocal count
+            count+=1
+            if count in (2,3):blocked.append((w.ready,w.gate.lease,w.fault))
+            if count==4:w.stop.set()
+            w.publish('leader',angles=[0.]*7)
+            return [0.]*6
+        def bounds(*args):
+            if count<3:raise ValueError('Shoulder starting pose is outside its model limits')
+            return (-5.,5.)
+        arm.read.side_effect=read
+        w.gate.action({'action':'press','client':'a','seq':1},time.monotonic())
+        with patch('axis_follow.axis_bounds',side_effect=bounds):w.motor_worker(lambda:arm)
+        self.assertEqual(count,4)
+        self.assertEqual(blocked,[(False,None,None),(False,None,None)])
+        self.assertIsNone(w.fault)
+        self.assertIsNotNone(w.bounds)
+        arm.enable_group.assert_not_called();arm.prepare_group.assert_not_called()
+
     def test_all_follow_accepts_coupled_motion_and_release_keeps_torque(self):
         w=self.w;w.control_mode='follow_all'
         g=w.geometry

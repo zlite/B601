@@ -472,6 +472,23 @@ class AxisWorkbench(WristWorkbench):
             if self.stop.is_set():
                 break
             now = time.monotonic()
+            # An unsupported starting envelope blocks teaching, but disabled
+            # readback must stay alive so an operator can reposition and retry.
+            if not arm.active and self.bounds is None:
+                with self.lock:
+                    candidates=[self.selected] if self.control_mode=='single' else list(range(6))
+                    try:
+                        for joint in candidates:axis_bounds(self.geometry,joint,q[joint])
+                    except ValueError as error:
+                        self.ready=False
+                        self.gate.cancel('starting_pose_invalid')
+                        self.message=str(error)+' · motors disabled; reposition to recover'
+                        blocked=True
+                    else:blocked=False
+                if blocked:
+                    self.stop.wait(.02)
+                    last=time.monotonic()
+                    continue
             with self.lock:
                 if revision != self.revision:
                     if arm.active:

@@ -10,6 +10,31 @@ from wrist_follow import FollowArm
 
 
 class ConcurrentReadTests(unittest.TestCase):
+    def test_position_timeout_retries_with_fresh_transaction(self):
+        from motorbridge.errors import CallError
+        reader=FreshMotorReader.__new__(FreshMotorReader);reader.retry_count=0
+        motor=Mock()
+        motor.get_register_f32.side_effect=[CallError('get_register_f32 failed: register 80 not received within 40ms'),.5]
+        self.assertEqual(reader.position(motor),.5)
+        self.assertEqual(motor.get_register_f32.call_count,2)
+        self.assertEqual(reader.retry_count,1)
+        motor.get_state.assert_not_called()
+
+    def test_repeated_position_timeout_remains_a_fault(self):
+        from motorbridge.errors import CallError
+        reader=FreshMotorReader.__new__(FreshMotorReader);reader.retry_count=0
+        motor=Mock()
+        motor.get_register_f32.side_effect=CallError('register 80 not received within 40ms')
+        with self.assertRaises(CallError):reader.position(motor)
+        self.assertEqual(motor.get_register_f32.call_count,2)
+
+    def test_position_transport_failure_is_not_retried(self):
+        from motorbridge.errors import CallError
+        reader=FreshMotorReader.__new__(FreshMotorReader);reader.retry_count=0
+        motor=Mock();motor.get_register_f32.side_effect=CallError('bus closed')
+        with self.assertRaises(CallError):reader.position(motor)
+        self.assertEqual(motor.get_register_f32.call_count,1)
+
     def reader(self, operation):
         reader = FreshMotorReader.__new__(FreshMotorReader)
         reader.motors = list(range(6))

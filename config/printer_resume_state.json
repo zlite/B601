@@ -1,11 +1,11 @@
 {
-  "saved_utc": "2026-10-08T01:15:55.147082+00:00",
-  "status": "Single optimization cycle completed, returned to rest and motors disabled verified. Rail Idle at X=0. Repeating demo stopped; teaching interface remains ready.",
+  "saved_utc": "2026-10-08T16:00:01.036156+00:00",
+  "status": "Power-cycle recovery: live disabled readback verified; Demo ready after offline entry revalidation from operator-confirmed normal rest. No new motion trial. Leader teaching blocked at current shoulder model boundary; readback stays live.",
   "arm_motors_disabled_verified": true,
-  "latest_teaching_session": "outputs/printer_teach/20261008T011137483386Z",
+  "latest_teaching_session": "outputs/printer_teach/20261008T155917003229Z",
   "current_launch": {
     "command": ".venv/bin/python printer_teach.py",
-    "exec_session_id": 22385,
+    "exec_session_id": 10190,
     "url": "http://127.0.0.1:8765",
     "demo_client_exec_session_id": null
   },
@@ -114,7 +114,7 @@
   "demo": {
     "config": "config/printer_demo.json",
     "running_at_save": false,
-    "completed_cycles_observed": 1,
+    "completed_cycles_observed": 0,
     "next_cycle_observed": null,
     "stop_immediately": ".venv/bin/python scripts/printer_demo_client.py pause",
     "stop_at_rest": ".venv/bin/python scripts/printer_demo_client.py stop",
@@ -123,8 +123,8 @@
     "restart_note": "Read actual current rail position before closing/restarting; a GRBL reconnect resets MPos. Never assume zero if interrupted away from origin.",
     "repeat_fix": "Cache gripper device per motor owner; reset cache when owner is replaced; regression tested.",
     "paused_holding": false,
-    "awaiting": null,
-    "current_folder": "outputs/printer_replay/ui_demo/20261008T011256235081Z",
+    "awaiting": "Operator starts Demo in refreshed browser",
+    "current_folder": null,
     "repeat_fix_live_verified": true
   },
   "speed_investigation": {
@@ -145,5 +145,15 @@
     "cad_tests_in_dedicated_environment": 4,
     "fresh_reader_tests_after_final_addition": 8,
     "native_damiao_tests": 24
+  },
+  "powerup_recovery": {
+    "inspection": "outputs/arm_response/20261008T155416316078Z/report.json",
+    "new_demo_source": "outputs/printer_replay/powerup_rest_20261008",
+    "supported_rest_operator_confirmed": true,
+    "geometry_checks_passed": true,
+    "motion_trial_completed": false,
+    "tests_passed": 72,
+    "old_fault": "get_register_f32 failed: register 80 not received within 40ms",
+    "position_retry_added": true
   }
 }

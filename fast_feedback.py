@@ -6,6 +6,7 @@ import json
 import os
 from pathlib import Path
 import time
+from motorbridge.errors import CallError
 
 ROOT=Path(__file__).resolve().parent
 LIBRARY=ROOT/'native/motorbridge/build/libmotor_abi.so'
@@ -34,10 +35,20 @@ class FreshMotorReader:
         self.pool=ThreadPoolExecutor(max_workers=6,thread_name_prefix='fresh-motor-read')
         self.last_duration_s=None
         self.retry_count=0
+    def position(self,motor):
+        try:
+            return motor.get_register_f32(80,40)
+        except CallError as error:
+            # Only a missing reply is transient. Transport/handle errors remain
+            # immediate faults, and a second timeout propagates to the owner.
+            if 'register 80 not received within 40ms' not in str(error):
+                raise
+            self.retry_count+=1
+            return motor.get_register_f32(80,40)
     def one(self,motor):
         # The full-precision register transaction and status transaction each
         # reject cached replies. No motor command is issued by these workers.
-        position=motor.get_register_f32(80,40)
+        position=self.position(motor)
         state=self.CState()
         if self.call(motor._require_open(),40,ctypes.byref(state)) or not state.has_value:
             # One lost status packet may be re-requested, never replaced by a

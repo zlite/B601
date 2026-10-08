@@ -3,8 +3,8 @@
 `fast_feedback.py` uses this Linux ABI extension to read six independent motor
 transactions concurrently. Motor commands remain on the existing owner thread.
 Each position-register reply and status reply must arrive after its request;
-cached status cannot satisfy the native transaction. One missing status reply
-gets one fresh request with a 40 ms timeout; a second failure or a batch over
+cached status cannot satisfy the native transaction. One missing position or
+status reply gets one fresh request with a 40 ms timeout; a second failure or a batch over
 120 ms faults the controller. All worker reads finish before commands resume
 or motor handles close. Temperature, speed and motor-status checks remain active.
 

@@ -5,6 +5,20 @@ Uses Seeed's motorbridge driver and Luxonis DepthAI v3. No recalibration or zero
 
 ## Current printer teaching and rail demo (October 7, 2026)
 
+October 8 power-up recovery: the old worker retained a position-read timeout
+fault after motor power returned. Position transactions now get one bounded
+fresh retry, like status reads; the 120 ms batch deadline and fault guards stay
+unchanged. A disabled starting pose outside the teaching envelope keeps live
+readback running and blocks teaching instead of killing the connection.
+The operator confirmed normal supported rest, differing from the prior start by
+up to 2.71 degrees. A new entry and its reverse passed the existing stock-arm,
+gripper and camera mesh checks, preserving the unchanged route tail, in
+`outputs/printer_replay/powerup_rest_20261008/`. The Demo config uses that entry;
+joint limits and live start tolerances were not widened. Demo readiness was
+verified with motors disabled; a motion trial from this new entry is pending.
+72 focused tests passed. Refresh the browser after a controller restart to
+obtain its new action token before using Demo.
+
 Run `.venv/bin/python printer_teach.py` and open `http://127.0.0.1:8765`.
 The controller starts with the arm disabled. The page supports relative leader
 teaching, held-arrow rail jogging, and the confirmed same-scene Demo: rail
