@@ -70,7 +70,7 @@ def mapped_target(origin, baseline, leader_baseline, leader, sign):
 
 class WristTrajectory:
     """Bounded position trajectory with speed, acceleration and edge braking."""
-    def __init__(self, origin, position, *, low=None, high=None, speed=SPEED, acceleration=ACCELERATION, response_time=.15):
+    def __init__(self, origin, position, *, low=None, high=None, speed=SPEED, acceleration=ACCELERATION, response_time=.15, brake_at_target=False):
         low = origin-LIMIT if low is None else low
         high = origin+LIMIT if high is None else high
         if not all(math.isfinite(v) for v in (origin, position, low, high, speed, acceleration, response_time)) or not low <= position <= high or speed <= 0 or acceleration <= 0 or response_time <= 0:
@@ -78,6 +78,7 @@ class WristTrajectory:
         self.low, self.high = low, high
         self.speed, self.acceleration = speed, acceleration
         self.response_time = response_time
+        self.brake_at_target = brake_at_target
         self.position, self.velocity = position, 0.
 
     def step(self, desired, dt):
@@ -96,6 +97,9 @@ class WristTrajectory:
             if low_v > high_v+1e-8:
                 raise RuntimeError('Wrist trajectory cannot brake inside its envelope')
             wanted = (desired-self.position)/self.response_time
+            if self.brake_at_target:
+                goal_speed = braking_speed(abs(desired-self.position))
+                wanted = max(-goal_speed, min(goal_speed, wanted))
             self.velocity = max(low_v, min(high_v, wanted))
             self.position += self.velocity*h
         if not self.low-1e-8 <= self.position <= self.high+1e-8:
@@ -137,12 +141,16 @@ class FollowArm(Reader):
 
     def read(self):
         values = []
-        for i, motor in enumerate(self.motors):
-            position = motor.get_register_f32(80, 100)
-            motor.request_feedback()
-            time.sleep(.005)
-            self.ctrl.poll_feedback_once()
-            s = motor.get_state()
+        fresh=getattr(self,'_fresh_reader',None)
+        if fresh is not None:
+            readings=fresh.read()
+        else:
+            readings=[]
+            for motor in self.motors:
+                position=motor.get_register_f32(80,100)
+                motor.request_feedback();time.sleep(.005);self.ctrl.poll_feedback_once()
+                readings.append((position,motor.get_state()))
+        for i,(motor,(position,s)) in enumerate(zip(self.motors,readings)):
             selected = getattr(self, 'selected', 5)
             enabled_indices = getattr(self, 'enabled_indices', None)
             enabled = (i == selected and self.active) if enabled_indices is None else i in enabled_indices

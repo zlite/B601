@@ -1,0 +1,8 @@
+# Keep CAD source bytes intact; geometry hashes depend on exact files.
+*.step binary
+*.STEP binary
+*.stl binary
+*.STL binary
+*.npz binary
+# Unified-diff blank context lines intentionally contain one space.
+*.patch -whitespace

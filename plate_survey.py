@@ -13,6 +13,8 @@ from tag_view import detect,annotate_view
 
 
 def execute(max_bend=36.):
+    from plate_training import require_current_workspace
+    require_current_workspace()
     folder=Path('outputs/plate_survey')/datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ');folder.mkdir(parents=True)
     w=Workbench();w.survey_mode=True;w.camera_sizes={'tripod':(1280,800)};w.camera_fps={'tripod':5};w.camera_check=CameraCheck(w.geometry,folder/'views')
     workers=[threading.Thread(target=w.camera_worker,args=(r,),daemon=True) for r in ('wrist','tripod')]

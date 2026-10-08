@@ -1,0 +1,69 @@
+{
+  "requested_speed_scale": 4,
+  "returned_to_start": true,
+  "motors_disabled_verified": true,
+  "gripper_commanded": false,
+  "rail_commanded": false,
+  "completed_stages": [
+    "entry",
+    "smooth_approach",
+    "plate_view"
+  ],
+  "start_raw_deg": [
+    92.27018662986116,
+    55.92495371647159,
+    100.93307264853924,
+    -2.9484287401544242,
+    5.1625250596205605,
+    -3.0319126482756094
+  ],
+  "starting_pose_method": "Fresh disabled readback immediately after rail Idle at origin; entry checked from this pose; <=0.05 degree change verified before enable",
+  "entry_check_s": 1.9826289570191875,
+  "fixed_home_raw_deg": [
+    92.2178810411972,
+    55.931087226346264,
+    100.9492055553588,
+    -2.944470645530402,
+    4.782235494559883,
+    -2.6326910794961256
+  ],
+  "planned_outbound_s": 22.865527855567045,
+  "rail_to_arm_motion_s": 2.0675163549894933,
+  "fixed_home_return": true,
+  "return_segments": [
+    {
+      "planned_duration_s": 1.868415636425755,
+      "actual_duration_s": 1.9129803119867574,
+      "max_curve_deviation_deg": 0.042607109657538444
+    },
+    {
+      "planned_duration_s": 19.486622287828823,
+      "actual_duration_s": 50.25622510199901,
+      "max_curve_deviation_deg": 0.0705841384158448
+    },
+    {
+      "planned_duration_s": 1.5734920851354803,
+      "actual_duration_s": 3.7010286540025845,
+      "max_curve_deviation_deg": 1.7763568394002505e-15
+    }
+  ],
+  "motion_elapsed_s": 114.13534756997251,
+  "final_raw_deg": [
+    92.26150545942608,
+    55.9167301687109,
+    100.93024495022286,
+    -3.078096466452531,
+    4.761367559098201,
+    -3.0039472924926383
+  ],
+  "report": "outputs/printer_replay/ui_demo/20261008T011256235081Z/report.json",
+  "samples": 8995,
+  "max_tracking_error_deg": 0.9810298236875354,
+  "loop_median_s": 0.01168095349567011,
+  "loop_p95_s": 0.016604706799262205,
+  "loop_max_s": 0.08856692601693794,
+  "feedback_reader": "concurrent fresh register/status transactions",
+  "motor_gains_changed": false,
+  "rail_cycle_commanded": true,
+  "rail_left_mm": 300
+}

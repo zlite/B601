@@ -1,4 +1,18 @@
 {
   "wrist": {"device_id": "19443010C104077E00", "model": "OAK-D-LITE", "manual_focus": 76},
-  "tripod": {"device_id": "19443010A155785A00", "model": "OAK-1"}
+  "tripod": {
+    "backend": "v4l2",
+    "device_id": "Arducam_20260506_0001",
+    "device_path": "/dev/v4l/by-id/usb-Arducam_Arducam_Global_Shutter_2.3MP_Arducam_20260506_0001-video-index0",
+    "model": "Arducam Global Shutter 2.3MP",
+    "usb_vendor_id": "04b4",
+    "usb_product_id": "0610",
+    "size": [1920, 1080],
+    "fps": 30,
+    "fourcc": "MJPG",
+    "lens": "fisheye",
+    "calibration_status": "uncalibrated",
+    "usage": "overview_only",
+    "display_rotation_deg": 0
+  }
 }

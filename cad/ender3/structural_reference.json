@@ -1,0 +1,271 @@
+{
+  "source": "cad/ender3/inspection.json",
+  "source_sha256": "7e868f30a44f0e6b1dd0daf8af1d7810ad9a754cc6fa066f6ef4d2b81e3297af",
+  "parts": {
+    "base_side_1": {
+      "name": "Ender3/NAUO1",
+      "solids": 1,
+      "min_assembly_mm": [
+        81.9990001973228,
+        -1.0000001421085471e-07,
+        -231.54886308155827
+      ],
+      "max_assembly_mm": [
+        121.99900029732294,
+        40.00000000000009,
+        58.45113711844173
+      ],
+      "volume_mm3": 146025.79275934133,
+      "product_name": "4040 profile_40*40-L290\ufffd\ufffd4\ufffd\ufffd\ufffd\ufffd\u0377\u0368\ufffd\ufffd,2\ufffd\ufffdM5"
+    },
+    "base_side_2": {
+      "name": "Ender3/NAUO101",
+      "solids": 1,
+      "min_assembly_mm": [
+        -208.00099990267813,
+        -1.0000159017241651e-07,
+        -231.54886308155798
+      ],
+      "max_assembly_mm": [
+        -168.000999802678,
+        39.9999999999985,
+        58.45113711844201
+      ],
+      "volume_mm3": 145681.96009845613,
+      "product_name": "4040 profile_40*40-L290-2\ufffd\ufffd4\ufffd\ufffd\ufffd\ufffd\u0377\u0368\ufffd\ufffd,2\ufffd\ufffdM5"
+    },
+    "base_crossmember": {
+      "name": "Ender3/NAUO117",
+      "solids": 1,
+      "min_assembly_mm": [
+        -168.0009999026771,
+        -1.0000147259981986e-07,
+        -106.54886298155834
+      ],
+      "max_assembly_mm": [
+        81.99900029732288,
+        39.999999999998614,
+        -66.5488629815583
+      ],
+      "volume_mm3": 113474.96191187688,
+      "product_name": "4040 profile_40*40-L250,4\ufffd\ufffdM5\ufffd\ufffd\ufffd\ufffd,2\ufffd\ufffd\ufffd\ufffd\u0377\ufffd\ufffd1\ufffd\ufffdM3\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd"
+    },
+    "bed_rail": {
+      "name": "Ender3/NAUO2",
+      "solids": 1,
+      "min_assembly_mm": [
+        -53.00099980267719,
+        32.999999999998444,
+        -296.5488630815584
+      ],
+      "max_assembly_mm": [
+        -33.00099980267714,
+        72.99999999999854,
+        33.45113711844162
+      ],
+      "volume_mm3": 96728.54583514106,
+      "product_name": "2040 profile_20*40-L330,\ufffd\ufffd\ufffd\ufffd4\ufffd\ufffdM4\ufffd\ufffd2\ufffd\ufffdM5"
+    },
+    "upright_1": {
+      "name": "Ender3/NAUO3",
+      "solids": 1,
+      "min_assembly_mm": [
+        81.99900019732183,
+        39.99999989999869,
+        -96.54886298155941
+      ],
+      "max_assembly_mm": [
+        121.99900019732203,
+        440.0000000999987,
+        -76.54886298155876
+      ],
+      "volume_mm3": 117412.29189042989,
+      "product_name": "2040 profile_20*40-L400,\ufffd\ufffd\ufffd\ufffd4\ufffd\ufffdM5*15\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd2\ufffd\ufffdM4"
+    },
+    "upright_2": {
+      "name": "Ender3/NAUO102",
+      "solids": 1,
+      "min_assembly_mm": [
+        -208.0009998026784,
+        39.99999989999852,
+        -96.54886298155861
+      ],
+      "max_assembly_mm": [
+        -168.0009998026781,
+        440.00000009999854,
+        -76.54886298155795
+      ],
+      "volume_mm3": 117331.06689837301,
+      "product_name": "2040 profile_20*40-L400\ufffd\ufffd\ufffd\ufffd\ufffd\ufffdM5*15,\ufffd\ufffd\ufffd\ufffd2\ufffd\ufffdM4\ufffd\ufffd\u0377"
+    },
+    "top_crossmember": {
+      "name": "Ender3/NAUO127",
+      "solids": 1,
+      "min_assembly_mm": [
+        -208.00099990267816,
+        439.99999999999875,
+        -96.54886298155937
+      ],
+      "max_assembly_mm": [
+        121.99900029732183,
+        460.0000000999988,
+        -76.54886298155937
+      ],
+      "volume_mm3": 56932.40441587176,
+      "product_name": "2020 profile_20*20-L330\ufffd\ufffd4\ufffd\ufffd\ufffd\ufffd\u0377\u0368\ufffd\ufffd"
+    },
+    "x_gantry": {
+      "name": "Ender3/NAUO81",
+      "solids": 1,
+      "min_assembly_mm": [
+        -224.90861161137738,
+        153.44780551862246,
+        -123.39886298155876
+      ],
+      "max_assembly_mm": [
+        120.09138858862262,
+        173.44780551862308,
+        -103.39886288155834
+      ],
+      "volume_mm3": 59526.06609755099,
+      "product_name": "2020 profile_20*20-L345,4\ufffd\ufffdM4\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\u0377\u0368\ufffd\ufffd"
+    },
+    "hot_bed": {
+      "name": "Ender3/NAUO140",
+      "solids": 1,
+      "min_assembly_mm": [
+        -160.70099980267878,
+        97.96373853886645,
+        -197.18667802526866
+      ],
+      "max_assembly_mm": [
+        74.29900019732128,
+        100.96373853886658,
+        37.813321974731394
+      ],
+      "volume_mm3": 165021.78661336817,
+      "product_name": "Hot bed"
+    },
+    "power_supply": {
+      "name": "Ender3/NAUO145",
+      "solids": 1,
+      "min_assembly_mm": [
+        -216.00099980267828,
+        87.49999989999849,
+        -76.54886298155843
+      ],
+      "max_assembly_mm": [
+        -166.00099980267788,
+        302.4999999999987,
+        36.45113701844196
+      ],
+      "volume_mm3": 1174429.4057336557,
+      "product_name": "24V15A power supply"
+    },
+    "lcd": {
+      "name": "Ender3/NAUO143",
+      "solids": 2,
+      "min_assembly_mm": [
+        -266.5009998026772,
+        34.10935138567381,
+        -209.26135422092955
+      ],
+      "max_assembly_mm": [
+        -173.5009998026772,
+        87.7719666285508,
+        -122.0591392839789
+      ],
+      "volume_mm3": 66514.0226506011,
+      "product_name": "lcd"
+    },
+    "lcd_support": {
+      "name": "Ender3/NAUO144",
+      "solids": 1,
+      "min_assembly_mm": [
+        -270.0009998026768,
+        0.9999999999989366,
+        -233.54886298155895
+      ],
+      "max_assembly_mm": [
+        -168.0009998026768,
+        93.87524062179482,
+        -128.1078366498884
+      ],
+      "volume_mm3": 24264.620557465383,
+      "product_name": "LCD support"
+    }
+  },
+  "assembly_axes": {
+    "vertical": "Y",
+    "bed_travel": "Z",
+    "gantry_horizontal": "X"
+  },
+  "registration_validated": false,
+  "motion_ready": false,
+  "bed_to_holder_candidate": {
+    "note": "Corresponding 170 mm-spaced bed and holder mounting holes constrain lateral/depth offset. Current bed travel and build-surface height must be measured, not copied from stock assembly.",
+    "T_stock_assembly_holder_at_stock_bed_pose_mm": [
+      [
+        0,
+        1,
+        0,
+        -136.2
+      ],
+      [
+        0,
+        0,
+        1,
+        100.96
+      ],
+      [
+        1,
+        0,
+        0,
+        -181.269
+      ],
+      [
+        0,
+        0,
+        0,
+        1
+      ]
+    ]
+  },
+  "scope": "Selected stock structural bounds only; excludes unselected parts and custom syringe drive",
+  "registration_groups": {
+    "printer_fixed": {
+      "parts": [
+        "base_side_1",
+        "base_side_2",
+        "base_crossmember",
+        "bed_rail",
+        "upright_1",
+        "upright_2",
+        "top_crossmember",
+        "power_supply",
+        "lcd",
+        "lcd_support"
+      ],
+      "T_base_group": null
+    },
+    "bed_y": {
+      "parts": [
+        "hot_bed"
+      ],
+      "T_base_group": null,
+      "requirement": "Reacquire bed tag and verify holder registration for each trial; do not move printer_fixed with the tag"
+    },
+    "gantry_z": {
+      "parts": [
+        "x_gantry"
+      ],
+      "T_base_group": null,
+      "requirement": "Measure current gantry height independently of bed pose"
+    },
+    "custom_syringe": {
+      "parts": [],
+      "T_base_group": null,
+      "requirement": "Observe drive, syringe, needle and cables; absent from stock CAD; empty parts does not mean free space"
+    }
+  }
+}

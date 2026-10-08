@@ -1,0 +1,167 @@
+{
+  "source": "/home/chris/Downloads/LH_deck_four_bolt.stl",
+  "retained_mesh": "cad/printer_bed/LH_deck_four_bolt.stl",
+  "sha256": "616f23702674b76062663489ee7c4ebc50781593bf8434c532ffeb465225f689",
+  "triangles": 3020,
+  "dimensions_native": [
+    202.5800018310547,
+    186.0,
+    14.199999809265137
+  ],
+  "scale_m_per_native_unit": 0.001,
+  "scale_evidence": "Provisional millimetres: CAD right-hand mounting-bore spacing 170 mm, manual stereo bolt-head spacing 171.95 mm. Physical features and nominal plate opening agree in scale.",
+  "plate_recess": {
+    "center_cad_mm": [
+      72.58,
+      66.0
+    ],
+    "opening_at_z_6_2_mm": [
+      128.36,
+      86.08
+    ],
+    "rim_max_z_mm": 14.2
+  },
+  "registration": {
+    "status": "rough candidate, not validated",
+    "stereo_report": "outputs/contact_camera/20261006T184603745832Z/report.json",
+    "frame_index": 11,
+    "joint_inspection": "outputs/gripper/20261006T183723393408Z_inspect.json",
+    "features": [
+      "near right bolt head",
+      "far right bolt head",
+      "far middle oblong slot approximate center"
+    ],
+    "cad_features_m": [
+      [
+        0.016579999999999998,
+        0.008,
+        0.0055
+      ],
+      [
+        0.18658000000000002,
+        0.008,
+        0.0055
+      ],
+      [
+        0.19408000000000003,
+        0.124,
+        0.0032
+      ]
+    ],
+    "pixels_b_sensor": [
+      [
+        292.5,
+        239.0
+      ],
+      [
+        369.0,
+        354.0
+      ],
+      [
+        528.0,
+        340.0
+      ]
+    ],
+    "pixels_c_sensor": [
+      [
+        151.5,
+        282.5
+      ],
+      [
+        284.5,
+        396.5
+      ],
+      [
+        434.0,
+        381.0
+      ]
+    ],
+    "points_camera_b_m": [
+      [
+        -0.01212995975878982,
+        0.007992695571202295,
+        0.22680148702435998
+      ],
+      [
+        0.04090474340574024,
+        0.10282314466653283,
+        0.36007110815816135
+      ],
+      [
+        0.15316118818292843,
+        0.08495032023211559,
+        0.33348213471304705
+      ]
+    ],
+    "max_stereo_reprojection_error_px": 0.16912095051413756,
+    "rigid_fit_errors_m": [
+      0.00082485064837196,
+      0.0015984724048986227,
+      0.0009871669345162576
+    ],
+    "T_camera_b_cad_candidate": [
+      [
+        0.3156783752175112,
+        0.9485164051296185,
+        -0.02576417318714887,
+        -0.025296850466804806
+      ],
+      [
+        0.5501707662058899,
+        -0.16084642166702193,
+        0.8194147647250069,
+        -0.003966955107829684
+      ],
+      [
+        0.7730842718827335,
+        -0.27284621646066415,
+        -0.5726217344204146,
+        0.219861477555378
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "T_base_cad_candidate": [
+      [
+        -0.018266486343458233,
+        -0.9986755707570386,
+        0.04809823125403792,
+        0.16077824487381265
+      ],
+      [
+        0.9997976475902034,
+        -0.018650106226008916,
+        -0.007539059016456352,
+        0.31775338508119005
+      ],
+      [
+        0.008426111188401482,
+        0.0479507863424707,
+        0.9988141582593723,
+        0.027043556829361798
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "assumptions": [
+      "Manual image landmarks; bolt-head centers are used for mounting-bore axes.",
+      "Bolt-head center height assumed 5.5 mm above CAD datum; slot at 3.2 mm.",
+      "Oblong-slot center and printed geometry not independently verified."
+    ],
+    "unresolved": [
+      "Independent elevated rim/plate landmarks must validate this pose; current three-feature fit is insufficient.",
+      "Full deck-height/image correspondence and RGB/stereo discrepancy remain unresolved.",
+      "Separate tall container, printer bed/gantry, installed tool and cable volumes are not supplied by this STL."
+    ]
+  },
+  "motion_ready": false,
+  "render": "outputs/holder_cad/deck_views.jpg"
+}

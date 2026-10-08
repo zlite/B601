@@ -3,6 +3,595 @@
 A gentle wrist wave while reading RGB images from the wrist-mounted Luxonis OAK-1.
 Uses Seeed's motorbridge driver and Luxonis DepthAI v3. No recalibration or zero-position writes.
 
+## Current printer teaching and rail demo (October 7, 2026)
+
+Run `.venv/bin/python printer_teach.py` and open `http://127.0.0.1:8765`.
+The controller starts with the arm disabled. The page supports relative leader
+teaching, held-arrow rail jogging, and the confirmed same-scene Demo: rail
+300 mm left and back, then open-jaw plate approach and return, repeating until
+Stop. Pause holds immediately; Stop completes the current cycle at rest.
+The demo does not grasp or lift the plate. Fresh resting-pose, scene and rail-sweep
+confirmations are required each start. Changed bed positions require new targeting.
+
+The latest bounded trial returned to rest with motors disabled and rail X=0.
+The repeating demo is stopped. Three smoothed motion sections replace seven
+stopped chunks, with maximum checked joint-path deviation 0.071 degrees.
+Fresh concurrent motor reads reduced the measured full arm cycle from 129.24 s
+to **114.14 s** (11.7% less time). Median control-loop interval fell from
+50.86 ms to 11.68 ms; the new 95th percentile was 16.60 ms and maximum 88.57 ms.
+Peak tracking error was 0.981 degrees against the unchanged 1.5-degree fault
+limit. Motor gains, speed limits and acceleration limits were unchanged in this
+comparison. Rail-return-to-arm-motion measured 2.07 s, including the fresh
+entry geometry check. This is one measured cycle, not a long-duration reliability
+claim. Its summary is versioned at
+`outputs/printer_replay/ui_demo/20261008T011256235081Z/summary.json`.
+
+The optional pinned native reader, build command, freshness behavior and
+read-only benchmark are documented in [native/motorbridge/README.md](native/motorbridge/README.md).
+Without that build, the controller uses the original sequential reader.
+The exact reviewed route and collision inputs/results under
+`outputs/printer_replay/smooth_demo_v1/` are explicitly versioned so the trajectory
+is preserved. Bulk session logs, camera recordings and compiled binaries remain
+local. Geometry files retain their source hashes, including workstation paths:
+a different checkout location or changed geometry needs fresh evidence rather
+than edited hashes. The existing pinned vendor geometry and isolated CAD
+environment are still required for the demo entry checker.
+
+For an attended single-cycle test, use
+`.venv/bin/python scripts/printer_demo_client.py start --once` after verifying
+the same scene and clear movement area. It maintains the attendance heartbeat
+and requests stop at the end of the first cycle. No client automatically resumes
+a paused trial. The sections below preserve chronological development history;
+older pending-state descriptions are superseded by this current status and
+`config/printer_resume_state.json`.
+
+## Relocated workspace and Arducam overview (October 6, 2026)
+
+The operator confirmed that only the arm location and tripod camera changed;
+the wrist camera, fingers and their mounts stayed unchanged. Existing plate,
+holder and table references remain historical. The relocation marker remains
+active, and both plate-hover and the standalone old survey route check it before
+opening hardware. No new motion path has been validated.
+
+The tripod is now an Arducam Global Shutter 2.3MP with a replacement fisheye lens,
+serial `Arducam_20260506_0001`. `config/cameras.json` selects its stable V4L2 path,
+MJPEG at **1920×1080, 30 fps**. USB 3 is required: the initial USB 2 hub connection
+advertised only 640×480 at 10 fps. Moving it to a 5 Gbps connection exposed the
+full modes. The configured USB 3 path/serial deliberately fails closed on a
+different device or USB 2 fallback; the backend does not silently resize frames.
+Manufacturer mode table:
+https://www.arducam.com/arducam-2-3mp-color-global-shutter-usb3-uvc-camera-module-with-onboard-isp-for-robotics-and-machine-vision.html
+
+`uvc_camera.py` supplies an overview image with its native aspect ratio and
+advancing driver timestamps. It provides no camera matrix, distortion parameters
+or metric pose; OAK-1 calibration must never be applied to these fisheye pixels.
+V4L2 driver-buffer age is not independently measured exposure-to-display latency.
+The timestamp comes from OpenCV's V4L2 `CAP_PROP_POS_MSEC` implementation:
+https://github.com/opencv/opencv/blob/4.12.0/modules/videoio/src/cap_v4l.cpp
+
+Start the read-only camera/arm dashboard with `.venv/bin/python pairing_dashboard.py`
+and open `http://127.0.0.1:8765`. It has no motor activation/movement endpoint.
+Stop it before any other device client. For a new stationary image record, run
+`.venv/bin/python scripts/workspace_capture.py`; this camera-only tool creates a
+unique folder under `outputs/workspace_revalidation` and never clears the motion
+block. Fresh tripod frames are retained at native 1080p; wrist images retain their
+existing calibrated sensor coordinates and separate upright previews.
+
+The first successful dual-camera record is
+`outputs/workspace_revalidation/20261006T183131149101Z/report.json`: 55 sampled
+tripod frames and 20 wrist frames, median driver/SDK frame ages 16.3 ms and
+101.0 ms respectively. Neither reference tag decoded at the resting pose.
+`outputs/contact_camera/20261006T182403188657Z/report.json` separately preserves
+12 stationary wrist RGB/stereo triplets; none established a tag pose.
+Read-only inspection found all six arm drives and the gripper disabled, with
+gripper position −1.15238 rad. The existing Python environment's broken symlink
+into `/tmp` was repaired to point to its already installed local interpreter.
+
+The operator subsequently confirmed that the target or task has changed. The
+new object, interaction and destination are pending; do not assume the old plate
+pickup task or reacquire its geometry as the new task. Define the new task before
+planning its workspace measurements or empty-jaw rehearsal. The new view includes
+nearby gantry structure; old clearances and trajectories are not evidence for this
+workspace. Fifteen focused camera, pairing and relocation-gate tests passed.
+
+The new target was then identified as a 96-well plate on a 3D printer bed, with
+AprilTag **36h11 ID 18** in front. `config/printer_bed_target.json` records the new
+identity separately from the historical tag-0/contact configuration. The tag's
+physical black-square size and requested plate operation are awaiting confirmation.
+Current wrist RGB and both mono cameras decoded ID 18 in all 12 triplets saved in
+`outputs/contact_camera/20261006T183713670011Z/report.json`. Independent stereo
+triangulation, without a tag-size assumption, puts its center approximately
+200 mm from camera B and its four side lengths at 17.9–18.4 mm. This is an
+observation, not a substitute for physical size confirmation or a bed/plate pose.
+The center's stationary coordinate standard deviations were 0.023, 0.056 and
+0.110 mm; maximum stereo reprojection error was 0.711 px. Details are in that
+folder's `tag18_stereo_observation.json`.
+
+Fresh native-resolution RGB/overview evidence is in
+`outputs/workspace_revalidation/20261006T183755006277Z/report.json`. The dashboard
+now annotates visible tags even when they are not the old metric reference.
+Discovery with `contact_camera_probe_v2.py --all-tags` no longer assigns the old
+60 mm size to an unknown tag. A metric capture requires an explicit paired
+`--tag-id` and `--tag-size` in metres (or the original default tag definition).
+Twelve focused probe, stereo geometry and pairing tests passed. Arm and gripper
+readback remained disabled; no motion was commanded and the relocation block
+remains in place. The printer's bed and gantry introduce geometry absent from
+the old tabletop routes.
+
+The operator confirmed ID 18's black square is **18 mm** and requested a lift
+and replacement at the same position, with a collision-aware side approach.
+The 12 stereo-only tag fits pass their size, reprojection and rigid-square
+checks, but RGB/stereo comparison fails: the 640×360 RGB tag pose differs by
+about 21 mm. The later 1280×800 RGB observation also differs from stereo in
+range. Do not treat the combined metric check as passed or use this discrepancy
+as permission to relax thresholds. Lower-exposure stereo evidence is saved in
+`outputs/contact_camera/20261006T184603745832Z`.
+
+`printer_approach.py` is a new **offline-only** plate-frame IK candidate generator.
+It does not open hardware and has no execute option. It generates retreat/rise,
+alignment outside the fixture, side-entry and a 40 mm noncontact standoff,
+plus the reverse sequence. Parallel-jaw orientation symmetry avoids a spurious
+180-degree wrist flip when the newly seeded grid axes differ from the old grid.
+The current candidate has 248 waypoints, maximum adjacent joint step 0.759°,
+and large overall changes (approximately 37° base and 41° shoulder), so fingertip
+clearance alone is insufficient. Candidate and manual 96-well image registration
+are under `outputs/workspace_revalidation/20261006T183755006277Z/`.
+
+The seven missing stock-arm collision meshes were retrieved from the same pinned
+Seeed commit as the URDF. Their hashes/bounding boxes are recorded in the candidate.
+A 1,344-sample stock-link box check clears a **provisional plate volume only**
+with 15 mm obstacle inflation; this is not complete scene or tool validation.
+Printer bed, fixture, adjacent container, gantry and installed tool/cable volumes
+still require registration/verification. The corrected operator-supplied deck is
+retained at `cad/printer_bed/LH_deck_four_bolt.stl`, with provenance, hash, dimensions
+and correspondence evidence in `LH_deck_four_bolt.inspection.json` beside it.
+Its plate recess, adjacent square support and mounting pattern match the scene.
+The mesh bounds are 202.58 × 186 × 14.2 native units; millimetres are provisionally
+supported by a 170 mm CAD mounting-hole spacing versus approximately 171.95 mm
+between manually marked stereo bolt-head centres. The plate opening at CAD
+z=6.2 mm is 128.36 × 86.08 mm; the raised rim reaches z=14.2 mm.
+
+A three-feature stereo registration candidate has maximum stereo reprojection
+error 0.17 px and maximum rigid-fit residual 1.60 mm. These residuals do not
+validate the registration: bolt-head height is assumed, one oblong-slot centre
+is manually approximated, and elevated rim landmarks still need independent
+verification. The tall container and printer gantry are not included in the STL.
+Six-view inspection of the earlier, superseded bracket export is preserved as
+historical evidence; it is not the configured deck. Corrected deck views and a
+provisional stock-arm/deck bounding-box diagnostic are in `outputs/holder_cad/`.
+`config/printer_bed_target.json`
+records these unresolved items and stays `motion_ready: false`; the old relocation
+marker remains. Twenty-two focused tests pass. No motors have been enabled and
+no physical rehearsal, grasp, lift or replacement has been attempted in this setup.
+
+The operator measured the plate top **10 mm above the holder rim**, confirmed
+there is no removable lid, and said the printer bed stays still during the pickup.
+The bed may occupy a different Y position between attempts. Every attempt must
+therefore reacquire a fresh wrist stereo reference and check plate seating; an
+old saved bed position is never an executable target. Bed-attached geometry must
+move with the observed bed; the fixed printer gantry must not.
+
+The October 6 19:20 UTC capture in
+`outputs/contact_camera/20261006T192021891418Z/` has 11 valid stereo tag fits.
+The tag moved 52.98 mm relative to the wrist while subsequent arm readback was
+essentially unchanged. All earlier printer approach candidates are consequently
+historical and explicitly invalid for the current scene. The operator's 10 mm
+height plus the preliminary CAD registration also disagrees with the old RGB
+plate seed by 8.73 mm in centre position; the tag-to-plate transform is not yet
+validated.
+
+The offline approach solver now aligns the **measured** contact-pad direction
+instead of the nominal 45-degree bend. `printer_grasp_clearance.py` adds sampled
+pad-volume checks and a full-face contact-height diagnostic. The earlier
+8 × 61 mm pad calculation is superseded: the operator confirmed **both installed
+pads are 60 mm long, 10 mm high and 3 mm thick, flush with the printed finger
+ends**. A 10 mm pad has zero full-face height tolerance in a nominal 10 mm band;
+one degree of pitch adds approximately 1.05 mm to its vertical extent. A pad
+projecting above the plate may permit partial-face contact, but its contact area,
+grip and rim clearance still require validation. Historical pad-only trajectory
+checks do not validate the new geometry or the displaced bed.
+
+The supplied `cad/grippers/B601_clean_braced45_assembly.step` has explicit mm
+units. `cad/grippers/inspect_step.py` extracts the two rigid fingers into 28
+conservative section boxes; `gripper_cad.py` adds two measured pad boxes from
+`cad/grippers/installed_pads.json`, replacing the STEP's 61 × 8 × 1 mm pads.
+The reference plate in the STEP is excluded from the robot collision model.
+At the same rigid-body opening the extra rubber reduces the gap by 4 mm relative
+to the CAD pads. This is not a measurement of the current open gap.
+
+Distal pad ends are placed at CAD X = −32.5 mm; vertical centering on the plastic
+face is still a hypothesis. Stereo landmark registration is also provisional.
+The candidate in `outputs/gripper_cad/installed_pad_registration_candidate.json`
+brackets center/upper-seam landmark hypotheses; this is not a certified error
+bound. It excludes the gripper housing, camera mounts, cables and self-collision.
+The earlier nominal-pad and tool/deck reports are marked superseded. No motion
+is enabled by importing CAD or passing an offline box check.
+
+`pairing_dashboard.py --printer-target` selects a read-only stereo tracking mode.
+`printer_target_tracker.py` rejects stale/lost/restarted/displaced references and
+permits a base-frame tag estimate only with fresh stationary joint history. It
+cannot yet localize the plate or authorize motion. The stereo mode uses a separate
+DepthAI 2.32 camera subprocess because the DepthAI 3 generic three-camera pipeline
+crashed during sensor startup. The normal RGB-only dashboard mode is unchanged.
+Inspect the current observation with
+`.venv/bin/python scripts/dashboard_read.py --brief --target`.
+
+The small-tag retry (`detect_small`) recovered the missed detection in all 12
+saved stereo pairs without relaxing the metric checks. The live 15-second check
+at `outputs/printer_tracking/20261006T193318873835Z.json` observed 75/75 valid
+samples, with maximum observation age 149 ms. This validates detection/freshness,
+not grasp precision: the small tag's raw orientation varies enough to trigger
+conservative reference invalidations even during this stationary check. The
+focused geometry, tracking, capture and relocation-gate tests pass. No arm or
+rail motion has been commanded. The operator confirmed the gantry/toolhead
+also stays stationary during trials and supplied the finger CAD described above.
+
+The operator also identified a later phase: the arm base rides on a stepper-driven
+rail controlled by a computer-connected GRBL/Arduino board, with an X+ limit
+switch. Rail homing and positioning are deferred until stationary plate pickup
+is reliable. No rail commands have been sent. Controller settings, limit polarity,
+homing direction, travel limits and the rail-axis/base transform must be measured
+before coordinated rail/arm motion. Rail position must update all workspace
+transforms and collision checks; existing references apply only to the current
+stationary rail position. This deferred work is recorded in the target config.
+
+### Continuing from the operator-selected pose, October 6
+
+The operator repositioned the arm and relocated tag 18. Earlier base-frame
+targets and paths remain invalid. `scripts/printer_stationary_capture.py` now
+brackets every camera exposure with read-only arm/gripper telemetry and rejects
+captures with arm/jaw movement, missing time coverage or long readback gaps.
+The accepted capture is `outputs/contact_camera/20261006T205427296547Z/`.
+Its joint report verifies a stationary arm and gripper at −1.15243 rad.
+The camera probe records exposure timestamps on the host monotonic clock and
+can fit B/C stereo independently of RGB visibility. It never commands motors.
+
+At the new viewing angle 2000 us overexposed tag detail in the mono cameras.
+1000 us, ISO 100 recovered 10/12 offline stereo fits; live tracking then gave
+50/50 valid samples in `outputs/printer_tracking/20261006T205755527700Z.json`.
+The dashboard uses that exposure. Small-tag orientation remains noisy, and
+successful detection does not establish a validated tag-to-plate transform.
+
+The elbow starts within its nominal model range but inside the extra 0.005 rad
+planning margin. The offline solver admits this measured start only with
+inward recovery: bounds tighten as the joint recovers and cannot reopen.
+No nominal joint limits are widened. A 1.2 rad offline search radius finds a
+continuous candidate; the former 0.8 rad local search bound was too narrow.
+The return candidate ends at the raised outside-fixture pose, avoiding a return
+to the near-limit starting pose. This is an offline IK change, not permission
+to energize motors or evidence of calibrated motion accuracy.
+
+The retained offline candidate is
+`outputs/contact_camera/20261006T205427296547Z/side_approach_current_pose_standoff65_candidate.json`.
+It ends at a 65 mm noncontact standoff above the provisional plate plane.
+The more aggressive 40 mm descent intersected an oversized container hypothesis
+and is not the selected candidate. Visible stereo points place the container
+top near 45 mm above the provisional CAD datum; the revised diagnostic uses a
+55 mm-high, 62 × 62 mm envelope, plus the existing 15 mm obstacle inflation.
+That local finger/container check passes with a 9.2 mm separating-axis gap
+beyond inflation. The provisional deck check also passes. Neither check covers
+the entire scene: holder registration, installed tool details, self-collision,
+the gantry/toolhead, surrounding structures and rail still require validation.
+The plot `current_pose_trajectory_review.png` shows the substantial arm sweep.
+No motion has been commanded, and the relocation marker remains set.
+
+The stock Ender 3 assembly is retained at `cad/ender3/Ender3.STEP`, from
+Creality commit `88c7758cea9d0d00a54fdb238bedb3b33425f409`. Its 311 located
+components and selected structural bounds are in `inspection.json` and
+`structural_reference.json`. These are unregistered reference geometry:
+the bed travel and gantry height in the STEP are not the current machine's
+positions, and the custom syringe drive, needle and rail are absent.
+`inspect_step.py` preserves repeated instances and resolves their product names.
+
+A small offline wrist-bend observation candidate was also checked using stock
+triangle meshes. The saved folded starting pose has a modeled link2/link5
+surface intersection; link2/link4 separation during that candidate is only
+about 0.6 mm. This does not establish physical contact, but prevents declaring
+the move clear. The camera cannot resolve that narrow gap. The operator was
+asked whether there is visible physical clearance, without moving the arm.
+`scripts/stock_mesh_self_check.py` provides a reproducible FCL diagnostic of
+precomputed collision-mesh transforms. It excludes adjacent engineered joints,
+checks all other pairs, and never authorizes motion. It checks triangle surfaces,
+not solid containment, and does not cover the custom tool or external obstacles.
+
+The full 65 mm-standoff candidate was subsequently **rejected** by the stock
+self-check: 295 of 1,577 interpolated samples have less than 5 mm separation,
+and 236 samples report link2/link5 surface intersection, all during the initial
+`retreat_and_raise` stage. See `side_approach_stock_self_check.json` in the
+accepted-capture directory. The earlier fixture clearance result does not make
+this trajectory usable. A different initial unfolding motion is required.
+
+Fresh readback at 21:26 UTC differs from the saved capture by about 1.17 degrees
+at joint 1 and 0.42 degrees at joint 4. The ten-second sample was stationary,
+but only 8/50 tag observations were valid (tag clipped in the wrist view).
+Historical tracking success and saved paths must not be treated as current
+validation. See `outputs/printer_tracking/20261006T212600370966Z.json`.
+
+From that fresh readback, an offline alternative first reduces raw joint 3 by
+2 degrees, then raw joint 4 by 8 degrees. This raises the modeled fingertips
+about 61 mm. Its 101 stock-mesh samples show no surface intersections, but the
+first 15 samples remain inside the 5 mm diagnostic margin while unfolding.
+This is a promising observation candidate, **not a cleared movement**: physical
+starting clearance, complete tool geometry and external swept clearance remain
+unverified. Reports are `local_observation_mesh_input.json` and
+`local_observation_stock_self_check.json` in the accepted-capture directory.
+
+### Return to normal rest, October 6 at 21:36 UTC
+
+The operator confirmed that the wrist housing physically touched the long beam
+in the previous pose, then manually returned the arm to normal rest. The new
+stationary, disabled-arm/gripper capture is
+`outputs/contact_camera/20261006T213644834808Z/`. Tag 18 is outside the wrist
+view (0/12 detections), which is expected at rest and is not itself a reason to
+reuse an old target pose or approach.
+
+An offline search candidate unfolds the elbow 30 degrees, turns the base about
+72 degrees, then aims the wrist camera toward the historical target bearing.
+`rest_search_mesh_input.json` and `rest_search_self_check.json` record 1,703
+stock-mesh samples with no surface intersections. The first 16 samples retain
+less than 5 mm separation as the folded arm begins opening. A coarser 171-pose
+finger/pad check reports no sub-5-mm proximity to stock links 0–5. This does not
+validate the camera housing, gripper motor, cables or external scene. It is
+not an execution plan, and the tag must be reacquired before plate targeting.
+Several wrist-steering alternatives were rejected because of modeled
+self-intersection or insufficient clearance.
+
+The operator adjusted the ArduCam twice; the rear elbow and adjacent bench
+are now visible. Earlier front views are retained. This camera remains an
+uncalibrated overview; no metric clearance is inferred from its fisheye pixels.
+
+The first physical observation trial, `20261006T215822174941Z` under
+`outputs/printer_observation_lift/`, lifted the elbow eight degrees at a
+1 degree/s cap, then returned along the same segment. All six drives held
+position; gripper and rail were untouched. Maximum elbow tracking error was
+0.259 degrees, and motor shutdown was independently verified. The wrist bend
+settled about 0.66 degrees after shutdown, so subsequent plans use fresh joints.
+This validates one bounded lifting segment, not a plate approach or pickup.
+
+The updated offline viewing route unfolds the elbow 20 degrees, raises the
+shoulder 12 degrees, then turns and aims the camera in separate small steps.
+Its settled-start evidence is in `outputs/printer_observation_route/settled_20261006/`.
+The stock gripper base is included as a fixed part of link6. A conservative
+camera enclosure bound and the supplied finger/pad hypotheses were checked
+separately. Printer registration, mount/cable envelopes, and grasp registration
+remain incomplete. `printer_observation_route.py` defaults to preview; execution
+requires fresh images to be reviewed at each stopped waypoint. Missing review
+or a camera freshness failure triggers retrace; motor faults use torque-off
+cleanup. This observation controller does not clear the workspace pickup block.
+
+Staged run `20261006T221343056382Z` completed seven waypoints: elbow opening
+20 degrees, shoulder lift 12 degrees, and base rotation to 20 degrees. Images
+were reviewed between segments. At the last stop the raised rear elbow reached
+the lower overview-image boundary, so further rotation was canceled. Controlled
+retrace to rest and disabled drives were verified. Maximum tracking error was
+0.264 degrees. No grasp, gripper or rail command occurred, and the target tag
+was not reacquired. The operator was asked to move the ArduCam farther away and
+higher to cover the complete turning area. The arm settled again after power-off;
+the saved route must be regenerated from fresh joints before another execution.
+Evidence and images: `outputs/printer_observation_route/settled_20261006/20261006T221343056382Z/`.
+
+The operator cannot move the ArduCam farther back or higher; its placement is now
+fixed. The compact observation run at
+`outputs/printer_observation_route/compact_fixed_camera/20261006T222626191083Z/`
+completed 16 stops but aborted during the final wrist bend: roll drifted 0.571°
+from its fixed target, beyond the 0.55° envelope. This caused torque-off cleanup,
+not controlled retrace. The arm settled under gravity; a separate read-only
+inspection confirmed all six drives disabled. Hold compliance is a possible
+cause, not a completed diagnosis. The user manually returned to rest, then
+rotated the follower to align with the newly connected leader. Old route starts
+are invalid. No pickup or rail operation was performed.
+
+`printer_teach.py` provides an attended approach demonstration panel at port
+8765, starting with all motors disabled. It reuses the existing relative,
+hold-to-follow controller with the existing 18°/s, 60°/s² first-three-axis profile
+and 24°/s, 80°/s² wrist profile. Model/local travel limits and motor guards remain
+active. Teaching captures the leader reference on the first press and preserves
+it through startup, limit saturation and ordinary pauses. A resumed press requires
+the leader's mapped request to match the held follower within 1°; the explicit
+Re-align button accepts the current pair of poses during powered pause without
+moving the follower. It never matches old absolute encoder origins. Release
+pauses with motor power on. Motor
+power removal requires physical support; faults may still remove torque.
+The first pass stops before plate contact; gripper control remains inactive.
+The printer stereo runtime and current ArduCam feed are used without moving the
+overview camera. The revised panel/controller passed 76 combined rail, teaching,
+axis-following, wrist-following and observation tests; the live page was visually
+checked. Teaching uses 20 ms smoothing with braking at the requested target to
+avoid command overshoot, and a 5 ms leader polling pause instead of 20 ms.
+Other clients retain their existing mapping and trajectory policy. Motor
+feedback polling, gains, speed limits and fault checks remain unchanged.
+
+The October 7 demonstration showed additional alignment shifts at startup and
+re-press (about 3.1° on joint 4), rather than within the second uninterrupted hold.
+Joint 3 also repeatedly reached its folded-end model limit after startup/re-press
+discarded leader movement. The latest reference policy removes those silent
+changes; it does not expand joint ranges. Dynamic motor tracking lag reached
+about 6° during the earlier trial and still needs a measured physical retest.
+No physical gain/scale correction was inferred solely from these encoder logs.
+
+The October 7 session `20261007T231900689788Z` isolated the reported joint-2
+descent problem to the shoulder's local 60° teaching window. The leader requested
+128.4° while both the command and measured follower stopped at a 60° excursion.
+`teaching_profiles()` now allows the shoulder's full model-defined range by
+using a 180° local window intersected with the existing calibrated URDF bounds
+and endpoint margin. Shoulder speed remains 18°/s and acceleration 60°/s²;
+tracking checks, other joints' ranges and hardware limits are unchanged.
+55 teaching/axis/rail tests passed, including the recorded 128.4° request,
+trajectory limits and saturation at the model endpoint without reference drift.
+After a supported motor-off restart, the operator confirmed the shoulder fix
+worked and recorded the successful approach in `20261007T232631093383Z`.
+Diagnosis: `outputs/printer_teach/20261007T231900689788Z/joint2_limit_diagnosis.json`.
+
+`printer_demo_replay.py` subsequently completed a staged open-gripper approach
+and autonomous return using the cleaner demonstrated withdrawal in reverse.
+The operator confirmed the rail, bed, plate/holder and syringe/gantry had not
+moved. The checked route uses 3°/s motion with fresh wrist/overview images,
+stationary-rail checks, tracking limits and camera review at each stopped stage.
+It reverses the identical executed curves for withdrawal, avoiding a dense
+telemetry refit that made an earlier return impractically slow. An earlier
+0.5° wrist pacing stall was also corrected; interrupted pacing holds for review.
+31 relevant tests passed. The successful run is
+`outputs/printer_replay/20261007_demo/corrected_return_route/20261008T000046228761Z/`.
+All four approach stages and the return completed; all arm motors were verified
+disabled. Peak recorded joint error was 0.963°, and return motion took 158.5 s.
+Modeled wrist travel fell from 2.083 m to 1.058 m (49%); summed joint travel fell
+38%. These are path/model comparisons, not a claim of a globally shortest path.
+The plate was not grasped or lifted. This same-scene trial does not validate
+changed bed Y, autonomous rail positioning, metric scene registration or a grasp.
+Replays require fresh starting-pose/scene checks; saved angles are not restart
+commands. Stock checks include a monotonically opening tight folded start;
+finger/camera registrations remain provisional.
+
+The teaching panel now also has an attended **Demo** loop: confirm the resting
+pose, unchanged scene and clear sweep, move the rail 300 mm left and back,
+execute the open-jaw approach/return, and repeat until stopped. **Pause now**
+holds immediately; **Stop after this cycle** finishes at rest. Loss of the
+owner heartbeat, camera freshness or rail readiness pauses execution and
+requires explicit resumption. Rail idle release remains configured with `$1=0`.
+
+The smoothed route in `outputs/printer_replay/smooth_demo_v1/` joins five middle
+curve pieces into one continuous section, leaving three stopped sections instead
+of seven. The maximum change from the prior checked curves is 0.071° per joint;
+1,428 stock/tool/camera samples were checked. Local timing caps joint velocity
+at 12°/s and acceleration below the existing 60/80°/s² limits, while feedback
+pacing keeps the 1.5° tracking fault limit. The first complete smoothed arm cycle
+took 130.0 s versus 162.9 s with the prior 4× profile; actual speed depends on
+servo tracking. This remains an open-jaw demonstration, without grasp or lift.
+
+Fixed-route validation, mesh loading and motor configuration happen before the
+rail moves and are reused across cycles. After rail return, the controller reads
+the actual disabled arm pose and checks a refreshed entry from that pose using
+the same mesh geometry and margins (about 1.5 s offline). It verifies that pose
+again before enable. Passive wrist shifts during rail travel do not invalidate
+the demo; the folded-arm rail interlock remains active. The completed return
+ends at the original checked home pose, preventing accumulating wrist offset.
+The updated live cycle measured 2.24 s from rail return to arm motion and
+129.24 s for the arm approach/return; cycle two started automatically. Evidence:
+`outputs/printer_replay/ui_demo/20261008T004919406737Z/summary.json`.
+There are no fixed handoff/intercycle delays or demo duration cutoff. Hardware,
+scene, freshness, tracking and explicit-stop interlocks still apply. Changed
+bed Y and autonomous pickup remain outside this same-scene demo's scope.
+
+Attended rail jogging is now available in the teaching panel. The operator
+confirmed unchanged full-step hardware and the limit switch at the right end
+of the ArduCam view: Left maps to positive X, away from the switch. `rail_jog.py`
+uses the separate physical USB path ending `1.2:1.0-port0`, verifies GRBL 1.1 and
+the inspected settings, and streams 2 mm incremental `$J` requests at 1920
+mm/min (requested 32 mm/s). It replenishes collinear moves during Jog rather
+than waiting for Idle between segments, so GRBL can blend their velocity.
+Only one command may await acknowledgement; the total commanded endpoint is
+limited to 18 mm ahead of the last reported position, including that command.
+The 2 mm segments keep this within nine planner blocks.
+At the operator's request, the 25 mm per-hold cap was removed: a held arrow
+continues motion while fresh heartbeats and all interlocks remain valid. Only
+the outstanding 18 mm buffer is bounded; release cancels it. Tests exercise both
+directions for 15 seconds past 400 mm, followed by release. The rail is still
+unhomed and only the right end has a verified switch; the operator must stop
+before either end or obstacles. The operator confirmed the 8 mm/s trial was
+smoother, requested 16 mm/s, then requested another doubling to 32 mm/s.
+`scripts/rail_speed_profile.py --apply` sets `$110=1920` and `$120=40` while
+Idle, verifying all other settings
+unchanged. Doubling acceleration preserves the nominal 0.8 s ramp-up time.
+The normal teaching worker only verifies settings. Nominal stopping distance
+at 32 mm/s is 12.8 mm before
+transport/heartbeat latency and step quantization; this is not measured physical
+stopping distance. The hardware still has only 5 steps/mm (0.2 mm per step), so
+software blending cannot supply microstepping. The old 1 mm F120 commands
+often completed in about 0.2 seconds including host latency. Standard 16 MHz
+GRBL with AMASS caps the slowest timer period at 65535 cycles and overdrives
+by at most 8, implying about 30.5 steps/s (6.1 mm/s at this scale). That is a
+plausible explanation, not an identification of the installed firmware build.
+Even the new nominal acceleration/deceleration cannot be assumed physically
+accurate at such low pulse density. Microstepping and a new scale check remain
+needed. No physical speed or stopping-distance validation has yet occurred.
+Key release, loss of focus, heartbeat expiry, stale views or lost arm-rest
+interlocks cancel jogging. Cancellation is repeated after acknowledgement to
+handle GRBL ignoring a cancel received before entering its Jog state. Both
+arm following and rail jogging are mutually interlocked; rail jogging requires
+the arm rested with its motor power removed. `$1=0` requests driver disable at
+idle; this is a configuration check, not current or enable-pin feedback. The
+operator subsequently reported holding current between moves despite recorded
+`$1=0` and `$4=0`. Physical driver release is unverified and under investigation;
+the UI no longer claims confirmed power-off. Saved hardware is Uno/A4988 with
+standard GRBL enable on D8, active low. The October 7 photo identifies a CNC
+Shield V3.00; the driver IC is hidden by a heatsink and is not visually confirmed.
+The carriage releases when motor supply power is switched off. The operator
+measured EN/GND about 0 V even in confirmed Sleep, with 5V/GND about 5 V.
+At the operator's explicit request, superseding the earlier no-flash preference,
+the rail Uno was flashed with the latest official release, `1.1h.20190825`.
+AVRDUDE verified all 29,920 programmed bytes; the prior build reported
+`1.1h.20190830`. All 34 settings, coordinate offsets and startup blocks matched
+the pre-flash backup, so no settings restore was needed. Firmware, settings,
+release metadata and verification logs are in
+`outputs/rail/20261007T224432Z_firmware/`. The raw EEPROM read attempt returned
+flash bytes from this bootloader and is **not a usable EEPROM backup**; use the
+validated textual GRBL backup for settings recovery. Do not write either
+EEPROM-named binary back to EEPROM. No motion was commanded. Post-flash enable
+voltage and physical driver release were initially unverified after flashing.
+The operator subsequently tested the standalone Arduino successfully and replaced
+the CNC shield, keeping the same X driver and no microstepping jumpers. Fresh
+checks preserved the rail settings and found Idle with clear limit inputs.
+Attended arrow-key control resumed in session `20261007T231900689788Z`, and the
+operator confirmed the holding-current problem was solved after the trial.
+This is operator-confirmed physical release, not electronic current telemetry.
+During that investigation, run `printer_teach.py --rail-monitor-only`: rail
+jogs are rejected, but fresh Idle/Alarm status permits arm teaching. Loss of
+rail status or observed rail motion blocks/pauses arm following. The arm-button
+hint reports rail blocking or the unchecked support-and-clearance checkbox.
+26 rail/teaching tests passed, including monitor-only alarm, stale status,
+unexpected movement and jog rejection. Restart verified arm ready with rail
+Idle and no active limit input; holding-current diagnosis remains unresolved.
+Limits remain active, and there is no automatic unlock,
+homing, settings write in the teaching worker or absolute positioning. The rail remains unhomed;
+reported X is only a relative controller coordinate. Startup allows the Arduino
+boot banner to finish before identification. Rail events are saved to `rail.jsonl`.
+During the operator's first rail trial, the right-end switch produced ALARM:1.
+That contact requires physical clearance and a fresh controller/switch check
+before jogging resumes. It is not treated as a calibrated home position.
+
+The initial 3°/s demonstration (`20261006T225818356204Z`) was too slow. Its
+incremental limit handling also caused joint 4 to retain a -33.3° offset after
+leader travel reached +78.5° beyond the local +45° bound. Recorded motor tracking
+was within about 1.02° of the commanded joint-4 target, pointing to software
+mapping rather than a direction reversal. Offline replay reproduces the old
+offset and removes it with the reference-preserving mapping: mean joint-4 command
+error relative to the bounded original reference falls from 18.94° to 0.43°.
+This is command simulation, not a new physical tracking result. Diagnosis:
+`outputs/printer_teach/20261006T225818356204Z/lag_and_alignment_diagnosis.json`.
+The corrected session `20261006T230514734367Z` starts disabled and displays live
+following error and limit warnings. No motor zero or direction sign was changed.
+The operator tested that session and confirmed it worked better, then stopped
+for the day. Motor disable and controller shutdown were verified; recordings
+are closed. Resume notes are in `config/printer_resume_state.json`, with measured
+trial statistics in the session's `operator_trial_summary.json`. After power-up,
+inspect fresh device identities, joints and cameras before starting another
+relative teaching session. No saved pose is a valid restart command. The full
+pickup demonstration, gripper mapping and adaptation to changed bed positions
+remain unfinished; the later same-scene open-gripper replay is described above.
+Automatic rail homing and task positioning remain deferred; the
+manual keyboard jogging added on October 7 is separate.
+
+Teaching records are in `outputs/printer_teach/<session>/`: the control event log,
+10 Hz snapshots of source readings and motor state, and approximately 2 Hz JPEGs
+from both views with source metadata. These are diagnostic snapshots, not
+synchronized metric imagery or an approved replay path. Recording failure or a
+30-minute session expiry blocks further following and requests powered pause.
+The workspace revalidation block remains in place. Start only after stopping
+other arm/camera owners: `.venv/bin/python printer_teach.py`.
+
+`scripts/stock_mesh_self_check.py` uses conservative AABB pruning before FCL
+surface checks. Its optional tests run in `.venv-cad` and compare classifications
+against analytic cube separations, including both intersections and near gaps.
+
+Existing rail work was found in `/home/chris/grbl-x-axis/calibration.json` and
+`resume-state.json`. Those records contain a 5 steps/mm measurement in full-step
+mode, an unfinished final homing pull-off/work-zero setup, and a proposed
+microstepping change. They label the switch X−, unlike the earlier X+ description.
+These are saved records, not a fresh controller inspection; reconcile hardware,
+settings and switch direction before rail commands. The operator wants later
+rail-position-guided target search: plan a clear arm lift and wrist-camera scan,
+acquire the expected tag, then refine the approach. Rail work remains deferred.
+
 ## Visual leader pairing workbench (October 2, 2026)
 
 ```bash
@@ -36,10 +625,16 @@ validation are not performed. Saved candidates are named
 References are not automatically loaded on a new run, and leader connection loss
 or a large discontinuity invalidates the current reference.
 
-The CH340 leader adapter is
-`/dev/serial/by-id/usb-1a86_USB_Serial-if00-port0`, with servo IDs 0–6 at 1 Mbaud.
-If Linux denies access, run `sudo setfacl -m u:chris:rw /dev/ttyUSB0` in your own
-terminal. This temporary permission may need repeating after USB reconnection.
+The CH340 leader adapter uses servo IDs 0–6 at 1 Mbaud. Its verified port is
+`/dev/serial/by-path/pci-0000:05:00.4-usb-0:3.2:1.0-port0` (currently ttyUSB1).
+The rail adapter has the same non-unique
+`/dev/serial/by-id/usb-1a86_USB_Serial-if00-port0` name, which was redirected to
+ttyUSB0 after reconnection on October 7. Do not use that shared alias for either
+controller. All seven leader servo replies were verified on the physical path
+before restarting teaching. If the leader is moved to another USB port, identify
+and verify its new path before changing the binding. If Linux denies access,
+grant the current account access to that verified device, not a guessed ttyUSB
+number. Temporary permissions may need repeating after USB reconnection.
 `leader_read.py` uses checksummed FashionStar monitor queries with per-query
 timeouts, reply-ID checks and no cached-angle fallback. The installed optional
 SDK 0.0.4 marks this unit's stationary -0.1° shoulder reading unreliable, so it

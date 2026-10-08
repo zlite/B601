@@ -1,8 +1,18 @@
 import json,tempfile,unittest
 from pathlib import Path
+from unittest.mock import patch
 from plate_training import holder_successes,require_ten_holder_cycles,require_current_workspace
 
 class TrainingEvidenceTests(unittest.TestCase):
+    def test_survey_relocation_gate_runs_before_hardware_startup(self):
+        import plate_survey
+        with patch('plate_training.require_current_workspace', side_effect=ValueError('relocation')), \
+                patch('plate_survey.Workbench') as camera, patch('plate_survey.AxisArm') as arm:
+            with self.assertRaisesRegex(ValueError, 'relocation'):
+                plate_survey.execute()
+            camera.assert_not_called()
+            arm.assert_not_called()
+
     def test_relocation_marker_blocks_old_workspace_routes(self):
         with tempfile.TemporaryDirectory() as directory:
             marker=Path(directory)/'workspace.json'

@@ -74,6 +74,41 @@ class ClutchedTarget:
         self.limited = desired <= self.low or desired >= self.high
         return self.position
 
+    def rebase_leader(self, leader):
+        if not math.isfinite(leader):
+            raise RuntimeError('Invalid leader position')
+        self.leader = leader
+
+
+class ReferencedTarget:
+    """Clamp output without changing the reference when leader travel saturates.
+
+    Returning the leader to its press-time reference returns the requested
+    follower pose, even after excursions beyond either follower limit.
+    """
+    def __init__(self, position, leader, sign, low, high):
+        if (not all(math.isfinite(v) for v in (position, leader, low, high)) or
+                sign not in (-1, 1) or not low <= position <= high):
+            raise ValueError('Invalid relative reference')
+        self.origin = self.position = position
+        self.leader_reference = leader
+        self.sign, self.low, self.high = sign, low, high
+        self.limited = False
+
+    def rebase_leader(self, leader):
+        if not math.isfinite(leader):
+            raise RuntimeError('Invalid leader position')
+        self.leader_reference = leader
+        self.origin = self.position
+
+    def update(self, leader):
+        if not math.isfinite(leader):
+            raise RuntimeError('Invalid leader position')
+        desired = self.origin + self.sign*(leader-self.leader_reference)
+        self.position = max(self.low, min(self.high, desired))
+        self.limited = desired <= self.low or desired >= self.high
+        return self.position
+
 
 def axis_bounds(geometry, selected, position):
     """Intersect local travel with model limits; permit only inward travel if
@@ -119,11 +154,25 @@ def starting_targets(q,limits):
 class AxisArm(FollowArm):
     def __init__(self):
         super().__init__()
+        from fast_feedback import configure_library
+        self.use_fresh_feedback=configure_library()
+        self._fresh_reader=None
         self.selected = 4
         self.original = {}
         self.enabled_indices = set()
         self.speed_limits = {i:p['measured_speed'] for i,p in enumerate(PROFILES)}
         self.measured_speed_limit = PROFILES[self.selected]['measured_speed']
+
+    def __enter__(self):
+        super().__enter__()
+        try:
+            if self.use_fresh_feedback:
+                from fast_feedback import FreshMotorReader
+                self._fresh_reader=FreshMotorReader(self.motors)
+            return self
+        except BaseException:
+            Reader.__exit__(self,None,None,None)
+            raise
 
     def select(self, selected):
         if self.active or selected not in range(6):
@@ -229,10 +278,23 @@ class AxisArm(FollowArm):
                     if m.get_register_u32(9,200) != old['timeout']:
                         raise RuntimeError(f'Joint {i+1} timeout restoration failed')
         finally:
+            if self._fresh_reader:self._fresh_reader.close();self._fresh_reader=None
             Reader.__exit__(self,*args)
 
 
 class AxisWorkbench(WristWorkbench):
+    target_mapper = ClutchedTarget
+    response_time = .08
+    brake_at_target = False
+
+    def make_target_mappers(self, baseline, leader, following, limits):
+        return {j:self.target_mapper(baseline[j], leader[j], self.follow_signs[j], *limits[j])
+                for j in following}
+
+    def update_take_up_reference(self, mapped, leader, following):
+        for j in following:
+            mapped[j].rebase_leader(leader[j])
+
     def __init__(self,pairing):
         super().__init__(pairing)
         self.pairing = Path(pairing)
@@ -385,10 +447,17 @@ class AxisWorkbench(WristWorkbench):
             self.record('fault', reason='motor_or_control_fault', error=str(error), torque_off_attempted=True)
             print(self.message, flush=True)
 
+    def run_auxiliary_motion(self, arm):
+        return False
+
     def run_motor(self, arm):
         revision = -1
         last = time.monotonic()
         while not self.stop.is_set():
+            if self.run_auxiliary_motion(arm):
+                revision = -1
+                last = time.monotonic()
+                continue
             with self.lock:
                 if self.disable_requested:
                     arm.disable()
@@ -492,8 +561,12 @@ class AxisWorkbench(WristWorkbench):
                     for j in controlled:
                         baseline[j] = previous[j]
                     trajectories = {j:WristTrajectory(origin[j], baseline[j], low=limits[j][0], high=limits[j][1],
-                        speed=PROFILES[j]['speed'], acceleration=PROFILES[j]['acceleration'], response_time=.08) for j in following}
-                    mapped = {j:ClutchedTarget(baseline[j], leader[j], self.follow_signs[j], *limits[j]) for j in following}
+                        speed=PROFILES[j]['speed'], acceleration=PROFILES[j]['acceleration'], response_time=self.response_time,
+                        brake_at_target=self.brake_at_target) for j in following}
+                    mapped = self.make_target_mappers(baseline, leader, following, limits)
+                    if not self.gate.valid(time.monotonic()):
+                        last = time.monotonic()
+                        continue
                     if newly_enabled:
                         arm.enable_group(previous)
                     self.powered = True
@@ -511,10 +584,10 @@ class AxisWorkbench(WristWorkbench):
                             raise RuntimeError('Arm did not settle at its starting pose')
                         settled = True
                     targets = {j:baseline[j] for j in controlled}
+                    if taking_load:
+                        self.update_take_up_reference(mapped, leader, following)
                     for j in following:
-                        if taking_load:
-                            mapped[j].leader = leader[j]  # ignore movements during load take-up
-                        else:
+                        if not taking_load:
                             targets[j] = trajectories[j].step(mapped[j].update(leader[j]), now-last)
                     if self.gate.valid(time.monotonic()):
                         arm.command_group(targets, take_up=taking_load)
@@ -526,6 +599,7 @@ class AxisWorkbench(WristWorkbench):
                         target_offset_deg={j+1:previous[j]-origin[j] for j in controlled},
                         actual_offset_deg=[a-b for a,b in zip(q,origin)], measured_velocity_deg_s=arm.joint_velocities_deg_s,
                         control_dt_s=now-last, leader_age_s=leader_age,
+                        mapped_offset_deg={j+1:mapped[j].position-origin[j] for j in following},
                         limited_joints=[j+1 for j in following if mapped[j].limited])
                 elif arm.active:
                     arm.command_group(previous)  # maintain motor watchdog and support without browser/leader
@@ -535,6 +609,7 @@ class AxisWorkbench(WristWorkbench):
                     'target_offset_deg':previous[j]-origin[j], 'actual_offset_deg':q[j]-origin[j],
                     'low_deg':limits[j][0]-origin[j], 'high_deg':limits[j][1]-origin[j],
                     'speed_deg_s':PROFILES[j]['speed'],
+                    'following_error_deg':mapped[j].position-q[j] if self.active_id and j in following else None,
                     'limited':bool(self.active_id and j in following and (mapped[j].limited or
                         min(abs(mapped[j].position-limits[j][0]), abs(mapped[j].position-limits[j][1])) < .05))}
                     for j in controlled]

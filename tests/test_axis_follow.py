@@ -7,7 +7,7 @@ import unittest
 from unittest.mock import Mock, patch
 
 from arm_geometry import Geometry
-from axis_follow import AxisArm, AxisWorkbench, PROFILES, axis_bounds, raw_signs, starting_targets, AxisGate, ClutchedTarget
+from axis_follow import AxisArm, AxisWorkbench, PROFILES, axis_bounds, raw_signs, starting_targets, AxisGate, ClutchedTarget, ReferencedTarget
 from wrist_follow import WristTrajectory
 
 PAIRING = Path('calibration/leader_pairing_20261002T202428971124Z.json')
@@ -340,6 +340,21 @@ class ControllerTransitionsTests(unittest.TestCase):
         with patch('time.monotonic',side_effect=lambda:self.tick):self.w.motor_worker(lambda:self.arm)
 
     def events(self,name):return [c.kwargs for c in self.w.record.call_args_list if c.args[0]==name]
+
+    def test_reference_preserving_mapper_survives_limit_in_motor_loop(self):
+        self.w.target_mapper = ReferencedTarget
+        self.w.response_time = .04
+        initial = self.q[3]
+        def scenario(n):
+            leader = [0.]*7
+            if 20 <= n < 70:
+                leader[3] = 80.  # Exceeds the unchanged 45 degree local limit.
+            self.w.publish('leader', angles=leader)
+        self.run_scenario(scenario, stop=180)
+        self.assertIsNone(self.w.fault)
+        self.assertAlmostEqual(self.q[3], initial, places=4)
+        self.assertLessEqual(max(abs(target[3]-initial) for _,target in self.commands),45.+1e-8)
+        self.arm.enable_group.assert_called_once()
 
     def test_release_holds_despite_moving_leader_resume_rebases_without_reenable(self):
         def scenario(n):

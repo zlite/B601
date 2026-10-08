@@ -1,0 +1,36 @@
+{
+  "source_url": "https://oak-files.fra1.cdn.digitaloceanspaces.com/OAK-D-Lite/DM9095_enclosure.STL",
+  "source_page": "https://github.com/luxonis/oak-hardware/tree/master/DM9095_OAK-D-LITE_DepthAI_USB3C/Mechanical",
+  "sha256": "b3366fe8472ddc7e2e88fc813df8bc981353e90917aa1551f0366815b641f288",
+  "min_native": [
+    0.01795915886759758,
+    0.017958926036953926,
+    0.004591420292854309
+  ],
+  "max_native": [
+    91.01795196533203,
+    28.017959594726562,
+    17.45460319519043
+  ],
+  "size_native": [
+    90.99999280646443,
+    28.00000066868961,
+    17.450011774897575
+  ],
+  "faces": 228324,
+  "registration_validated": false,
+  "motion_ready": false,
+  "conservative_camera_b_bounds_m": {
+    "min": [
+      -0.026,
+      -0.038,
+      -0.0275
+    ],
+    "max": [
+      0.101,
+      0.038,
+      0.0275
+    ],
+    "basis": "91 x 28 x 17.5 mm enclosure; 75 mm stereo baseline; optical-center location within enclosure plus 10 mm allowance. Bounding hypothesis, not independently registered mesh."
+  }
+}

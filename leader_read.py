@@ -12,7 +12,10 @@ import termios
 import time
 
 ROOT = Path(__file__).resolve().parent
-LEADER_PORT = '/dev/serial/by-id/usb-1a86_USB_Serial-if00-port0'
+# The rail's CH340 adapter has the same non-unique by-id name. Bind the
+# verified leader USB topology instead; never fall back to that shared alias.
+# Re-verify all seven servo replies if the leader is moved to another USB port.
+LEADER_PORT = '/dev/serial/by-path/pci-0000:05:00.4-usb-0:3.2:1.0-port0'
 NAMES = ['Base', 'Shoulder', 'Elbow', 'Wrist bend', 'Wrist yaw', 'Wrist roll', 'Gripper']
 # Initial preview convention from upstream LeRobot; verify physically in the UI.
 PREVIEW_SIGNS = [-1, -1, 1, 1, 1, -1]

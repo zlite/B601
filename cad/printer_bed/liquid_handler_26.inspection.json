@@ -1,0 +1,43 @@
+{
+  "source": "/home/chris/Downloads/liquid handler (26).stl",
+  "sha256": "af03d4c29b910ade5c33307d61eede4cf647b8cf6bc45ab2a76b202215998b59",
+  "triangles": 2826,
+  "bounds_min_native": [
+    -32.900001525878906,
+    -48.5,
+    4.0
+  ],
+  "bounds_max_native": [
+    56.89500045776367,
+    6.297999858856201,
+    89.0
+  ],
+  "dimensions_native": [
+    89.79500198364258,
+    54.7979998588562,
+    85.0
+  ],
+  "units": "STL has no units; millimetres provisional only",
+  "connected_components": [
+    {
+      "vertices": 1389,
+      "min": [
+        -32.9,
+        -48.5,
+        4.0
+      ],
+      "max": [
+        56.895,
+        6.298,
+        89.0
+      ]
+    }
+  ],
+  "registration_validated": false,
+  "motion_ready": false,
+  "retained_mesh": "cad/printer_bed/liquid_handler_26.stl",
+  "visual_assessment": "Bracket-like part with circular bores; does not match the rectangular plate tray visible in the wrist image. Component identity and units need confirmation.",
+  "registration_status": "not attempted: no defensible CAD-to-image correspondence",
+  "reference_image": "outputs/workspace_revalidation/20261006T183755006277Z/wrist_view.jpg",
+  "render": "outputs/holder_cad/cad_views.jpg"
+}

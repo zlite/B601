@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ReBot · Teach the printer approach</title>
+<style>
+:root{color-scheme:dark;font:17px system-ui;background:#10161f;color:#e7eff9}body{max-width:1200px;margin:auto;padding:24px}h1{margin-bottom:8px}p{line-height:1.5;color:#bdccdc}.panel{background:#1a2533;padding:20px;border-radius:14px;margin:16px 0}.cameras{display:grid;grid-template-columns:1fr 1fr;gap:16px}figure{margin:0}img{width:100%;height:300px;object-fit:contain;background:#080c12}figcaption{padding:8px}button,select{font:inherit;padding:14px;border-radius:9px;border:0}button{cursor:pointer}button:disabled{opacity:.4;cursor:default}#hold{background:#6fe0c5;color:#102721;font-weight:bold;width:100%;touch-action:none;user-select:none}#pause{background:#b73545;color:white;width:100%;margin-top:10px}label{display:block;margin:14px 0}#error{color:#ffb4b4;white-space:pre-wrap}#message{font-size:22px}table{width:100%;border-collapse:collapse}td,th{text-align:left;padding:8px;border-bottom:1px solid #344356}.small{font-size:14px}#recording{overflow-wrap:anywhere}@media(max-width:750px){.cameras{grid-template-columns:1fr}body{padding:12px}img{height:230px}}
+</style>
+<h1>Teach the printer approach</h1>
+<p>Demonstrate the approach and withdrawal with the jaws unchanged. Gripper control is inactive. Both cameras and the measured arm path are being recorded.</p>
+<div class="cameras"><figure><img id="wrist" alt="Live wrist camera"><figcaption>Wrist camera</figcaption></figure><figure><img id="tripod" alt="Live ArduCam overview"><figcaption>ArduCam overview</figcaption></figure></div>
+<div class="panel"><h2>Plate approach demo</h2>
+<p>Repeat: rail 30 cm left → rail back to start → smooth open-jaw plate approach → arm back to rest. Joint speed is capped at 12°/s and slows for bends and tracking. This demo does not grip or lift the plate.</p>
+<label><input type="checkbox" id="demoConfirm"> The arm is at its demonstrated resting pose; the rail, bed, plate, gantry and syringe are unchanged, and the full 30 cm rail sweep and arm path are clear.</label>
+<button id="demoStart" disabled>Demo · start repeating cycle</button>
+<button id="demoPause" disabled>Pause now</button> <button id="demoStop" disabled>Stop after this cycle</button>
+<label id="demoResumeLabel" hidden><input type="checkbox" id="demoClear"> I have checked the paused arm and the path is still clear.</label>
+<button id="demoResume" disabled>Resume</button><button id="demoReturn" disabled>Return along completed path</button>
+<p id="demoStatus">Checking demo readiness…</p>
+<p class="small">Keep this window visible while watching the arm. Leaving the window pauses with motor power on. After a complete return, arm motor power turns off automatically.</p></div>
+<div class="panel"><h2>Rail · arrow keys</h2><p id="railStatus">Connecting to rail…</p>
+<label><input type="checkbox" id="railClear"> The arm is rested with motor power off, and the rail path is clear.</label>
+<button id="railKeys" disabled>Click here, then hold ← or →</button><button id="railStop">Stop rail</button>
+<p class="small">Left/right follow the ArduCam view. Hold the arrow to keep moving at a requested 32 mm/s; release to brake to a stop. Leaving this window also stops. Release early before obstacles and either end of the rail. Idle driver disable is configured; release after movement was confirmed by the operator with the replacement shield. Motor current is not measured. Rail position is relative and unhomed.</p></div>
+<div class="panel">
+<div id="message">Connecting — leave both arms at rest.</div><p id="power"></p>
+<p>Align the arms before the first press. Hold to follow: base, shoulder and elbow up to 18°/s; wrist axes up to 24°/s. The first press captures alignment. Keep the leader still while “Taking hold” appears. Release pauses the follower without changing alignment.</p>
+<p id="tracking">Joint limits preserve alignment: if an axis reaches its limit, bring the leader back within range. A new press establishes a new relative reference.</p>
+<label><input type="checkbox" id="clear"> I can support the follower during engagement and watch arm, tool, cable and printer clearance.</label>
+<button id="hold" disabled>Press and hold to follow</button><button id="pause">Pause and hold</button>
+<p id="holdHint" class="small">Waiting for controller status.</p>
+<p id="alignment" class="small"></p><button id="realign" disabled>Re-align · use current poses</button>
+<p class="small">To resume, match the leader to the held follower using the alignment errors below. If you intentionally repositioned the leader while paused, Re-align accepts the current pair of poses without moving the follower.</p>
+<p class="small">Pause keeps motor power on. A controller fault or power loss can remove torque; keep support available. Stop before touching the plate during this approach-only pass.</p>
+<label><input type="checkbox" id="supported"> The follower is physically supported for motor power removal.</label>
+<button id="disable" disabled>Remove motor power</button>
+<p id="error"></p><p id="recording" class="small"></p>
+</div>
+<div class="panel"><table><thead><tr><th>Axis</th><th>Leader</th><th>Follower</th><th>Following error</th><th>Travel</th></tr></thead><tbody id="joints"></tbody></table>
+<details><summary>Direction checks · change only with motors off</summary>
+<label>Mode <select id="mode"><option value="follow_all">All joints follow</option><option value="hold_all">Hold all · selected joint follows</option></select></label>
+<label>Selected axis <select id="joint"></select></label><button id="reverse">Reverse selected direction</button>
+<p class="small">Use a small movement to check direction before approaching the printer. Model joint limits and the existing local travel limits remain active.</p>
+</details></div>
+<script>
+const token='__TOKEN__',client=crypto.randomUUID(),$=id=>document.getElementById(id),names=['Base','Shoulder','Elbow','Bend','Yaw','Roll'];
+names.forEach((n,i)=>{const o=document.createElement('option');o.value=i+1;o.textContent=n;$('joint').append(o)});
+let seq=0,pressId=null,holding=false,ready=false,powered=false,selected=5,revision=-1,lastState=0,pending=false;
+let demoActive=false,demoPaused=false,demoReady=false,demoOwner=false;
+let railSeq=0,railPressId=null,railHolding=false,railReady=false;
+async function railSend(action,direction){const n=++railSeq;if(action==='rail_start')railPressId=n;const r=await fetch('/action',{method:'POST',headers:{'Content-Type':'application/json','X-Pairing-Token':token},body:JSON.stringify({action,client:client+'-rail',seq:n,press_id:railPressId,direction,clearance_confirmed:$('railClear').checked}),signal:AbortSignal.timeout(700),keepalive:action==='rail_stop'});const data=await r.json();if(!r.ok)throw Error(data.error||'Rail request failed')}
+function stopRail(){const old=railHolding;railHolding=false;railPressId=null;if(old)railSend('rail_stop').catch(()=>{})}
+$('railKeys').onkeydown=e=>{if(!['ArrowLeft','ArrowRight'].includes(e.key))return;e.preventDefault();if(e.repeat||railHolding||!railReady||!$('railClear').checked)return;railHolding=true;railSend('rail_start',e.key==='ArrowLeft'?'left':'right').catch(e=>{$('error').textContent=e.message;stopRail()})};
+document.addEventListener('keyup',e=>{if(['ArrowLeft','ArrowRight'].includes(e.key))stopRail()});$('railKeys').onblur=stopRail;
+$('railStop').onclick=()=>{railHolding=false;railPressId=null;railSend('rail_stop').catch(e=>$('error').textContent=e.message)};
+$('railClear').onchange=()=>{if(!$('railClear').checked)stopRail();$('railKeys').disabled=!railReady||!$('railClear').checked};
+window.addEventListener('blur',stopRail);window.addEventListener('pagehide',stopRail);document.addEventListener('visibilitychange',()=>{if(document.hidden)stopRail()});document.addEventListener('keydown',e=>{if(e.key==='Escape')stopRail()});
+setInterval(()=>{if(railHolding){if(Date.now()-lastState>500){stopRail();return}railSend('rail_heartbeat').catch(stopRail)}},100);
+async function send(action,extra={}){const n=++seq;if(action==='press')pressId=n;const r=await fetch('/action',{method:'POST',headers:{'Content-Type':'application/json','X-Pairing-Token':token},body:JSON.stringify({action,client,seq:n,press_id:pressId,joint:selected,revision,...extra}),signal:AbortSignal.timeout(1000),keepalive:action==='release'});const v=await r.json();if(!r.ok)throw Error(v.error||'Request failed')}
+function demoButtons(){
+$('demoStart').disabled=!demoReady||!$('demoConfirm').checked;
+$('demoPause').disabled=!demoActive;$('demoStop').disabled=!demoActive;
+$('demoResumeLabel').hidden=!demoPaused;
+for(const id of ['demoResume','demoReturn'])$(id).disabled=!demoPaused||!$('demoClear').checked;
+}
+function pauseDemo(){if(demoActive){demoOwner=false;send('demo_pause').catch(()=>{})}}
+$('demoConfirm').onchange=demoButtons;$('demoClear').onchange=demoButtons;
+$('demoStart').onclick=async()=>{demoOwner=true;demoActive=true;demoReady=false;demoButtons();try{await send('demo_start',{rest_confirmed:$('demoConfirm').checked,scene_unchanged:$('demoConfirm').checked,rail_clear_confirmed:$('demoConfirm').checked});$('demoConfirm').checked=false;$('error').textContent=''}catch(e){demoOwner=false;demoActive=false;$('error').textContent=e.message}};
+$('demoPause').onclick=pauseDemo;$('demoStop').onclick=()=>send('demo_stop').catch(e=>$('error').textContent=e.message);
+for(const [id,action] of [['demoResume','demo_resume'],['demoReturn','demo_return']])$(id).onclick=async()=>{try{await send(action,{clearance_confirmed:$('demoClear').checked});demoOwner=true;$('demoClear').checked=false}catch(e){$('error').textContent=e.message}};
+for(const e of ['blur','pagehide'])window.addEventListener(e,pauseDemo);
+document.addEventListener('visibilitychange',()=>{if(document.hidden)pauseDemo()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')pauseDemo()});
+setInterval(()=>{if(demoActive&&demoOwner&&!document.hidden){if(Date.now()-lastState>600){pauseDemo();return}send('demo_heartbeat').catch(pauseDemo)}},100);
+function release(reason){const old=holding;holding=false;pressId=null;if(old)send('release',{reason}).catch(()=>{});$('hold').textContent='Press and hold to follow'}
+$('hold').onpointerdown=e=>{if(e.button!==0||!ready||!$('clear').checked)return;e.preventDefault();holding=true;$('hold').setPointerCapture(e.pointerId);$('error').textContent='';$('hold').textContent='Following · release to pause';send('press',{clearance_confirmed:true}).catch(e=>{$('error').textContent=e.message;release('press_failed')})};
+for(const e of ['pointerup','pointercancel','lostpointercapture'])$('hold').addEventListener(e,()=>release(e));
+$('pause').onclick=()=>{holding=false;pressId=null;send(demoActive?'demo_pause':'release',{reason:'pause_button'}).catch(e=>$('error').textContent=e.message)};
+$('realign').onclick=()=>{if(holding||!powered)return;send('realign').then(()=>$('error').textContent='').catch(e=>$('error').textContent=e.message)};
+$('disable').onclick=()=>{if(!$('supported').checked)return;holding=false;pressId=null;send('disable',{support_confirmed:true}).then(()=>$('supported').checked=false).catch(e=>$('error').textContent=e.message)};
+for(const e of ['blur','pagehide'])window.addEventListener(e,()=>release(e));
+document.addEventListener('visibilitychange',()=>{if(document.hidden)release('page_hidden')});document.addEventListener('keydown',e=>{if(e.key==='Escape')release('escape')});
+$('clear').onchange=()=>{if(!$('clear').checked)release('clearance_unchecked');$('hold').disabled=!ready||!$('clear').checked};
+$('supported').onchange=()=>{$('disable').disabled=!powered||!$('supported').checked};
+async function configure(action,extra={}){if(powered||holding)return;try{await send(action,extra)}catch(e){$('error').textContent=e.message}}
+$('mode').onchange=()=>configure('set_control_mode',{control_mode:$('mode').value});$('joint').onchange=()=>configure('select',{joint:Number($('joint').value)});$('reverse').onclick=()=>configure('reverse');
+setInterval(()=>{if(holding){if(Date.now()-lastState>600){release('status_stale');return}send('heartbeat').catch(()=>release('heartbeat_failed'))}},100);
+function angle(x){return Number.isFinite(x)?x.toFixed(1)+'°':'—'}
+async function poll(){if(pending)return;pending=true;try{const r=await fetch('/state',{signal:AbortSignal.timeout(700)});if(!r.ok)throw Error('Status unavailable');const s=await r.json();lastState=Date.now();ready=!!(s.ready||s.following);powered=!!s.powered;selected=s.selected_joint;
+const d=s.demo||{};demoActive=!!d.active;demoPaused=!!d.paused;demoReady=!!d.ready;if(!demoActive)demoOwner=false;demoButtons();$('demoStatus').textContent=d.error||((d.phase||'Demo unavailable')+(d.active&&!d.repeat?' · will stop after this cycle':'')+(d.reason&&!d.active?' · '+d.reason:''));
+if(revision!==s.revision)$('clear').checked=false;revision=s.revision;
+$('message').textContent=s.message;$('power').textContent=s.fault?'Fault — motor state requires verification':powered?'Motor power ON':'Motor power OFF';
+$('hold').disabled=!ready||!$('clear').checked;$('disable').disabled=!powered||!$('supported').checked||!!s.fault;
+$('holdHint').textContent=!ready?(s.teaching.arm_block_reason||s.message):!$('clear').checked?'Check the support-and-clearance box above to enable arm following.':'Ready — press and hold to follow.';
+$('realign').disabled=demoActive||!powered||!!s.following||holding||!s.teaching.reference_captured||!!s.fault;
+const alignment=s.teaching.resume_errors_deg||{};
+$('alignment').textContent=powered&&!s.following&&s.teaching.reference_captured?(s.teaching.resume_aligned?'Aligned — ready to resume.':'Move leader to match (error must be within ±1°): '+Object.entries(alignment).filter(([j,e])=>Math.abs(e)>1).map(([j,e])=>names[Number(j)-1]+' '+angle(e)).join(' · ')):'';
+const rail=s.rail||{};railReady=!!rail.ready;$('railKeys').disabled=(!railReady&&!railHolding)||!$('railClear').checked;
+$('railStatus').textContent=rail.jog_enabled===false?'Rail jogging disabled during power investigation · '+rail.state+(rail.error?' · '+rail.error:''):(rail.error?'Rail unavailable: '+rail.error:(rail.connected?rail.state+' · relative X '+(rail.x_mm??'—')+' mm'+(!rail.arm_parked?' · rest arm and remove motor power before jogging':' · idle driver disable configured; current unverified'):'Connecting to rail…'));
+for(const id of ['joint','mode','reverse'])$(id).disabled=demoActive||powered||holding||!!s.fault;
+$('joint').value=selected;$('mode').value=s.control_mode;
+if(s.fault||s.teaching.error)$('error').textContent=s.fault||s.teaching.error;
+$('recording').textContent=`Recording: ${s.teaching.rows} samples · ${s.teaching.images} images · ${s.teaching.folder}`;
+const limited=(s.axis_trials||[]).filter(t=>t.limited).map(t=>t.name);
+$('tracking').textContent=limited.length?'AT LIMIT: '+limited.join(', ')+'. Bring the leader back within range; its reference is preserved.':'Joint limits preserve alignment. Following error shows how far the follower is behind the bounded leader request; release to pause.';
+$('joints').replaceChildren();names.forEach((n,i)=>{const row=document.createElement('tr'),t=(s.axis_trials||[]).find(x=>x.joint===i+1);[n,angle(s.sources.leader?.angles?.[i]),angle(s.sources.follower?.angles?.[i]),angle(t?.following_error_deg),t?(t.limited?'AT LIMIT · ':'')+angle(t.low_deg)+' to '+angle(t.high_deg):'—'].forEach(v=>{const td=document.createElement('td');td.textContent=v;row.append(td)});$('joints').append(row)});
+}catch(e){ready=false;demoReady=false;demoButtons();pauseDemo();$('hold').disabled=true;$('message').textContent='Status unavailable — following paused';release('status_unavailable')}finally{pending=false}}
+setInterval(poll,150);poll();
+for(const role of ['wrist','tripod']){const img=$(role);const next=()=>setTimeout(()=>{img.src='/'+role+'.jpg?t='+Date.now()},200);img.onload=next;img.onerror=next;next()}
+</script></html>

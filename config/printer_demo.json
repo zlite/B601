@@ -1,0 +1,11 @@
+{
+  "enabled": true,
+  "source": "outputs/printer_replay/smooth_demo_v1",
+  "speed_scale": 4,
+  "scope": "Attended repeating rail-left/rail-return/open-gripper approach/arm-return; no grasp or lift",
+  "scene_confirmation_required_each_start": true,
+  "disable_after_rail_jog": true,
+  "repeat": true,
+  "rail_left_mm": 300,
+  "rail_sweep_operator_confirmed": true
+}

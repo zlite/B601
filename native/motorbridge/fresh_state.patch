@@ -1,0 +1,82 @@
+diff --git a/motor_abi/src/state_ffi.rs b/motor_abi/src/state_ffi.rs
+index 3565cdc..ed92921 100644
+--- a/motor_abi/src/state_ffi.rs
++++ b/motor_abi/src/state_ffi.rs
+@@ -121,3 +121,38 @@ pub extern "C" fn motor_handle_get_state(
+     }
+     0
+ }
++
++// B601 extension: cached values cannot satisfy this transaction.
++#[unsafe(no_mangle)]
++pub extern "C" fn b601_motor_request_fresh_state(
++    motor: *mut MotorHandle,
++    timeout_ms: u32,
++    out_state: *mut MotorState,
++) -> i32 {
++    if motor.is_null() || out_state.is_null() || timeout_ms == 0 || timeout_ms > 1000 {
++        set_last_error("invalid fresh-state request");
++        return -1;
++    }
++    let motor = lock_motor_inner!(motor, "motor is null");
++    let out = unsafe { &mut *out_state };
++    *out = MotorState::default();
++    match &*motor {
++        MotorHandleInner::Damiao(m) => {
++            match m.request_fresh_state(Duration::from_millis(timeout_ms as u64)) {
++                Ok(Some(state)) => {
++                    *out = MotorState {
++                        has_value: 1, can_id: state.can_id,
++                        arbitration_id: state.arbitration_id,
++                        status_code: state.status_code, pos: state.pos,
++                        vel: state.vel, torq: state.torq,
++                        t_mos: state.t_mos, t_rotor: state.t_rotor,
++                    };
++                    0
++                },
++                Ok(None) => { set_last_error("fresh motor feedback timed out"); -1 },
++                Err(e) => { set_last_error(e.to_string()); -1 },
++            }
++        },
++        _ => { set_last_error("fresh-state extension is Damiao-only"); -1 },
++    }
++}
+diff --git a/motor_vendors/damiao/src/motor.rs b/motor_vendors/damiao/src/motor.rs
+index 8c438b4..930adc4 100644
+--- a/motor_vendors/damiao/src/motor.rs
++++ b/motor_vendors/damiao/src/motor.rs
+@@ -916,6 +916,34 @@ mod tests {
+         assert!(suggested[0] == "4340" || suggested[0] == "4340P");
+     }
+ 
++    #[test]
++    fn b601_fresh_state_rejects_cached_feedback() {
++        let bus: Arc<dyn CanBus> = Arc::new(MockBus::new());
++        let motor = DamiaoMotor::new(1, 17, "4340P", bus).unwrap();
++        let frame = CanFrame { arbitration_id: 17, data: [1, 0x80, 0, 0x80, 0, 0, 30, 30], dlc: 8, is_extended: false, is_rx: true };
++        motor.process_feedback_frame_impl(frame).unwrap();
++        assert!(motor.latest_state().is_some());
++        assert!(motor.request_fresh_state(Duration::from_millis(4)).unwrap().is_none());
++    }
++
++    #[test]
++    fn b601_fresh_state_accepts_response_after_request() {
++        let bus = Arc::new(MockBus::new());
++        let motor = Arc::new(DamiaoMotor::new(1, 17, "4340P", bus.clone()).unwrap());
++        let responding = motor.clone();
++        let responder = std::thread::spawn(move || {
++            let deadline = Instant::now() + Duration::from_millis(100);
++            while bus.sent.lock().unwrap().is_empty() {
++                assert!(Instant::now() < deadline);
++                std::thread::sleep(Duration::from_millis(1));
++            }
++            let frame = CanFrame { arbitration_id: 17, data: [1, 0x80, 0, 0x80, 0, 0, 30, 30], dlc: 8, is_extended: false, is_rx: true };
++            responding.process_feedback_frame_impl(frame).unwrap();
++        });
++        assert!(motor.request_fresh_state(Duration::from_millis(100)).unwrap().is_some());
++        responder.join().unwrap();
++    }
++
+     #[test]
+     fn get_register_u32_times_out_when_no_feedback_arrives() {
+         let bus: Arc<dyn CanBus> = Arc::new(MockBus::new());

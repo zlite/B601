@@ -1,0 +1,149 @@
+{
+  "saved_utc": "2026-10-08T01:15:55.147082+00:00",
+  "status": "Single optimization cycle completed, returned to rest and motors disabled verified. Rail Idle at X=0. Repeating demo stopped; teaching interface remains ready.",
+  "arm_motors_disabled_verified": true,
+  "latest_teaching_session": "outputs/printer_teach/20261008T011137483386Z",
+  "current_launch": {
+    "command": ".venv/bin/python printer_teach.py",
+    "exec_session_id": 22385,
+    "url": "http://127.0.0.1:8765",
+    "demo_client_exec_session_id": null
+  },
+  "operator_feedback": "Requests fast smooth repeating 300 mm left/back then open-jaw arm approach/return, immediate postrail start; small passive wrist movement during rail is acceptable.",
+  "controller": "printer_teach.py",
+  "profiles": {
+    "first_three_speed_deg_s": 18,
+    "wrist_speed_deg_s": 24,
+    "response_time_s": 0.02,
+    "mapping": "First-press reference preserved through setup, saturation and pauses; resume within 1 degree or explicitly Re-align",
+    "brake_at_target": true,
+    "leader_poll_pause_s": 0.005,
+    "shoulder_local_window_deg": 180
+  },
+  "offline_tests_passed": 82,
+  "autonomous_motion_ready": false,
+  "resume_steps": [
+    "Fresh read-only device identity, disabled motor state, joints/gripper and both cameras after power-up; never reuse saved start angles",
+    "Use printer_teach.py with first-press references, persistent alignment across pauses and explicit Re-align",
+    "Read live demo state; an attended repeating loop may already be active. Pause/stop through demo API, preserve holding torque if arm is away from rest; require fresh checks after any restart.",
+    "Validate gripper leader mapping and current measured pads before a full pickup demonstration",
+    "Reacquire bed tag18 (18 mm black square), plate and holder in current bed Y; validate scene and approach before autonomous lift/replace",
+    "Manual rail arrows available; automatic homing/task positioning remain deferred until stationary pickup is reliable"
+  ],
+  "important_limits": [
+    "Bed and gantry stationary during each attempt; bed Y may differ between attempts",
+    "Same-scene open-jaw approach/return and confirmed rail demo sweep are validated by repeated completed trials; grasp, changed-bed adaptation and full scene/tool calibration remain incomplete.",
+    "Gripper remains inactive. Operator rail trial hit the right limit; operator manually cleared it, and restart verified Idle with no limit input. Rail remains unhomed",
+    "Prior compact camera search aborted on roll envelope; torque-off rather than retrace; cause still requires diagnosis",
+    "Leader and rail CH340 adapters share the same by-id alias; use the verified leader by-path binding in leader_read.py. Re-verify if moved to another port."
+  ],
+  "preserved_files": [
+    "config/printer_bed_target.json",
+    "calibration/workspace_revalidation_required.json",
+    "outputs/printer_teach/20261006T230514734367Z/operator_trial_summary.json"
+  ],
+  "last_powerup_inspection": "outputs/gripper/20261007T235944178538Z_inspect.json",
+  "leader_port": "/dev/serial/by-path/pci-0000:05:00.4-usb-0:3.2:1.0-port0",
+  "rail_jog": {
+    "currently_enabled": true,
+    "disabled_reason": null,
+    "port": "/dev/serial/by-path/pci-0000:05:00.4-usb-0:1.2:1.0-port0",
+    "operator_confirmed_switch_side": "right in ArduCam",
+    "operator_confirmed_hardware_unchanged": false,
+    "left_x_sign": 1,
+    "steps_per_mm": 5,
+    "idle_lock_ms": 0,
+    "physical_idle_power_off_verified": true,
+    "driver_mount_operator_confirmed": "Photo confirms CNC Shield VER 3.00, Protoneer-style layout; rail connected to X. Driver IC hidden by heatsink, prior A4988 identification not visually confirmed",
+    "shield_photo": "/home/chris/Downloads/PXL_20261007_220331292.MP.jpg",
+    "idle_enable_voltage_operator_v": 0,
+    "sleep_enable_voltage_operator_v": 0,
+    "logic_reference_voltage_operator_v": 5,
+    "sleep_diagnostic": "outputs/rail/20261007T221751119288Z_idle_probe.json",
+    "idle_power_issue": "Resolved per operator: Arduino tested good, replacement CNC shield fixed holding current, arrow-key trial successful.",
+    "speed_mm_s": 32,
+    "segment_mm": 2,
+    "max_queued_ahead_mm": 18,
+    "acceleration_mm_s2": 40,
+    "operator_feedback_8_mm_s": "Smoother; requested 2x faster",
+    "settings_verification": "outputs/rail/20261007T231858072255Z_status.json",
+    "streaming": "Replenish during Jog; one unacknowledged command; release cancels queued moves",
+    "physical_speed_and_stop_validated": false,
+    "low_speed_caveat": "5 steps/mm; possible standard AMASS timer floor around 6.1 mm/s, so nominal acceleration ramps need physical validation",
+    "max_hold_mm": null,
+    "continuous_hold_update": "24 rail/teaching tests passed, including 15 seconds beyond 400 mm in each direction in simulation and release cancellation",
+    "homed": false,
+    "scope": "Attended keyboard jogging and operator-confirmed 300 mm left/return demo with arm folded and off; unhomed, no generalized task positioning.",
+    "firmware_update": {
+      "verification": "outputs/rail/20261007T224432Z_firmware/verification.json",
+      "installed_version": "1.1h.20190825",
+      "previous_version": "1.1h.20190830",
+      "settings_preserved": true,
+      "raw_eeprom_backup_valid": false
+    },
+    "post_flash_operator_feedback": "Still holding after official firmware flash and acknowledged $1=0",
+    "replacement_shield": {
+      "operator_report": "Arduino tested good; replacement shield appears to fix holding current",
+      "same_x_driver_and_no_microstepping_jumpers": true,
+      "post_move_release_trial_pending": false,
+      "operator_trial_result": "That\u2019s great. Problem solved"
+    },
+    "physical_idle_power_off_verification_method": "Operator confirmation after replacement shield and attended arrow-key trial; no electronic current sensor"
+  },
+  "pending_controller_update": {
+    "shoulder_local_window_deg": 180,
+    "model_limits_preserved": true,
+    "tests_passed": 55,
+    "loaded": true,
+    "diagnosis": "outputs/printer_teach/20261007T231900689788Z/joint2_limit_diagnosis.json",
+    "operator_retest_passed": true
+  },
+  "last_autonomous_trial": {
+    "summary": "outputs/printer_replay/ui_demo/20261008T011256235081Z/summary.json",
+    "approach_completed": true,
+    "autonomous_return_completed": true,
+    "motors_disabled_verified_at_cycle_end": true,
+    "gripper_commanded": false,
+    "rail_commanded": true,
+    "scope": "One bounded 300 mm left/return rail cycle and open-jaw approach/return; no grasp or lift",
+    "max_tracking_error_deg": 0.9810298236875354,
+    "arm_motion_s": 114.13534756997251,
+    "rail_to_arm_motion_s": 2.0675163549894933,
+    "code_tests_passed": 63
+  },
+  "demo": {
+    "config": "config/printer_demo.json",
+    "running_at_save": false,
+    "completed_cycles_observed": 1,
+    "next_cycle_observed": null,
+    "stop_immediately": ".venv/bin/python scripts/printer_demo_client.py pause",
+    "stop_at_rest": ".venv/bin/python scripts/printer_demo_client.py stop",
+    "no_duration_cutoff": true,
+    "rail_reboot_offset_for_current_launch_mm": 0,
+    "restart_note": "Read actual current rail position before closing/restarting; a GRBL reconnect resets MPos. Never assume zero if interrupted away from origin.",
+    "repeat_fix": "Cache gripper device per motor owner; reset cache when owner is replaced; regression tested.",
+    "paused_holding": false,
+    "awaiting": null,
+    "current_folder": "outputs/printer_replay/ui_demo/20261008T011256235081Z",
+    "repeat_fix_live_verified": true
+  },
+  "speed_investigation": {
+    "report": "outputs/printer_replay/ui_demo/20261008T004919406737Z/speed_bottleneck.json",
+    "main_bottleneck": "Joint 2 feedback pacing",
+    "hardware_tuning_changed": false,
+    "latest_report": "outputs/printer_replay/ui_demo/20261008T011256235081Z/summary.json",
+    "feedback_reader": "Fresh concurrent native motor reads; one fresh status retry, 120 ms batch deadline",
+    "loop_median_s": 0.01168095349567011,
+    "loop_p95_s": 0.016604706799262205,
+    "loop_max_s": 0.08856692601693794,
+    "arm_cycle_reduction_percent": 11.68538400792698,
+    "remaining_bottleneck": "Motor tracking response still paces path advancement; further gains are not established"
+  },
+  "validation": {
+    "python_discovery_cases": 351,
+    "python_discovery_optional_skips": 4,
+    "cad_tests_in_dedicated_environment": 4,
+    "fresh_reader_tests_after_final_addition": 8,
+    "native_damiao_tests": 24
+  }
+}

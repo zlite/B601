@@ -1,0 +1,14 @@
+{
+  "source": "Operator measurements and placement confirmation, 2026-10-06",
+  "both_pads_identical": true,
+  "length_mm": 60.0,
+  "height_mm": 10.0,
+  "uncompressed_thickness_mm": 3.0,
+  "distal_ends_flush_with_printed_fingers": true,
+  "distal_x_mm": -32.5,
+  "backing_abs_y_mm": 43.74,
+  "center_z_mm_candidate": 8.0,
+  "vertical_placement_status": "Candidate centered on the 10 mm-high distal plastic face; verify against stereo images",
+  "registration_validated": false,
+  "motion_ready": false
+}

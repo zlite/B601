@@ -1,0 +1,57 @@
+"""Fresh, concurrent read-only motor transactions using the pinned SDK extension."""
+from concurrent.futures import ThreadPoolExecutor, wait
+import ctypes
+import hashlib
+import json
+import os
+from pathlib import Path
+import time
+
+ROOT=Path(__file__).resolve().parent
+LIBRARY=ROOT/'native/motorbridge/build/libmotor_abi.so'
+UPSTREAM_COMMIT='c652ce420e7da1008fa1864cc7f47d7d7c57fdb6'
+
+def configure_library():
+    """Call before constructing the SDK controller; explicit opt-out remains available."""
+    if os.environ.get('B601_FRESH_FEEDBACK','1')=='0' or not LIBRARY.exists():return False
+    manifest=json.loads(LIBRARY.with_name('manifest.json').read_text())
+    if (manifest['upstream_commit'] != UPSTREAM_COMMIT or
+            manifest['patch_sha256'] != hashlib.sha256((LIBRARY.parent.parent/'fresh_state.patch').read_bytes()).hexdigest()):
+        raise RuntimeError('Fresh-feedback build does not match the pinned source')
+    if hashlib.sha256(LIBRARY.read_bytes()).hexdigest()!=manifest['library_sha256']:raise RuntimeError('Fresh-feedback library checksum mismatch')
+    if os.environ.get('MOTORBRIDGE_LIB') not in (None,str(LIBRARY)):raise RuntimeError('Conflicting motor library override')
+    os.environ['MOTORBRIDGE_LIB']=str(LIBRARY)
+    return True
+
+class FreshMotorReader:
+    def __init__(self,motors):
+        from motorbridge.abi import CState
+        from motorbridge.models import MotorState
+        if len(motors)!=6:raise ValueError('Exactly six arm motors required')
+        self.motors=motors;self.CState=CState;self.MotorState=MotorState
+        self.call=motors[0]._abi.lib.b601_motor_request_fresh_state
+        self.call.argtypes=[ctypes.c_void_p,ctypes.c_uint32,ctypes.POINTER(CState)];self.call.restype=ctypes.c_int32
+        self.pool=ThreadPoolExecutor(max_workers=6,thread_name_prefix='fresh-motor-read')
+        self.last_duration_s=None
+        self.retry_count=0
+    def one(self,motor):
+        # The full-precision register transaction and status transaction each
+        # reject cached replies. No motor command is issued by these workers.
+        position=motor.get_register_f32(80,40)
+        state=self.CState()
+        if self.call(motor._require_open(),40,ctypes.byref(state)) or not state.has_value:
+            # One lost status packet may be re-requested, never replaced by a
+            # cached value. The batch deadline still includes this retry.
+            self.retry_count+=1
+            if self.call(motor._require_open(),40,ctypes.byref(state)) or not state.has_value:
+                raise RuntimeError('Fresh motor feedback timed out or failed after one retry')
+        return position,self.MotorState(can_id=int(state.can_id),arbitration_id=int(state.arbitration_id),status_code=int(state.status_code),pos=float(state.pos),vel=float(state.vel),torq=float(state.torq),t_mos=float(state.t_mos),t_rotor=float(state.t_rotor))
+    def read(self):
+        began=time.monotonic();jobs=[self.pool.submit(self.one,m) for m in self.motors]
+        # Finish every read before the owner can send commands or close handles,
+        # including when one motor fails. Native transactions have finite timeouts.
+        wait(jobs)
+        self.last_duration_s=time.monotonic()-began
+        if self.last_duration_s>.12:raise RuntimeError('Fresh motor read deadline exceeded')
+        return [job.result() for job in jobs]
+    def close(self):self.pool.shutdown(wait=True,cancel_futures=True)

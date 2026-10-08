@@ -1,0 +1,4986 @@
+{
+  "source_url": "https://github.com/Creality3DPrinting/Ender-3/blob/88c7758cea9d0d00a54fdb238bedb3b33425f409/Ender-3%20Mechanical/STP/Ender3.STEP",
+  "commit": "88c7758cea9d0d00a54fdb238bedb3b33425f409",
+  "sha256": "7e868f30a44f0e6b1dd0daf8af1d7810ad9a754cc6fa066f6ef4d2b81e3297af",
+  "objects": [
+    {
+      "name": "Ender3/NAUO1",
+      "solids": 1,
+      "min_assembly_mm": [
+        81.9990001973228,
+        -1.0000001421085471e-07,
+        -231.54886308155827
+      ],
+      "max_assembly_mm": [
+        121.99900029732294,
+        40.00000000000009,
+        58.45113711844173
+      ],
+      "volume_mm3": 146025.79275934133,
+      "product_name": "4040 profile_40*40-L290\ufffd\ufffd4\ufffd\ufffd\ufffd\ufffd\u0377\u0368\ufffd\ufffd,2\ufffd\ufffdM5"
+    },
+    {
+      "name": "Ender3/NAUO2",
+      "solids": 1,
+      "min_assembly_mm": [
+        -53.00099980267719,
+        32.999999999998444,
+        -296.5488630815584
+      ],
+      "max_assembly_mm": [
+        -33.00099980267714,
+        72.99999999999854,
+        33.45113711844162
+      ],
+      "volume_mm3": 96728.54583514106,
+      "product_name": "2040 profile_20*40-L330,\ufffd\ufffd\ufffd\ufffd4\ufffd\ufffdM4\ufffd\ufffd2\ufffd\ufffdM5"
+    },
+    {
+      "name": "Ender3/NAUO3",
+      "solids": 1,
+      "min_assembly_mm": [
+        81.99900019732183,
+        39.99999989999869,
+        -96.54886298155941
+      ],
+      "max_assembly_mm": [
+        121.99900019732203,
+        440.0000000999987,
+        -76.54886298155876
+      ],
+      "volume_mm3": 117412.29189042989,
+      "product_name": "2040 profile_20*40-L400,\ufffd\ufffd\ufffd\ufffd4\ufffd\ufffdM5*15\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd2\ufffd\ufffdM4"
+    },
+    {
+      "name": "Ender3/NAUO4",
+      "solids": 1,
+      "min_assembly_mm": [
+        -33.00099980267722,
+        32.999999999980034,
+        21.451137018440946
+      ],
+      "max_assembly_mm": [
+        -30.00099980267711,
+        85.00000000001087,
+        83.45113701844167
+      ],
+      "volume_mm3": 5991.338238517687,
+      "product_name": "Y Motor holder"
+    },
+    {
+      "name": "Ender3/NAUO5",
+      "solids": 1,
+      "min_assembly_mm": [
+        -50.00099980267719,
+        42.99999999999848,
+        32.751137018441646
+      ],
+      "max_assembly_mm": [
+        3.749000197322861,
+        84.99999999999855,
+        83.45113701844167
+      ],
+      "volume_mm3": 60413.38827481688,
+      "product_name": "42-34 motor"
+    },
+    {
+      "name": "Ender3/NAUO6",
+      "solids": 1,
+      "min_assembly_mm": [
+        -34.6509998026772,
+        76.64999999999817,
+        44.101137018441705
+      ],
+      "max_assembly_mm": [
+        -27.000999802677196,
+        82.34999999999816,
+        49.80113701844171
+      ],
+      "volume_mm3": 67.63626386539522,
+      "product_name": "M3X6Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO7",
+      "solids": 1,
+      "min_assembly_mm": [
+        -34.65099980267722,
+        76.64999999999816,
+        75.10113701844172
+      ],
+      "max_assembly_mm": [
+        -27.000999802677217,
+        82.34999999999815,
+        80.80113701844171
+      ],
+      "volume_mm3": 67.63626386539522,
+      "product_name": "M3X6Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO8",
+      "solids": 1,
+      "min_assembly_mm": [
+        -34.65099980267715,
+        45.649999999998165,
+        44.1011370184417
+      ],
+      "max_assembly_mm": [
+        -27.000999802677146,
+        51.34999999999817,
+        49.8011370184417
+      ],
+      "volume_mm3": 67.63626386539521,
+      "product_name": "M3X6Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO9",
+      "solids": 1,
+      "min_assembly_mm": [
+        -34.65099980267717,
+        45.64999999999816,
+        75.10113701844169
+      ],
+      "max_assembly_mm": [
+        -27.000999802677168,
+        51.34999999999816,
+        80.80113701844168
+      ],
+      "volume_mm3": 67.63626386539522,
+      "product_name": "M3X6Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO10",
+      "solids": 1,
+      "min_assembly_mm": [
+        -50.00099980267733,
+        56.49999989999573,
+        54.9511369184376
+      ],
+      "max_assembly_mm": [
+        -34.0009997026773,
+        71.50000000000175,
+        69.95113701844362
+      ],
+      "volume_mm3": 1870.7387465228971,
+      "product_name": "2GT-pulley"
+    },
+    {
+      "name": "Ender3/NAUO11",
+      "solids": 1,
+      "min_assembly_mm": [
+        -58.00099980267718,
+        33.99999999999849,
+        4.4511370184415755
+      ],
+      "max_assembly_mm": [
+        -53.000999802677086,
+        71.99999999999851,
+        24.451137018441596
+      ],
+      "volume_mm3": 2939.8055472127253,
+      "product_name": "Y limit switch bracket"
+    },
+    {
+      "name": "Ender3/NAUO12",
+      "solids": 1,
+      "min_assembly_mm": [
+        -67.00099980267714,
+        48.212950260081286,
+        -0.4988629815584038
+      ],
+      "max_assembly_mm": [
+        -56.000999802677136,
+        68.2129502600813,
+        25.501137018441604
+      ],
+      "volume_mm3": 1764.8890834023643,
+      "product_name": "limit switch"
+    },
+    {
+      "name": "Ender3/NAUO13",
+      "solids": 1,
+      "min_assembly_mm": [
+        -61.65099980267717,
+        62.862950260080986,
+        17.651137018441695
+      ],
+      "max_assembly_mm": [
+        -54.00099980267717,
+        68.56295026008098,
+        23.35113701844169
+      ],
+      "volume_mm3": 67.63626386539521,
+      "product_name": "M3X6Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO14",
+      "solids": 1,
+      "min_assembly_mm": [
+        -61.65099980267715,
+        47.86295026008099,
+        17.65113701844168
+      ],
+      "max_assembly_mm": [
+        -54.00099980267714,
+        53.562950260080996,
+        23.351137018441683
+      ],
+      "volume_mm3": 67.63626386539521,
+      "product_name": "M3X6Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO15",
+      "solids": 1,
+      "min_assembly_mm": [
+        -68.40099980267735,
+        80.84999999999853,
+        -76.0866780252686
+      ],
+      "max_assembly_mm": [
+        -58.20099980267735,
+        81.44999999999852,
+        -65.8866780252686
+      ],
+      "volume_mm3": 36.28539514896207,
+      "product_name": "M5 washer"
+    },
+    {
+      "name": "Ender3/NAUO16",
+      "solids": 1,
+      "min_assembly_mm": [
+        -68.40099980267718,
+        80.8500000000051,
+        -117.48667802526867
+      ],
+      "max_assembly_mm": [
+        -58.20099980267717,
+        81.45000000000509,
+        -107.28667802526869
+      ],
+      "volume_mm3": 36.28539514896201,
+      "product_name": "M5 washer"
+    },
+    {
+      "name": "Ender3/NAUO17",
+      "solids": 1,
+      "min_assembly_mm": [
+        -68.05099980267734,
+        54.7499999999999,
+        -75.73667802526859
+      ],
+      "max_assembly_mm": [
+        -58.55099980267734,
+        87.6999999999999,
+        -66.23667802526859
+      ],
+      "volume_mm3": 706.7489745506016,
+      "product_name": "M5X30 Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO18",
+      "solids": 1,
+      "min_assembly_mm": [
+        -27.850999802677013,
+        54.74999999999818,
+        -57.43667802526858
+      ],
+      "max_assembly_mm": [
+        -18.350999802677013,
+        87.69999999999818,
+        -47.93667802526858
+      ],
+      "volume_mm3": 706.7489745506015,
+      "product_name": "M5X30 Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO19",
+      "solids": 1,
+      "min_assembly_mm": [
+        -27.85099980267702,
+        54.74999999999996,
+        -97.4366780252686
+      ],
+      "max_assembly_mm": [
+        -18.35099980267702,
+        87.69999999999996,
+        -87.9366780252686
+      ],
+      "volume_mm3": 706.7489745506016,
+      "product_name": "M5X30 Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO20",
+      "solids": 1,
+      "min_assembly_mm": [
+        -68.0509998026771,
+        54.74999999999983,
+        -117.13667802526885
+      ],
+      "max_assembly_mm": [
+        -58.5509998026771,
+        87.69999999999983,
+        -107.63667802526885
+      ],
+      "volume_mm3": 706.7489745506014,
+      "product_name": "M5X30 Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO21",
+      "solids": 1,
+      "min_assembly_mm": [
+        -27.10099980267701,
+        68.49999999999997,
+        -56.686678025268584
+      ],
+      "max_assembly_mm": [
+        -19.10099980267701,
+        76.84999999999997,
+        -48.686678025268584
+      ],
+      "volume_mm3": 221.33501992244325,
+      "product_name": "Spacers for rollers"
+    },
+    {
+      "name": "Ender3/NAUO22",
+      "solids": 1,
+      "min_assembly_mm": [
+        -27.100999802677016,
+        68.49999999999996,
+        -96.68667802526862
+      ],
+      "max_assembly_mm": [
+        -19.100999802677016,
+        76.84999999999995,
+        -88.68667802526862
+      ],
+      "volume_mm3": 221.33501992244334,
+      "product_name": "Spacers for rollers"
+    },
+    {
+      "name": "Ender3/NAUO23",
+      "solids": 1,
+      "min_assembly_mm": [
+        -69.07450249456903,
+        68.49999999999996,
+        -76.68667802527676
+      ],
+      "max_assembly_mm": [
+        -57.52749711077651,
+        79.24999999999996,
+        -66.68667802526795
+      ],
+      "volume_mm3": 586.636166698371,
+      "product_name": "Eccentric column"
+    },
+    {
+      "name": "Ender3/NAUO24",
+      "solids": 1,
+      "min_assembly_mm": [
+        -69.07450249457328,
+        68.49999999999996,
+        -116.68667802526917
+      ],
+      "max_assembly_mm": [
+        -57.52749711078076,
+        79.24999999999999,
+        -106.68667802526804
+      ],
+      "volume_mm3": 586.6361666983711,
+      "product_name": "Eccentric column"
+    },
+    {
+      "name": "Ender3/V Wheel Component/NAUO278",
+      "solids": 1,
+      "min_assembly_mm": [
+        -35.15099980267717,
+        57.9,
+        -104.7366780252692
+      ],
+      "max_assembly_mm": [
+        -11.050999802677174,
+        68.10000000000001,
+        -80.63667802526919
+      ],
+      "volume_mm3": 2356.79558158673,
+      "product_name": "Rollers"
+    },
+    {
+      "name": "Ender3/V Wheel Component/NAUO279",
+      "solids": 1,
+      "min_assembly_mm": [
+        -28.100999802677173,
+        62.49999999999996,
+        -97.6866780252692
+      ],
+      "max_assembly_mm": [
+        -18.100999802677173,
+        63.49999999999996,
+        -87.6866780252692
+      ],
+      "volume_mm3": 58.904862254808606,
+      "product_name": "M5 washer1"
+    },
+    {
+      "name": "Ender3/V Wheel Component/NAUO280",
+      "solids": 14,
+      "min_assembly_mm": [
+        -31.100999902677174,
+        57.49999989999995,
+        -100.6866781252692
+      ],
+      "max_assembly_mm": [
+        -15.100999702677166,
+        62.500000099999966,
+        -84.68667792526921
+      ],
+      "volume_mm3": 681.5964373632211,
+      "product_name": "625pillow"
+    },
+    {
+      "name": "Ender3/V Wheel Component/NAUO281",
+      "solids": 14,
+      "min_assembly_mm": [
+        -31.100999902677174,
+        63.49999989999996,
+        -100.6866781252692
+      ],
+      "max_assembly_mm": [
+        -15.100999702677171,
+        68.50000009999997,
+        -84.68667792526921
+      ],
+      "volume_mm3": 681.596437363221,
+      "product_name": "625pillow"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance2/NAUO278",
+      "solids": 1,
+      "min_assembly_mm": [
+        -35.15099980267701,
+        57.89999999999821,
+        -64.73667802526856
+      ],
+      "max_assembly_mm": [
+        -11.050999802677017,
+        68.09999999999822,
+        -40.636678025268566
+      ],
+      "volume_mm3": 2356.795581586731,
+      "product_name": "Rollers"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance2/NAUO279",
+      "solids": 1,
+      "min_assembly_mm": [
+        -28.10099980267702,
+        62.49999999999818,
+        -57.68667802526856
+      ],
+      "max_assembly_mm": [
+        -18.10099980267702,
+        63.49999999999818,
+        -47.68667802526856
+      ],
+      "volume_mm3": 58.90486225480862,
+      "product_name": "M5 washer1"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance2/NAUO280",
+      "solids": 14,
+      "min_assembly_mm": [
+        -31.10099990267702,
+        57.49999989999817,
+        -60.686678125268564
+      ],
+      "max_assembly_mm": [
+        -15.100999702677013,
+        62.50000009999819,
+        -44.68667792526856
+      ],
+      "volume_mm3": 681.5964373632213,
+      "product_name": "625pillow"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance2/NAUO281",
+      "solids": 14,
+      "min_assembly_mm": [
+        -31.100999902677025,
+        63.49999989999819,
+        -60.686678125268564
+      ],
+      "max_assembly_mm": [
+        -15.100999702677019,
+        68.50000009999819,
+        -44.68667792526856
+      ],
+      "volume_mm3": 681.5964373632216,
+      "product_name": "625pillow"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance3/NAUO278",
+      "solids": 1,
+      "min_assembly_mm": [
+        -75.35099980267735,
+        57.89999999999996,
+        -83.03667802526859
+      ],
+      "max_assembly_mm": [
+        -51.25099980267735,
+        68.09999999999997,
+        -58.93667802526858
+      ],
+      "volume_mm3": 2356.795581586731,
+      "product_name": "Rollers"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance3/NAUO279",
+      "solids": 1,
+      "min_assembly_mm": [
+        -68.30099980267735,
+        62.499999999999915,
+        -75.98667802526859
+      ],
+      "max_assembly_mm": [
+        -58.30099980267735,
+        63.499999999999915,
+        -65.98667802526859
+      ],
+      "volume_mm3": 58.90486225480863,
+      "product_name": "M5 washer1"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance3/NAUO280",
+      "solids": 14,
+      "min_assembly_mm": [
+        -71.30099990267735,
+        57.49999989999991,
+        -78.98667812526858
+      ],
+      "max_assembly_mm": [
+        -55.300999702677345,
+        62.50000009999992,
+        -62.98667792526859
+      ],
+      "volume_mm3": 681.5964373632219,
+      "product_name": "625pillow"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance3/NAUO281",
+      "solids": 14,
+      "min_assembly_mm": [
+        -71.30099990267735,
+        63.49999989999992,
+        -78.98667812526857
+      ],
+      "max_assembly_mm": [
+        -55.30099970267735,
+        68.50000009999992,
+        -62.98667792526857
+      ],
+      "volume_mm3": 681.5964373632215,
+      "product_name": "625pillow"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance4/NAUO278",
+      "solids": 1,
+      "min_assembly_mm": [
+        -75.35099980267715,
+        57.89999999999986,
+        -124.43667802526882
+      ],
+      "max_assembly_mm": [
+        -51.25099980267716,
+        68.09999999999987,
+        -100.33667802526881
+      ],
+      "volume_mm3": 2356.7955815867303,
+      "product_name": "Rollers"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance4/NAUO279",
+      "solids": 1,
+      "min_assembly_mm": [
+        -68.30099980267715,
+        62.49999999999983,
+        -117.38667802526882
+      ],
+      "max_assembly_mm": [
+        -58.30099980267715,
+        63.49999999999983,
+        -107.38667802526882
+      ],
+      "volume_mm3": 58.90486225480862,
+      "product_name": "M5 washer1"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance4/NAUO280",
+      "solids": 14,
+      "min_assembly_mm": [
+        -71.30099990267713,
+        57.49999989999983,
+        -120.38667812526882
+      ],
+      "max_assembly_mm": [
+        -55.30099970267714,
+        62.50000009999984,
+        -104.38667792526883
+      ],
+      "volume_mm3": 681.5964373632219,
+      "product_name": "625pillow"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance4/NAUO281",
+      "solids": 14,
+      "min_assembly_mm": [
+        -71.30099990267713,
+        63.499999899999835,
+        -120.38667812526882
+      ],
+      "max_assembly_mm": [
+        -55.30099970267714,
+        68.50000009999984,
+        -104.38667792526883
+      ],
+      "volume_mm3": 681.5964373632212,
+      "product_name": "625pillow"
+    },
+    {
+      "name": "Ender3/NAUO29",
+      "solids": 1,
+      "min_assembly_mm": [
+        -67.86427032977387,
+        81.44999999999824,
+        -75.29562137167657
+      ],
+      "max_assembly_mm": [
+        -58.737729275578765,
+        85.34999999999826,
+        -66.67773467886013
+      ],
+      "volume_mm3": 152.0011515894685,
+      "product_name": "M5 Self-locking nut"
+    },
+    {
+      "name": "Ender3/NAUO30",
+      "solids": 1,
+      "min_assembly_mm": [
+        -67.79485695193902,
+        81.45000000000508,
+        -116.81199431663792
+      ],
+      "max_assembly_mm": [
+        -58.80714265341528,
+        85.3500000000051,
+        -107.96136173389937
+      ],
+      "volume_mm3": 152.00115158946838,
+      "product_name": "M5 Self-locking nut"
+    },
+    {
+      "name": "Ender3/NAUO31",
+      "solids": 1,
+      "min_assembly_mm": [
+        -27.13880101863898,
+        80.8499999999985,
+        -57.304843301865
+      ],
+      "max_assembly_mm": [
+        -19.06319858671504,
+        84.74999999999852,
+        -48.068512748672184
+      ],
+      "volume_mm3": 152.00115158946838,
+      "product_name": "M5 Self-locking nut"
+    },
+    {
+      "name": "Ender3/NAUO32",
+      "solids": 1,
+      "min_assembly_mm": [
+        -27.10099990267702,
+        80.8499999999985,
+        -97.30548027878561
+      ],
+      "max_assembly_mm": [
+        -19.100999702677015,
+        84.74999999999852,
+        -88.0678757717516
+      ],
+      "volume_mm3": 152.00115158946835,
+      "product_name": "M5 Self-locking nut"
+    },
+    {
+      "name": "Ender3/NAUO33",
+      "solids": 1,
+      "min_assembly_mm": [
+        -132.65099990267706,
+        80.84999990000509,
+        -169.13667812526862
+      ],
+      "max_assembly_mm": [
+        -123.75099970267708,
+        97.96373863886659,
+        -160.23667792526865
+      ],
+      "volume_mm3": 133.7143867616026,
+      "product_name": "Bed level springs"
+    },
+    {
+      "name": "Ender3/NAUO34",
+      "solids": 1,
+      "min_assembly_mm": [
+        50.591388488622776,
+        116.44780551862308,
+        -72.69886298338469
+      ],
+      "max_assembly_mm": [
+        147.09138848862278,
+        210.94780551862308,
+        -19.198862981557767
+      ],
+      "volume_mm3": 19126.896740259508,
+      "product_name": "E motor bracket_X\ufffd\ufffd\ufffd\ufffd\ufffdB0"
+    },
+    {
+      "name": "Ender3/NAUO35",
+      "solids": 1,
+      "min_assembly_mm": [
+        59.59138848862173,
+        116.44780551862134,
+        -103.39886298155885
+      ],
+      "max_assembly_mm": [
+        169.35558293611425,
+        210.94780551862576,
+        -100.3988629815586
+      ],
+      "volume_mm3": 17756.812641272423,
+      "product_name": "X motor bracket_X\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd-B0"
+    },
+    {
+      "name": "Ender3/NAUO36",
+      "solids": 1,
+      "min_assembly_mm": [
+        66.34138848862275,
+        159.2722617832769,
+        -106.14886298155866
+      ],
+      "max_assembly_mm": [
+        75.84138848862275,
+        168.7722617832769,
+        -63.39886298155864
+      ],
+      "volume_mm3": 899.1709492902946,
+      "product_name": "M5X40 Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO37",
+      "solids": 1,
+      "min_assembly_mm": [
+        126.94138848862278,
+        123.197805518623,
+        -106.14886298155872
+      ],
+      "max_assembly_mm": [
+        136.44138848862278,
+        132.697805518623,
+        -63.3988629815587
+      ],
+      "volume_mm3": 899.1709492902945,
+      "product_name": "M5X40 Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO38",
+      "solids": 1,
+      "min_assembly_mm": [
+        126.94138848862269,
+        194.197805518623,
+        -106.14886298155886
+      ],
+      "max_assembly_mm": [
+        136.4413884886227,
+        203.697805518623,
+        -63.39886298155884
+      ],
+      "volume_mm3": 899.1709492902945,
+      "product_name": "M5X40 Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO39",
+      "solids": 1,
+      "min_assembly_mm": [
+        127.69138848862278,
+        194.94780551862317,
+        -81.048862981555
+      ],
+      "max_assembly_mm": [
+        135.69138848862278,
+        202.94780551862317,
+        -72.69886298155498
+      ],
+      "volume_mm3": 221.3350199224435,
+      "product_name": "Spacers for rollers"
+    },
+    {
+      "name": "Ender3/NAUO40",
+      "solids": 1,
+      "min_assembly_mm": [
+        127.69138848862279,
+        123.94780551862299,
+        -100.39886298155871
+      ],
+      "max_assembly_mm": [
+        135.6913884886228,
+        131.947805518623,
+        -92.04886298155868
+      ],
+      "volume_mm3": 221.33501992244345,
+      "product_name": "Spacers for rollers"
+    },
+    {
+      "name": "Ender3/NAUO41",
+      "solids": 1,
+      "min_assembly_mm": [
+        127.69138848862282,
+        123.94780551862304,
+        -81.04886298155489
+      ],
+      "max_assembly_mm": [
+        135.69138848862283,
+        131.94780551862306,
+        -72.69886298155487
+      ],
+      "volume_mm3": 221.33501992244342,
+      "product_name": "Spacers for rollers"
+    },
+    {
+      "name": "Ender3/NAUO42",
+      "solids": 1,
+      "min_assembly_mm": [
+        127.69138848862268,
+        194.94780551862303,
+        -100.398862981555
+      ],
+      "max_assembly_mm": [
+        135.6913884886227,
+        202.94780551862303,
+        -92.04886298155498
+      ],
+      "volume_mm3": 221.3350199224434,
+      "product_name": "Spacers for rollers"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance5/NAUO278",
+      "solids": 1,
+      "min_assembly_mm": [
+        59.04138848862277,
+        151.97226178327685,
+        -91.64886298155874
+      ],
+      "max_assembly_mm": [
+        83.14138848862278,
+        176.0722617832769,
+        -81.44886298155868
+      ],
+      "volume_mm3": 2356.7955815867313,
+      "product_name": "Rollers"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance5/NAUO279",
+      "solids": 1,
+      "min_assembly_mm": [
+        66.09138848862278,
+        159.0222617832769,
+        -87.04886298155867
+      ],
+      "max_assembly_mm": [
+        76.09138848862278,
+        169.0222617832769,
+        -86.04886298155864
+      ],
+      "volume_mm3": 58.90486225480865,
+      "product_name": "M5 washer1"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance5/NAUO280",
+      "solids": 14,
+      "min_assembly_mm": [
+        63.09138838862278,
+        156.0222616832769,
+        -86.04886308155868
+      ],
+      "max_assembly_mm": [
+        79.09138858862278,
+        172.02226188327688,
+        -81.04886288155866
+      ],
+      "volume_mm3": 681.5964373632219,
+      "product_name": "625pillow"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance5/NAUO281",
+      "solids": 14,
+      "min_assembly_mm": [
+        63.09138838862277,
+        156.0222616832769,
+        -92.04886308155868
+      ],
+      "max_assembly_mm": [
+        79.09138858862276,
+        172.02226188327688,
+        -87.04886288155866
+      ],
+      "volume_mm3": 681.5964373632223,
+      "product_name": "625pillow"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance6/NAUO278",
+      "solids": 1,
+      "min_assembly_mm": [
+        119.6413884886215,
+        186.8978055186235,
+        -91.64886298155506
+      ],
+      "max_assembly_mm": [
+        143.74138848862154,
+        210.99780551862355,
+        -81.44886298155501
+      ],
+      "volume_mm3": 2356.79558158673,
+      "product_name": "Rollers"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance6/NAUO279",
+      "solids": 1,
+      "min_assembly_mm": [
+        126.69138848862153,
+        193.9478055186235,
+        -87.048862981555
+      ],
+      "max_assembly_mm": [
+        136.69138848862153,
+        203.9478055186235,
+        -86.04886298155498
+      ],
+      "volume_mm3": 58.904862254808634,
+      "product_name": "M5 washer1"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance6/NAUO280",
+      "solids": 14,
+      "min_assembly_mm": [
+        123.69138838862153,
+        190.94780541862352,
+        -86.04886308155501
+      ],
+      "max_assembly_mm": [
+        139.69138858862152,
+        206.9478056186235,
+        -81.04886288155498
+      ],
+      "volume_mm3": 681.5964373632223,
+      "product_name": "625pillow"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance6/NAUO281",
+      "solids": 14,
+      "min_assembly_mm": [
+        123.69138838862153,
+        190.94780541862352,
+        -92.04886308155503
+      ],
+      "max_assembly_mm": [
+        139.69138858862152,
+        206.9478056186235,
+        -87.04886288155498
+      ],
+      "volume_mm3": 681.5964373632219,
+      "product_name": "625pillow"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance7/NAUO278",
+      "solids": 1,
+      "min_assembly_mm": [
+        119.64138848862284,
+        115.89780551862304,
+        -91.64886298155669
+      ],
+      "max_assembly_mm": [
+        143.74138848862285,
+        139.99780551862307,
+        -81.44886298155663
+      ],
+      "volume_mm3": 2356.79558158673,
+      "product_name": "Rollers"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance7/NAUO279",
+      "solids": 1,
+      "min_assembly_mm": [
+        126.69138848862286,
+        122.94780551862306,
+        -87.04886298155662
+      ],
+      "max_assembly_mm": [
+        136.69138848862286,
+        132.94780551862306,
+        -86.0488629815566
+      ],
+      "volume_mm3": 58.904862254808634,
+      "product_name": "M5 washer1"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance7/NAUO280",
+      "solids": 14,
+      "min_assembly_mm": [
+        123.69138838862287,
+        119.94780541862306,
+        -86.04886308155663
+      ],
+      "max_assembly_mm": [
+        139.69138858862286,
+        135.94780561862305,
+        -81.04886288155662
+      ],
+      "volume_mm3": 681.596437363222,
+      "product_name": "625pillow"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance7/NAUO281",
+      "solids": 14,
+      "min_assembly_mm": [
+        123.69138838862284,
+        119.94780541862305,
+        -92.04886308155663
+      ],
+      "max_assembly_mm": [
+        139.69138858862283,
+        135.94780561862305,
+        -87.04886288155662
+      ],
+      "volume_mm3": 681.5964373632221,
+      "product_name": "625pillow"
+    },
+    {
+      "name": "Ender3/NAUO46",
+      "solids": 1,
+      "min_assembly_mm": [
+        66.4725862351058,
+        160.02226168327692,
+        -70.19886298155774
+      ],
+      "max_assembly_mm": [
+        75.7101907421398,
+        168.0222618832769,
+        -66.29886298155772
+      ],
+      "volume_mm3": 152.00115158946852,
+      "product_name": "M5 Self-locking nut"
+    },
+    {
+      "name": "Ender3/NAUO47",
+      "solids": 1,
+      "min_assembly_mm": [
+        127.07258623510586,
+        123.94780541862306,
+        -70.19886298155777
+      ],
+      "max_assembly_mm": [
+        136.31019074213987,
+        131.94780561862305,
+        -66.29886298155775
+      ],
+      "volume_mm3": 152.00115158946846,
+      "product_name": "M5 Self-locking nut"
+    },
+    {
+      "name": "Ender3/NAUO48",
+      "solids": 1,
+      "min_assembly_mm": [
+        127.07258623510572,
+        194.94780541862312,
+        -70.19886298155788
+      ],
+      "max_assembly_mm": [
+        136.31019074213972,
+        202.9478056186231,
+        -66.29886298155786
+      ],
+      "volume_mm3": 152.0011515894684,
+      "product_name": "M5 Self-locking nut"
+    },
+    {
+      "name": "Ender3/NAUO49",
+      "solids": 1,
+      "min_assembly_mm": [
+        50.59138848862276,
+        164.47423750326305,
+        -61.19886298155783
+      ],
+      "max_assembly_mm": [
+        101.29138848862283,
+        228.4742375032631,
+        -19.198862981557696
+      ],
+      "volume_mm3": 70101.52431488804,
+      "product_name": "40-42 motor"
+    },
+    {
+      "name": "Ender3/NAUO50",
+      "solids": 2,
+      "min_assembly_mm": [
+        50.56388838862281,
+        206.97423740326315,
+        -61.226362981557926
+      ],
+      "max_assembly_mm": [
+        92.56388848862287,
+        222.09923760326322,
+        -19.226362881557783
+      ],
+      "volume_mm3": 8302.671168945515,
+      "product_name": "E housing"
+    },
+    {
+      "name": "Ender3/NAUO51",
+      "solids": 1,
+      "min_assembly_mm": [
+        53.241388488622775,
+        200.8942375032631,
+        -58.54886298155779
+      ],
+      "max_assembly_mm": [
+        58.94138848862278,
+        212.6442375032631,
+        -52.84886298155779
+      ],
+      "volume_mm3": 97.66473295574997,
+      "product_name": "M3X10 Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO52",
+      "solids": 1,
+      "min_assembly_mm": [
+        53.241388488622825,
+        200.89423750326316,
+        -27.548862981557797
+      ],
+      "max_assembly_mm": [
+        58.94138848862283,
+        212.64423750326316,
+        -21.848862981557794
+      ],
+      "volume_mm3": 97.66473295574994,
+      "product_name": "M3X10 Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO53",
+      "solids": 1,
+      "min_assembly_mm": [
+        84.32138848862283,
+        200.99352682514447,
+        -27.468862981557844
+      ],
+      "max_assembly_mm": [
+        89.86138848862282,
+        210.99423750326315,
+        -21.92886298155784
+      ],
+      "volume_mm3": 88.1624224398422,
+      "product_name": "M3X10 Flush Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO54",
+      "solids": 2,
+      "min_assembly_mm": [
+        65.7854651655247,
+        210.9942374032631,
+        -61.47092359556988
+      ],
+      "max_assembly_mm": [
+        92.67918858862289,
+        221.59673760326316,
+        -5.211762504031701
+      ],
+      "volume_mm3": 6296.080887995939,
+      "product_name": "E idler tensioner"
+    },
+    {
+      "name": "Ender3/NAUO55",
+      "solids": 1,
+      "min_assembly_mm": [
+        84.34138848862277,
+        201.0342375032631,
+        -58.44886308155791
+      ],
+      "max_assembly_mm": [
+        89.84138848862277,
+        222.0342375032631,
+        -52.94886288155791
+      ],
+      "volume_mm3": 205.82637093135637,
+      "product_name": "M3X18 Socket Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO56",
+      "solids": 1,
+      "min_assembly_mm": [
+        66.01888848862276,
+        213.99423750326315,
+        -58.65121298155789
+      ],
+      "max_assembly_mm": [
+        79.01888848862276,
+        217.99423750326315,
+        -45.65121298155787
+      ],
+      "volume_mm3": 420.70003759694424,
+      "product_name": "624U pillow"
+    },
+    {
+      "name": "Ender3/NAUO57",
+      "solids": 1,
+      "min_assembly_mm": [
+        95.09138848861154,
+        197.974237503265,
+        -69.048862981557
+      ],
+      "max_assembly_mm": [
+        107.69138848863584,
+        208.47423750326504,
+        -42.048862981556965
+      ],
+      "volume_mm3": 1128.2162394613931,
+      "product_name": "z nut"
+    },
+    {
+      "name": "Ender3/NAUO58",
+      "solids": 1,
+      "min_assembly_mm": [
+        68.92444833750051,
+        217.99423750326312,
+        -55.751212981557906
+      ],
+      "max_assembly_mm": [
+        76.11888848862279,
+        218.99423750326312,
+        -48.5512129815579
+      ],
+      "volume_mm3": 26.260086697681125,
+      "product_name": "M4 Split Washer"
+    },
+    {
+      "name": "Ender3/NAUO59",
+      "solids": 1,
+      "min_assembly_mm": [
+        69.11888848862277,
+        210.99423750326312,
+        -55.5512129815579
+      ],
+      "max_assembly_mm": [
+        75.91888848862278,
+        222.99423760326312,
+        -48.7512129815579
+      ],
+      "volume_mm3": 222.52728003141513,
+      "product_name": "M4X8 Socket Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO60",
+      "solids": 1,
+      "min_assembly_mm": [
+        113.49138848862275,
+        159.847805518623,
+        -100.39886298155875
+      ],
+      "max_assembly_mm": [
+        120.69138848862275,
+        167.04224566974528,
+        -99.39886298155872
+      ],
+      "volume_mm3": 26.26008669768112,
+      "product_name": "M4 Split Washer"
+    },
+    {
+      "name": "Ender3/NAUO61",
+      "solids": 1,
+      "min_assembly_mm": [
+        87.49138848862275,
+        159.84780551862295,
+        -100.39886298155868
+      ],
+      "max_assembly_mm": [
+        94.69138848862274,
+        167.04780551862294,
+        -99.39886298155865
+      ],
+      "volume_mm3": 26.260086697681118,
+      "product_name": "M4 Split Washer"
+    },
+    {
+      "name": "Ender3/NAUO62",
+      "solids": 1,
+      "min_assembly_mm": [
+        99.09138848862268,
+        203.47423750326502,
+        -48.848862981556984
+      ],
+      "max_assembly_mm": [
+        103.69138848862268,
+        204.47423750326502,
+        -44.24886298155699
+      ],
+      "volume_mm3": 8.770784773662896,
+      "product_name": "M3 Split Washer"
+    },
+    {
+      "name": "Ender3/NAUO63",
+      "solids": 1,
+      "min_assembly_mm": [
+        99.09138848862254,
+        203.4742375032636,
+        -66.84886298155335
+      ],
+      "max_assembly_mm": [
+        103.69138848862254,
+        204.4742375032636,
+        -62.24886298155336
+      ],
+      "volume_mm3": 8.770784773662896,
+      "product_name": "M3 Split Washer"
+    },
+    {
+      "name": "Ender3/NAUO64",
+      "solids": 1,
+      "min_assembly_mm": [
+        98.54138848862253,
+        197.87423750325826,
+        -67.39886298155379
+      ],
+      "max_assembly_mm": [
+        104.24138848862252,
+        209.62423750325826,
+        -61.698862981553795
+      ],
+      "volume_mm3": 97.66473295574995,
+      "product_name": "M3X10 Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO65",
+      "solids": 1,
+      "min_assembly_mm": [
+        98.54138848862264,
+        197.87423750326502,
+        -49.39886298155705
+      ],
+      "max_assembly_mm": [
+        104.24138848862263,
+        209.62423750326502,
+        -43.69886298155705
+      ],
+      "volume_mm3": 97.66473295574995,
+      "product_name": "M3X10 Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO66",
+      "solids": 1,
+      "min_assembly_mm": [
+        119.04138848862266,
+        153.447805518623,
+        -132.29886308155878
+      ],
+      "max_assembly_mm": [
+        145.04138848862266,
+        173.44780551862308,
+        -121.29886298155878
+      ],
+      "volume_mm3": 1764.8890834023634,
+      "product_name": "limit switch"
+    },
+    {
+      "name": "Ender3/NAUO67",
+      "solids": 1,
+      "min_assembly_mm": [
+        66.11638848862295,
+        212.49423750326318,
+        -45.67386298156488
+      ],
+      "max_assembly_mm": [
+        77.06638848862295,
+        223.39423760326318,
+        -34.72386298156488
+      ],
+      "volume_mm3": 672.9783673456825,
+      "product_name": "E gear"
+    },
+    {
+      "name": "Ender3/NAUO68",
+      "solids": 1,
+      "min_assembly_mm": [
+        65.13638838862292,
+        212.0717374032632,
+        -29.797863081557885
+      ],
+      "max_assembly_mm": [
+        82.25012712748442,
+        220.97173760326316,
+        -20.897862881557835
+      ],
+      "volume_mm3": 133.71438676160264,
+      "product_name": "Extrusion Spring"
+    },
+    {
+      "name": "Ender3/NAUO69",
+      "solids": 1,
+      "min_assembly_mm": [
+        40.56388838862278,
+        212.01923750324772,
+        -50.87066513510171
+      ],
+      "max_assembly_mm": [
+        55.563992131022765,
+        220.0192376032631,
+        -41.633060828013825
+      ],
+      "volume_mm3": 518.4068369265201,
+      "product_name": "M6 Pneumatic joint"
+    },
+    {
+      "name": "Ender3/NAUO70",
+      "solids": 1,
+      "min_assembly_mm": [
+        139.59138848861954,
+        155.94780551862007,
+        -117.83529604688593
+      ],
+      "max_assembly_mm": [
+        154.59138858862556,
+        170.94780561862612,
+        -101.83529594688592
+      ],
+      "volume_mm3": 1870.7387465228976,
+      "product_name": "2GT-pulley"
+    },
+    {
+      "name": "Ender3/NAUO71",
+      "solids": 1,
+      "min_assembly_mm": [
+        126.09138848862256,
+        142.44780551862306,
+        -137.39886298155886
+      ],
+      "max_assembly_mm": [
+        168.09138848862273,
+        184.44780551862323,
+        -103.39886298155874
+      ],
+      "volume_mm3": 16198.603084933316,
+      "product_name": "X limit switch bracket_\ufffd\ufffd\ufffd\ufffdX\ufffd\ufffd\u03bb\ufffd\ufffd"
+    },
+    {
+      "name": "Ender3/NAUO72",
+      "solids": 1,
+      "min_assembly_mm": [
+        137.19138848862272,
+        168.09780551862303,
+        -129.29886298155884
+      ],
+      "max_assembly_mm": [
+        142.8913884886227,
+        173.79780551862302,
+        -121.64886298155884
+      ],
+      "volume_mm3": 67.63626386539522,
+      "product_name": "M3X6Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO73",
+      "solids": 1,
+      "min_assembly_mm": [
+        137.19138848862272,
+        153.09780551862303,
+        -129.2988629815588
+      ],
+      "max_assembly_mm": [
+        142.8913884886227,
+        158.79780551862302,
+        -121.64886298155879
+      ],
+      "volume_mm3": 67.63626386539524,
+      "product_name": "M3X6Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO74",
+      "solids": 1,
+      "min_assembly_mm": [
+        128.82138848862272,
+        145.17780551862296,
+        -137.39886298155875
+      ],
+      "max_assembly_mm": [
+        134.36138848862274,
+        150.71780551862298,
+        -97.3981523034401
+      ],
+      "volume_mm3": 308.58213903041496,
+      "product_name": "M3\ufffd\ufffd40 Flush Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO75",
+      "solids": 1,
+      "min_assembly_mm": [
+        159.82138848862272,
+        145.17780551862302,
+        -137.3988629815588
+      ],
+      "max_assembly_mm": [
+        165.36138848862274,
+        150.71780551862304,
+        -97.39815230344016
+      ],
+      "volume_mm3": 308.58213903041496,
+      "product_name": "M3\ufffd\ufffd40 Flush Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO76",
+      "solids": 1,
+      "min_assembly_mm": [
+        128.8213884886227,
+        176.17780551862296,
+        -137.3988629815588
+      ],
+      "max_assembly_mm": [
+        134.3613884886227,
+        181.71780551862298,
+        -97.39815230344016
+      ],
+      "volume_mm3": 308.58213903041496,
+      "product_name": "M3\ufffd\ufffd40 Flush Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO77",
+      "solids": 1,
+      "min_assembly_mm": [
+        159.8213884886227,
+        176.17780551862305,
+        -137.39886298155886
+      ],
+      "max_assembly_mm": [
+        165.3613884886227,
+        181.71780551862307,
+        -97.39815230344021
+      ],
+      "volume_mm3": 308.5821390304149,
+      "product_name": "M3\ufffd\ufffd40 Flush Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO78",
+      "solids": 1,
+      "min_assembly_mm": [
+        126.09138848862008,
+        133.74780551862517,
+        -120.39886298155889
+      ],
+      "max_assembly_mm": [
+        168.09138848862014,
+        184.44780551862522,
+        -66.64886298155882
+      ],
+      "volume_mm3": 60413.388274816905,
+      "product_name": "42-34 motor"
+    },
+    {
+      "name": "Ender3/NAUO79",
+      "solids": 1,
+      "min_assembly_mm": [
+        67.09138848862274,
+        160.02226178327683,
+        -100.39886298155868
+      ],
+      "max_assembly_mm": [
+        75.09138848862275,
+        168.02226178327686,
+        -92.04886298155866
+      ],
+      "volume_mm3": 221.33501992244334,
+      "product_name": "Spacers for rollers"
+    },
+    {
+      "name": "Ender3/NAUO80",
+      "solids": 1,
+      "min_assembly_mm": [
+        66.2652279239217,
+        157.69497428776685,
+        -81.0488629815587
+      ],
+      "max_assembly_mm": [
+        76.71754905300736,
+        169.20063674961776,
+        -70.29886298155867
+      ],
+      "volume_mm3": 586.6361666983712,
+      "product_name": "Eccentric column"
+    },
+    {
+      "name": "Ender3/NAUO81",
+      "solids": 1,
+      "min_assembly_mm": [
+        -224.90861161137738,
+        153.44780551862246,
+        -123.39886298155876
+      ],
+      "max_assembly_mm": [
+        120.09138858862262,
+        173.44780551862308,
+        -103.39886288155834
+      ],
+      "volume_mm3": 59526.06609755099,
+      "product_name": "2020 profile_20*20-L345,4\ufffd\ufffdM4\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\u0377\u0368\ufffd\ufffd"
+    },
+    {
+      "name": "Ender3/NAUO82",
+      "solids": 1,
+      "min_assembly_mm": [
+        -103.85802337050463,
+        131.64780551862282,
+        -134.24886298155613
+      ],
+      "max_assembly_mm": [
+        -39.85802337050453,
+        195.64780551862287,
+        -106.84886298155607
+      ],
+      "volume_mm3": 9859.4494829722,
+      "product_name": "E plate"
+    },
+    {
+      "name": "Ender3/NAUO83",
+      "solids": 1,
+      "min_assembly_mm": [
+        -96.60802337050463,
+        178.99780551862278,
+        -132.49886298155613
+      ],
+      "max_assembly_mm": [
+        -87.10802337050463,
+        188.49780551862278,
+        -99.54886298155613
+      ],
+      "volume_mm3": 706.7489745506014,
+      "product_name": "M5X30 Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO84",
+      "solids": 1,
+      "min_assembly_mm": [
+        -77.18247963515836,
+        138.39780551862287,
+        -138.09886298155843
+      ],
+      "max_assembly_mm": [
+        -67.68247963515836,
+        147.89780551862287,
+        -105.14886298155842
+      ],
+      "volume_mm3": 706.7489745506014,
+      "product_name": "M5X30 Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO85",
+      "solids": 1,
+      "min_assembly_mm": [
+        -56.60802337050462,
+        178.9978055186228,
+        -132.49886298155616
+      ],
+      "max_assembly_mm": [
+        -47.10802337050462,
+        188.4978055186228,
+        -99.54886298155616
+      ],
+      "volume_mm3": 706.7489745506015,
+      "product_name": "M5X30 Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO86",
+      "solids": 1,
+      "min_assembly_mm": [
+        -77.53247963515838,
+        138.04780551862282,
+        -130.34886298155604
+      ],
+      "max_assembly_mm": [
+        -67.33247963515839,
+        148.2478055186228,
+        -129.74886298155604
+      ],
+      "volume_mm3": 36.28539514896202,
+      "product_name": "M5 washer"
+    },
+    {
+      "name": "Ender3/NAUO87",
+      "solids": 1,
+      "min_assembly_mm": [
+        -77.6108546014323,
+        138.32164495408256,
+        -129.64886298155835
+      ],
+      "max_assembly_mm": [
+        -66.10519213958004,
+        148.7739660831615,
+        -118.89886298155837
+      ],
+      "volume_mm3": 586.6361666983712,
+      "product_name": "Eccentric column"
+    },
+    {
+      "name": "Ender3/NAUO88",
+      "solids": 1,
+      "min_assembly_mm": [
+        -95.85802337050461,
+        179.74780551862278,
+        -127.2488629815585
+      ],
+      "max_assembly_mm": [
+        -87.8580233705046,
+        187.7478055186228,
+        -118.89886298155848
+      ],
+      "volume_mm3": 221.3350199224434,
+      "product_name": "Spacers for rollers"
+    },
+    {
+      "name": "Ender3/NAUO89",
+      "solids": 1,
+      "min_assembly_mm": [
+        -55.85802337050461,
+        179.74780551862284,
+        -127.24886298155853
+      ],
+      "max_assembly_mm": [
+        -47.858023370504604,
+        187.74780551862284,
+        -118.89886298155851
+      ],
+      "volume_mm3": 221.33501992244334,
+      "product_name": "Spacers for rollers"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance8/NAUO278",
+      "solids": 1,
+      "min_assembly_mm": [
+        -103.90802337050458,
+        171.69780551862274,
+        -118.49886298155862
+      ],
+      "max_assembly_mm": [
+        -79.80802337050457,
+        195.79780551862277,
+        -108.29886298155859
+      ],
+      "volume_mm3": 2356.79558158673,
+      "product_name": "Rollers"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance8/NAUO279",
+      "solids": 1,
+      "min_assembly_mm": [
+        -96.85802337050458,
+        178.74780551862276,
+        -113.89886298155857
+      ],
+      "max_assembly_mm": [
+        -86.85802337050458,
+        188.74780551862276,
+        -112.89886298155854
+      ],
+      "volume_mm3": 58.904862254808585,
+      "product_name": "M5 washer1"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance8/NAUO280",
+      "solids": 14,
+      "min_assembly_mm": [
+        -99.85802347050458,
+        175.74780541862276,
+        -112.89886308155856
+      ],
+      "max_assembly_mm": [
+        -83.85802327050459,
+        191.74780561862275,
+        -107.89886288155854
+      ],
+      "volume_mm3": 681.5964373632213,
+      "product_name": "625pillow"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance8/NAUO281",
+      "solids": 14,
+      "min_assembly_mm": [
+        -99.85802347050458,
+        175.74780541862276,
+        -118.89886308155856
+      ],
+      "max_assembly_mm": [
+        -83.85802327050459,
+        191.74780561862275,
+        -113.89886288155854
+      ],
+      "volume_mm3": 681.5964373632219,
+      "product_name": "625pillow"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance9/NAUO278",
+      "solids": 1,
+      "min_assembly_mm": [
+        -84.48247963515405,
+        131.09780551862286,
+        -118.4988629815585
+      ],
+      "max_assembly_mm": [
+        -60.38247963515404,
+        155.19780551862289,
+        -108.29886298155846
+      ],
+      "volume_mm3": 2356.7955815867303,
+      "product_name": "Rollers"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance9/NAUO279",
+      "solids": 1,
+      "min_assembly_mm": [
+        -77.43247963515405,
+        138.14780551862287,
+        -113.89886298155845
+      ],
+      "max_assembly_mm": [
+        -67.43247963515405,
+        148.14780551862287,
+        -112.89886298155842
+      ],
+      "volume_mm3": 58.904862254808585,
+      "product_name": "M5 washer1"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance9/NAUO280",
+      "solids": 14,
+      "min_assembly_mm": [
+        -80.43247973515405,
+        135.14780541862288,
+        -112.89886308155846
+      ],
+      "max_assembly_mm": [
+        -64.43247953515406,
+        151.14780561862287,
+        -107.89886288155844
+      ],
+      "volume_mm3": 681.5964373632214,
+      "product_name": "625pillow"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance9/NAUO281",
+      "solids": 14,
+      "min_assembly_mm": [
+        -80.43247973515405,
+        135.14780541862288,
+        -118.89886308155847
+      ],
+      "max_assembly_mm": [
+        -64.43247953515406,
+        151.14780561862287,
+        -113.89886288155846
+      ],
+      "volume_mm3": 681.5964373632213,
+      "product_name": "625pillow"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance10/NAUO278",
+      "solids": 1,
+      "min_assembly_mm": [
+        -63.90802337050458,
+        171.69780551862289,
+        -118.49886298155856
+      ],
+      "max_assembly_mm": [
+        -39.80802337050457,
+        195.7978055186229,
+        -108.29886298155854
+      ],
+      "volume_mm3": 2356.795581586731,
+      "product_name": "Rollers"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance10/NAUO279",
+      "solids": 1,
+      "min_assembly_mm": [
+        -56.85802337050458,
+        178.74780551862287,
+        -113.89886298155852
+      ],
+      "max_assembly_mm": [
+        -46.85802337050458,
+        188.74780551862287,
+        -112.89886298155852
+      ],
+      "volume_mm3": 58.904862254808585,
+      "product_name": "M5 washer1"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance10/NAUO280",
+      "solids": 14,
+      "min_assembly_mm": [
+        -59.85802347050459,
+        175.74780541862287,
+        -112.89886308155853
+      ],
+      "max_assembly_mm": [
+        -43.85802327050458,
+        191.74780561862286,
+        -107.89886288155851
+      ],
+      "volume_mm3": 681.5964373632218,
+      "product_name": "625pillow"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance10/NAUO281",
+      "solids": 14,
+      "min_assembly_mm": [
+        -59.858023470504584,
+        175.74780541862287,
+        -118.89886308155855
+      ],
+      "max_assembly_mm": [
+        -43.858023270504574,
+        191.74780561862286,
+        -113.89886288155853
+      ],
+      "volume_mm3": 681.5964373632218,
+      "product_name": "625pillow"
+    },
+    {
+      "name": "Ender3/NAUO93",
+      "solids": 1,
+      "min_assembly_mm": [
+        -77.05128188867539,
+        139.14780541862282,
+        -134.24886298155604
+      ],
+      "max_assembly_mm": [
+        -67.81367738164138,
+        147.1478056186228,
+        -130.34886298155604
+      ],
+      "volume_mm3": 152.00115158946835,
+      "product_name": "M5 Self-locking nut"
+    },
+    {
+      "name": "Ender3/NAUO94",
+      "solids": 1,
+      "min_assembly_mm": [
+        -96.12454044476578,
+        179.16827954156187,
+        -107.8988629815585
+      ],
+      "max_assembly_mm": [
+        -87.59150629624335,
+        188.32733149568386,
+        -103.99886298155847
+      ],
+      "volume_mm3": 152.0011515894685,
+      "product_name": "M5 Self-locking nut"
+    },
+    {
+      "name": "Ender3/NAUO95",
+      "solids": 1,
+      "min_assembly_mm": [
+        -56.124540444765806,
+        179.1682795415619,
+        -107.89886298155852
+      ],
+      "max_assembly_mm": [
+        -47.591506296243374,
+        188.3273314956839,
+        -103.9988629815585
+      ],
+      "volume_mm3": 152.00115158946846,
+      "product_name": "M5 Self-locking nut"
+    },
+    {
+      "name": "Ender3/NAUO96",
+      "solids": 1,
+      "min_assembly_mm": [
+        72.29900019732196,
+        39.999999999999886,
+        -76.54886298155876
+      ],
+      "max_assembly_mm": [
+        122.99900019732199,
+        93.74999999999993,
+        -34.54886298155869
+      ],
+      "volume_mm3": 60413.388274816876,
+      "product_name": "42-34 motor"
+    },
+    {
+      "name": "Ender3/NAUO97",
+      "solids": 1,
+      "min_assembly_mm": [
+        80.99900019732193,
+        73.74999989999871,
+        -76.54886298155881
+      ],
+      "max_assembly_mm": [
+        122.99900019732193,
+        85.75000009999872,
+        -66.54886288155878
+      ],
+      "volume_mm3": 3775.8207619715877,
+      "product_name": "Z motor bracket"
+    },
+    {
+      "name": "Ender3/NAUO98",
+      "solids": 1,
+      "min_assembly_mm": [
+        83.64900019732292,
+        69.74999999999869,
+        -73.89886298155821
+      ],
+      "max_assembly_mm": [
+        89.34900019732291,
+        87.39999999999871,
+        -68.19886298155822
+      ],
+      "volume_mm3": 138.3215139240993,
+      "product_name": "M3X16 Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO99",
+      "solids": 1,
+      "min_assembly_mm": [
+        114.64900019732292,
+        69.74999999999872,
+        -73.8988629815582
+      ],
+      "max_assembly_mm": [
+        120.34900019732291,
+        87.39999999999873,
+        -68.19886298155821
+      ],
+      "volume_mm3": 138.32151392409924,
+      "product_name": "M3X16 Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO100",
+      "solids": 1,
+      "min_assembly_mm": [
+        91.99900009732289,
+        80.74999999999736,
+        -65.5488630815582
+      ],
+      "max_assembly_mm": [
+        111.99900029732288,
+        106.74999999999895,
+        -45.54886288155816
+      ],
+      "volume_mm3": 6823.542368584032,
+      "product_name": "Z coupler"
+    },
+    {
+      "name": "Ender3/NAUO101",
+      "solids": 1,
+      "min_assembly_mm": [
+        -208.00099990267813,
+        -1.0000159017241651e-07,
+        -231.54886308155798
+      ],
+      "max_assembly_mm": [
+        -168.000999802678,
+        39.9999999999985,
+        58.45113711844201
+      ],
+      "volume_mm3": 145681.96009845613,
+      "product_name": "4040 profile_40*40-L290-2\ufffd\ufffd4\ufffd\ufffd\ufffd\ufffd\u0377\u0368\ufffd\ufffd,2\ufffd\ufffdM5"
+    },
+    {
+      "name": "Ender3/NAUO102",
+      "solids": 1,
+      "min_assembly_mm": [
+        -208.0009998026784,
+        39.99999989999852,
+        -96.54886298155861
+      ],
+      "max_assembly_mm": [
+        -168.0009998026781,
+        440.00000009999854,
+        -76.54886298155795
+      ],
+      "volume_mm3": 117331.06689837301,
+      "product_name": "2040 profile_20*40-L400\ufffd\ufffd\ufffd\ufffd\ufffd\ufffdM5*15,\ufffd\ufffd\ufffd\ufffd2\ufffd\ufffdM4\ufffd\ufffd\u0377"
+    },
+    {
+      "name": "Ender3/NAUO103",
+      "solids": 1,
+      "min_assembly_mm": [
+        -230.96519425017746,
+        117.10605181106732,
+        -103.39886298155851
+      ],
+      "max_assembly_mm": [
+        -124.60861151136365,
+        208.44780551862937,
+        -100.39886298155834
+      ],
+      "volume_mm3": 15513.288664064718,
+      "product_name": "Z Stent_Z\ufffd\u1c7b\ufffd\ufffd\ufffd\ufffdA-0"
+    },
+    {
+      "name": "Ender3/NAUO104",
+      "solids": 1,
+      "min_assembly_mm": [
+        -222.30099980267727,
+        194.9478055186227,
+        -100.39886298155847
+      ],
+      "max_assembly_mm": [
+        -214.30099980267727,
+        202.9478055186227,
+        -92.04886298155844
+      ],
+      "volume_mm3": 221.33501992244345,
+      "product_name": "Spacers for rollers"
+    },
+    {
+      "name": "Ender3/NAUO105",
+      "solids": 1,
+      "min_assembly_mm": [
+        -222.30099980267724,
+        123.94780551862267,
+        -100.39886298155835
+      ],
+      "max_assembly_mm": [
+        -214.30099980267724,
+        131.9478055186227,
+        -92.04886298155833
+      ],
+      "volume_mm3": 221.3350199224435,
+      "product_name": "Spacers for rollers"
+    },
+    {
+      "name": "Ender3/NAUO106",
+      "solids": 1,
+      "min_assembly_mm": [
+        -163.32716036721325,
+        157.69497428770015,
+        -102.79886298155843
+      ],
+      "max_assembly_mm": [
+        -152.8748392381344,
+        169.20063674955244,
+        -92.04886298155843
+      ],
+      "volume_mm3": 586.6361666983712,
+      "product_name": "Eccentric column"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance11/NAUO278",
+      "solids": 1,
+      "min_assembly_mm": [
+        -230.35099980267722,
+        115.89780551862263,
+        -91.64886298155838
+      ],
+      "max_assembly_mm": [
+        -206.2509998026772,
+        139.99780551862267,
+        -81.44886298155835
+      ],
+      "volume_mm3": 2356.79558158673,
+      "product_name": "Rollers"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance11/NAUO279",
+      "solids": 1,
+      "min_assembly_mm": [
+        -223.30099980267718,
+        122.94780551862266,
+        -87.04886298155834
+      ],
+      "max_assembly_mm": [
+        -213.30099980267718,
+        132.94780551862266,
+        -86.04886298155832
+      ],
+      "volume_mm3": 58.9048622548086,
+      "product_name": "M5 washer1"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance11/NAUO280",
+      "solids": 14,
+      "min_assembly_mm": [
+        -226.30099990267718,
+        119.94780541862266,
+        -86.04886308155834
+      ],
+      "max_assembly_mm": [
+        -210.3009997026772,
+        135.94780561862265,
+        -81.04886288155832
+      ],
+      "volume_mm3": 681.5964373632215,
+      "product_name": "625pillow"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance11/NAUO281",
+      "solids": 14,
+      "min_assembly_mm": [
+        -226.3009999026772,
+        119.94780541862265,
+        -92.04886308155834
+      ],
+      "max_assembly_mm": [
+        -210.30099970267722,
+        135.94780561862265,
+        -87.04886288155832
+      ],
+      "volume_mm3": 681.5964373632216,
+      "product_name": "625pillow"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance12/NAUO278",
+      "solids": 1,
+      "min_assembly_mm": [
+        -230.35099980267728,
+        186.8978055186227,
+        -91.64886298155851
+      ],
+      "max_assembly_mm": [
+        -206.25099980267726,
+        210.99780551862273,
+        -81.44886298155845
+      ],
+      "volume_mm3": 2356.795581586731,
+      "product_name": "Rollers"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance12/NAUO279",
+      "solids": 1,
+      "min_assembly_mm": [
+        -223.30099980267727,
+        193.94780551862272,
+        -87.04886298155846
+      ],
+      "max_assembly_mm": [
+        -213.30099980267727,
+        203.94780551862272,
+        -86.04886298155843
+      ],
+      "volume_mm3": 58.90486225480862,
+      "product_name": "M5 washer1"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance12/NAUO280",
+      "solids": 14,
+      "min_assembly_mm": [
+        -226.30099990267726,
+        190.94780541862272,
+        -86.04886308155845
+      ],
+      "max_assembly_mm": [
+        -210.30099970267727,
+        206.9478056186227,
+        -81.04886288155843
+      ],
+      "volume_mm3": 681.5964373632224,
+      "product_name": "625pillow"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance12/NAUO281",
+      "solids": 14,
+      "min_assembly_mm": [
+        -226.30099990267726,
+        190.94780541862272,
+        -92.04886308155847
+      ],
+      "max_assembly_mm": [
+        -210.30099970267727,
+        206.9478056186227,
+        -87.04886288155845
+      ],
+      "volume_mm3": 681.5964373632224,
+      "product_name": "625pillow"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance13/NAUO278",
+      "solids": 1,
+      "min_assembly_mm": [
+        -169.7509998026773,
+        151.9722617832765,
+        -91.64886298155848
+      ],
+      "max_assembly_mm": [
+        -145.6509998026773,
+        176.07226178327653,
+        -81.44886298155845
+      ],
+      "volume_mm3": 2356.7955815867303,
+      "product_name": "Rollers"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance13/NAUO279",
+      "solids": 1,
+      "min_assembly_mm": [
+        -162.70099980267727,
+        159.02226178327652,
+        -87.04886298155844
+      ],
+      "max_assembly_mm": [
+        -152.70099980267727,
+        169.02226178327652,
+        -86.04886298155841
+      ],
+      "volume_mm3": 58.904862254808606,
+      "product_name": "M5 washer1"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance13/NAUO280",
+      "solids": 14,
+      "min_assembly_mm": [
+        -165.70099990267727,
+        156.02226168327653,
+        -86.04886308155845
+      ],
+      "max_assembly_mm": [
+        -149.70099970267728,
+        172.0222618832765,
+        -81.04886288155843
+      ],
+      "volume_mm3": 681.5964373632216,
+      "product_name": "625pillow"
+    },
+    {
+      "name": "Ender3/V Wheel Component__instance13/NAUO281",
+      "solids": 14,
+      "min_assembly_mm": [
+        -165.7009999026773,
+        156.02226168327653,
+        -92.04886308155845
+      ],
+      "max_assembly_mm": [
+        -149.7009997026773,
+        172.0222618832765,
+        -87.04886288155843
+      ],
+      "volume_mm3": 681.5964373632215,
+      "product_name": "625pillow"
+    },
+    {
+      "name": "Ender3/NAUO110",
+      "solids": 1,
+      "min_assembly_mm": [
+        -161.19528084460853,
+        160.52226178327655,
+        -104.39886298155844
+      ],
+      "max_assembly_mm": [
+        -154.2009998026773,
+        167.52226178327655,
+        -103.39886298155844
+      ],
+      "volume_mm3": 17.676019336184588,
+      "product_name": "M5 Split Washer"
+    },
+    {
+      "name": "Ender3/NAUO111",
+      "solids": 1,
+      "min_assembly_mm": [
+        -162.4509998026773,
+        159.27226178327652,
+        -107.14886298155845
+      ],
+      "max_assembly_mm": [
+        -152.9509998026773,
+        168.77226178327652,
+        -74.19886298155845
+      ],
+      "volume_mm3": 706.7489745506016,
+      "product_name": "M5X30 Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO112",
+      "solids": 1,
+      "min_assembly_mm": [
+        -223.0509998026773,
+        123.19780551862274,
+        -111.24886298155832
+      ],
+      "max_assembly_mm": [
+        -213.5509998026773,
+        132.69780551862274,
+        -78.29886298155832
+      ],
+      "volume_mm3": 706.7489745506016,
+      "product_name": "M5X30 Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO113",
+      "solids": 1,
+      "min_assembly_mm": [
+        -223.0509998026772,
+        194.19780551862272,
+        -111.24886298155846
+      ],
+      "max_assembly_mm": [
+        -213.5509998026772,
+        203.69780551862272,
+        -78.29886298155844
+      ],
+      "volume_mm3": 706.7489745506014,
+      "product_name": "M5X30 Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO114",
+      "solids": 1,
+      "min_assembly_mm": [
+        -222.56751687693907,
+        123.36827954156192,
+        -107.29886298155834
+      ],
+      "max_assembly_mm": [
+        -214.0344827284154,
+        132.52733149568348,
+        -103.39886298155832
+      ],
+      "volume_mm3": 152.00115158946846,
+      "product_name": "M5 Self-locking nut"
+    },
+    {
+      "name": "Ender3/NAUO115",
+      "solids": 1,
+      "min_assembly_mm": [
+        -222.88436421607747,
+        194.69296751081316,
+        -107.29886298155847
+      ],
+      "max_assembly_mm": [
+        -213.71763538927712,
+        203.20264352643233,
+        -103.39886298155845
+      ],
+      "volume_mm3": 152.00115158946846,
+      "product_name": "M5 Self-locking nut"
+    },
+    {
+      "name": "Ender3/NAUO116",
+      "solids": 1,
+      "min_assembly_mm": [
+        -162.3198020561943,
+        160.02226168327658,
+        -81.04886298155844
+      ],
+      "max_assembly_mm": [
+        -153.0821975491603,
+        168.02226188327657,
+        -77.14886298155842
+      ],
+      "volume_mm3": 152.0011515894684,
+      "product_name": "M5 Self-locking nut"
+    },
+    {
+      "name": "Ender3/NAUO117",
+      "solids": 1,
+      "min_assembly_mm": [
+        -168.0009999026771,
+        -1.0000147259981986e-07,
+        -106.54886298155834
+      ],
+      "max_assembly_mm": [
+        81.99900029732288,
+        39.999999999998614,
+        -66.5488629815583
+      ],
+      "volume_mm3": 113474.96191187688,
+      "product_name": "4040 profile_40*40-L250,4\ufffd\ufffdM5\ufffd\ufffd\ufffd\ufffd,2\ufffd\ufffd\ufffd\ufffd\u0377\ufffd\ufffd1\ufffd\ufffdM3\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd"
+    },
+    {
+      "name": "Ender3/NAUO118",
+      "solids": 1,
+      "min_assembly_mm": [
+        -249.55861151137728,
+        153.44780551862263,
+        -126.39886298155523
+      ],
+      "max_assembly_mm": [
+        -202.90861151137727,
+        173.4478055186227,
+        -123.39886298155517
+      ],
+      "volume_mm3": 2299.9207369424225,
+      "product_name": "X Adjustment Block_X\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd"
+    },
+    {
+      "name": "Ender3/NAUO119",
+      "solids": 1,
+      "min_assembly_mm": [
+        -244.9086115113773,
+        155.44780551862263,
+        -130.79886298155833
+      ],
+      "max_assembly_mm": [
+        -230.9086115113773,
+        169.44780551862263,
+        -100.99886298155832
+      ],
+      "volume_mm3": 1670.4207197541286,
+      "product_name": "M8X25 Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO120",
+      "solids": 1,
+      "min_assembly_mm": [
+        -244.4086116113773,
+        154.9422519191575,
+        -123.39886308155833
+      ],
+      "max_assembly_mm": [
+        -231.40861141137728,
+        169.9533591180878,
+        -117.89886288155832
+      ],
+      "volume_mm3": 595.4804244170858,
+      "product_name": "M8 nut"
+    },
+    {
+      "name": "Ender3/NAUO121",
+      "solids": 1,
+      "min_assembly_mm": [
+        -246.9086115113773,
+        153.44780551862266,
+        -117.89886298155835
+      ],
+      "max_assembly_mm": [
+        -228.9086115113773,
+        171.44780551862266,
+        -112.89886298155832
+      ],
+      "volume_mm3": 804.7301939537371,
+      "product_name": "F688 pillow"
+    },
+    {
+      "name": "Ender3/NAUO122",
+      "solids": 1,
+      "min_assembly_mm": [
+        -245.09738757194373,
+        155.14338965450946,
+        -107.89886308155833
+      ],
+      "max_assembly_mm": [
+        -230.7198354508108,
+        169.75222138273583,
+        -100.71640562961261
+      ],
+      "volume_mm3": 740.0478162418872,
+      "product_name": "M8 Self-locking nut"
+    },
+    {
+      "name": "Ender3/NAUO123",
+      "solids": 1,
+      "min_assembly_mm": [
+        -212.30861151137728,
+        160.04780551862265,
+        -130.39886308155837
+      ],
+      "max_assembly_mm": [
+        -205.50861151137727,
+        166.84780561862266,
+        -118.39886298155837
+      ],
+      "volume_mm3": 222.52728003141527,
+      "product_name": "M4X8 Socket Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO124",
+      "solids": 1,
+      "min_assembly_mm": [
+        -225.30861151137725,
+        160.0478055186226,
+        -130.39886308155835
+      ],
+      "max_assembly_mm": [
+        -218.50861151137724,
+        166.8478056186226,
+        -118.39886298155834
+      ],
+      "volume_mm3": 222.52728003141536,
+      "product_name": "M4X8 Socket Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO125",
+      "solids": 1,
+      "min_assembly_mm": [
+        -211.90861151137727,
+        158.69780551862266,
+        -122.49886298155833
+      ],
+      "max_assembly_mm": [
+        -205.90861151137727,
+        168.19780551862266,
+        -118.39886298155832
+      ],
+      "volume_mm3": 136.47941466535295,
+      "product_name": "M4 T-Slot Nut"
+    },
+    {
+      "name": "Ender3/NAUO126",
+      "solids": 1,
+      "min_assembly_mm": [
+        -224.90861151137725,
+        158.69780551862263,
+        -122.4988629815583
+      ],
+      "max_assembly_mm": [
+        -218.90861151137725,
+        168.19780551862263,
+        -118.3988629815583
+      ],
+      "volume_mm3": 136.47941466535292,
+      "product_name": "M4 T-Slot Nut"
+    },
+    {
+      "name": "Ender3/NAUO127",
+      "solids": 1,
+      "min_assembly_mm": [
+        -208.00099990267816,
+        439.99999999999875,
+        -96.54886298155937
+      ],
+      "max_assembly_mm": [
+        121.99900029732183,
+        460.0000000999988,
+        -76.54886298155937
+      ],
+      "volume_mm3": 56932.40441587176,
+      "product_name": "2020 profile_20*20-L330\ufffd\ufffd4\ufffd\ufffd\ufffd\ufffd\u0377\u0368\ufffd\ufffd"
+    },
+    {
+      "name": "Ender3/NAUO128",
+      "solids": 1,
+      "min_assembly_mm": [
+        99.09138848862254,
+        206.97423750325837,
+        -66.84886298155335
+      ],
+      "max_assembly_mm": [
+        103.69138848862254,
+        207.97423750325837,
+        -62.24886298155336
+      ],
+      "volume_mm3": 8.770784773662896,
+      "product_name": "M3 Split Washer"
+    },
+    {
+      "name": "Ender3/NAUO129",
+      "solids": 1,
+      "min_assembly_mm": [
+        99.09138848862268,
+        206.97423750326502,
+        -48.84886298155696
+      ],
+      "max_assembly_mm": [
+        103.69138848862268,
+        207.97423750326502,
+        -44.24886298155697
+      ],
+      "volume_mm3": 8.770784773662895,
+      "product_name": "M3 Split Washer"
+    },
+    {
+      "name": "Ender3/NAUO130",
+      "solids": 1,
+      "min_assembly_mm": [
+        -246.90861151137727,
+        153.44780551862266,
+        -112.89886298155835
+      ],
+      "max_assembly_mm": [
+        -228.90861151137727,
+        171.44780551862266,
+        -107.89886298155832
+      ],
+      "volume_mm3": 804.7301939537373,
+      "product_name": "F688 pillow"
+    },
+    {
+      "name": "Ender3/NAUO131",
+      "solids": 1,
+      "min_assembly_mm": [
+        -158.3288927825853,
+        67.52339504811164,
+        -194.81457100517687
+      ],
+      "max_assembly_mm": [
+        -98.07310682276889,
+        78.02339365978362,
+        -134.55878504536045
+      ],
+      "volume_mm3": 9888.251885587113,
+      "product_name": "Hand Twisted Nut_\ufffd\ufffd\u0164\ufffd\ufffd\u0138-\ufffd\ufffd"
+    },
+    {
+      "name": "Ender3/NAUO132",
+      "solids": 1,
+      "min_assembly_mm": [
+        11.67110721741471,
+        67.52339504811168,
+        -194.81457100517687
+      ],
+      "max_assembly_mm": [
+        71.92689317723116,
+        78.02339355978367,
+        -134.55878504536045
+      ],
+      "volume_mm3": 9888.251885587115,
+      "product_name": "Hand Twisted Nut_\ufffd\ufffd\u0164\ufffd\ufffd\u0138-\ufffd\ufffd"
+    },
+    {
+      "name": "Ender3/NAUO133",
+      "solids": 1,
+      "min_assembly_mm": [
+        -158.3288927825853,
+        67.5233950481116,
+        -24.814571005176816
+      ],
+      "max_assembly_mm": [
+        -98.07310682276886,
+        78.02339365978358,
+        35.44121495463965
+      ],
+      "volume_mm3": 9888.25188558711,
+      "product_name": "Hand Twisted Nut_\ufffd\ufffd\u0164\ufffd\ufffd\u0138-\ufffd\ufffd"
+    },
+    {
+      "name": "Ender3/NAUO134",
+      "solids": 1,
+      "min_assembly_mm": [
+        11.671107217414752,
+        67.52339504811165,
+        -24.81457100517684
+      ],
+      "max_assembly_mm": [
+        71.9268931772312,
+        78.02339355978364,
+        35.44121495463963
+      ],
+      "volume_mm3": 9888.251885587133,
+      "product_name": "Hand Twisted Nut_\ufffd\ufffd\u0164\ufffd\ufffd\u0138-\ufffd\ufffd"
+    },
+    {
+      "name": "Ender3/NAUO135",
+      "solids": 1,
+      "min_assembly_mm": [
+        -14.50099980267715,
+        4.999999999999517,
+        -231.54886298155827
+      ],
+      "max_assembly_mm": [
+        55.49900019732307,
+        24.99999999999962,
+        -131.54886298155822
+      ],
+      "volume_mm3": 21353.555751332042,
+      "product_name": "Control panel"
+    },
+    {
+      "name": "Ender3/NAUO136",
+      "solids": 1,
+      "min_assembly_mm": [
+        -138.20099980267705,
+        76.84999999999849,
+        -174.68667802526858
+      ],
+      "max_assembly_mm": [
+        51.79900019732297,
+        80.84999999999854,
+        15.313321974731412
+      ],
+      "volume_mm3": 93586.87651025064,
+      "product_name": "Y plate"
+    },
+    {
+      "name": "Ender3/NAUO137",
+      "solids": 1,
+      "min_assembly_mm": [
+        37.34900009732294,
+        80.84999990000514,
+        -169.13667812526862
+      ],
+      "max_assembly_mm": [
+        46.249000297322944,
+        97.96373863886664,
+        -160.23667792526865
+      ],
+      "volume_mm3": 133.71438676160255,
+      "product_name": "Bed level springs"
+    },
+    {
+      "name": "Ender3/NAUO138",
+      "solids": 1,
+      "min_assembly_mm": [
+        -132.65099990267706,
+        80.84999990000505,
+        0.8633218747314423
+      ],
+      "max_assembly_mm": [
+        -123.75099970267708,
+        97.96373863886654,
+        9.763322074731443
+      ],
+      "volume_mm3": 133.71438676160258,
+      "product_name": "Bed level springs"
+    },
+    {
+      "name": "Ender3/NAUO139",
+      "solids": 1,
+      "min_assembly_mm": [
+        37.34900009732297,
+        80.8499999000051,
+        0.8633218747314156
+      ],
+      "max_assembly_mm": [
+        46.24900029732297,
+        97.9637386388666,
+        9.763322074731414
+      ],
+      "volume_mm3": 133.71438676160258,
+      "product_name": "Bed level springs"
+    },
+    {
+      "name": "Ender3/NAUO140",
+      "solids": 1,
+      "min_assembly_mm": [
+        -160.70099980267878,
+        97.96373853886645,
+        -197.18667802526866
+      ],
+      "max_assembly_mm": [
+        74.29900019732128,
+        100.96373853886658,
+        37.813321974731394
+      ],
+      "volume_mm3": 165021.78661336817,
+      "product_name": "Hot bed"
+    },
+    {
+      "name": "Ender3/NAUO141",
+      "solids": 1,
+      "min_assembly_mm": [
+        -31.000999902677147,
+        -1.0000031663560662e-07,
+        -232.34886308155825
+      ],
+      "max_assembly_mm": [
+        121.99900019732297,
+        40.000000000000206,
+        -87.34886298155826
+      ],
+      "volume_mm3": 19285.799763271654,
+      "product_name": "Sheetmetal enclosure bottom"
+    },
+    {
+      "name": "Ender3/NAUO142",
+      "solids": 1,
+      "min_assembly_mm": [
+        -31.00099980267695,
+        35.799999999999876,
+        -232.34886298155823
+      ],
+      "max_assembly_mm": [
+        81.99900019732308,
+        40.80000000000022,
+        -66.34886298155821
+      ],
+      "volume_mm3": 14644.045074875125,
+      "product_name": "Sheetmetal enclosure top"
+    },
+    {
+      "name": "Ender3/NAUO143",
+      "solids": 2,
+      "min_assembly_mm": [
+        -266.5009998026772,
+        34.10935138567381,
+        -209.26135422092955
+      ],
+      "max_assembly_mm": [
+        -173.5009998026772,
+        87.7719666285508,
+        -122.0591392839789
+      ],
+      "volume_mm3": 66514.0226506011,
+      "product_name": "lcd"
+    },
+    {
+      "name": "Ender3/NAUO144",
+      "solids": 1,
+      "min_assembly_mm": [
+        -270.0009998026768,
+        0.9999999999989366,
+        -233.54886298155895
+      ],
+      "max_assembly_mm": [
+        -168.0009998026768,
+        93.87524062179482,
+        -128.1078366498884
+      ],
+      "volume_mm3": 24264.620557465383,
+      "product_name": "LCD support"
+    },
+    {
+      "name": "Ender3/NAUO145",
+      "solids": 1,
+      "min_assembly_mm": [
+        -216.00099980267828,
+        87.49999989999849,
+        -76.54886298155843
+      ],
+      "max_assembly_mm": [
+        -166.00099980267788,
+        302.4999999999987,
+        36.45113701844196
+      ],
+      "volume_mm3": 1174429.4057336557,
+      "product_name": "24V15A power supply"
+    },
+    {
+      "name": "Ender3/NAUO146",
+      "solids": 1,
+      "min_assembly_mm": [
+        -219.50099980267805,
+        57.49999999999838,
+        -76.3488629815584
+      ],
+      "max_assembly_mm": [
+        -163.50099980267788,
+        127.49999999999865,
+        38.65113701844175
+      ],
+      "volume_mm3": 51153.26382356918,
+      "product_name": "Power holder"
+    },
+    {
+      "name": "Ender3/NAUO147",
+      "solids": 1,
+      "min_assembly_mm": [
+        97.99900019732283,
+        93.7499999999989,
+        -59.54886298155874
+      ],
+      "max_assembly_mm": [
+        105.99900019732286,
+        463.7499999999989,
+        -51.54886298155817
+      ],
+      "volume_mm3": 18598.228509251578,
+      "product_name": "Z threaded rod"
+    },
+    {
+      "name": "Ender3/Fan assembly/NAUO264",
+      "solids": 1,
+      "min_assembly_mm": [
+        -104.85802347050462,
+        131.19780541862283,
+        -171.74886308155615
+      ],
+      "max_assembly_mm": [
+        -47.858023370504625,
+        185.89780551862282,
+        -126.74886298155616
+      ],
+      "volume_mm3": 6215.139603390365,
+      "product_name": "Fan cover"
+    },
+    {
+      "name": "Ender3/Fan assembly/NAUO265",
+      "solids": 1,
+      "min_assembly_mm": [
+        -100.85802337050684,
+        134.09780551862283,
+        -170.7488629815605
+      ],
+      "max_assembly_mm": [
+        -60.858023370498955,
+        174.09780551857284,
+        -160.74886288155525
+      ],
+      "volume_mm3": 8021.687483590327,
+      "product_name": "Nozzle fan"
+    },
+    {
+      "name": "Ender3/Fan assembly/NAUO266",
+      "solids": 1,
+      "min_assembly_mm": [
+        -99.70802337050588,
+        167.24780551857285,
+        -170.84886298155638
+      ],
+      "max_assembly_mm": [
+        -94.0080233705059,
+        172.94780551857284,
+        -159.09886298155638
+      ],
+      "volume_mm3": 97.66473295575008,
+      "product_name": "M3X10 Pan Head Screw"
+    },
+    {
+      "name": "Ender3/Fan assembly/NAUO267",
+      "solids": 1,
+      "min_assembly_mm": [
+        -99.70802337050588,
+        135.24780551862284,
+        -170.84886298155638
+      ],
+      "max_assembly_mm": [
+        -94.0080233705059,
+        140.94780551862283,
+        -159.09886298155638
+      ],
+      "volume_mm3": 97.66473295575005,
+      "product_name": "M3X10 Pan Head Screw"
+    },
+    {
+      "name": "Ender3/Fan assembly/NAUO268",
+      "solids": 1,
+      "min_assembly_mm": [
+        -67.70802337050462,
+        167.24780551857285,
+        -170.84886298155638
+      ],
+      "max_assembly_mm": [
+        -62.008023370504624,
+        172.94780551857284,
+        -159.09886298155638
+      ],
+      "volume_mm3": 97.66473295574988,
+      "product_name": "M3X10 Pan Head Screw"
+    },
+    {
+      "name": "Ender3/Fan assembly/NAUO269",
+      "solids": 1,
+      "min_assembly_mm": [
+        -67.70802337050462,
+        135.24780551862284,
+        -170.84886298155638
+      ],
+      "max_assembly_mm": [
+        -62.008023370504624,
+        140.94780551862283,
+        -159.09886298155638
+      ],
+      "volume_mm3": 97.66473295574988,
+      "product_name": "M3X10 Pan Head Screw"
+    },
+    {
+      "name": "Ender3/Fan assembly/NAUO270",
+      "solids": 1,
+      "min_assembly_mm": [
+        -73.2080233705046,
+        178.44780551862283,
+        -132.19886298155615
+      ],
+      "max_assembly_mm": [
+        -67.50802337050462,
+        184.14780551862282,
+        -124.54886298155614
+      ],
+      "volume_mm3": 67.63626386539524,
+      "product_name": "M3X6Pan Head Screw"
+    },
+    {
+      "name": "Ender3/Fan assembly/NAUO271",
+      "solids": 1,
+      "min_assembly_mm": [
+        -55.70802337050461,
+        159.54780551862282,
+        -132.19886298155615
+      ],
+      "max_assembly_mm": [
+        -50.00802337050461,
+        165.2478055186228,
+        -124.54886298155614
+      ],
+      "volume_mm3": 67.63626386539522,
+      "product_name": "M3X6Pan Head Screw"
+    },
+    {
+      "name": "Ender3/Fan assembly/NAUO272",
+      "solids": 1,
+      "min_assembly_mm": [
+        -115.85802337050416,
+        134.79780551853744,
+        -169.24886298158484
+      ],
+      "max_assembly_mm": [
+        -104.85802337050464,
+        174.7978055185376,
+        -129.2488629815846
+      ],
+      "volume_mm3": 9428.89407741774,
+      "product_name": "Cold section fan"
+    },
+    {
+      "name": "Ender3/Fan assembly/NAUO273",
+      "solids": 1,
+      "min_assembly_mm": [
+        -113.02435572637293,
+        129.64780551862282,
+        -169.24886298155616
+      ],
+      "max_assembly_mm": [
+        -103.04691215939312,
+        139.29780551862282,
+        -129.24886298155616
+      ],
+      "volume_mm3": 1441.3235349808626,
+      "product_name": "Nozzle fan duct"
+    },
+    {
+      "name": "Ender3/Fan assembly/NAUO274",
+      "solids": 1,
+      "min_assembly_mm": [
+        -108.74691235939312,
+        170.39780541862285,
+        -168.64886308155616
+      ],
+      "max_assembly_mm": [
+        -98.74691225935493,
+        174.19780561862285,
+        -164.84886288155616
+      ],
+      "volume_mm3": 45.38213272833421,
+      "product_name": "M2X8 Socket Head Screw"
+    },
+    {
+      "name": "Ender3/Fan assembly/NAUO275",
+      "solids": 1,
+      "min_assembly_mm": [
+        -108.74691235939315,
+        170.39780541862288,
+        -133.64886308155616
+      ],
+      "max_assembly_mm": [
+        -98.74691225935496,
+        174.19780561862288,
+        -129.84886288155616
+      ],
+      "volume_mm3": 45.38213272833421,
+      "product_name": "M2X8 Socket Head Screw"
+    },
+    {
+      "name": "Ender3/Fan assembly/NAUO276",
+      "solids": 1,
+      "min_assembly_mm": [
+        -111.54691235939296,
+        135.3978054186226,
+        -168.64886308155613
+      ],
+      "max_assembly_mm": [
+        -99.54691225939295,
+        139.1978056186226,
+        -164.84886288155613
+      ],
+      "volume_mm3": 51.667653254404854,
+      "product_name": "M2X10\ufffd\ufffd\u0377"
+    },
+    {
+      "name": "Ender3/Fan assembly/NAUO277",
+      "solids": 1,
+      "min_assembly_mm": [
+        -111.54691235939319,
+        135.39780541862285,
+        -133.64886308155616
+      ],
+      "max_assembly_mm": [
+        -99.54691225939318,
+        139.19780561862285,
+        -129.84886288155616
+      ],
+      "volume_mm3": 51.667653254404854,
+      "product_name": "M2X10\ufffd\ufffd\u0377"
+    },
+    {
+      "name": "Ender3/Z Limit Switch assembly/NAUO256",
+      "solids": 1,
+      "min_assembly_mm": [
+        119.99900019732199,
+        31.999999999998533,
+        -117.54886298155878
+      ],
+      "max_assembly_mm": [
+        126.999000197322,
+        81.49999999999856,
+        -76.5488629815587
+      ],
+      "volume_mm3": 6598.008889616556,
+      "product_name": "Z limit switch bracket"
+    },
+    {
+      "name": "Ender3/Z Limit Switch assembly/NAUO257",
+      "solids": 1,
+      "min_assembly_mm": [
+        112.99900019732199,
+        59.9499999999985,
+        -117.54886298155877
+      ],
+      "max_assembly_mm": [
+        123.99900019732199,
+        85.94999999999852,
+        -97.54886298155874
+      ],
+      "volume_mm3": 1764.8890834023641,
+      "product_name": "limit switch"
+    },
+    {
+      "name": "Ender3/Z Limit Switch assembly/NAUO258",
+      "solids": 1,
+      "min_assembly_mm": [
+        118.34900019732198,
+        62.099999999998495,
+        -117.89886298155875
+      ],
+      "max_assembly_mm": [
+        125.999000197322,
+        67.79999999999849,
+        -112.19886298155876
+      ],
+      "volume_mm3": 67.63626386539522,
+      "product_name": "M3X6Pan Head Screw"
+    },
+    {
+      "name": "Ender3/Z Limit Switch assembly/NAUO259",
+      "solids": 1,
+      "min_assembly_mm": [
+        118.34900019732198,
+        62.09999999999851,
+        -102.89886298155875
+      ],
+      "max_assembly_mm": [
+        125.999000197322,
+        67.7999999999985,
+        -97.19886298155876
+      ],
+      "volume_mm3": 67.63626386539524,
+      "product_name": "M3X6Pan Head Screw"
+    },
+    {
+      "name": "Ender3/Z Limit Switch assembly/NAUO260",
+      "solids": 1,
+      "min_assembly_mm": [
+        116.99900019732198,
+        72.09999999999854,
+        -89.94886298155876
+      ],
+      "max_assembly_mm": [
+        130.99900029732197,
+        78.89999999999856,
+        -83.14886298155875
+      ],
+      "volume_mm3": 247.66002126013362,
+      "product_name": "M4X10 Socket Head Screw"
+    },
+    {
+      "name": "Ender3/Z Limit Switch assembly/NAUO261",
+      "solids": 1,
+      "min_assembly_mm": [
+        116.99900019732198,
+        56.599999999998545,
+        -89.94886298155876
+      ],
+      "max_assembly_mm": [
+        130.99900029732197,
+        63.39999999999854,
+        -83.14886298155875
+      ],
+      "volume_mm3": 247.66002126013365,
+      "product_name": "M4X10 Socket Head Screw"
+    },
+    {
+      "name": "Ender3/Z Limit Switch assembly/NAUO262",
+      "solids": 1,
+      "min_assembly_mm": [
+        116.49900019732198,
+        72.49999999999854,
+        -91.29886298155878
+      ],
+      "max_assembly_mm": [
+        120.59900019732198,
+        78.49999999999856,
+        -81.79886298155877
+      ],
+      "volume_mm3": 136.4794146653532,
+      "product_name": "M4 T-Slot Nut"
+    },
+    {
+      "name": "Ender3/Z Limit Switch assembly/NAUO263",
+      "solids": 1,
+      "min_assembly_mm": [
+        116.49900019732198,
+        56.99999999999853,
+        -91.29886298155874
+      ],
+      "max_assembly_mm": [
+        120.59900019732198,
+        62.99999999999854,
+        -81.79886298155873
+      ],
+      "volume_mm3": 136.47941466535323,
+      "product_name": "M4 T-Slot Nut"
+    },
+    {
+      "name": "Ender3/NAUO150",
+      "solids": 1,
+      "min_assembly_mm": [
+        20.549000197322904,
+        0.6999999999996194,
+        -136.19886298155822
+      ],
+      "max_assembly_mm": [
+        26.249000197322907,
+        8.349999999999635,
+        -130.49886298155823
+      ],
+      "volume_mm3": 67.63626386539522,
+      "product_name": "M3X6Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO151",
+      "solids": 1,
+      "min_assembly_mm": [
+        -14.350999802677082,
+        0.6999999999998077,
+        -154.3988629815582
+      ],
+      "max_assembly_mm": [
+        -8.650999802677081,
+        8.349999999999822,
+        -148.69886298155822
+      ],
+      "volume_mm3": 67.63626386539525,
+      "product_name": "M3X6Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO152",
+      "solids": 1,
+      "min_assembly_mm": [
+        23.34900019732291,
+        0.6999999999997348,
+        -167.99886298155823
+      ],
+      "max_assembly_mm": [
+        29.04900019732291,
+        8.34999999999975,
+        -162.29886298155824
+      ],
+      "volume_mm3": 67.63626386539522,
+      "product_name": "M3X6Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO153",
+      "solids": 1,
+      "min_assembly_mm": [
+        -14.350999802677087,
+        0.7000000000000457,
+        -216.3988629815582
+      ],
+      "max_assembly_mm": [
+        -8.650999802677086,
+        8.35000000000006,
+        -210.69886298155822
+      ],
+      "volume_mm3": 67.63626386539522,
+      "product_name": "M3X6Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO154",
+      "solids": 1,
+      "min_assembly_mm": [
+        107.24900019732284,
+        25.250000000000085,
+        -235.09886298155828
+      ],
+      "max_assembly_mm": [
+        116.74900019732284,
+        34.750000000000085,
+        -224.34886298155828
+      ],
+      "volume_mm3": 270.85429707905143,
+      "product_name": "M5X8Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO155",
+      "solids": 1,
+      "min_assembly_mm": [
+        87.24900019732284,
+        5.250000000000076,
+        -235.09886298155828
+      ],
+      "max_assembly_mm": [
+        96.74900019732284,
+        14.750000000000078,
+        -224.34886298155828
+      ],
+      "volume_mm3": 270.85429707905143,
+      "product_name": "M5X8Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO156",
+      "solids": 1,
+      "min_assembly_mm": [
+        -202.7509998026767,
+        25.249999999997797,
+        -236.29886298155898
+      ],
+      "max_assembly_mm": [
+        -193.2509998026767,
+        34.7499999999978,
+        -225.54886298155898
+      ],
+      "volume_mm3": 270.8542970790515,
+      "product_name": "M5X8Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO157",
+      "solids": 1,
+      "min_assembly_mm": [
+        -182.75099980267754,
+        5.249999999998469,
+        -236.298862981559
+      ],
+      "max_assembly_mm": [
+        -173.25099980267754,
+        14.74999999999847,
+        -225.548862981559
+      ],
+      "volume_mm3": 270.8542970790515,
+      "product_name": "M5X8Pan Head Screw"
+    },
+    {
+      "name": "Ender3/pulley mount/NAUO244",
+      "solids": 1,
+      "min_assembly_mm": [
+        -33.00099980267716,
+        34.999999999998586,
+        -326.54886298155344
+      ],
+      "max_assembly_mm": [
+        -30.00099980267714,
+        72.99999999999858,
+        -269.3888629815534
+      ],
+      "volume_mm3": 3891.905214767906,
+      "product_name": "Y Adjustment Block_Y\ufffd\u1c7b\ufffd\ufffd\ufffd\ufffd"
+    },
+    {
+      "name": "Ender3/pulley mount/NAUO245",
+      "solids": 1,
+      "min_assembly_mm": [
+        -38.00099980267715,
+        39.59999989999858,
+        -281.94886298155336
+      ],
+      "max_assembly_mm": [
+        -26.00099980267715,
+        46.40000009999858,
+        -275.1488629815534
+      ],
+      "volume_mm3": 222.52728003141505,
+      "product_name": "M4X8 Socket Head Screw"
+    },
+    {
+      "name": "Ender3/pulley mount/NAUO246",
+      "solids": 1,
+      "min_assembly_mm": [
+        -38.00099980267715,
+        39.599999899998586,
+        -296.94886298155836
+      ],
+      "max_assembly_mm": [
+        -26.00099980267715,
+        46.399999999998585,
+        -290.1488629815584
+      ],
+      "volume_mm3": 222.5272800314151,
+      "product_name": "M4X8 Socket Head Screw"
+    },
+    {
+      "name": "Ender3/pulley mount/NAUO247",
+      "solids": 1,
+      "min_assembly_mm": [
+        -38.00099980267714,
+        59.599999899998586,
+        -296.94886298155836
+      ],
+      "max_assembly_mm": [
+        -26.000999802677143,
+        66.39999999999858,
+        -290.1488629815584
+      ],
+      "volume_mm3": 222.52728003141507,
+      "product_name": "M4X8 Socket Head Screw"
+    },
+    {
+      "name": "Ender3/pulley mount/NAUO248",
+      "solids": 1,
+      "min_assembly_mm": [
+        -38.00099980267715,
+        38.249999999998586,
+        -296.5488629815584
+      ],
+      "max_assembly_mm": [
+        -33.90099980267715,
+        47.749999999998586,
+        -290.5488629815584
+      ],
+      "volume_mm3": 136.47941466535323,
+      "product_name": "M4 T-Slot Nut"
+    },
+    {
+      "name": "Ender3/pulley mount/NAUO249",
+      "solids": 1,
+      "min_assembly_mm": [
+        -38.00099980267715,
+        38.24999999999858,
+        -281.5488629815534
+      ],
+      "max_assembly_mm": [
+        -33.90099980267715,
+        47.74999999999858,
+        -275.5488629815534
+      ],
+      "volume_mm3": 136.4794146653532,
+      "product_name": "M4 T-Slot Nut"
+    },
+    {
+      "name": "Ender3/pulley mount/NAUO250",
+      "solids": 1,
+      "min_assembly_mm": [
+        -38.00099980267714,
+        58.24999999999858,
+        -296.5488629815584
+      ],
+      "max_assembly_mm": [
+        -33.90099980267714,
+        67.7499999999986,
+        -290.5488629815584
+      ],
+      "volume_mm3": 136.47941466535315,
+      "product_name": "M4 T-Slot Nut"
+    },
+    {
+      "name": "Ender3/pulley mount/NAUO251",
+      "solids": 1,
+      "min_assembly_mm": [
+        -38.500999902677144,
+        56.348379286087145,
+        -321.04781735743774
+      ],
+      "max_assembly_mm": [
+        -33.00099970267714,
+        69.65162071391,
+        -306.04990860566903
+      ],
+      "volume_mm3": 595.4804244170858,
+      "product_name": "M8 nut"
+    },
+    {
+      "name": "Ender3/pulley mount/NAUO252",
+      "solids": 1,
+      "min_assembly_mm": [
+        -55.68345715462286,
+        56.49999989999858,
+        -321.05441658101853
+      ],
+      "max_assembly_mm": [
+        -48.50099970267714,
+        69.50000009999859,
+        -306.04330938208824
+      ],
+      "volume_mm3": 740.0478162418871,
+      "product_name": "M8 Self-locking nut"
+    },
+    {
+      "name": "Ender3/pulley mount/NAUO253",
+      "solids": 1,
+      "min_assembly_mm": [
+        -55.40099980267714,
+        55.9999999999986,
+        -320.5488629815534
+      ],
+      "max_assembly_mm": [
+        -25.600999802677137,
+        69.99999999999861,
+        -306.5488629815534
+      ],
+      "volume_mm3": 1670.42071975413,
+      "product_name": "M8X25 Pan Head Screw"
+    },
+    {
+      "name": "Ender3/pulley mount/NAUO254",
+      "solids": 1,
+      "min_assembly_mm": [
+        -43.50099980267714,
+        53.999999999998586,
+        -322.5488629815534
+      ],
+      "max_assembly_mm": [
+        -38.50099980267714,
+        71.99999999999858,
+        -304.5488629815534
+      ],
+      "volume_mm3": 804.730193953736,
+      "product_name": "F688 pillow"
+    },
+    {
+      "name": "Ender3/pulley mount/NAUO255",
+      "solids": 1,
+      "min_assembly_mm": [
+        -48.50099980267714,
+        53.999999999998586,
+        -322.5488629815534
+      ],
+      "max_assembly_mm": [
+        -43.50099980267714,
+        71.99999999999858,
+        -304.5488629815534
+      ],
+      "volume_mm3": 804.7301939537363,
+      "product_name": "F688 pillow"
+    },
+    {
+      "name": "Ender3/NAUO159",
+      "solids": 1,
+      "min_assembly_mm": [
+        21.149000197337052,
+        24.799999999999518,
+        -99.19886298155821
+      ],
+      "max_assembly_mm": [
+        26.84900019733705,
+        42.44999999999953,
+        -93.49886298155822
+      ],
+      "volume_mm3": 138.32151392409926,
+      "product_name": "M3X16 Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO160",
+      "solids": 1,
+      "min_assembly_mm": [
+        -28.850999802676977,
+        34.80000000000016,
+        -227.69886298155822
+      ],
+      "max_assembly_mm": [
+        -23.15099980267697,
+        42.45000000000017,
+        -221.99886298155823
+      ],
+      "volume_mm3": 67.63626386539521,
+      "product_name": "M3X6Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO161",
+      "solids": 1,
+      "min_assembly_mm": [
+        74.14900019732305,
+        34.79999999999982,
+        -227.69886298155822
+      ],
+      "max_assembly_mm": [
+        79.84900019732305,
+        42.44999999999983,
+        -221.99886298155823
+      ],
+      "volume_mm3": 67.63626386539521,
+      "product_name": "M3X6Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO162",
+      "solids": 1,
+      "min_assembly_mm": [
+        -131.96272824711752,
+        71.46373853886654,
+        -168.43483713121356
+      ],
+      "max_assembly_mm": [
+        -124.43927135824032,
+        100.96373863886653,
+        -160.93851891932349
+      ],
+      "volume_mm3": 408.51613752843036,
+      "product_name": "M4X30 Flush Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO163",
+      "solids": 1,
+      "min_assembly_mm": [
+        38.037271752873785,
+        71.4637385388666,
+        -168.43483713121373
+      ],
+      "max_assembly_mm": [
+        45.56072864175099,
+        100.96373863886659,
+        -160.93851891932366
+      ],
+      "volume_mm3": 408.5161375284304,
+      "product_name": "M4X30 Flush Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO164",
+      "solids": 1,
+      "min_assembly_mm": [
+        -131.9627282471262,
+        71.4637385388665,
+        1.5651628687863244
+      ],
+      "max_assembly_mm": [
+        -124.43927135824899,
+        100.96373863886649,
+        9.061481080676396
+      ],
+      "volume_mm3": 408.5161375284302,
+      "product_name": "M4X30 Flush Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO165",
+      "solids": 1,
+      "min_assembly_mm": [
+        38.037271752873814,
+        71.46373853886655,
+        1.5651628687862968
+      ],
+      "max_assembly_mm": [
+        45.56072864175102,
+        100.96373863886654,
+        9.061481080676367
+      ],
+      "volume_mm3": 408.5161375284305,
+      "product_name": "M4X30 Flush Head Screw"
+    },
+    {
+      "name": "Ender3/M5X25 Screw/NAUO243",
+      "solids": 2,
+      "min_assembly_mm": [
+        -182.30099980267718,
+        429.9999999999184,
+        -90.8325297979001
+      ],
+      "max_assembly_mm": [
+        -173.70099980267716,
+        460.19999999991836,
+        -82.24886298155879
+      ],
+      "volume_mm3": 766.811421908468,
+      "product_name": "M5X25 Socket Head Screw_M5X25\ufffd\ufffd\ufffd\ufffd\ufffd\u02ff"
+    },
+    {
+      "name": "Ender3/M5X25 Screw__instance2/NAUO243",
+      "solids": 2,
+      "min_assembly_mm": [
+        87.69900019732286,
+        429.9999999999218,
+        -90.8325297979001
+      ],
+      "max_assembly_mm": [
+        96.29900019732285,
+        460.1999999999218,
+        -82.24886298155879
+      ],
+      "volume_mm3": 766.8114219084675,
+      "product_name": "M5X25 Socket Head Screw_M5X25\ufffd\ufffd\ufffd\ufffd\ufffd\u02ff"
+    },
+    {
+      "name": "Ender3/M5X25 Screw__instance3/NAUO243",
+      "solids": 2,
+      "min_assembly_mm": [
+        -202.30099980267718,
+        429.99999999991815,
+        -90.8325297979001
+      ],
+      "max_assembly_mm": [
+        -193.70099980267716,
+        460.19999999991813,
+        -82.24886298155879
+      ],
+      "volume_mm3": 766.8114219084677,
+      "product_name": "M5X25 Socket Head Screw_M5X25\ufffd\ufffd\ufffd\ufffd\ufffd\u02ff"
+    },
+    {
+      "name": "Ender3/NAUO169",
+      "solids": 2,
+      "min_assembly_mm": [
+        107.69900019732285,
+        -0.3999999999999488,
+        -90.83252979789957
+      ],
+      "max_assembly_mm": [
+        116.29900019732284,
+        49.800000000000054,
+        -82.24886298155826
+      ],
+      "volume_mm3": 1159.5105036071918,
+      "product_name": "M5X25 Socket Head Screw_M5*45\ufffd\ufffd\u0377\ufffd\ufffd\ufffd"
+    },
+    {
+      "name": "Ender3/NAUO170",
+      "solids": 2,
+      "min_assembly_mm": [
+        72.19900019732286,
+        25.700000000000085,
+        -100.84886298155823
+      ],
+      "max_assembly_mm": [
+        122.39900029732286,
+        34.30000000000008,
+        -92.24886298155823
+      ],
+      "volume_mm3": 1159.5105036071916,
+      "product_name": "M5X25 Socket Head Screw_M5*45\ufffd\ufffd\u0377\ufffd\ufffd\ufffd"
+    },
+    {
+      "name": "Ender3/NAUO171",
+      "solids": 2,
+      "min_assembly_mm": [
+        87.6990001973229,
+        -0.39999999999995234,
+        -90.83252979789957
+      ],
+      "max_assembly_mm": [
+        96.2990001973229,
+        49.800000000000054,
+        -82.24886298155826
+      ],
+      "volume_mm3": 1159.5105036071923,
+      "product_name": "M5X25 Socket Head Screw_M5*45\ufffd\ufffd\u0377\ufffd\ufffd\ufffd"
+    },
+    {
+      "name": "Ender3/NAUO172",
+      "solids": 2,
+      "min_assembly_mm": [
+        72.19900019732287,
+        5.700000000000032,
+        -80.84886298155826
+      ],
+      "max_assembly_mm": [
+        122.39900029732287,
+        14.300000000000033,
+        -72.24886298155826
+      ],
+      "volume_mm3": 1159.510503607192,
+      "product_name": "M5X25 Socket Head Screw_M5*45\ufffd\ufffd\u0377\ufffd\ufffd\ufffd"
+    },
+    {
+      "name": "Ender3/NAUO173",
+      "solids": 2,
+      "min_assembly_mm": [
+        -208.4009998026778,
+        25.69999999999817,
+        -80.83252979790022
+      ],
+      "max_assembly_mm": [
+        -158.2009998026778,
+        34.29999999999817,
+        -72.24886298155891
+      ],
+      "volume_mm3": 1159.5105036071918,
+      "product_name": "M5X25 Socket Head Screw_M5*45\ufffd\ufffd\u0377\ufffd\ufffd\ufffd"
+    },
+    {
+      "name": "Ender3/NAUO174",
+      "solids": 2,
+      "min_assembly_mm": [
+        -208.40099980267806,
+        5.6999999999983055,
+        -100.83252979789931
+      ],
+      "max_assembly_mm": [
+        -158.20099980267804,
+        14.299999999998306,
+        -92.248862981558
+      ],
+      "volume_mm3": 1159.510503607192,
+      "product_name": "M5X25 Socket Head Screw_M5*45\ufffd\ufffd\u0377\ufffd\ufffd\ufffd"
+    },
+    {
+      "name": "Ender3/NAUO175",
+      "solids": 2,
+      "min_assembly_mm": [
+        -202.30099980267804,
+        -0.40000000000166736,
+        -90.83252979789928
+      ],
+      "max_assembly_mm": [
+        -193.700999802678,
+        49.799999999998334,
+        -82.24886298155798
+      ],
+      "volume_mm3": 1159.5105036071918,
+      "product_name": "M5X25 Socket Head Screw_M5*45\ufffd\ufffd\u0377\ufffd\ufffd\ufffd"
+    },
+    {
+      "name": "Ender3/NAUO176",
+      "solids": 2,
+      "min_assembly_mm": [
+        -182.3009998026781,
+        -0.4000000000016585,
+        -90.83252979789928
+      ],
+      "max_assembly_mm": [
+        -173.70099980267807,
+        49.79999999999835,
+        -82.24886298155798
+      ],
+      "volume_mm3": 1159.5105036071918,
+      "product_name": "M5X25 Socket Head Screw_M5*45\ufffd\ufffd\u0377\ufffd\ufffd\ufffd"
+    },
+    {
+      "name": "Ender3/NAUO177",
+      "solids": 2,
+      "min_assembly_mm": [
+        -47.30099980267707,
+        -0.4000000000014464,
+        -100.83252979789968
+      ],
+      "max_assembly_mm": [
+        -38.700999802677075,
+        44.799999999998555,
+        -92.24886298155837
+      ],
+      "volume_mm3": 1061.335733182511,
+      "product_name": "M5X25 Socket Head Screw_M5*40\ufffd\ufffd\u0377\ufffd\ufffd\ufffd"
+    },
+    {
+      "name": "Ender3/NAUO178",
+      "solids": 2,
+      "min_assembly_mm": [
+        -47.30099980267708,
+        -0.4000000000014411,
+        -80.83252979789962
+      ],
+      "max_assembly_mm": [
+        -38.70099980267709,
+        44.79999999999856,
+        -72.24886298155832
+      ],
+      "volume_mm3": 1061.335733182511,
+      "product_name": "M5X25 Socket Head Screw_M5*40\ufffd\ufffd\u0377\ufffd\ufffd\ufffd"
+    },
+    {
+      "name": "Ender3/NAUO179",
+      "solids": 1,
+      "min_assembly_mm": [
+        -263.6009999026772,
+        56.46657032695978,
+        -219.68853672326273
+      ],
+      "max_assembly_mm": [
+        -238.6009997026772,
+        78.72950444960566,
+        -191.6213282970655
+      ],
+      "volume_mm3": 6202.543156105777,
+      "product_name": "lcd Knob"
+    },
+    {
+      "name": "Ender3/NAUO180",
+      "solids": 1,
+      "min_assembly_mm": [
+        2.499000197181144,
+        26.999999899998887,
+        -213.34886298157068
+      ],
+      "max_assembly_mm": [
+        42.49900019713155,
+        37.000000000004135,
+        -173.34886298156243
+      ],
+      "volume_mm3": 8021.687483590315,
+      "product_name": "Case fan"
+    },
+    {
+      "name": "Ender3/NAUO181",
+      "solids": 1,
+      "min_assembly_mm": [
+        116.69900009732186,
+        439.9997426900141,
+        -96.54903900369935
+      ],
+      "max_assembly_mm": [
+        124.84900029732184,
+        460.0002573099827,
+        -76.54868695942255
+      ],
+      "volume_mm3": 1101.981167557412,
+      "product_name": "2020 Endcap"
+    },
+    {
+      "name": "Ender3/NAUO182",
+      "solids": 1,
+      "min_assembly_mm": [
+        -210.85099990267804,
+        439.9997426900141,
+        -96.5490390036997
+      ],
+      "max_assembly_mm": [
+        -202.70099970267805,
+        460.0002573099827,
+        -76.54868695942291
+      ],
+      "volume_mm3": 1101.9811675574063,
+      "product_name": "2020 Endcap"
+    },
+    {
+      "name": "Ender3/NAUO183",
+      "solids": 1,
+      "min_assembly_mm": [
+        -181.4009998026783,
+        266.5999999999983,
+        -94.74886308155861
+      ],
+      "max_assembly_mm": [
+        -174.6009998026783,
+        273.3999999999983,
+        -70.74886298155862
+      ],
+      "volume_mm3": 373.3237274037251,
+      "product_name": "M4X20 Socket Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO184",
+      "solids": 1,
+      "min_assembly_mm": [
+        -181.40099980267811,
+        116.59999989999837,
+        -94.74886308155821
+      ],
+      "max_assembly_mm": [
+        -174.6009998026781,
+        123.39999999999837,
+        -70.74886298155822
+      ],
+      "volume_mm3": 373.32372740372523,
+      "product_name": "M4X20 Socket Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO185",
+      "solids": 1,
+      "min_assembly_mm": [
+        -180.400999802678,
+        116.09999999999894,
+        30.651137018441606
+      ],
+      "max_assembly_mm": [
+        -173.600999702678,
+        122.89999999999895,
+        42.65113701844162
+      ],
+      "volume_mm3": 222.52728003141516,
+      "product_name": "M4X8 Socket Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO186",
+      "solids": 1,
+      "min_assembly_mm": [
+        -205.40099980267794,
+        116.0999999999989,
+        30.651137018441627
+      ],
+      "max_assembly_mm": [
+        -198.60099980267793,
+        122.89999999999891,
+        42.65113701844164
+      ],
+      "volume_mm3": 222.52728003141524,
+      "product_name": "M4X8 Socket Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO187",
+      "solids": 1,
+      "min_assembly_mm": [
+        3.6490001973482356,
+        25.35000000000015,
+        -212.1988629815595
+      ],
+      "max_assembly_mm": [
+        9.349000197348236,
+        37.100000000000165,
+        -206.4988629815595
+      ],
+      "volume_mm3": 97.66473295574991,
+      "product_name": "M3X10 Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO188",
+      "solids": 1,
+      "min_assembly_mm": [
+        35.649000197273025,
+        25.349999999999916,
+        -180.19886298153304
+      ],
+      "max_assembly_mm": [
+        41.34900019727303,
+        37.09999999999993,
+        -174.49886298153305
+      ],
+      "volume_mm3": 97.6647329557499,
+      "product_name": "M3X10 Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO189",
+      "solids": 1,
+      "min_assembly_mm": [
+        -266.8009998026772,
+        75.61326782520842,
+        -132.98919638885965
+      ],
+      "max_assembly_mm": [
+        -261.10099980267717,
+        85.69649262095082,
+        -125.67070421409244
+      ],
+      "volume_mm3": 83.34723592759275,
+      "product_name": "M3X8 Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO190",
+      "solids": 1,
+      "min_assembly_mm": [
+        -266.8009998026773,
+        48.18534263823666,
+        -191.8085717675381
+      ],
+      "max_assembly_mm": [
+        -261.1009998026773,
+        58.26856743397906,
+        -184.49007959277085
+      ],
+      "volume_mm3": 83.34723592759276,
+      "product_name": "M3X8 Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO191",
+      "solids": 1,
+      "min_assembly_mm": [
+        -178.9009998026783,
+        74.5516721013589,
+        -135.26579576543824
+      ],
+      "max_assembly_mm": [
+        -173.20099980267833,
+        84.6348968971013,
+        -127.947303590671
+      ],
+      "volume_mm3": 83.34723592759276,
+      "product_name": "M3X8 Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO192",
+      "solids": 1,
+      "min_assembly_mm": [
+        -178.9009998026773,
+        48.18534263823665,
+        -191.80857176753815
+      ],
+      "max_assembly_mm": [
+        -173.2009998026773,
+        58.268567433979044,
+        -184.4900795927709
+      ],
+      "volume_mm3": 83.34723592759276,
+      "product_name": "M3X8 Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO193",
+      "solids": 1,
+      "min_assembly_mm": [
+        113.29138848862273,
+        159.647805518623,
+        -115.39886298155874
+      ],
+      "max_assembly_mm": [
+        120.89138848862272,
+        167.247805518623,
+        -97.19886298155873
+      ],
+      "volume_mm3": 259.9385242081984,
+      "product_name": "M4X16 Pan Head Screw_M4*16\ufffd\ufffd\u026b\u033c\ufffd\ufffd"
+    },
+    {
+      "name": "Ender3/NAUO194",
+      "solids": 1,
+      "min_assembly_mm": [
+        87.29138848862276,
+        159.647805518623,
+        -115.39886298155868
+      ],
+      "max_assembly_mm": [
+        94.89138848862275,
+        167.247805518623,
+        -97.19886298155868
+      ],
+      "volume_mm3": 259.9385242081984,
+      "product_name": "M4X16 Pan Head Screw_M4*16\ufffd\ufffd\u026b\u033c\ufffd\ufffd"
+    },
+    {
+      "name": "Ender3/NAUO195",
+      "solids": 1,
+      "min_assembly_mm": [
+        -140.40861151137693,
+        159.64780551862273,
+        -115.39886298155925
+      ],
+      "max_assembly_mm": [
+        -132.8086115113769,
+        167.24780551862276,
+        -97.19886298155924
+      ],
+      "volume_mm3": 259.9385242081985,
+      "product_name": "M4X16 Pan Head Screw_M4*16\ufffd\ufffd\u026b\u033c\ufffd\ufffd"
+    },
+    {
+      "name": "Ender3/NAUO196",
+      "solids": 1,
+      "min_assembly_mm": [
+        -220.1209998026773,
+        159.64780551862268,
+        -115.39886298155842
+      ],
+      "max_assembly_mm": [
+        -212.52099980267727,
+        167.2478055186227,
+        -97.19886298155842
+      ],
+      "volume_mm3": 259.9385242081985,
+      "product_name": "M4X16 Pan Head Screw_M4*16\ufffd\ufffd\u026b\u033c\ufffd\ufffd"
+    },
+    {
+      "name": "Ender3/NAUO197",
+      "solids": 1,
+      "min_assembly_mm": [
+        -140.20861151137686,
+        159.8478055186227,
+        -100.3988629815593
+      ],
+      "max_assembly_mm": [
+        -133.01417136025458,
+        167.04780551862268,
+        -99.39886298155928
+      ],
+      "volume_mm3": 26.26008669768111,
+      "product_name": "M4 Split Washer"
+    },
+    {
+      "name": "Ender3/NAUO198",
+      "solids": 1,
+      "min_assembly_mm": [
+        -219.92099980267724,
+        159.84780551862266,
+        -100.3988629815584
+      ],
+      "max_assembly_mm": [
+        -212.72655965155496,
+        167.04780551862265,
+        -99.3988629815584
+      ],
+      "volume_mm3": 26.260086697681125,
+      "product_name": "M4 Split Washer"
+    },
+    {
+      "name": "Ender3/NAUO199",
+      "solids": 1,
+      "min_assembly_mm": [
+        108.23400019732193,
+        75.98499999999869,
+        -84.54886298155878
+      ],
+      "max_assembly_mm": [
+        115.76400019732193,
+        83.5149999999987,
+        -66.54886298155878
+      ],
+      "volume_mm3": 251.69888519515544,
+      "product_name": "M4X18 Flush Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO200",
+      "solids": 1,
+      "min_assembly_mm": [
+        88.23400019732193,
+        75.98499999999869,
+        -84.5488629815588
+      ],
+      "max_assembly_mm": [
+        95.76400019732193,
+        83.5149999999987,
+        -66.5488629815588
+      ],
+      "volume_mm3": 251.69888519515544,
+      "product_name": "M4X18 Flush Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO201",
+      "solids": 1,
+      "min_assembly_mm": [
+        -228.9547711454327,
+        61.12621211983297,
+        -55.948862981558314
+      ],
+      "max_assembly_mm": [
+        -196.30099980267795,
+        109.87378788016395,
+        2.251137018441735
+      ],
+      "volume_mm3": 28528.477571853815,
+      "product_name": "power switch"
+    },
+    {
+      "name": "Ender3/NAUO202",
+      "solids": 1,
+      "min_assembly_mm": [
+        -223.500999802678,
+        102.72999999999847,
+        -29.61886298155833
+      ],
+      "max_assembly_mm": [
+        -213.50028912455932,
+        108.26999999999846,
+        -24.07886298155833
+      ],
+      "volume_mm3": 88.16242243984216,
+      "product_name": "M3X10 Flush Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO203",
+      "solids": 1,
+      "min_assembly_mm": [
+        -223.50099980267794,
+        62.729999999998476,
+        -29.618862981558266
+      ],
+      "max_assembly_mm": [
+        -213.50028912455926,
+        68.26999999999848,
+        -24.078862981558267
+      ],
+      "volume_mm3": 88.16242243984219,
+      "product_name": "M3X10 Flush Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO204",
+      "solids": 1,
+      "min_assembly_mm": [
+        -45.50099980267712,
+        53.999747109039184,
+        -322.3617247682239
+      ],
+      "max_assembly_mm": [
+        -39.5009998026771,
+        87.84999999999845,
+        69.55945955692346
+      ],
+      "volume_mm3": 4439.139630431247,
+      "product_name": "Y belt"
+    },
+    {
+      "name": "Ender3/NAUO205",
+      "solids": 1,
+      "min_assembly_mm": [
+        -46.50099980267712,
+        80.84999999999845,
+        -181.03681681161984
+      ],
+      "max_assembly_mm": [
+        -38.50099980267712,
+        86.84999999999845,
+        -173.03681681161984
+      ],
+      "volume_mm3": 57.302650001477744,
+      "product_name": "Copper cover"
+    },
+    {
+      "name": "Ender3/NAUO206",
+      "solids": 1,
+      "min_assembly_mm": [
+        -46.50099980267712,
+        80.84999999999845,
+        -103.33712981694579
+      ],
+      "max_assembly_mm": [
+        -38.50099980267712,
+        86.84999999999845,
+        -95.33712981694579
+      ],
+      "volume_mm3": 57.30265000147776,
+      "product_name": "Copper cover"
+    },
+    {
+      "name": "Ender3/NAUO207",
+      "solids": 1,
+      "min_assembly_mm": [
+        -247.65008975335735,
+        141.14780551862276,
+        -115.8988629815589
+      ],
+      "max_assembly_mm": [
+        154.14378852910895,
+        171.38914175330248,
+        -109.89886298155824
+      ],
+      "volume_mm3": 4754.026803068806,
+      "product_name": "X belt"
+    },
+    {
+      "name": "Ender3/NAUO208",
+      "solids": 1,
+      "min_assembly_mm": [
+        -54.55071745157349,
+        142.14780551862287,
+        -115.53529604688569
+      ],
+      "max_assembly_mm": [
+        -46.55071745157347,
+        148.14780551862293,
+        -107.53529604688568
+      ],
+      "volume_mm3": 57.30265000147784,
+      "product_name": "Copper cover"
+    },
+    {
+      "name": "Ender3/NAUO209",
+      "solids": 1,
+      "min_assembly_mm": [
+        -97.16809469247181,
+        142.14780551862276,
+        -115.53529604688562
+      ],
+      "max_assembly_mm": [
+        -89.1680946924718,
+        148.14780551862282,
+        -107.5352960468856
+      ],
+      "volume_mm3": 57.30265000147784,
+      "product_name": "Copper cover"
+    },
+    {
+      "name": "Ender3/NAUO210",
+      "solids": 1,
+      "min_assembly_mm": [
+        16.206721917331198,
+        459.9999998999974,
+        -96.54886308156657
+      ],
+      "max_assembly_mm": [
+        59.2067221173312,
+        610.0000000999972,
+        -75.54886298156556
+      ],
+      "volume_mm3": 11191.838938246148,
+      "product_name": "Support frame"
+    },
+    {
+      "name": "Ender3/NAUO211",
+      "solids": 1,
+      "min_assembly_mm": [
+        42.95672201733148,
+        453.4999999999976,
+        -90.2988629815656
+      ],
+      "max_assembly_mm": [
+        52.45672201733148,
+        464.2499999999976,
+        -80.7988629815656
+      ],
+      "volume_mm3": 270.8542970790515,
+      "product_name": "M5X8Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO212",
+      "solids": 1,
+      "min_assembly_mm": [
+        22.95672201733147,
+        453.4999999999976,
+        -90.29886298156566
+      ],
+      "max_assembly_mm": [
+        32.45672201733147,
+        464.2499999999976,
+        -80.79886298156566
+      ],
+      "volume_mm3": 270.8542970790515,
+      "product_name": "M5X8Pan Head Screw"
+    },
+    {
+      "name": "Ender3/NAUO213",
+      "solids": 1,
+      "min_assembly_mm": [
+        24.706722017330133,
+        455.8999999999987,
+        -90.29886298155877
+      ],
+      "max_assembly_mm": [
+        30.706722017330133,
+        459.99999999999875,
+        -80.79886298155877
+      ],
+      "volume_mm3": 109.07510005472301,
+      "product_name": "M5 T-Slot Nut"
+    },
+    {
+      "name": "Ender3/NAUO214",
+      "solids": 1,
+      "min_assembly_mm": [
+        44.706722017331465,
+        455.89999999999753,
+        -90.2988629815656
+      ],
+      "max_assembly_mm": [
+        50.706722017331465,
+        459.9999999999976,
+        -80.79886298156558
+      ],
+      "volume_mm3": 109.07510005472321,
+      "product_name": "M5 T-Slot Nut"
+    },
+    {
+      "name": "Ender3/NAUO215",
+      "solids": 1,
+      "min_assembly_mm": [
+        17.57681286488627,
+        572.499999999998,
+        -9.048862981566726
+      ],
+      "max_assembly_mm": [
+        57.83663116978083,
+        607.499999999998,
+        -5.048862981566495
+      ],
+      "volume_mm3": 1415.7685813513885,
+      "product_name": "M30 Plastic nut"
+    },
+    {
+      "name": "Ender3/NAUO216",
+      "solids": 1,
+      "min_assembly_mm": [
+        17.57681286488627,
+        572.4999999999972,
+        -100.54886298156772
+      ],
+      "max_assembly_mm": [
+        57.83663116978083,
+        607.4999999999972,
+        -96.5488629815675
+      ],
+      "volume_mm3": 1415.7685813513885,
+      "product_name": "M30 Plastic nut"
+    },
+    {
+      "name": "Ender3/NAUO217",
+      "solids": 1,
+      "min_assembly_mm": [
+        21.706722017333533,
+        573.9999999999972,
+        -102.04886298156657
+      ],
+      "max_assembly_mm": [
+        53.70672201733353,
+        605.9999999999978,
+        -2.048862981566373
+      ],
+      "volume_mm3": 17486.104709880783,
+      "product_name": "Support tube"
+    },
+    {
+      "name": "Ender3/NAUO218",
+      "solids": 1,
+      "min_assembly_mm": [
+        -46.00099980267703,
+        59.59999999999862,
+        26.05113701844082
+      ],
+      "max_assembly_mm": [
+        -26.000999802677033,
+        66.39999999999863,
+        32.85113701844082
+      ],
+      "volume_mm3": 323.05824494628865,
+      "product_name": "M4X16 Screw_M4*16\ufffd\ufffd\u026b\ufffd\ufffd\u0377"
+    },
+    {
+      "name": "Ender3/NAUO219",
+      "solids": 1,
+      "min_assembly_mm": [
+        -46.00099980267703,
+        39.599999999998644,
+        26.051137018440865
+      ],
+      "max_assembly_mm": [
+        -26.00099980267703,
+        46.39999999999864,
+        32.851137018440866
+      ],
+      "volume_mm3": 323.05824494628865,
+      "product_name": "M4X16 Screw_M4*16\ufffd\ufffd\u026b\ufffd\ufffd\u0377"
+    },
+    {
+      "name": "Ender3/NAUO220",
+      "solids": 1,
+      "min_assembly_mm": [
+        -62.00099990267706,
+        39.59999999999858,
+        5.051137018440976
+      ],
+      "max_assembly_mm": [
+        -42.00099980267706,
+        46.39999999999858,
+        11.851137018440976
+      ],
+      "volume_mm3": 323.0582449462884,
+      "product_name": "M4X16 Screw_M4*16\ufffd\ufffd\u026b\ufffd\ufffd\u0377"
+    },
+    {
+      "name": "Ender3/NAUO221",
+      "solids": 1,
+      "min_assembly_mm": [
+        -62.000999802677065,
+        39.5999999999986,
+        17.05113701844096
+      ],
+      "max_assembly_mm": [
+        -42.000999802677065,
+        46.3999999999986,
+        23.85113701844096
+      ],
+      "volume_mm3": 323.05824494628854,
+      "product_name": "M4X16 Screw_M4*16\ufffd\ufffd\u026b\ufffd\ufffd\u0377"
+    },
+    {
+      "name": "Ender3/NAUO222",
+      "solids": 1,
+      "min_assembly_mm": [
+        81.9990001973229,
+        2.398081733190338e-14,
+        53.451137018441734
+      ],
+      "max_assembly_mm": [
+        121.9990001973229,
+        40.00000000000003,
+        61.451137018441734
+      ],
+      "volume_mm3": 7964.10700326005,
+      "product_name": "4040 Endcap"
+    },
+    {
+      "name": "Ender3/NAUO223",
+      "solids": 1,
+      "min_assembly_mm": [
+        -208.00099980267802,
+        -1.5356604876615165e-12,
+        53.45113701844201
+      ],
+      "max_assembly_mm": [
+        -168.00099980267802,
+        39.999999999998465,
+        61.45113701844201
+      ],
+      "volume_mm3": 7964.107003260045,
+      "product_name": "4040 Endcap"
+    },
+    {
+      "name": "Ender3/NAUO224",
+      "solids": 2,
+      "min_assembly_mm": [
+        107.69900019732285,
+        430.1999999999987,
+        -90.83252979790008
+      ],
+      "max_assembly_mm": [
+        116.29900019732284,
+        460.39999999999867,
+        -82.24886298155877
+      ],
+      "volume_mm3": 766.8114219084677,
+      "product_name": "M5X25 Socket Head Screw_M5X25\ufffd\ufffd\ufffd\ufffd\ufffd\u02ff"
+    },
+    {
+      "name": "Ender3/Sprinkler assembly/NAUO226",
+      "solids": 1,
+      "min_assembly_mm": [
+        -98.3580234705046,
+        147.3978054186227,
+        -146.24886308155615
+      ],
+      "max_assembly_mm": [
+        -78.3580232705046,
+        175.19780561862274,
+        -134.24886288155605
+      ],
+      "volume_mm3": 3041.803736213969,
+      "product_name": "Radiator"
+    },
+    {
+      "name": "Ender3/Sprinkler assembly/NAUO227",
+      "solids": 1,
+      "min_assembly_mm": [
+        -91.8580234705046,
+        137.3977965916686,
+        -143.7488630815561
+      ],
+      "max_assembly_mm": [
+        -84.85802327050462,
+        164.3978056186227,
+        -136.7488628815561
+      ],
+      "volume_mm3": 465.55974545925324,
+      "product_name": "Catheter"
+    },
+    {
+      "name": "Ender3/Sprinkler assembly/NAUO228",
+      "solids": 1,
+      "min_assembly_mm": [
+        -98.35802347050456,
+        132.3978054186227,
+        -154.24886298155604
+      ],
+      "max_assembly_mm": [
+        -78.35802327050455,
+        142.39780551862276,
+        -134.24886298155602
+      ],
+      "volume_mm3": 2904.738545879493,
+      "product_name": "Heat block"
+    },
+    {
+      "name": "Ender3/Sprinkler assembly/NAUO229",
+      "solids": 1,
+      "min_assembly_mm": [
+        -91.56171505596107,
+        124.39780541862271,
+        -143.6821964907141
+      ],
+      "max_assembly_mm": [
+        -85.15433168504792,
+        137.3978055186227,
+        -136.8155294723979
+      ],
+      "volume_mm3": 273.4023360027649,
+      "product_name": "nozzle"
+    },
+    {
+      "name": "Ender3/Sprinkler assembly/NAUO230",
+      "solids": 1,
+      "min_assembly_mm": [
+        -89.85802337050457,
+        147.89780551862273,
+        -146.24886298155604
+      ],
+      "max_assembly_mm": [
+        -86.85802337050457,
+        150.89780551862273,
+        -143.24886298155604
+      ],
+      "volume_mm3": 13.230349630258996,
+      "product_name": "M3 Screw"
+    },
+    {
+      "name": "Ender3/Sprinkler assembly/NAUO231",
+      "solids": 1,
+      "min_assembly_mm": [
+        -103.77802337050456,
+        134.44780551862266,
+        -152.69886298155603
+      ],
+      "max_assembly_mm": [
+        -78.35802337050455,
+        140.3478055186227,
+        -146.798862981556
+      ],
+      "volume_mm3": 551.9691288193692,
+      "product_name": "Heater"
+    },
+    {
+      "name": "Ender3/Sprinkler assembly/NAUO232",
+      "solids": 1,
+      "min_assembly_mm": [
+        -100.35802337050453,
+        133.39780541862268,
+        -143.74886298155602
+      ],
+      "max_assembly_mm": [
+        -96.35802337050453,
+        135.39780561862267,
+        -141.74886298155602
+      ],
+      "volume_mm3": 4.897084865991635,
+      "product_name": "Nozzle thermistor"
+    },
+    {
+      "name": "Ender3/Sprinkler assembly/NAUO233",
+      "solids": 1,
+      "min_assembly_mm": [
+        -99.17352000992402,
+        134.89780551862268,
+        -145.748863081556
+      ],
+      "max_assembly_mm": [
+        -95.35802337050454,
+        140.89780561862267,
+        -139.74886298155602
+      ],
+      "volume_mm3": 31.387082261996493,
+      "product_name": "M3X4 Screw "
+    },
+    {
+      "name": "Ender3/Sprinkler assembly/NAUO234",
+      "solids": 1,
+      "min_assembly_mm": [
+        -93.75802337050466,
+        169.19780551862274,
+        -146.02236567345236
+      ],
+      "max_assembly_mm": [
+        -82.95802337050465,
+        185.69780551862277,
+        -134.47536028965982
+      ],
+      "volume_mm3": 807.9050753656682,
+      "product_name": "Pneumatic joint"
+    },
+    {
+      "name": "Ender3/Sprinkler assembly/NAUO235",
+      "solids": 1,
+      "min_assembly_mm": [
+        -90.35802337050465,
+        142.3978055186227,
+        -142.24886298155613
+      ],
+      "max_assembly_mm": [
+        -86.35802337050455,
+        192.3978055186227,
+        -138.24886298155604
+      ],
+      "volume_mm3": 471.23889803846913,
+      "product_name": "D4 Teflon tube"
+    },
+    {
+      "name": "Ender3/Sprinkler assembly/NAUO236",
+      "solids": 1,
+      "min_assembly_mm": [
+        -98.71802337050453,
+        132.3978054186227,
+        -142.10886298155603
+      ],
+      "max_assembly_mm": [
+        -91.99802337050451,
+        150.3978055186227,
+        -135.388862981556
+      ],
+      "volume_mm3": 146.11063422488593,
+      "product_name": "M3\ufffd\ufffd18 Flush Head Screw"
+    },
+    {
+      "name": "Ender3/Sprinkler assembly/NAUO237",
+      "solids": 1,
+      "min_assembly_mm": [
+        -84.71802337050453,
+        132.39780541862274,
+        -142.10886298155603
+      ],
+      "max_assembly_mm": [
+        -77.99802337050451,
+        150.39780551862273,
+        -135.388862981556
+      ],
+      "volume_mm3": 146.1106342248859,
+      "product_name": "M3\ufffd\ufffd18 Flush Head Screw"
+    },
+    {
+      "name": "Ender3/Sprinkler assembly/NAUO238",
+      "solids": 1,
+      "min_assembly_mm": [
+        -83.64931121798253,
+        168.8978055186227,
+        -147.2488629815561
+      ],
+      "max_assembly_mm": [
+        -79.05802337050461,
+        173.49780551862273,
+        -146.2488629815561
+      ],
+      "volume_mm3": 8.770784773662896,
+      "product_name": "M3 Split Washer"
+    },
+    {
+      "name": "Ender3/Sprinkler assembly/NAUO239",
+      "solids": 1,
+      "min_assembly_mm": [
+        -97.64931121798253,
+        168.89780551862268,
+        -147.24886298155607
+      ],
+      "max_assembly_mm": [
+        -93.05802337050461,
+        173.4978055186227,
+        -146.24886298155607
+      ],
+      "volume_mm3": 8.770784773662896,
+      "product_name": "M3 Split Washer"
+    },
+    {
+      "name": "Ender3/Sprinkler assembly/NAUO240",
+      "solids": 1,
+      "min_assembly_mm": [
+        -84.2080233705046,
+        168.34780551862272,
+        -148.89886298155608
+      ],
+      "max_assembly_mm": [
+        -78.50802337050462,
+        174.0478055186227,
+        -131.24886298155607
+      ],
+      "volume_mm3": 138.32151392409935,
+      "product_name": "M3X16 Pan Head Screw"
+    },
+    {
+      "name": "Ender3/Sprinkler assembly/NAUO241",
+      "solids": 1,
+      "min_assembly_mm": [
+        -98.2080233705046,
+        168.3478055186227,
+        -148.89886298155608
+      ],
+      "max_assembly_mm": [
+        -92.50802337050462,
+        174.04780551862268,
+        -131.24886298155607
+      ],
+      "volume_mm3": 138.32151392409938,
+      "product_name": "M3X16 Pan Head Screw"
+    },
+    {
+      "name": "Ender3/Sprinkler assembly/NAUO242",
+      "solids": 1,
+      "min_assembly_mm": [
+        -89.85802337050454,
+        132.3978055186227,
+        -151.24886298155604
+      ],
+      "max_assembly_mm": [
+        -86.85802337050454,
+        135.3978055186227,
+        -148.24886298155604
+      ],
+      "volume_mm3": 13.230349630259015,
+      "product_name": "M3 Screw"
+    }
+  ],
+  "motion_ready": false,
+  "registered": false,
+  "scope": "Stock assembly only; moving components need separate registration and custom syringe drive is absent"
+}

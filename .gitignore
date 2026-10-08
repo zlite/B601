@@ -1,6 +1,8 @@
 .venv/
 .venv-depth-v2/
+.venv-cad/
 .python/
 __pycache__/
 outputs/
 vendor/
+native/motorbridge/build/

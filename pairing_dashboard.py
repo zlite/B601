@@ -88,6 +88,7 @@ class Workbench:
         self.stop = threading.Event()
         self.sources = {}
         self.history = deque(maxlen=50)
+        self.follower_history = deque(maxlen=50)
         self.images = {}
         self.reference = None
         self.signs = PREVIEW_SIGNS.copy()
@@ -102,10 +103,14 @@ class Workbench:
             self.sources[name] = {'time': time.monotonic(), **values}
             if name == 'leader' and 'angles' in values:
                 self.history.append((time.monotonic(), values['angles']))
+            if name == 'follower' and 'angles' in values:
+                self.follower_history.append((time.monotonic(), values['angles']))
 
     def error(self, name, error):
         with self.lock:
             self.sources[name] = {'time': time.monotonic(), 'error': str(error)}
+            if name == 'follower':
+                self.follower_history.clear()
             if name == 'leader':
                 self.history.clear()
                 # Any link loss invalidates the software origin for this run.
@@ -128,11 +133,17 @@ class Workbench:
                 self.stop.wait(2)
 
     def camera_worker(self, role):
+        config = json.loads((ROOT / 'config/cameras.json').read_text())[role]
+        if config.get('backend') == 'v4l2':
+            from uvc_camera import camera_worker
+            return camera_worker(self, role, config)
+        if role == 'wrist' and getattr(self, 'track_printer_target', False):
+            from printer_camera_worker import camera_worker
+            return camera_worker(self, config)
         import depthai as dai
         from camera_selection import build_wrist_rgb, start_wrist_pipeline
         from calibrate_camera import frame_pose
         from tag_view import annotate_view
-        config = json.loads((ROOT / 'config/cameras.json').read_text())[role]
         while not self.stop.is_set():
             try:
                 matches = [d for d in dai.Device.getAllAvailableDevices() if d.deviceId == config['device_id']]
@@ -217,7 +228,10 @@ class Workbench:
                                         'coordinates':'original_sensor_frame', 'image_rotation_deg':180}
 
                                 except ValueError as error:
-                                    frame = cv2.rotate(frame, cv2.ROTATE_180)
+                                    from tag_view import detect
+                                    visible = detect(frame, 'auto', None)
+                                    frame = annotate_view(frame, visible)
+                                    info['visible_tags'] = [{'family': t['family'], 'id': t['id']} for t in visible]
                                     info['tag'] = str(error)
                                     observation = {'valid':False, 'reason':str(error)}
                             ok, jpeg = cv2.imencode('.jpg', cv2.resize(frame, (800,500)), [cv2.IMWRITE_JPEG_QUALITY,80])
@@ -320,6 +334,9 @@ class Workbench:
         with self.lock:
             now = time.monotonic()
             sources = {name: {**s, 'age_s': now-s['time']} for name,s in self.sources.items()}
+            target = sources.get('printer_target')
+            if target is not None and not 0 <= now-target.get('observation_time', 0) <= .25:
+                target.update(valid=False, reason='Stereo reference expired; reacquire before planning')
             result = {'demo': self.demo, 'sources': sources, 'names': NAMES,
                       'message': self.message, 'reference': self.reference,
                       'signs': self.signs, 'checks': self.checks, 'guided': self.guided,
@@ -398,9 +415,12 @@ def make_handler(workbench, token):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--port', type=int, default=8765)
+    parser.add_argument('--printer-target', action='store_true',
+                        help='Read-only live stereo tracking of the movable printer-bed tag')
     parser.add_argument('--demo', action='store_true', help='UI preview; no hardware access')
     args = parser.parse_args()
     workbench = Workbench(args.demo)
+    workbench.track_printer_target = args.printer_target
     workers = []
     if args.demo:
         def demo_loop():
@@ -425,7 +445,7 @@ def main():
         workbench.stop.set()
         server.server_close()
         for worker in workers:
-            worker.join(timeout=4)
+            worker.join(timeout=16 if args.printer_target else 4)
 
 
 if __name__ == '__main__':

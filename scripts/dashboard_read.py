@@ -2,7 +2,9 @@
 """Read-only diagnostics for the fixed local REbot dashboard. No action requests."""
 import argparse
 import json
+from datetime import datetime, timezone
 from pathlib import Path
+import time
 from urllib.request import urlopen
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -13,10 +15,37 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--images', action='store_true', help='Save the two currently served JPEGs under outputs/camera_diagnosis')
     parser.add_argument('--brief', action='store_true', help='Show motor state and source readings only')
+    parser.add_argument('--target', action='store_true', help='Include the current read-only printer stereo observation')
+    parser.add_argument('--sample-target-seconds', type=float, default=0,
+                        help='Record up to 60 seconds of read-only target status')
     args = parser.parse_args()
+    if not 0 <= args.sample_target_seconds <= 60:
+        parser.error('Target sampling must be between 0 and 60 seconds')
+    if args.sample_target_seconds:
+        rows = []; deadline = time.monotonic()+args.sample_target_seconds
+        while time.monotonic() < deadline:
+            with urlopen(URL+'/state', timeout=3) as response:
+                state = json.load(response)
+            rows.append({'sample_time': time.monotonic(),
+                         'target': state.get('sources', {}).get('printer_target'),
+                         'follower': state.get('sources', {}).get('follower')})
+            time.sleep(.2)
+        folder = ROOT/'outputs/printer_tracking'
+        folder.mkdir(parents=True, exist_ok=True)
+        path = folder/(datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')+'.json')
+        valid = [r['target'] for r in rows if r['target'] and r['target'].get('valid')]
+        summary = {'samples': len(rows), 'valid_samples': len(valid),
+                   'sessions': sorted({r['session'] for r in valid}),
+                   'max_observation_age_s': max((r['sample_time']-r['target']['observation_time']
+                       for r in rows if r['target'] and r['target'].get('valid')), default=None),
+                   'scene_revisions': sorted({r['scene_revision'] for r in valid}),
+                   'motion_ready': False}
+        path.write_text(json.dumps({'summary': summary, 'rows': rows}, indent=2, allow_nan=False)+'\n')
+        print(json.dumps({'report': str(path), **summary}, indent=2))
+        return
     with urlopen(URL+'/state', timeout=3) as response:
         state = json.load(response)
-    summary = {k:state.get(k) for k in ('powered','following','fault','message','control_mode','camera_check')}
+    summary = {k:state.get(k) for k in ('ready','powered','following','fault','message','control_mode','camera_check','teaching','rail','phase','pause_requested','samples','pause_cause','last_sample','demo')}
     summary['sources'] = {k:{key:v.get(key) for key in ('angles','age_s','frame_age_s','error','tag','rms_px') if key in v}
                           for k,v in state.get('sources',{}).items()}
     profile = state.get('joint_calibration')
@@ -37,7 +66,9 @@ def main():
             with urlopen(URL+'/'+role+'.jpg',timeout=3) as response:
                 (directory/(role+'_latest.jpg')).write_bytes(response.read())
         summary['images_directory'] = str(directory)
-    if args.brief:summary={k:v for k,v in summary.items() if k in ('powered','following','fault','message','sources','images_directory')}
+    if args.brief:summary={k:v for k,v in summary.items() if k in ('ready','powered','following','fault','message','sources','images_directory','teaching','rail','phase','pause_requested','samples','pause_cause','last_sample','demo')}
+    if args.target:
+        summary['printer_target'] = state.get('sources', {}).get('printer_target')
     print(json.dumps(summary,indent=2))
 
 

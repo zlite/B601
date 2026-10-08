@@ -1,0 +1,33 @@
+{
+  "source_url": "https://raw.githubusercontent.com/Seeed-Projects/reBotArm_control_py/6415d43130d1e143c70dc106096a857ac5556f81/urdf/DM/meshes/collision/gripper_base.stl",
+  "sha256": "5e7b0473acaf31fc5c511a3591311e6561ad6066af8e135e21e18c096e1e7da5",
+  "mesh": "vendor/reBotArm_control_py/urdf/DM/meshes/collision/gripper_base.stl",
+  "T_link6_end_link": [
+    [
+      3.673205087579915e-06,
+      -9.265358966049026e-05,
+      0.9999999957009099,
+      0.0
+    ],
+    [
+      -3.4033563838429215e-10,
+      -0.9999999957076562,
+      -9.265358965986519e-05,
+      0.0
+    ],
+    [
+      0.9999999999932537,
+      0.0,
+      -3.673205103346574e-06,
+      0.15539
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "scope": "Stock gripper base only; stock fingers excluded and replaced with supplied CAD; camera and custom mounts separate",
+  "motion_ready": false
+}
