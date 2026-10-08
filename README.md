@@ -5,6 +5,15 @@ Uses Seeed's motorbridge driver and Luxonis DepthAI v3. No recalibration or zero
 
 ## Current printer teaching and rail demo (October 7, 2026)
 
+October 8 endpoint follow-up: the first updated cycle completed, but cycle 2
+paused at `settling_timeout`. Roll was still about .77 degrees from its target
+at the four-second deadline, and subsequently converged inside the unchanged
+.75-degree endpoint tolerance. Endpoint holding now permits up to eight seconds,
+exits as soon as all original tolerances pass, and reports the limiting joint
+and measured error if it times out. Camera/attendance readiness is checked
+during settling as well. Recorded-convergence and nonconvergence regressions
+passed; this follow-up still needs deployment at disabled rest and a live trial.
+
 October 8 roll-pacing correction: the next sequential-reader run stalled near
 the plate while joint 6 retained almost exactly one degree of command error.
 The trajectory clock and command cap both stopped advancing at that error.

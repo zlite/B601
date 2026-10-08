@@ -230,18 +230,31 @@ class ReplayRunner(LiftRunner):
             self.tick(moving=True)
             if not returning and np.max(abs(np.asarray(list(self.targets.values()))-visited[-1]))>.1:
                 visited.append(list(self.targets.values()))
-        until=time.monotonic()+4
-        while True:
-            q=self.tick()
-            if np.all(abs(np.asarray(q)-path.at(path.duration))<self.settle_tolerance):break
-            if time.monotonic()>until:
-                self.dynamic_reviews+=1;self.pause_cause='settling_timeout'
-                if review(self,self.output,self.dynamic_reviews,'settling_timeout')=='return' and not returning:
-                    raise ReturnRequested('settling_timeout')
-                until=time.monotonic()+4
+        self.settle_endpoint(path.at(path.duration),returning)
         if not returning:visited.append(path.at(path.duration).tolist())
         return {'planned_duration_s':path.duration,'actual_duration_s':time.monotonic()-began,
                 'max_curve_deviation_deg':path.max_deviation}
+
+    def settle_endpoint(self,goal,returning=False):
+        # Recorded roll convergence needed about seven seconds to reach .75
+        # degrees on the second cycle. Keep that accuracy requirement, but
+        # allow eight seconds of powered, freshly checked holding to reach it.
+        phase=self.phase;until=time.monotonic()+8.
+        while True:
+            q=self.tick();errors=abs(np.asarray(q)-goal)
+            ready=self.vision_ready()
+            if ready and np.all(errors<self.settle_tolerance):
+                self.phase=phase;return
+            joint=int(np.argmax(errors/self.settle_tolerance))
+            detail=f'joint {joint+1}, error {errors[joint]:.3f} degrees (needs <{self.settle_tolerance[joint]:.2f})'
+            self.phase='Settling: '+detail
+            if not ready or time.monotonic()>until:
+                self.dynamic_reviews+=1
+                cause=('settling_timeout: '+detail) if ready else 'readiness_or_operator_pause during settling'
+                self.pause_cause=cause
+                if review(self,self.output,self.dynamic_reviews,cause)=='return' and not returning:
+                    raise ReturnRequested(cause)
+                until=time.monotonic()+8.
 
     def return_executed_curves(self, home_entry=None):
         results=[]

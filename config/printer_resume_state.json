@@ -1,6 +1,6 @@
 {
-  "saved_utc": "2026-10-08T17:01:55.925801+00:00",
-  "status": "Repeating demo active. First full rail-and-arm cycle completed without pause or fault using wrist-roll pacing fix; second cycle observed. ArduCam restored to USB 3, 1080p30. Do not restart motor owner while active.",
+  "saved_utc": "2026-10-08T17:06:16.101256+00:00",
+  "status": "Cycle 2 paused and holding near plate on old four-second settling timeout; healthy motor and camera feedback. Eight-second endpoint fix tested but not loaded. Awaiting movement clearance for checked return, controller reload, and demo restart.",
   "arm_motors_disabled_verified": false,
   "latest_teaching_session": "outputs/printer_teach/20261008T165331174278Z",
   "current_launch": {
@@ -128,9 +128,9 @@
     "rail_reboot_offset_for_current_launch_mm": 0,
     "restart_note": "Read actual current rail position before closing/restarting; a GRBL reconnect resets MPos. Never assume zero if interrupted away from origin.",
     "repeat_fix": "Cache gripper device per motor owner; reset cache when owner is replaced; regression tested.",
-    "paused_holding": false,
-    "awaiting": null,
-    "current_folder": "outputs/printer_replay/ui_demo/20261008T165922227650Z",
+    "paused_holding": true,
+    "awaiting": "Clearance to return to rest, load endpoint fix, restart demo",
+    "current_folder": "outputs/printer_replay/ui_demo/20261008T170150059723Z",
     "repeat_fix_live_verified": true
   },
   "speed_investigation": {
@@ -206,5 +206,15 @@
     "live_rest_tolerance_changed": false,
     "focused_tests_passed": 25,
     "motion_trial_completed": true
+  },
+  "endpoint_repair": {
+    "loaded": false,
+    "timeout_s": 8,
+    "previous_timeout_s": 4,
+    "roll_tolerance_deg": 0.75,
+    "other_axes_tolerance_deg": 0.2,
+    "measured_tracking_stop_deg": 1.5,
+    "focused_tests_passed": 28,
+    "physical_trial_completed": false
   }
 }

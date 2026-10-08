@@ -131,6 +131,42 @@ class ReplayInterlockTests(unittest.TestCase):
                     r.tick()
             r.arm.command_group.assert_not_called()
 
+    def endpoint_runner(self,roll_errors):
+        r=self.runner();r.phase='Approaching';r.dynamic_reviews=300
+        r.settle_tolerance=np.array([.2]*5+[.75]);r.vision_ready=lambda:True
+        clock=[0.]
+        def tick():
+            clock[0]+=.05
+            return [0.]*5+[float(np.interp(clock[0],np.arange(len(roll_errors)),roll_errors))]
+        r.tick=tick
+        return r,clock
+
+    def test_recorded_second_cycle_settles_without_relaxing_accuracy(self):
+        # Measured roll errors around the four-second timeout, then convergence.
+        r,clock=self.endpoint_runner([.942,.9405,.935,.9284,.7732,.7576,.7521,.738])
+        with patch('printer_demo_replay.time.monotonic',side_effect=lambda:clock[0]), patch('printer_demo_replay.review',side_effect=AssertionError('Unexpected pause')):
+            r.settle_endpoint(np.zeros(6))
+        self.assertGreater(clock[0],6.)
+        self.assertLess(clock[0],8.)
+        self.assertEqual(r.settle_tolerance[5],.75)
+        self.assertEqual(r.phase,'Approaching')
+
+    def test_endpoint_that_never_settles_still_pauses_with_joint_and_error(self):
+        r,clock=self.endpoint_runner([.9,.9])
+        with patch('printer_demo_replay.time.monotonic',side_effect=lambda:clock[0]), patch('printer_demo_replay.review',side_effect=RuntimeError('review pending')) as review:
+            with self.assertRaisesRegex(RuntimeError,'review pending'):
+                r.settle_endpoint(np.zeros(6))
+        self.assertGreaterEqual(clock[0],8.)
+        self.assertLess(clock[0],8.1)
+        self.assertIn('joint 6, error 0.900',review.call_args.args[-1])
+
+    def test_loss_of_readiness_while_settling_requires_review_even_inside_tolerance(self):
+        r,clock=self.endpoint_runner([.1]);r.vision_ready=lambda:False
+        with patch('printer_demo_replay.time.monotonic',side_effect=lambda:clock[0]), patch('printer_demo_replay.review',side_effect=RuntimeError('review pending')) as review:
+            with self.assertRaisesRegex(RuntimeError,'review pending'):
+                r.settle_endpoint(np.zeros(6))
+        self.assertIn('readiness_or_operator_pause',review.call_args.args[-1])
+
     def runner(self):
         runner=object.__new__(ReplayRunner)
         runner.w=SimpleNamespace(lock=threading.RLock(),
