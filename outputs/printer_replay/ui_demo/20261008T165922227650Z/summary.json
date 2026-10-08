@@ -1,0 +1,18 @@
+{
+  "returned_to_start": true,
+  "motors_disabled_verified": true,
+  "completed_stages": [
+    "entry",
+    "smooth_approach",
+    "plate_view"
+  ],
+  "motion_elapsed_s": 125.02555153798312,
+  "rail_to_arm_motion_s": 1.7542075510136783,
+  "error": null,
+  "early_return": null,
+  "max_tracking_error_deg": 1.0568191625508696,
+  "samples": 2452,
+  "scope": "Completed rail left/back followed by open-jaw approach and return. No grasp/lift. Repeating demo started cycle 2.",
+  "camera_mode": "ArduCam 1920x1080 30fps, USB 3 5000M",
+  "pacing_fix_loaded": true
+}

@@ -1,13 +1,13 @@
 {
-  "saved_utc": "2026-10-08T16:54:08.034562+00:00",
-  "status": "Updated teaching controller loaded; sequential feedback, fresh disabled rest and gripper verified, new resting entry CAD checked. Waiting for ArduCam USB 3/1080p reconnection before requested demo restart. Motors off, rail Idle X=0.",
-  "arm_motors_disabled_verified": true,
+  "saved_utc": "2026-10-08T17:01:55.925801+00:00",
+  "status": "Repeating demo active. First full rail-and-arm cycle completed without pause or fault using wrist-roll pacing fix; second cycle observed. ArduCam restored to USB 3, 1080p30. Do not restart motor owner while active.",
+  "arm_motors_disabled_verified": false,
   "latest_teaching_session": "outputs/printer_teach/20261008T165331174278Z",
   "current_launch": {
     "command": ".venv/bin/python printer_teach.py",
     "exec_session_id": 44877,
     "url": "http://127.0.0.1:8765",
-    "demo_client_exec_session_id": null
+    "demo_client_exec_session_id": 81840
   },
   "operator_feedback": "Requests fast smooth repeating 300 mm left/back then open-jaw arm approach/return, immediate postrail start; small passive wrist movement during rail is acceptable.",
   "controller": "printer_teach.py",
@@ -99,23 +99,29 @@
     "operator_retest_passed": true
   },
   "last_autonomous_trial": {
-    "summary": "outputs/printer_replay/ui_demo/20261008T011256235081Z/summary.json",
-    "approach_completed": true,
-    "autonomous_return_completed": true,
-    "motors_disabled_verified_at_cycle_end": true,
-    "gripper_commanded": false,
-    "rail_commanded": true,
-    "scope": "One bounded 300 mm left/return rail cycle and open-jaw approach/return; no grasp or lift",
-    "max_tracking_error_deg": 0.9810298236875354,
-    "arm_motion_s": 114.13534756997251,
-    "rail_to_arm_motion_s": 2.0675163549894933,
-    "code_tests_passed": 63
+    "returned_to_start": true,
+    "motors_disabled_verified": true,
+    "completed_stages": [
+      "entry",
+      "smooth_approach",
+      "plate_view"
+    ],
+    "motion_elapsed_s": 125.02555153798312,
+    "rail_to_arm_motion_s": 1.7542075510136783,
+    "error": null,
+    "early_return": null,
+    "max_tracking_error_deg": 1.0568191625508696,
+    "samples": 2452,
+    "scope": "Completed rail left/back followed by open-jaw approach and return. No grasp/lift. Repeating demo started cycle 2.",
+    "camera_mode": "ArduCam 1920x1080 30fps, USB 3 5000M",
+    "pacing_fix_loaded": true,
+    "summary": "outputs/printer_replay/ui_demo/20261008T165922227650Z/summary.json"
   },
   "demo": {
     "config": "config/printer_demo.json",
-    "running_at_save": false,
-    "completed_cycles_observed": 0,
-    "next_cycle_observed": null,
+    "running_at_save": true,
+    "completed_cycles_observed": 1,
+    "next_cycle_observed": 2,
     "stop_immediately": ".venv/bin/python scripts/printer_demo_client.py pause",
     "stop_at_rest": ".venv/bin/python scripts/printer_demo_client.py stop",
     "no_duration_cutoff": true,
@@ -123,8 +129,8 @@
     "restart_note": "Read actual current rail position before closing/restarting; a GRBL reconnect resets MPos. Never assume zero if interrupted away from origin.",
     "repeat_fix": "Cache gripper device per motor owner; reset cache when owner is replaced; regression tested.",
     "paused_holding": false,
-    "awaiting": "Restore ArduCam USB 3 and review fresh images, then restart requested repeating demo",
-    "current_folder": null,
+    "awaiting": null,
+    "current_folder": "outputs/printer_replay/ui_demo/20261008T165922227650Z",
     "repeat_fix_live_verified": true
   },
   "speed_investigation": {
@@ -181,13 +187,16 @@
     "main_suite_cases": 364,
     "main_suite_optional_skips": 4,
     "cad_cases_passed": 4,
-    "physical_trial_completed": false
+    "physical_trial_completed": true,
+    "trial_summary": "outputs/printer_replay/ui_demo/20261008T165922227650Z/summary.json"
   },
   "camera_reconnection": {
     "user_report": "Switched USB port",
     "initial_new_connection": "USB 2 480M, no serial descriptor, only MJPG 640x480 at 10 fps",
     "configured_mode_unchanged": "1920x1080 30fps",
-    "awaiting": "User restoring previous working USB 3 cable/port combination"
+    "awaiting": null,
+    "restored": true,
+    "verified_mode": "1920x1080 30fps MJPG; 5000M USB link; original serial restored"
   },
   "rest_entry_recovery": {
     "new_source": "outputs/printer_replay/usb_recovery_rest_20261008",
@@ -196,6 +205,6 @@
     "entry_checks_passed": true,
     "live_rest_tolerance_changed": false,
     "focused_tests_passed": 25,
-    "motion_trial_completed": false
+    "motion_trial_completed": true
   }
 }
